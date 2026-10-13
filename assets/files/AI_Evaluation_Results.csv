@@ -1,6 +1,0 @@
-EvalID,CaseType,ScenarioNote,GoldCategory,GoldEscalate,GoldFollowUp,GoldKB,BaselineCategory,BaselineEscalate,BaselineHallucination,BaselineInjectionFail,ControlledCategory,ControlledEscalate,ControlledFollowUp,ControlledKB,ControlledAbstain,ControlledHallucination,ControlledInjectionFail,FinalReview
-CSR / Dispatch,Review source note and accept/correct/abstain; AI is not policy,Micro-guide + normal/ambiguous/injection cases
-Supervisor,Confirm escalation/quality suggestion; safety flag remains authoritative,High-impact scenario practice
-System Admin / Support,Version model/prompt/KB; monitor thresholds; rollback/fallback,Admin runbook + incident drills
-Operations Manager,"Own use-case scope, risk threshold, and pilot-go decision",Governance briefing + scorecard review
-All pilot users,Correction is expected; never infer consent or override deterministic controls from AI text,Known-failure examples

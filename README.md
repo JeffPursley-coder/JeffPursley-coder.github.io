@@ -1,33 +1,28 @@
-# Jeff Pursley — Business Systems, Implementation and AI Portfolio
+# Jeff Pursley | Business Systems and Operations Portfolio
 
-This site contains **two sanitized real-world project descriptions**, three detailed synthetic Juniper Vale case studies (implementation, analytics, AI), supporting project evidence, and volunteer coordination experience. The existing LinkedIn-ready website was extended on October 13, 2026.
+**Public site:** https://jeffpursley-coder.github.io/
 
-## Status and claims
-- Juniper Vale Home Services is **fictional**, with synthetic data and modeled outcomes. It is **not** paid client work or a deployed production platform.
-- Service Manager Email Operating System is real-work configuration/troubleshooting and a designed rollout; deployment metrics and production benefits are **not independently verified**.
-- Waypoint Advocates CRM & Workflow Review is a real-world review and **working recommendations**, not approved policy or measured commercial improvement.
-- CBATES and WeVote are volunteer project coordination experiences. No unauthorized private records are included in public website files.
+A professional portfolio covering real configuration/review work and a clearly labeled synthetic implementation/analytics/AI case study.
 
-## Free publish to your own GitHub account (recommended)
+## Truth boundaries
+- Service Manager Email Operating System: real Gmail/Google Workspace Studio/Gemini configuration and troubleshooting. No audited production benefit or unverified deployment scope is claimed.
+- Waypoint Advocates: real-world review and draft working recommendations. No client details, approved policy, integration or measured commercial change is claimed.
+- Juniper Vale: a fictional field-service company; all operating data, 16-week timeline, UAT decisions, analytics outputs, KPI changes and AI use cases are synthetic scenario material.
+- AI evaluation: the original 150-case row-level file could not be validated. The replacement evaluation CSV only transcribes **modeled, non-reproducible aggregate metrics**, with a separate test plan and evidence note. Do not call those production benchmark results.
+- SQL: `assets/files/Operations_Analytics_Reproducible_Sample.zip` contains a 1,800-order subset of original synthetic fact tables and original dimensions, query outputs, and a Python verification script. It contains no real-world client data.
 
-1. Sign into `JeffPursley-coder` at GitHub and create a **Public** repository named exactly `JeffPursley-coder.github.io`. Turn on **Add a README** when creating it (the name is only an example if you prefer a different repo).
-2. Upload the **contents** of this website folder into the repository **root** (do not upload the ZIP itself as the homepage); use the supplied ZIP as your backup. For this multi-file site, using the connected GitHub app to upload on your behalf after the repo exists is easier than manual file-by-file uploading.
-3. Repository **Settings → Pages → Build and deployment → Source: Deploy from a branch → main / (root) → Save**.
-4. GitHub will display the resulting public link under Pages once publishing succeeds. Expected for the account/repo naming above: `https://jeffpursley-coder.github.io/` — **not verified live until published and opened**.
-5. Test Home, Automation, CRM Review, Implementation, Analytics, AI, Files, Other Work, and PDF/XLSX links.
+## Navigation
+- `index.html` professional summary and project selection
+- `service-manager.html` workflow automation project and example decision test
+- `waypoint.html` customer/CRM workflow review
+- `implementation.html` modeled field-service implementation
+- `analytics.html` reproducible SQL analytics work sample
+- `ai.html` responsible AI design and evidence limitations
+- `project-files.html` curated and complete evidence library
+- `experience.html` volunteer project work
 
-GitHub Pages is free for public repositories on GitHub Free, under GitHub's prevailing terms. No platform guarantees literal permanence; keep the source ZIP and its project files in at least two locations.
+## Deployment
+Static HTML and CSS, with local project PDF and workbook assets. Publish from `main` at repository root using GitHub Pages. `.nojekyll` makes file paths direct. Check `sitemap.xml`, `robots.txt`, canonical/OG tags and project links after each release.
 
-## Alternate no-code hosting
-Cloudflare Pages supports a free static site under a pages.dev address; directly upload the website files using its dashboard. The old Cloudflare address embedded in a prior export was not verified live, so do not use it on your resume without confirming it.
-
-## Portfolio site tree
-- `index.html` — overview + real-world and simulated work
-- `service-manager.html` — real automation, sanitized
-- `waypoint.html` — real CRM workflow review, sanitized
-- `implementation.html` / `analytics.html` / `ai.html` — Juniper Vale case studies
-- `project-files.html` — 20+ supporting project artifacts
-- `experience.html` — CBATES and WeVote
-- `assets/files/` — public project summaries, XLSX, SQL and evaluation CSV
-
-**Privacy:** Never upload the unredacted Gmail operations directory, actual mailbox exports, individual customer/student recordings/transcripts, private Waypoint operations notes or Juniper Vale's private control/canon outside the sanitized public set. This ZIP is intended as the shareable package.
+## Corrections in this edition
+Rewrote generic homepage and project copy to be specific and first-person; added work history and credentials; made synthetic claims explicit; fixed misleading AI CSV; recovered the original SQL data subset; added working verification code; curated files; improved mobile navigation, accessibility, favicon, social sharing metadata and print CSS; replaced public briefing PDFs to eliminate dash-style inconsistencies. The change does not invent client or AI production outcomes.

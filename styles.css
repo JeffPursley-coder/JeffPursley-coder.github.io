@@ -4,7 +4,7 @@
 @media(max-width:780px){.shell{width:min(100% - 30px,1120px)}.navwrap{display:block}.nav{gap:14px;margin-top:12px;font-size:14px}.hero,.pagehero{padding:48px 0 36px}.hero h1,.pagehero h1{font-size:44px}.lede{font-size:20px}.stats,.mini{grid-template-columns:1fr 1fr}.arc{grid-template-columns:1fr 1fr}.feature,.grid2{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.phase{grid-template-columns:1fr}.contact{display:block}.contactlinks{margin-top:20px}.item{display:block}.item .file{margin-top:12px}}
 @media(max-width:430px){.hero h1,.pagehero h1{font-size:38px}.arc{grid-template-columns:1fr 1fr}.step{padding:15px}.step b{font-size:18px}.stats,.mini{grid-template-columns:1fr 1fr}.stat,.mini>div{padding:16px}.stat b,.mini b{font-size:24px}.btn{width:100%;text-align:center}.feature .copy{padding:24px}.preview{padding:18px}}
 
-/* Extended portfolio styles – October 2026 */
+/* Portfolio layout */
 .nav {flex-wrap:wrap;row-gap:8px}
 .nav a {white-space:nowrap}
 .cards.three {grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -13,3 +13,39 @@
 .codepanel code{color:#f0fafb;white-space:pre-wrap;font-size:13px;line-height:1.6}
 @media(max-width:940px){.cards.three{grid-template-columns:1fr 1fr}}
 @media(max-width:780px){.cards.three{grid-template-columns:1fr}.nav{gap:8px 14px}.nav a{font-size:13px}}
+
+/* Accessibility, responsive navigation and print improvements, October 2026 */
+.skip-link{position:absolute;left:12px;top:-80px;background:#fff;padding:12px;z-index:100;border:2px solid var(--navy)}
+.skip-link:focus{top:12px}
+a:focus-visible,summary:focus-visible{outline:3px solid #c17720;outline-offset:4px}
+.mobile-nav{display:none}
+.narrow{max-width:960px}.narrow>p{max-width:880px}
+.credentialstats .stat b{font-size:24px}
+.processdiagram{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;margin:24px 0}
+.processdiagram>div{flex:1 1 165px;min-width:140px;background:var(--navy);border-radius:14px;padding:16px;color:white;font-weight:700}
+.processdiagram>div small{display:block;color:#d3e5ea;font-size:12px;font-weight:400;line-height:1.4;margin-top:5px}
+.processdiagram>span{align-self:center;font-weight:800;color:var(--teal)}
+@media(max-width:850px){
+  .navwrap{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .navwrap>.nav{display:none}
+  .mobile-nav{display:block;position:relative;margin-left:auto}
+  .mobile-nav summary{cursor:pointer;font-weight:700;color:var(--navy);border:1px solid var(--line);border-radius:9px;padding:10px 14px;list-style:none}
+  .mobile-nav summary::after{content:" BE"}
+  .mobile-nav[open] nav{position:absolute;z-index:20;right:0;top:calc(100% + 8px);width:min(270px,88vw);display:grid;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 22px rgba(23,50,77,.15);padding:8px}
+  .mobile-nav nav a{display:block;padding:8px 12px;text-decoration:none;color:var(--navy);border-radius:7px}
+  .mobile-nav nav a[aria-current='page']{background:var(--tealsoft);font-weight:800}
+  .mobile-nav nav a:hover{background:var(--soft)}
+  .processdiagram>span{display:none}
+}
+@media print{
+ html{scroll-behavior:auto}body{background:white!important;color:#222;font-size:10pt}
+ .head,.footer,.mobile-nav,.actions,.skip-link{display:none!important}
+ .shell{width:100%!important;max-width:none}.hero,.pagehero{padding:16px 0!important}.section{padding:15px 0!important}
+ .card,.feature,.stat,.phase,.step,.item,.callout,.contact{break-inside:avoid;box-shadow:none!important}
+ .section,.band{break-before:auto;break-after:auto;page-break-before:auto;page-break-after:auto}
+ .hero h1,.pagehero h1{font-size:28pt;line-height:1.12}.section h2{font-size:18pt}
+ .hero .lede,.sectionintro{font-size:11pt}.stats,.mini{grid-template-columns:repeat(4,1fr)}
+ .contact{padding:16px}.preview img{max-height:320px}
+ .btn{color:#17324d!important;border:1px solid #17324d!important;background:white!important;padding:6px 10px!important}
+ a:after{content:''}
+}

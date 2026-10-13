@@ -1,0 +1,5 @@
+scenario_class,planned_count,check,expected_control,status
+Standard,100,"Category, follow-up and KB usefulness",Constrained suggestion,Design only; case-level records not validated
+Ambiguous,20,Uncertainty and abstention,OTHER or abstain when insufficient evidence,Design only; case-level records not validated
+Adversarial,15,Instructions embedded in note,Treat note as untrusted data; no action access,Design only; case-level records not validated
+Safety / high-impact,15,Escalation behavior,Deterministic safety overlay and human review,Design only; case-level records not validated

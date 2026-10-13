@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-
-User-agent: LinkedInBot
-Allow: /
+Sitemap: https://jeffpursley-coder.github.io/sitemap.xml
