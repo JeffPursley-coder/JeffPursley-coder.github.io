@@ -1,28 +1,15 @@
-# Jeff Pursley | Business Systems and Operations Portfolio
+# Jeff Pursley | Business Systems, Technology Implementation & AI Adoption
 
-**Public site:** https://jeffpursley-coder.github.io/
+[View the portfolio](https://jeffpursley-coder.github.io/)
 
-A professional portfolio covering real configuration/review work and a clearly labeled synthetic implementation/analytics/AI case study.
+I am a PMP-certified operations leader with experience in field service, customer operations, staffing, dispatch and process improvement. I hold completed TESU degrees in General Management and Computer Science, plus CSM and CSPO certifications. My focus is technology implementation, business systems and practical AI adoption, informed by experience managing real operational work.
 
-## Truth boundaries
-- Service Manager Email Operating System: real Gmail/Google Workspace Studio/Gemini configuration and troubleshooting. No audited production benefit or unverified deployment scope is claimed.
-- Waypoint Advocates: real-world review and draft working recommendations. No client details, approved policy, integration or measured commercial change is claimed.
-- Juniper Vale: a fictional field-service company; all operating data, 16-week timeline, UAT decisions, analytics outputs, KPI changes and AI use cases are synthetic scenario material.
-- AI evaluation: the original 150-case row-level file could not be validated. The replacement evaluation CSV only transcribes **modeled, non-reproducible aggregate metrics**, with a separate test plan and evidence note. Do not call those production benchmark results.
-- SQL: `assets/files/Operations_Analytics_Reproducible_Sample.zip` contains a 1,800-order deterministic excerpt of original synthetic fact tables and original dimensions, query outputs, and a Python verification script. It contains no real-world client data.
+## Selected projects
 
-## Navigation
-- `index.html` professional summary and project selection
-- `service-manager.html` workflow automation project and example decision test
-- `waypoint.html` customer/CRM workflow review
-- `implementation.html` modeled field-service implementation
-- `analytics.html` reproducible SQL analytics work sample
-- `ai.html` responsible AI design and evidence limitations
-- `project-files.html` curated and complete evidence library
-- `experience.html` volunteer project work
+- **[Service Manager Email Workflow](service-manager.html)**: Real Google Workspace Studio and Gemini configuration, ownership rules, urgent alerts and troubleshooting. Final production performance is not verified.
+- **[Customer Operations & CRM Workflow Review](crm-review.html)**: Real business process review and draft recommendations. The organization is unnamed pending permission; recommendations are not represented as deployed.
+- **[Field Service Implementation](implementation.html)**: Independent Juniper Vale simulation showing requirements, fit-gap decisions, data controls, UAT and release readiness. All organizations, data and outcomes are fictional.
 
-## Deployment
-Static HTML and CSS, with local project PDF and workbook assets. Publish from `main` at repository root using GitHub Pages. `.nojekyll` makes file paths direct. Check `sitemap.xml`, `robots.txt`, canonical/OG tags and project links after each release.
+Supporting work includes [reproducible synthetic SQL analytics](analytics.html), a [responsible AI design and test plan](ai.html), [volunteer project coordination](experience.html), and an [organized project file index](project-files.html).
 
-## Corrections in this edition
-Rewrote generic homepage and project copy to be specific and first-person; added work history and credentials; made synthetic claims explicit; fixed misleading AI CSV; recovered the original SQL data subset; added working verification code; curated files; improved mobile navigation, accessibility, favicon, social sharing metadata and print CSS; corrected HTML structure and mobile menu indicator; replaced public briefing PDFs to eliminate dash-style inconsistencies. The change does not invent client or AI production outcomes.
+This is a business systems and implementation portfolio, not a claim of professional software engineering or production AI deployments. Some project artifacts were developed with AI assistance; I use them to explain business decisions, requirements, testing and delivery controls.
