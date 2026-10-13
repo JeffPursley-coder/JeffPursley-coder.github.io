@@ -30,7 +30,8 @@ a:focus-visible,summary:focus-visible{outline:3px solid #c17720;outline-offset:4
   .navwrap>.nav{display:none}
   .mobile-nav{display:block;position:relative;margin-left:auto}
   .mobile-nav summary{cursor:pointer;font-weight:700;color:var(--navy);border:1px solid var(--line);border-radius:9px;padding:10px 14px;list-style:none}
-  .mobile-nav summary::after{content:" BE"}
+  .mobile-nav summary::after{content:" ▾";font-size:16px;margin-left:8px}
+  .mobile-nav[open] summary::after{content:" ▴"}
   .mobile-nav[open] nav{position:absolute;z-index:20;right:0;top:calc(100% + 8px);width:min(270px,88vw);display:grid;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 22px rgba(23,50,77,.15);padding:8px}
   .mobile-nav nav a{display:block;padding:8px 12px;text-decoration:none;color:var(--navy);border-radius:7px}
   .mobile-nav nav a[aria-current='page']{background:var(--tealsoft);font-weight:800}
