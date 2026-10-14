@@ -6,12 +6,17 @@ on:
       - '.github/workflows/juniper-tests.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
+concurrency:
+  group: juniper-vale-main
+  cancel-in-progress: true
 jobs:
   reproducible:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -25,12 +30,38 @@ jobs:
         run: |
           set -o pipefail
           python -m pytest -q | tee test-current-run.txt
-      - name: Verify synthetic generator and replay evaluation
+      - name: Generate browser input data and deterministic evaluation
         working-directory: juniper-command-center
         run: |
-          python -m lab.generate --out /tmp/juniper_synthetic_test.json
+          python -m lab.web_export
           python -m lab.evaluate
-      - name: Keep run evidence
+          python -m lab.generate --out /tmp/juniper_synthetic_test.json
+      - name: Check public JavaScript syntax
+        working-directory: juniper-command-center
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from re import search,S
+          code=Path('web/index.html').read_text()
+          m=search(r'<script>(.*?)</script>',code,S)
+          assert m,'Missing public calculation script'
+          Path('/tmp/juniper-web.js').write_text(m.group(1))
+          PY
+          node --check /tmp/juniper-web.js
+      - name: Publish matching browser inputs and release test evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp juniper-command-center/test-current-run.txt juniper-command-center/docs/current-tests.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add juniper-command-center/web/data.json juniper-command-center/docs/current-tests.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "Record verified Juniper Vale model inputs and tests [skip ci]"
+            git pull --rebase origin main
+            git push
+          fi
+      - name: Keep complete run evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
