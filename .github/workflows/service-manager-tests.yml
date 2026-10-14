@@ -24,4 +24,4 @@ jobs:
         with:
           node-version: "22"
       - name: Execute deterministic 30-case acceptance suite
-        run: node --test service-manager/engine.test.mjs
+        run: node --test service-manager/*.test.mjs
