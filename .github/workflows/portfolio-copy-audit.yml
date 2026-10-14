@@ -19,7 +19,7 @@ jobs:
           import fitz, zipfile, re, xml.etree.ElementTree as ET
           from collections import Counter
           root=Path('assets/files')
-          bad=re.compile(r'\\b(?:delve|leverage|seamless|robust|holistic|synergy|game.changing|cutting.edge|in today.s|a testament to|at its core|not just|not merely|more than just|revolutionary|unlock|ever.evolving)\\b',re.I)
+          bad=re.compile(r'\b(?:delve|leverage|seamless|robust|holistic|synergy|game.changing|cutting.edge|in today.s|a testament to|at its core|not just|not merely|more than just|revolutionary|unlock|ever.evolving)\b',re.I)
           def show(name,txt):
               chars=Counter(txt)
               hits=list(re.finditer('[—–]',txt))
