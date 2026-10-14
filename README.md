@@ -8,9 +8,9 @@ My specialty is designing practical systems for complex operations: clarifying p
 
 ## Three career paths, one professional foundation
 
-- **[Operations & Business Strategy](operations.html)** — service-business building, distributed leadership, staffing, dispatch, customer operations, scaling processes and management systems.
-- **[Project & Program Delivery](project-management.html)** — PMP-led delivery methods, cross-functional coordination, process design, implementation controls, UAT and adoption.
-- **[AI & Technology Transformation](service-manager.html)** — real-world Google Workspace Studio/Gemini configuration and consulting-led automation.
+- **[Operations & Business Strategy](operations.html)**: service-business building, distributed leadership, staffing, dispatch, customer operations, scaling processes and management systems.
+- **[Project & Program Delivery](project-management.html)**: PMP-led delivery methods, cross-functional coordination, process design, implementation controls, UAT and adoption.
+- **[AI & Technology Transformation](service-manager.html)**: real-world Google Workspace Studio/Gemini configuration and consulting-led automation.
 
 ## Featured independent engineering lab
 
@@ -18,15 +18,15 @@ My specialty is designing practical systems for complex operations: clarifying p
 
 ## Real-world selected work
 
-- **[Service Manager Operating System](service-manager.html)** — translated a real field-service manager's operating requirements into Google Workspace / Gemini workflow configuration, six current work states, urgent escalation and three daily management checkpoints. A separate [interactive synthetic demonstration](service-manager-demo.html), [30-case acceptance suite](service-manager/engine.test.mjs) and [passing GitHub Actions run](https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/actions/workflows/service-manager-tests.yml) provide reproducible rule-level evidence, not a corporate Gemini benchmark.
-- **[Customer Operations & CRM Review](crm-review.html)** — assessed call patterns, intake, escalation, handoffs and CRM outcome reporting; developed practical recommendations.
-- **[CBATES and WeVote](experience.html)** — nonprofit project coordination and distributed software team delivery, including Scrum and Jira/Confluence.
+- **[Service Manager Operating System](service-manager.html)**: translated a real field-service manager's operating requirements into Google Workspace / Gemini workflow configuration, six current work states, urgent escalation and three daily management checkpoints. A separate [interactive synthetic demonstration](service-manager-demo.html), [30-case acceptance suite](service-manager/engine.test.mjs) and [passing GitHub Actions run](https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/actions/workflows/service-manager-tests.yml) provide reproducible rule-level evidence, not a corporate Gemini benchmark.
+- **[Customer Operations & CRM Review](crm-review.html)**: assessed call patterns, intake, escalation, handoffs and CRM outcome reporting; developed practical recommendations.
+- **[CBATES and WeVote](experience.html)**: nonprofit project coordination and distributed software team delivery, including Scrum and Jira/Confluence.
 
 ## Independent implementation evidence
 
-- **[Juniper Vale field-service transformation](implementation.html)** — a clearly identified simulated case with requirements, process maps, fit-gap decisions, migration controls, risk logs, UAT, release decisions and handoff planning.
-- **[Service analytics](analytics.html)** and **[AI operations design](ai.html)** — SQL and modeled scenarios, plus responsible-AI evaluation and safeguards.
-- **[Source documents and workbooks](project-files.html)** — inspect the underlying case material.
+- **[Juniper Vale field-service transformation](implementation.html)**: a clearly identified simulated case with requirements, process maps, fit-gap decisions, migration controls, risk logs, UAT, release decisions and handoff planning.
+- **[Service analytics](analytics.html)** and **[AI operations design](ai.html)**: SQL and modeled scenarios, plus responsible-AI evaluation and safeguards.
+- **[Source documents and workbooks](project-files.html)**: inspect the underlying case material.
 
 Juniper Vale uses fictional organizations and synthetic outcomes. The operational cases describe actual work without publishing private client or workplace records.
 
