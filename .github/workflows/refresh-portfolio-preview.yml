@@ -1,0 +1,60 @@
+name: Refresh portfolio social preview
+on:
+  push:
+    paths:
+      - '.github/workflows/refresh-portfolio-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image dependency
+        run: python -m pip install pillow
+      - name: Render professional social preview
+        run: |
+          python - <<'PY'
+          from PIL import Image,ImageDraw,ImageFont
+          from pathlib import Path
+          W,H=1200,630
+          navy='#17324d';teal='#2b7a78';ink='#334854';muted='#58707a';paper='#fbfaf7';soft='#edf4f4';line='#d5e3e5'
+          im=Image.new('RGB',(W,H),paper)
+          d=ImageDraw.Draw(im)
+          font='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+          bold='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+          def f(sz,strong=False):return ImageFont.truetype(bold if strong else font,sz)
+          d.rounded_rectangle((42,36,1158,596),radius=27,fill='white',outline=line,width=2)
+          d.rounded_rectangle((42,36,58,596),radius=7,fill=teal)
+          d.text((104,91),'JEFF PURSLEY, PMP',font=f(48,True),fill=navy)
+          d.text((107,167),'OPERATIONS  /  PROJECT DELIVERY  /  AI TRANSFORMATION',font=f(21,True),fill=teal)
+          d.line((107,211,1086,211),fill=line,width=3)
+          d.text((104,242),'Business Transformation',font=f(57,True),fill=navy)
+          d.text((104,318),'Built Around Real Operations.',font=f(48,True),fill=navy)
+          d.text((107,412),'Business leadership, strategic execution and intelligent systems',font=f(23),fill=ink)
+          for title,x,w in [('OPERATIONS STRATEGY',107,372),('PROGRAM LEADERSHIP',493,333),('AI IMPLEMENTATION',844,251)]:
+              d.rounded_rectangle((x,485,x+w,537),radius=9,fill=soft,outline='#d8e9e7',width=1)
+              bw=d.textbbox((0,0),title,font=f(17,True))[2]
+              d.text((x+(w-bw)/2,500),title,font=f(17,True),fill=navy)
+          d.text((108,560),'jeffpursley-coder.github.io',font=f(16),fill=muted)
+          dest=Path('assets/img/linkedin-preview.png')
+          dest.parent.mkdir(parents=True,exist_ok=True)
+          im.save(dest,optimize=True)
+          print(f'Preview generated: {dest} {dest.stat().st_size} bytes')
+          PY
+      - name: Commit social preview
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/img/linkedin-preview.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh professional portfolio social preview [skip ci]"
+            git push origin HEAD:main
+          fi
