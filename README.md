@@ -2,7 +2,7 @@
 
 [View the portfolio](https://jeffpursley-coder.github.io/)
 
-I am a PMP-certified operations leader with experience in field service, customer operations, staffing, dispatch and process improvement. I hold completed TESU degrees in General Management and Computer Science, plus CSM and CSPO certifications. My focus is technology implementation, business systems and practical AI adoption, informed by experience managing real operational work.
+I am a PMP-certified operations leader with experience in field service, customer operations, staffing, dispatch and process improvement. I hold a BSBA in Operations Management and a B.S. in Computer Information Systems from Thomas Edison State University, plus CSM and CSPO certifications. My focus is technology implementation, business systems and practical AI adoption, informed by experience managing real operational work.
 
 ## Selected projects
 
