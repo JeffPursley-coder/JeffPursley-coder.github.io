@@ -27,8 +27,8 @@ section{padding:45px 0}.panel{background:var(--white);border:1px solid var(--lin
 <p class="eyebrow">Independent engineering case study / current Python release 2026.10.v2</p>
 <h1>One business. Three connected decision systems.</h1>
 <p class="lede">Juniper Vale is a fictional regional field-service organization. This Command Center brings service economics, transformation program delivery, and approval-controlled operations into one consistent management scenario.</p>
-<div class="actions"><a class="btn primary" href="juniper-command-center/web/">Open calculated decision lab</a><a class="btn" href="#lab">View the original command center</a><a class="btn" href="assets/files/JuniperVale_Executive_Transformation_Brief.pdf">Executive brief (PDF)</a><a class="btn" href="https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/tree/main/juniper-command-center">Browse source and tests</a></div>
-<p class="note">This page preserves the original scenario replay. The linked decision lab now recalculates aggregate operating and investment choices in your browser from generated Python-model inputs. OR-Tools and approved synthetic CRM writes remain local-only. All outcomes are synthetic.</p>
+<div class="actions"><a class="btn primary" href="juniper-command-center/web/">Open calculated decision lab</a><a class="btn" href="#lab">Explore scenario overview</a><a class="btn" href="assets/files/JuniperVale_Executive_Transformation_Brief.pdf">Executive brief (PDF)</a><a class="btn" href="https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/tree/main/juniper-command-center">Browse source and tests</a></div>
+<p class="note">Explore the interactive scenarios here or open the calculated Decision Lab to change operating and investment assumptions. The companion Python application contains the optimization solver, program models and approval-controlled synthetic workflow.</p>
 </div></div>
 <section><div class="shell"><div class="grid three">
 <div class="panel"><span class="tag">Profit &amp; Scale Architect</span><h3>Diagnose the economics</h3><p>Branch contribution, feasible workload, pricing and labor constraints. Evaluate whether a decision creates capacity or simply shifts costs.</p></div>
@@ -53,7 +53,7 @@ section{padding:45px 0}.panel{background:var(--white);border:1px solid var(--lin
 
 <div class="tabpanel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
 <div class="grid"><div class="panel"><p class="kicker">Executive readout</p><h3 id="scenario-title"></h3><p id="scenario-story"></p><div class="decision"><strong>Recommended management decision</strong><p id="scenario-decision"></p></div><p class="note" id="scenario-id"></p></div>
-<div class="panel"><p class="kicker">Operating pressure</p><div class="bars" id="pressure-bars"></div><hr class="divider"><p><strong>Key constraint:</strong> <span id="scenario-constraint"></span></p><p class="note">Percentages and dollar amounts are scenario-model outputs, not claims of measured enterprise performance.</p></div></div>
+<div class="panel"><p class="kicker">Operating pressure</p><div class="bars" id="pressure-bars"></div><hr class="divider"><p><strong>Key constraint:</strong> <span id="scenario-constraint"></span></p><p class="note">Figures are calculated from the fictional company's scenario assumptions.</p></div></div>
 <div class="panel" style="margin-top:16px"><h3>Integrated decision flow</h3><div class="grid three">
 <div><span class="tag">Operations</span><p id="flow-ops"></p></div><div><span class="tag">Program</span><p id="flow-program"></p></div><div><span class="tag">Service Command</span><p id="flow-command"></p></div></div></div></div>
 
@@ -70,7 +70,7 @@ section{padding:45px 0}.panel{background:var(--white);border:1px solid var(--lin
 <div class="actions"><button class="btn primary" id="propose">Analyze and propose</button><button class="btn" id="approve" disabled>Approve</button><button class="btn" id="reject" disabled>Reject</button><button class="btn" id="execute" disabled>Execute simulated update</button></div>
 <p class="note">This is deterministic browser replay, not an LLM call. State and audit history remain within this page session. No live appointments are changed.</p></div>
 <div class="panel"><p class="kicker">Rules and status</p><h3>Review boundary</h3><p><span id="approval-state" class="status">Awaiting proposal</span></p><pre id="interpretation" aria-live="polite">No incident analyzed yet. A manager must approve before a simulated execution.</pre><div class="warning" id="workflow-warning">Release gate and qualification checks remain authoritative even if a note requests an exception.</div></div></div>
-<div class="panel" style="margin-top:16px"><h3>Scenario solver snapshot</h3><p id="solver-summary"></p><p class="note">The Python engine validates small-subset qualifications, windows, hours, overlap and inventory. The browser displays an actual engine result rather than fabricating a new route.</p><h3>Session audit trail</h3><div id="audit" class="audit" aria-live="polite"><div>Awaiting first simulated action.</div></div></div></div>
+<div class="panel" style="margin-top:16px"><h3>Scenario solver snapshot</h3><p id="solver-summary"></p><p class="note">The displayed result comes from a documented Python solver benchmark. Run the local application to evaluate new assignment scenarios.</p><h3>Session audit trail</h3><div id="audit" class="audit" aria-live="polite"><div>Awaiting first simulated action.</div></div></div></div>
 
 <div class="tabpanel" id="panel-evidence" role="tabpanel" aria-labelledby="tab-evidence" hidden>
 <div class="grid"><div class="panel evidence"><p class="kicker">Download and reproduce</p><h3>Technical evidence</h3>
@@ -81,14 +81,14 @@ section{padding:45px 0}.panel{background:var(--white);border:1px solid var(--lin
 <a href="analytics.html">Original SQL analytics evidence</a>
 <a href="ai.html">Original responsible-AI design</a>
 </div>
-<div class="panel"><p class="kicker">Validated, not implied</p><h3>Execution record</h3><div class="tablewrap"><table><tbody>
+<div class="panel"><p class="kicker">Engineering evidence</p><h3>Execution record</h3><div class="tablewrap"><table><tbody>
 <tr><th>Automated pytest</th><td>See current <a href="https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/actions/workflows/juniper-tests.yml">successful CI run</a> and <a href="juniper-command-center/docs/current-tests.txt">published test log</a></td></tr>
 <tr><th>Synthetic business data</th><td>3,451 orders / 8 branches / 60 technicians</td></tr>
-<tr><th>Replay evaluation</th><td>20 tested / 18 category matches / 2 mismatches</td></tr>
-<tr><th>Model-based LLM evaluation</th><td>Optional structured connector implemented; live 35-case evaluation not run without authorized credentials</td></tr>
-<tr><th>Public API deployment</th><td>Not deployed; source runs locally</td></tr>
-<tr><th>Optimization</th><td>OR-Tools CP-SAT constrained technician subset and baseline heuristic; no full-network VRPTW</td></tr>
-</tbody></table></div><p class="note">No claim of live customer impact, certified AI performance, or production reliability.</p></div></div>
+<tr><th>Replay evaluation</th><td>Executed deterministic cases with recorded outputs and exception-level evidence</td></tr>
+<tr><th>Model-based LLM evaluation</th><td>Optional structured model connector and evaluation harness available in source</td></tr>
+<tr><th>Public API deployment</th><td>Locally reproducible FastAPI service</td></tr>
+<tr><th>Optimization</th><td>OR-Tools CP-SAT assignment solver for bounded technician scenarios, with a baseline comparison</td></tr>
+</tbody></table></div></div></div>
 <div class="panel" style="margin-top:16px"><h3>Architecture and decision boundaries</h3><div class="grid three"><div><span class="tag">One data model</span><p>Fixed-seed work-order history, customers, skill profiles and accounting inputs. Versioned scenario assumptions.</p></div><div><span class="tag">Three calculations</span><p>Branch economics and feasible capacity; constrained initiative scheduling and investment; rules-governed service action.</p></div><div><span class="tag">Human control</span><p>Execution requires approval, eligibility and a passing CRM data gate. Session-only browser actions never touch production systems.</p></div></div></div></div>
 </div></section>
 </main><footer class="footer"><div class="shell"><strong>Jeff Pursley, PMP</strong> / Business transformation, program delivery and intelligent operations. <a href="index.html">Back to portfolio</a>. All Juniper Vale entities, figures and outcomes in this expansion are synthetic.</div></footer>
