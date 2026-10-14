@@ -50,6 +50,8 @@ jobs:
           Path('/tmp/juniper-web.js').write_text(script.group(1))
           PY
           node --check /tmp/juniper-web.js
+          node tests/browser-smoke.cjs
+          python tests/check_links.py
           python -m lab.reporting --out /tmp/juniper-evidence
           python - <<'PY'
           import json,re
