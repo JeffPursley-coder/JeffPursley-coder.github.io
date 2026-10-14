@@ -1,0 +1,1278 @@
+{
+  "data_version": "2026.10.v1",
+  "seed": 20261014,
+  "scenarios": {
+    "baseline": {
+      "scenario_id": "JV-baseline-20261014",
+      "data_version": "2026.10.v1",
+      "assumptions": {
+        "scenario": "baseline",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      },
+      "operations": {
+        "baseline_orders": 3451,
+        "requested": 3451,
+        "eligible": 3395,
+        "completed": 3213,
+        "unfulfilled": 238,
+        "technicians": 60,
+        "capacity_minutes": 432000,
+        "revenue": 585067.51,
+        "direct_cost": 176848.01,
+        "contribution": 408219.5,
+        "fixed_operating_cost": 102000.0,
+        "operating_profit": 306219.5,
+        "scenario": "baseline",
+        "branch": "all",
+        "service": "all",
+        "working_days": 15,
+        "utilization": 0.7033,
+        "on_time_rate": 0.881,
+        "rework_rate": 0.0382,
+        "contribution_margin": 0.6977,
+        "cost_per_completed_service": 55.04,
+        "revenue_per_completed_service": 182.09,
+        "travel_minutes_per_service": 21.4,
+        "assumptions": {
+          "scenario": "baseline",
+          "available_delta": 0,
+          "demand_multiplier": 1.0,
+          "wage_multiplier": 1.0,
+          "price_multiplier": 1.0,
+          "travel_multiplier": 1.0,
+          "overtime_minutes": 0,
+          "data_quality": 0.985,
+          "funding_multiplier": 1.0,
+          "seed": 20261014
+        }
+      },
+      "program": {
+        "status": "PLANNED",
+        "target_day": 50,
+        "finish_day": 53,
+        "delay_days": 3,
+        "migration_quality": 0.985,
+        "release_threshold": 0.95,
+        "release_approved": true,
+        "items": [
+          {
+            "id": "CRM",
+            "name": "Customer data and CRM modernization",
+            "start": 0,
+            "finish": 16,
+            "staff": 2,
+            "cost": 52000,
+            "depends_on": []
+          },
+          {
+            "id": "AI",
+            "name": "AI-assisted service operations",
+            "start": 16,
+            "finish": 34,
+            "staff": 2,
+            "cost": 46000,
+            "depends_on": [
+              "CRM"
+            ]
+          },
+          {
+            "id": "DISPATCH",
+            "name": "Dispatch and capacity optimization",
+            "start": 16,
+            "finish": 38,
+            "staff": 2,
+            "cost": 75000,
+            "depends_on": [
+              "CRM"
+            ]
+          },
+          {
+            "id": "ADOPTION",
+            "name": "Workforce adoption and controls",
+            "start": 38,
+            "finish": 53,
+            "staff": 1,
+            "cost": 29000,
+            "depends_on": [
+              "CRM",
+              "DISPATCH",
+              "AI"
+            ]
+          }
+        ],
+        "total_investment": 202000,
+        "funding": {
+          "discount": 0.11,
+          "years": 3,
+          "adoption": 0.7,
+          "total_investment": 202000,
+          "funding_limit": 202000.0,
+          "mandatory_cost": 81000,
+          "mandatory_affordable": true,
+          "total_npv_if_all": 284257,
+          "benefits_overlap_adjusted": true,
+          "projects": [
+            {
+              "id": "CRM",
+              "mandatory": true,
+              "investment": 52000,
+              "net_annual_benefit": 60900,
+              "npv": 69390,
+              "simple_payback_years": 0.85
+            },
+            {
+              "id": "DISPATCH",
+              "mandatory": false,
+              "investment": 75000,
+              "net_annual_benefit": 117600,
+              "npv": 159408,
+              "simple_payback_years": 0.64
+            },
+            {
+              "id": "AI",
+              "mandatory": false,
+              "investment": 46000,
+              "net_annual_benefit": 34650,
+              "npv": 23067,
+              "simple_payback_years": 1.33
+            },
+            {
+              "id": "ADOPTION",
+              "mandatory": true,
+              "investment": 29000,
+              "net_annual_benefit": 30800,
+              "npv": 32393,
+              "simple_payback_years": 0.94
+            }
+          ]
+        }
+      },
+      "service_command": {
+        "assignment_status": "OPTIMAL_WITHIN_SUBSET",
+        "assignment": {
+          "status": "OPTIMAL_WITHIN_SUBSET",
+          "jobs_total": 8,
+          "jobs_assigned": 8,
+          "unassigned": [],
+          "assignments": [
+            {
+              "job_id": "JOB-7",
+              "technician_id": "T-1",
+              "start": 740,
+              "end": 820,
+              "travel_minutes": 23
+            },
+            {
+              "job_id": "JOB-3",
+              "technician_id": "T-1",
+              "start": 506,
+              "end": 566,
+              "travel_minutes": 26
+            },
+            {
+              "job_id": "JOB-6",
+              "technician_id": "T-1",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 14
+            },
+            {
+              "job_id": "JOB-2",
+              "technician_id": "T-3",
+              "start": 494,
+              "end": 544,
+              "travel_minutes": 14
+            },
+            {
+              "job_id": "JOB-5",
+              "technician_id": "T-3",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 26
+            },
+            {
+              "job_id": "JOB-8",
+              "technician_id": "T-3",
+              "start": 740,
+              "end": 800,
+              "travel_minutes": 24
+            },
+            {
+              "job_id": "JOB-1",
+              "technician_id": "T-2",
+              "start": 507,
+              "end": 587,
+              "travel_minutes": 27
+            },
+            {
+              "job_id": "JOB-4",
+              "technician_id": "T-2",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 21
+            }
+          ],
+          "travel_minutes": 175,
+          "nodes": 1690,
+          "note": "Exact subset enumerator; not a vehicle routing solver. Travel is a static per-job estimate."
+        },
+        "write_blocked": false,
+        "action": "REVIEW_OPTIMIZATION",
+        "review_required": true
+      },
+      "comparison": {
+        "baseline_profit": 306219.5,
+        "scenario_profit": 306219.5
+      }
+    },
+    "technician-shortage": {
+      "scenario_id": "JV-technician-shortage-20261014",
+      "data_version": "2026.10.v1",
+      "assumptions": {
+        "scenario": "technician-shortage",
+        "available_delta": -15,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      },
+      "operations": {
+        "baseline_orders": 3451,
+        "requested": 3451,
+        "eligible": 3176,
+        "completed": 3005,
+        "unfulfilled": 446,
+        "technicians": 44,
+        "capacity_minutes": 316800,
+        "revenue": 547100.58,
+        "direct_cost": 165373.27,
+        "contribution": 381727.31,
+        "fixed_operating_cost": 102000.0,
+        "operating_profit": 279727.31,
+        "scenario": "technician-shortage",
+        "branch": "all",
+        "service": "all",
+        "working_days": 15,
+        "utilization": 0.8968,
+        "on_time_rate": 0.8497,
+        "rework_rate": 0.0381,
+        "contribution_margin": 0.6977,
+        "cost_per_completed_service": 55.03,
+        "revenue_per_completed_service": 182.06,
+        "travel_minutes_per_service": 21.4,
+        "assumptions": {
+          "scenario": "technician-shortage",
+          "available_delta": -15,
+          "demand_multiplier": 1.0,
+          "wage_multiplier": 1.0,
+          "price_multiplier": 1.0,
+          "travel_multiplier": 1.0,
+          "overtime_minutes": 0,
+          "data_quality": 0.985,
+          "funding_multiplier": 1.0,
+          "seed": 20261014
+        }
+      },
+      "program": {
+        "status": "PLANNED",
+        "target_day": 50,
+        "finish_day": 71,
+        "delay_days": 21,
+        "migration_quality": 0.985,
+        "release_threshold": 0.95,
+        "release_approved": true,
+        "items": [
+          {
+            "id": "CRM",
+            "name": "Customer data and CRM modernization",
+            "start": 0,
+            "finish": 16,
+            "staff": 2,
+            "cost": 52000,
+            "depends_on": []
+          },
+          {
+            "id": "AI",
+            "name": "AI-assisted service operations",
+            "start": 16,
+            "finish": 34,
+            "staff": 2,
+            "cost": 46000,
+            "depends_on": [
+              "CRM"
+            ]
+          },
+          {
+            "id": "DISPATCH",
+            "name": "Dispatch and capacity optimization",
+            "start": 34,
+            "finish": 56,
+            "staff": 2,
+            "cost": 75000,
+            "depends_on": [
+              "CRM"
+            ]
+          },
+          {
+            "id": "ADOPTION",
+            "name": "Workforce adoption and controls",
+            "start": 56,
+            "finish": 71,
+            "staff": 1,
+            "cost": 29000,
+            "depends_on": [
+              "CRM",
+              "DISPATCH",
+              "AI"
+            ]
+          }
+        ],
+        "total_investment": 202000,
+        "funding": {
+          "discount": 0.11,
+          "years": 3,
+          "adoption": 0.7,
+          "total_investment": 202000,
+          "funding_limit": 202000.0,
+          "mandatory_cost": 81000,
+          "mandatory_affordable": true,
+          "total_npv_if_all": 284257,
+          "benefits_overlap_adjusted": true,
+          "projects": [
+            {
+              "id": "CRM",
+              "mandatory": true,
+              "investment": 52000,
+              "net_annual_benefit": 60900,
+              "npv": 69390,
+              "simple_payback_years": 0.85
+            },
+            {
+              "id": "DISPATCH",
+              "mandatory": false,
+              "investment": 75000,
+              "net_annual_benefit": 117600,
+              "npv": 159408,
+              "simple_payback_years": 0.64
+            },
+            {
+              "id": "AI",
+              "mandatory": false,
+              "investment": 46000,
+              "net_annual_benefit": 34650,
+              "npv": 23067,
+              "simple_payback_years": 1.33
+            },
+            {
+              "id": "ADOPTION",
+              "mandatory": true,
+              "investment": 29000,
+              "net_annual_benefit": 30800,
+              "npv": 32393,
+              "simple_payback_years": 0.94
+            }
+          ]
+        }
+      },
+      "service_command": {
+        "assignment_status": "BEST_PARTIAL_WITHIN_SUBSET",
+        "assignment": {
+          "status": "BEST_PARTIAL_WITHIN_SUBSET",
+          "jobs_total": 8,
+          "jobs_assigned": 6,
+          "unassigned": [
+            "JOB-3",
+            "JOB-5"
+          ],
+          "assignments": [
+            {
+              "job_id": "JOB-7",
+              "technician_id": "T-2",
+              "start": 740,
+              "end": 820,
+              "travel_minutes": 23
+            },
+            {
+              "job_id": "JOB-2",
+              "technician_id": "T-1",
+              "start": 494,
+              "end": 544,
+              "travel_minutes": 14
+            },
+            {
+              "job_id": "JOB-6",
+              "technician_id": "T-1",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 14
+            },
+            {
+              "job_id": "JOB-8",
+              "technician_id": "T-1",
+              "start": 740,
+              "end": 800,
+              "travel_minutes": 24
+            },
+            {
+              "job_id": "JOB-1",
+              "technician_id": "T-2",
+              "start": 507,
+              "end": 587,
+              "travel_minutes": 27
+            },
+            {
+              "job_id": "JOB-4",
+              "technician_id": "T-2",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 21
+            }
+          ],
+          "travel_minutes": 123,
+          "nodes": 101,
+          "note": "Exact subset enumerator; not a vehicle routing solver. Travel is a static per-job estimate."
+        },
+        "write_blocked": false,
+        "action": "REVIEW_OPTIMIZATION",
+        "review_required": true
+      },
+      "comparison": {
+        "baseline_profit": 306219.5,
+        "scenario_profit": 279727.31
+      }
+    },
+    "crm-data-failure": {
+      "scenario_id": "JV-crm-data-failure-20261014",
+      "data_version": "2026.10.v1",
+      "assumptions": {
+        "scenario": "crm-data-failure",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.88,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      },
+      "operations": {
+        "baseline_orders": 3451,
+        "requested": 3451,
+        "eligible": 3032,
+        "completed": 2869,
+        "unfulfilled": 582,
+        "technicians": 60,
+        "capacity_minutes": 432000,
+        "revenue": 522430.05,
+        "direct_cost": 157914.28,
+        "contribution": 364515.77,
+        "fixed_operating_cost": 102000.0,
+        "operating_profit": 262515.77,
+        "scenario": "crm-data-failure",
+        "branch": "all",
+        "service": "all",
+        "working_days": 15,
+        "utilization": 0.628,
+        "on_time_rate": 0.881,
+        "rework_rate": 0.0382,
+        "contribution_margin": 0.6977,
+        "cost_per_completed_service": 55.04,
+        "revenue_per_completed_service": 182.09,
+        "travel_minutes_per_service": 21.4,
+        "assumptions": {
+          "scenario": "crm-data-failure",
+          "available_delta": 0,
+          "demand_multiplier": 1.0,
+          "wage_multiplier": 1.0,
+          "price_multiplier": 1.0,
+          "travel_multiplier": 1.0,
+          "overtime_minutes": 0,
+          "data_quality": 0.88,
+          "funding_multiplier": 1.0,
+          "seed": 20261014
+        }
+      },
+      "program": {
+        "status": "RELEASE_BLOCKED_DATA_QUALITY",
+        "target_day": 50,
+        "finish_day": 53,
+        "delay_days": 3,
+        "migration_quality": 0.88,
+        "release_threshold": 0.95,
+        "release_approved": false,
+        "items": [
+          {
+            "id": "CRM",
+            "name": "Customer data and CRM modernization",
+            "start": 0,
+            "finish": 16,
+            "staff": 2,
+            "cost": 52000,
+            "depends_on": []
+          },
+          {
+            "id": "AI",
+            "name": "AI-assisted service operations",
+            "start": 16,
+            "finish": 34,
+            "staff": 2,
+            "cost": 46000,
+            "depends_on": [
+              "CRM"
+            ]
+          },
+          {
+            "id": "DISPATCH",
+            "name": "Dispatch and capacity optimization",
+            "start": 16,
+            "finish": 38,
+            "staff": 2,
+            "cost": 75000,
+            "depends_on": [
+              "CRM"
+            ]
+          },
+          {
+            "id": "ADOPTION",
+            "name": "Workforce adoption and controls",
+            "start": 38,
+            "finish": 53,
+            "staff": 1,
+            "cost": 29000,
+            "depends_on": [
+              "CRM",
+              "DISPATCH",
+              "AI"
+            ]
+          }
+        ],
+        "total_investment": 202000,
+        "funding": {
+          "discount": 0.11,
+          "years": 3,
+          "adoption": 0.7,
+          "total_investment": 202000,
+          "funding_limit": 202000.0,
+          "mandatory_cost": 81000,
+          "mandatory_affordable": true,
+          "total_npv_if_all": 284257,
+          "benefits_overlap_adjusted": true,
+          "projects": [
+            {
+              "id": "CRM",
+              "mandatory": true,
+              "investment": 52000,
+              "net_annual_benefit": 60900,
+              "npv": 69390,
+              "simple_payback_years": 0.85
+            },
+            {
+              "id": "DISPATCH",
+              "mandatory": false,
+              "investment": 75000,
+              "net_annual_benefit": 117600,
+              "npv": 159408,
+              "simple_payback_years": 0.64
+            },
+            {
+              "id": "AI",
+              "mandatory": false,
+              "investment": 46000,
+              "net_annual_benefit": 34650,
+              "npv": 23067,
+              "simple_payback_years": 1.33
+            },
+            {
+              "id": "ADOPTION",
+              "mandatory": true,
+              "investment": 29000,
+              "net_annual_benefit": 30800,
+              "npv": 32393,
+              "simple_payback_years": 0.94
+            }
+          ]
+        }
+      },
+      "service_command": {
+        "assignment_status": "BEST_PARTIAL_WITHIN_SUBSET",
+        "assignment": {
+          "status": "BEST_PARTIAL_WITHIN_SUBSET",
+          "jobs_total": 8,
+          "jobs_assigned": 7,
+          "unassigned": [
+            "JOB-7"
+          ],
+          "assignments": [
+            {
+              "job_id": "JOB-3",
+              "technician_id": "T-1",
+              "start": 506,
+              "end": 566,
+              "travel_minutes": 26
+            },
+            {
+              "job_id": "JOB-6",
+              "technician_id": "T-1",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 14
+            },
+            {
+              "job_id": "JOB-2",
+              "technician_id": "T-3",
+              "start": 494,
+              "end": 544,
+              "travel_minutes": 14
+            },
+            {
+              "job_id": "JOB-5",
+              "technician_id": "T-3",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 26
+            },
+            {
+              "job_id": "JOB-8",
+              "technician_id": "T-1",
+              "start": 740,
+              "end": 800,
+              "travel_minutes": 24
+            },
+            {
+              "job_id": "JOB-1",
+              "technician_id": "T-2",
+              "start": 507,
+              "end": 587,
+              "travel_minutes": 27
+            },
+            {
+              "job_id": "JOB-4",
+              "technician_id": "T-2",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 21
+            }
+          ],
+          "travel_minutes": 152,
+          "nodes": 543,
+          "note": "Exact subset enumerator; not a vehicle routing solver. Travel is a static per-job estimate."
+        },
+        "write_blocked": true,
+        "action": "HOLD_FOR_DATA_REMEDIATION",
+        "review_required": true
+      },
+      "comparison": {
+        "baseline_profit": 306219.5,
+        "scenario_profit": 262515.77
+      }
+    },
+    "demand-surge": {
+      "scenario_id": "JV-demand-surge-20261014",
+      "data_version": "2026.10.v1",
+      "assumptions": {
+        "scenario": "demand-surge",
+        "available_delta": 0,
+        "demand_multiplier": 1.32,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      },
+      "operations": {
+        "baseline_orders": 3451,
+        "requested": 4554,
+        "eligible": 4313,
+        "completed": 4083,
+        "unfulfilled": 471,
+        "technicians": 60,
+        "capacity_minutes": 432000,
+        "revenue": 743415.36,
+        "direct_cost": 224716.04,
+        "contribution": 518699.32,
+        "fixed_operating_cost": 102000.0,
+        "operating_profit": 416699.32,
+        "scenario": "demand-surge",
+        "branch": "all",
+        "service": "all",
+        "working_days": 15,
+        "utilization": 0.8937,
+        "on_time_rate": 0.8505,
+        "rework_rate": 0.0381,
+        "contribution_margin": 0.6977,
+        "cost_per_completed_service": 55.04,
+        "revenue_per_completed_service": 182.08,
+        "travel_minutes_per_service": 21.4,
+        "assumptions": {
+          "scenario": "demand-surge",
+          "available_delta": 0,
+          "demand_multiplier": 1.32,
+          "wage_multiplier": 1.0,
+          "price_multiplier": 1.0,
+          "travel_multiplier": 1.0,
+          "overtime_minutes": 0,
+          "data_quality": 0.985,
+          "funding_multiplier": 1.0,
+          "seed": 20261014
+        }
+      },
+      "program": {
+        "status": "PLANNED",
+        "target_day": 50,
+        "finish_day": 53,
+        "delay_days": 3,
+        "migration_quality": 0.985,
+        "release_threshold": 0.95,
+        "release_approved": true,
+        "items": [
+          {
+            "id": "CRM",
+            "name": "Customer data and CRM modernization",
+            "start": 0,
+            "finish": 16,
+            "staff": 2,
+            "cost": 52000,
+            "depends_on": []
+          },
+          {
+            "id": "AI",
+            "name": "AI-assisted service operations",
+            "start": 16,
+            "finish": 34,
+            "staff": 2,
+            "cost": 46000,
+            "depends_on": [
+              "CRM"
+            ]
+          },
+          {
+            "id": "DISPATCH",
+            "name": "Dispatch and capacity optimization",
+            "start": 16,
+            "finish": 38,
+            "staff": 2,
+            "cost": 75000,
+            "depends_on": [
+              "CRM"
+            ]
+          },
+          {
+            "id": "ADOPTION",
+            "name": "Workforce adoption and controls",
+            "start": 38,
+            "finish": 53,
+            "staff": 1,
+            "cost": 29000,
+            "depends_on": [
+              "CRM",
+              "DISPATCH",
+              "AI"
+            ]
+          }
+        ],
+        "total_investment": 202000,
+        "funding": {
+          "discount": 0.11,
+          "years": 3,
+          "adoption": 0.7,
+          "total_investment": 202000,
+          "funding_limit": 202000.0,
+          "mandatory_cost": 81000,
+          "mandatory_affordable": true,
+          "total_npv_if_all": 284257,
+          "benefits_overlap_adjusted": true,
+          "projects": [
+            {
+              "id": "CRM",
+              "mandatory": true,
+              "investment": 52000,
+              "net_annual_benefit": 60900,
+              "npv": 69390,
+              "simple_payback_years": 0.85
+            },
+            {
+              "id": "DISPATCH",
+              "mandatory": false,
+              "investment": 75000,
+              "net_annual_benefit": 117600,
+              "npv": 159408,
+              "simple_payback_years": 0.64
+            },
+            {
+              "id": "AI",
+              "mandatory": false,
+              "investment": 46000,
+              "net_annual_benefit": 34650,
+              "npv": 23067,
+              "simple_payback_years": 1.33
+            },
+            {
+              "id": "ADOPTION",
+              "mandatory": true,
+              "investment": 29000,
+              "net_annual_benefit": 30800,
+              "npv": 32393,
+              "simple_payback_years": 0.94
+            }
+          ]
+        }
+      },
+      "service_command": {
+        "assignment_status": "OPTIMAL_WITHIN_SUBSET",
+        "assignment": {
+          "status": "OPTIMAL_WITHIN_SUBSET",
+          "jobs_total": 8,
+          "jobs_assigned": 8,
+          "unassigned": [],
+          "assignments": [
+            {
+              "job_id": "JOB-7",
+              "technician_id": "T-1",
+              "start": 740,
+              "end": 820,
+              "travel_minutes": 23
+            },
+            {
+              "job_id": "JOB-3",
+              "technician_id": "T-1",
+              "start": 506,
+              "end": 566,
+              "travel_minutes": 26
+            },
+            {
+              "job_id": "JOB-6",
+              "technician_id": "T-1",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 14
+            },
+            {
+              "job_id": "JOB-2",
+              "technician_id": "T-3",
+              "start": 494,
+              "end": 544,
+              "travel_minutes": 14
+            },
+            {
+              "job_id": "JOB-5",
+              "technician_id": "T-3",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 26
+            },
+            {
+              "job_id": "JOB-8",
+              "technician_id": "T-3",
+              "start": 740,
+              "end": 800,
+              "travel_minutes": 24
+            },
+            {
+              "job_id": "JOB-1",
+              "technician_id": "T-2",
+              "start": 507,
+              "end": 587,
+              "travel_minutes": 27
+            },
+            {
+              "job_id": "JOB-4",
+              "technician_id": "T-2",
+              "start": 610,
+              "end": 670,
+              "travel_minutes": 21
+            }
+          ],
+          "travel_minutes": 175,
+          "nodes": 1690,
+          "note": "Exact subset enumerator; not a vehicle routing solver. Travel is a static per-job estimate."
+        },
+        "write_blocked": false,
+        "action": "REVIEW_OPTIMIZATION",
+        "review_required": true
+      },
+      "comparison": {
+        "baseline_profit": 306219.5,
+        "scenario_profit": 416699.32
+      }
+    }
+  },
+  "risk": {
+    "status": "MODELED",
+    "runs": 400,
+    "seed": 20261014,
+    "p10_finish_day": 52,
+    "p50_finish_day": 57,
+    "p90_finish_day": 62,
+    "probability_by_day_50": 0.028,
+    "p10_cost": 203509,
+    "p50_cost": 219645,
+    "p90_cost": 240712,
+    "distributions": "Independent triangular duration multipliers: min .82, mode 1, max 1.43. Cost multipliers .96, 1.06, 1.27. Correlations not modeled."
+  },
+  "investment": {
+    "discount": 0.11,
+    "years": 3,
+    "adoption": 0.7,
+    "total_investment": 202000,
+    "funding_limit": 202000,
+    "mandatory_cost": 81000,
+    "mandatory_affordable": true,
+    "total_npv_if_all": 284257,
+    "benefits_overlap_adjusted": true,
+    "projects": [
+      {
+        "id": "CRM",
+        "mandatory": true,
+        "investment": 52000,
+        "net_annual_benefit": 60900,
+        "npv": 69390,
+        "simple_payback_years": 0.85
+      },
+      {
+        "id": "DISPATCH",
+        "mandatory": false,
+        "investment": 75000,
+        "net_annual_benefit": 117600,
+        "npv": 159408,
+        "simple_payback_years": 0.64
+      },
+      {
+        "id": "AI",
+        "mandatory": false,
+        "investment": 46000,
+        "net_annual_benefit": 34650,
+        "npv": 23067,
+        "simple_payback_years": 1.33
+      },
+      {
+        "id": "ADOPTION",
+        "mandatory": true,
+        "investment": 29000,
+        "net_annual_benefit": 30800,
+        "npv": 32393,
+        "simple_payback_years": 0.94
+      }
+    ]
+  },
+  "branches": [
+    {
+      "branch_name": "North Atlanta",
+      "scenario": "baseline",
+      "branch": "B01",
+      "service": "all",
+      "working_days": 15,
+      "baseline_orders": 406,
+      "requested": 406,
+      "eligible": 399,
+      "completed": 384,
+      "unfulfilled": 22,
+      "technicians": 8,
+      "capacity_minutes": 57600,
+      "utilization": 0.6334,
+      "on_time_rate": 0.867,
+      "rework_rate": 0.0435,
+      "revenue": 71775.59,
+      "direct_cost": 21456.21,
+      "contribution": 50319.38,
+      "contribution_margin": 0.7011,
+      "fixed_operating_cost": 12750.0,
+      "operating_profit": 37569.38,
+      "cost_per_completed_service": 55.88,
+      "revenue_per_completed_service": 186.92,
+      "travel_minutes_per_service": 21.2,
+      "assumptions": {
+        "scenario": "baseline",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      }
+    },
+    {
+      "branch_name": "Woodstock",
+      "scenario": "baseline",
+      "branch": "B02",
+      "service": "all",
+      "working_days": 15,
+      "baseline_orders": 429,
+      "requested": 429,
+      "eligible": 422,
+      "completed": 396,
+      "unfulfilled": 33,
+      "technicians": 8,
+      "capacity_minutes": 57600,
+      "utilization": 0.6487,
+      "on_time_rate": 0.8883,
+      "rework_rate": 0.0323,
+      "revenue": 70962.13,
+      "direct_cost": 21578.17,
+      "contribution": 49383.96,
+      "contribution_margin": 0.6959,
+      "fixed_operating_cost": 12750.0,
+      "operating_profit": 36633.96,
+      "cost_per_completed_service": 54.49,
+      "revenue_per_completed_service": 179.2,
+      "travel_minutes_per_service": 22.0,
+      "assumptions": {
+        "scenario": "baseline",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      }
+    },
+    {
+      "branch_name": "Marietta",
+      "scenario": "baseline",
+      "branch": "B03",
+      "service": "all",
+      "working_days": 15,
+      "baseline_orders": 442,
+      "requested": 442,
+      "eligible": 435,
+      "completed": 415,
+      "unfulfilled": 27,
+      "technicians": 8,
+      "capacity_minutes": 57600,
+      "utilization": 0.6771,
+      "on_time_rate": 0.872,
+      "rework_rate": 0.0355,
+      "revenue": 75646.73,
+      "direct_cost": 22765.63,
+      "contribution": 52881.1,
+      "contribution_margin": 0.6991,
+      "fixed_operating_cost": 12750.0,
+      "operating_profit": 40131.1,
+      "cost_per_completed_service": 54.86,
+      "revenue_per_completed_service": 182.28,
+      "travel_minutes_per_service": 21.2,
+      "assumptions": {
+        "scenario": "baseline",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      }
+    },
+    {
+      "branch_name": "Roswell",
+      "scenario": "baseline",
+      "branch": "B04",
+      "service": "all",
+      "working_days": 15,
+      "baseline_orders": 434,
+      "requested": 434,
+      "eligible": 427,
+      "completed": 405,
+      "unfulfilled": 29,
+      "technicians": 8,
+      "capacity_minutes": 57600,
+      "utilization": 0.6604,
+      "on_time_rate": 0.8835,
+      "rework_rate": 0.0291,
+      "revenue": 72309.23,
+      "direct_cost": 22042.56,
+      "contribution": 50266.67,
+      "contribution_margin": 0.6952,
+      "fixed_operating_cost": 12750.0,
+      "operating_profit": 37516.67,
+      "cost_per_completed_service": 54.43,
+      "revenue_per_completed_service": 178.54,
+      "travel_minutes_per_service": 21.1,
+      "assumptions": {
+        "scenario": "baseline",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      }
+    },
+    {
+      "branch_name": "Alpharetta",
+      "scenario": "baseline",
+      "branch": "B05",
+      "service": "all",
+      "working_days": 15,
+      "baseline_orders": 426,
+      "requested": 426,
+      "eligible": 419,
+      "completed": 397,
+      "unfulfilled": 29,
+      "technicians": 7,
+      "capacity_minutes": 50400,
+      "utilization": 0.7454,
+      "on_time_rate": 0.8861,
+      "rework_rate": 0.0594,
+      "revenue": 72001.86,
+      "direct_cost": 21863.96,
+      "contribution": 50137.9,
+      "contribution_margin": 0.6963,
+      "fixed_operating_cost": 12750.0,
+      "operating_profit": 37387.9,
+      "cost_per_completed_service": 55.07,
+      "revenue_per_completed_service": 181.36,
+      "travel_minutes_per_service": 21.3,
+      "assumptions": {
+        "scenario": "baseline",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      }
+    },
+    {
+      "branch_name": "Canton",
+      "scenario": "baseline",
+      "branch": "B06",
+      "service": "all",
+      "working_days": 15,
+      "baseline_orders": 438,
+      "requested": 438,
+      "eligible": 431,
+      "completed": 406,
+      "unfulfilled": 32,
+      "technicians": 7,
+      "capacity_minutes": 50400,
+      "utilization": 0.7643,
+      "on_time_rate": 0.8838,
+      "rework_rate": 0.0315,
+      "revenue": 74536.89,
+      "direct_cost": 22423.58,
+      "contribution": 52113.31,
+      "contribution_margin": 0.6992,
+      "fixed_operating_cost": 12750.0,
+      "operating_profit": 39363.31,
+      "cost_per_completed_service": 55.23,
+      "revenue_per_completed_service": 183.59,
+      "travel_minutes_per_service": 21.4,
+      "assumptions": {
+        "scenario": "baseline",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      }
+    },
+    {
+      "branch_name": "Sandy Springs",
+      "scenario": "baseline",
+      "branch": "B07",
+      "service": "all",
+      "working_days": 15,
+      "baseline_orders": 429,
+      "requested": 429,
+      "eligible": 422,
+      "completed": 395,
+      "unfulfilled": 34,
+      "technicians": 7,
+      "capacity_minutes": 50400,
+      "utilization": 0.7517,
+      "on_time_rate": 0.9005,
+      "rework_rate": 0.0249,
+      "revenue": 72397.06,
+      "direct_cost": 22022.02,
+      "contribution": 50375.04,
+      "contribution_margin": 0.6958,
+      "fixed_operating_cost": 12750.0,
+      "operating_profit": 37625.04,
+      "cost_per_completed_service": 55.75,
+      "revenue_per_completed_service": 183.28,
+      "travel_minutes_per_service": 21.4,
+      "assumptions": {
+        "scenario": "baseline",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      }
+    },
+    {
+      "branch_name": "Kennesaw",
+      "scenario": "baseline",
+      "branch": "B08",
+      "service": "all",
+      "working_days": 15,
+      "baseline_orders": 447,
+      "requested": 447,
+      "eligible": 440,
+      "completed": 415,
+      "unfulfilled": 32,
+      "technicians": 7,
+      "capacity_minutes": 50400,
+      "utilization": 0.7732,
+      "on_time_rate": 0.8673,
+      "rework_rate": 0.0498,
+      "revenue": 75438.02,
+      "direct_cost": 22695.88,
+      "contribution": 52742.14,
+      "contribution_margin": 0.6991,
+      "fixed_operating_cost": 12750.0,
+      "operating_profit": 39992.14,
+      "cost_per_completed_service": 54.69,
+      "revenue_per_completed_service": 181.78,
+      "travel_minutes_per_service": 21.3,
+      "assumptions": {
+        "scenario": "baseline",
+        "available_delta": 0,
+        "demand_multiplier": 1.0,
+        "wage_multiplier": 1.0,
+        "price_multiplier": 1.0,
+        "travel_multiplier": 1.0,
+        "overtime_minutes": 0,
+        "data_quality": 0.985,
+        "funding_multiplier": 1.0,
+        "seed": 20261014
+      }
+    }
+  ]
+}
