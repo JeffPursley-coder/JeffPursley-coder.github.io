@@ -50,3 +50,18 @@ a:focus-visible,summary:focus-visible{outline:3px solid #c17720;outline-offset:4
  .btn{color:#17324d!important;border:1px solid #17324d!important;background:white!important;padding:6px 10px!important}
  a:after{content:''}
 }
+
+/* Final static-site refinements: preview legibility, keyboard focus, and readable evidence links. */
+.preview{margin:0;min-width:0}
+.preview img{height:auto;max-height:440px;object-fit:contain;box-shadow:0 8px 22px rgba(23,50,77,.10)}
+.preview figcaption{margin-top:12px;color:#4c5d67;font-size:13px;line-height:1.45}
+.preview figcaption a{font-weight:700}
+.card p{overflow-wrap:break-word}
+.card .links{align-items:flex-start}
+.card .links a{font-weight:700}
+.card:hover,.item:hover{border-color:#b0c6c9}
+.btn:hover,.file:hover{filter:brightness(.94)}
+a:focus-visible,summary:focus-visible{outline:3px solid #b36800;outline-offset:4px}
+@media(max-width:780px){.preview img{max-height:360px}.systems-cards{grid-template-columns:1fr}}
+@media(max-width:430px){.preview img{max-height:280px}.card{padding:21px}}
+@media print{.preview img{max-height:300px}}
