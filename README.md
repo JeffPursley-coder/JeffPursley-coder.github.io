@@ -25,3 +25,8 @@ My specialty is designing practical systems for complex operations: clarifying p
 - **[Source documents and workbooks](project-files.html)** — inspect the underlying case material.
 
 Juniper Vale uses fictional organizations and synthetic outcomes. The operational cases describe actual work without publishing private client or workplace records.
+
+
+## Dragonfly business transformation
+
+[Dragonfly: Building and Scaling a Service Business](https://jeffpursley-coder.github.io/dragonfly.html) documents real operations leadership and a separately modeled operating economics analysis. The scenario financial figures are illustrative, not historical Dragonfly sales or profit.
