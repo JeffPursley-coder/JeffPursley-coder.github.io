@@ -1,0 +1,57 @@
+name: One-time portfolio document copy audit
+on:
+  push:
+    paths:
+      - '.github/workflows/portfolio-copy-audit.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PDF text reader
+        run: python -m pip install pymupdf
+      - name: Inspect PDFs spreadsheets and ZIP text assets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import fitz, zipfile, re, xml.etree.ElementTree as ET
+          from collections import Counter
+          root=Path('assets/files')
+          bad=re.compile(r'\\b(?:delve|leverage|seamless|robust|holistic|synergy|game.changing|cutting.edge|in today.s|a testament to|at its core|not just|not merely|more than just|revolutionary|unlock|ever.evolving)\\b',re.I)
+          def show(name,txt):
+              chars=Counter(txt)
+              hits=list(re.finditer('[—–]',txt))
+              other=list(bad.finditer(txt))
+              if not hits and not other:return
+              print(f'ASSET {name} EM={chars["—"]} EN={chars["–"]} AI_CUES={len(other)}')
+              for m in (hits[:7]+other[:4]):
+                  excerpt=txt[max(0,m.start()-75):min(len(txt),m.start()+115)].replace('\\n',' ')
+                  print(f'  {m.group(0)!r}: {excerpt!r}')
+          for p in sorted(root.glob('*.pdf')):
+              try:
+                  d=fitz.open(p); txt='\\n'.join(page.get_text('text') for page in d)
+                  show(str(p),txt)
+              except Exception as e:print('READ FAILURE',p,e)
+          for p in sorted(root.glob('*.xlsx')):
+              try:
+                  with zipfile.ZipFile(p) as z:
+                      strings=[]
+                      for name in z.namelist():
+                          if name.startswith('xl/') and name.endswith('.xml') and (name.startswith('xl/sharedStrings') or '/worksheets/' in name):
+                              data=z.read(name).decode('utf-8')
+                              rootx=ET.fromstring(data)
+                              for el in rootx.iter():
+                                  if el.tag.rsplit('}',1)[-1] in ('t','v') and el.text:strings.append(el.text)
+                      show(str(p),' | '.join(strings))
+              except Exception as e:print('XLSX ERROR',p,e)
+          for p in sorted(root.glob('*.zip')):
+              try:
+                  with zipfile.ZipFile(p) as z:
+                      for f in z.namelist():
+                          if f.endswith(('.md','.txt','.csv','.sql','.json','.py','.html','.mjs','.xml')) and not f.startswith('__MACOSX'):
+                              try: show(str(p)+'::'+f,z.read(f).decode('utf-8'))
+                              except Exception: pass
+              except Exception as e:print('ZIP ERROR',p,e)
+          PY
