@@ -33,6 +33,17 @@ export function classify(raw) {
   }else{
     state="NEEDS_REVIEW";reason="Insufficient evidence to assign a current obligation safely.";
   }
+  // Optional event context makes retry and human-correction safeguards testable.
+  // The caller supplies recorded event IDs and overrides; no data is stored here.
+  const input=(raw&&typeof raw==="object")?raw:{};
+  if(input.overrideLocked && STATES.includes(input.manualState)){
+    state=input.manualState;
+    reason="A protected human correction has priority over automated reclassification.";
+  }else if(input.eventId && Array.isArray(input.seenEventIds) &&
+    input.seenEventIds.includes(input.eventId) && STATES.includes(input.priorState)){
+    state=input.priorState;
+    reason="Repeated event detected; preserve the recorded state rather than retrigger.";
+  }
   if(injected&&state==="ACTION")reason+=" Instructions embedded in the email were ignored.";
   const category=has(/password|credentials?|ignore rules/)?"Security / exception"
     :has(/hazard|safety/)?"Safety"
