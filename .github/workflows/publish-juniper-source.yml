@@ -1,0 +1,52 @@
+name: Publish current Juniper Vale source
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-juniper-source.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  extract-test-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Extract the existing authoritative archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f assets/files/JuniperVale_Transformation_Lab_Source.zip
+          mkdir -p /tmp/jv-source
+          unzip -q assets/files/JuniperVale_Transformation_Lab_Source.zip -d /tmp/jv-source
+          req=$(find /tmp/jv-source -name requirements.txt -not -path '*/.venv/*' | head -n 1)
+          test -n "$req"
+          src=$(dirname "$req")
+          echo "SRC=$src" >> "$GITHUB_ENV"
+          python -m pip install --upgrade pip
+          python -m pip install -r "$req"
+      - name: Rerun existing application tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$SRC"
+          python -m pytest -q | tee /tmp/jv-test-results.txt
+      - name: Publish browsable source only after passing tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p juniper-command-center
+          cp -a "$SRC"/. juniper-command-center/
+          find juniper-command-center -type d \( -name __pycache__ -o -name .pytest_cache -o -name .venv \) -prune -exec rm -rf '{}' +
+          find juniper-command-center -type f \( -name '*.pyc' -o -name '*.db' -o -name '*.sqlite' \) -delete
+          mkdir -p juniper-command-center/docs
+          cp /tmp/jv-test-results.txt juniper-command-center/docs/github-actions-test-results.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add juniper-command-center
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish verified authoritative Juniper Vale source [skip ci]"
+            git push
+          fi
