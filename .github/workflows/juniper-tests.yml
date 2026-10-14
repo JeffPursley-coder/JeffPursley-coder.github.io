@@ -4,73 +4,77 @@ on:
     paths:
       - 'juniper-command-center/**'
       - '.github/workflows/juniper-tests.yml'
+  pull_request:
+    paths:
+      - 'juniper-command-center/**'
+      - '.github/workflows/juniper-tests.yml'
   workflow_dispatch:
 permissions:
-  contents: write
-concurrency:
-  group: juniper-vale-main
-  cancel-in-progress: true
+  contents: read
 jobs:
   reproducible:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install reproducible dependencies
+      - name: Install dependencies
         working-directory: juniper-command-center
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
-      - name: Run the full release suite
+        run: python -m pip install -r requirements.txt
+      - name: Run all Python tests
         working-directory: juniper-command-center
+        shell: bash
         run: |
           set -o pipefail
           python -m pytest -q | tee test-current-run.txt
-      - name: Generate browser input data and deterministic evaluation
+      - name: Recreate versioned synthetic evidence
         working-directory: juniper-command-center
         run: |
           python -m lab.web_export
           python -m lab.evaluate
           python -m lab.generate --out /tmp/juniper_synthetic_test.json
-      - name: Check public JavaScript syntax
+      - name: Validate browser script, source inputs and reports
         working-directory: juniper-command-center
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          from re import search,S
-          code=Path('web/index.html').read_text()
-          m=search(r'<script>(.*?)</script>',code,S)
-          assert m,'Missing public calculation script'
-          Path('/tmp/juniper-web.js').write_text(m.group(1))
-          PY
-          node --check /tmp/juniper-web.js
-      - name: Generate current executive and technical PDF reports
-        working-directory: juniper-command-center
-        run: python -m lab.reporting --out ../assets/files
-      - name: Publish matching browser inputs and release test evidence
         shell: bash
         run: |
           set -euo pipefail
-          cp juniper-command-center/test-current-run.txt juniper-command-center/docs/current-tests.txt
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add juniper-command-center/web/data.json juniper-command-center/docs/current-tests.txt assets/files/JuniperVale_Executive_Transformation_Brief.pdf assets/files/JuniperVale_Technical_Evaluation_Report.pdf
-          if ! git diff --cached --quiet; then
-            git commit -m "Record verified Juniper Vale model inputs and tests [skip ci]"
-            git stash push -u --quiet || true
-            git pull --rebase origin main
-            git push
-          fi
-      - name: Keep complete run evidence
+          python - <<'PY'
+          from pathlib import Path
+          from re import search,S
+          content=Path('web/index.html').read_text()
+          script=search(r'<script>(.*?)</script>',content,S)
+          assert script,'Missing calculation script'
+          Path('/tmp/juniper-web.js').write_text(script.group(1))
+          PY
+          node --check /tmp/juniper-web.js
+          python -m lab.reporting --out /tmp/juniper-evidence
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          from lab.engine import operations,DATA
+          p=Path('web/data.json')
+          d=json.loads(p.read_text())
+          b=operations()
+          assert d['total_orders']==len(DATA['orders'])
+          assert d['seed']==DATA['seed'] and len(d['branches'])==8
+          for k in ('requested','completed','revenue','direct_cost','operating_profit'):
+              assert abs(d['python_baseline'][k]-b[k])<.011,k
+          for doc in ('JuniperVale_Executive_Transformation_Brief.pdf','JuniperVale_Technical_Evaluation_Report.pdf'):
+              pdf=Path('/tmp/juniper-evidence')/doc
+              assert pdf.stat().st_size>2500 and pdf.read_bytes()[:5]==b'%PDF-'
+          print('PASS: source, synthetic browser inputs, model reconciliation, JS syntax, PDF signatures')
+          PY
+      - name: Keep proof from tested commit
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: juniper-vale-ci-evidence
+          name: juniper-vale-verified-evidence
           path: |
             juniper-command-center/test-current-run.txt
+            juniper-command-center/web/data.json
             juniper-command-center/results/replay-evaluation.json
+            /tmp/juniper-evidence/*.pdf
           if-no-files-found: warn
