@@ -18,7 +18,7 @@ My specialty is designing practical systems for complex operations: clarifying p
 
 ## Real-world selected work
 
-- **[Service Manager Operating System](service-manager.html)** — consulted on a service manager's priorities and follow-through, then designed and configured six work states, urgent exceptions and three daily manager checkpoints in Google Workspace/Gemini. Sustained production impact has not been independently measured.
+- **[Service Manager Operating System](service-manager.html)** — translated a real field-service manager's operating requirements into Google Workspace / Gemini workflow configuration, six current work states, urgent escalation and three daily management checkpoints. A separate [interactive synthetic demonstration](service-manager-demo.html), [30-case acceptance suite](service-manager/engine.test.mjs) and [passing GitHub Actions run](https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/actions/workflows/service-manager-tests.yml) provide reproducible rule-level evidence, not a corporate Gemini benchmark.
 - **[Customer Operations & CRM Review](crm-review.html)** — assessed call patterns, intake, escalation, handoffs and CRM outcome reporting; developed practical recommendations.
 - **[CBATES and WeVote](experience.html)** — nonprofit project coordination and distributed software team delivery, including Scrum and Jira/Confluence.
 
