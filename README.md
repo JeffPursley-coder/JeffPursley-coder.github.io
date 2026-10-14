@@ -1,15 +1,27 @@
-# Jeff Pursley | Business Systems, Technology Implementation & AI Adoption
+# Jeff Pursley, PMP | Business Transformation & Intelligent Operations
 
-[View the portfolio](https://jeffpursley-coder.github.io/)
+[View my professional portfolio](https://jeffpursley-coder.github.io/)
 
-I am a PMP-certified operations leader with experience in field service, customer operations, staffing, dispatch and process improvement. I hold a BSBA in Operations Management and a B.S. in Computer Information Systems from Thomas Edison State University, plus CSM and CSPO certifications. My focus is technology implementation, business systems and practical AI adoption, informed by experience managing real operational work.
+I connect **operations leadership, project delivery and intelligent technology**. My background includes co-building a service business with approximately 21 employees, leading a 15-person team across five markets, and supervising a roughly 25-person licensed sales team that ranked first during the Annual Enrollment Period. I hold two bachelor's degrees in Operations Management and Computer Information Systems, along with PMP, CSM and CSPO credentials.
 
-## Selected projects
+My specialty is designing practical systems for complex operations: clarifying priorities and ownership, coordinating change, and making follow-through visible to the people running the business.
 
-- **[Service Manager Email Workflow](service-manager.html)**: Real Google Workspace Studio and Gemini configuration, ownership rules, urgent alerts and troubleshooting. Final production performance is not verified.
-- **[Customer Operations & CRM Workflow Review](crm-review.html)**: Real business process review and draft recommendations. The organization is unnamed pending permission; recommendations are not represented as deployed.
-- **[Field Service Implementation](implementation.html)**: Independent Juniper Vale simulation showing requirements, fit-gap decisions, data controls, UAT and release readiness. All organizations, data and outcomes are fictional.
+## Three career paths, one professional foundation
 
-Supporting work includes [reproducible synthetic SQL analytics](analytics.html), a [responsible AI design and test plan](ai.html), [volunteer project coordination](experience.html), and an [organized project file index](project-files.html).
+- **[Operations & Business Strategy](operations.html)** — service-business building, distributed leadership, staffing, dispatch, customer operations, scaling processes and management systems.
+- **[Project & Program Delivery](project-management.html)** — PMP-led delivery methods, cross-functional coordination, process design, implementation controls, UAT and adoption.
+- **[AI & Technology Transformation](service-manager.html)** — real-world Google Workspace Studio/Gemini configuration and consulting-led automation.
 
-This is a business systems and implementation portfolio, not a claim of professional software engineering or production AI deployments. Some project artifacts were developed with AI assistance; I use them to explain business decisions, requirements, testing and delivery controls.
+## Real-world selected work
+
+- **[Service Manager Operating System](service-manager.html)** — consulted on a service manager's priorities and follow-through, then designed and configured six work states, urgent exceptions and three daily manager checkpoints in Google Workspace/Gemini. Sustained production impact has not been independently measured.
+- **[Customer Operations & CRM Review](crm-review.html)** — assessed call patterns, intake, escalation, handoffs and CRM outcome reporting; developed practical recommendations.
+- **[CBATES and WeVote](experience.html)** — nonprofit project coordination and distributed software team delivery, including Scrum and Jira/Confluence.
+
+## Independent implementation evidence
+
+- **[Juniper Vale field-service transformation](implementation.html)** — a clearly identified simulated case with requirements, process maps, fit-gap decisions, migration controls, risk logs, UAT, release decisions and handoff planning.
+- **[Service analytics](analytics.html)** and **[AI operations design](ai.html)** — SQL and modeled scenarios, plus responsible-AI evaluation and safeguards.
+- **[Source documents and workbooks](project-files.html)** — inspect the underlying case material.
+
+Juniper Vale uses fictional organizations and synthetic outcomes. The operational cases describe actual work without publishing private client or workplace records.
