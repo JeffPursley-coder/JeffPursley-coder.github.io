@@ -139,3 +139,8 @@ def reset_demo(authorization:str|None=Header(default=None)):
     require_role(authorization,{'manager'})
     store.reset()
     return {'status':'RESET','detail':'synthetic incidents and audit reset; baseline dataset is unchanged'}
+
+@app.get('/api/appointments/{order_id}')
+def read_appointment(order_id:str):
+    try:return store.get_appointment(order_id)
+    except KeyError as e:raise HTTPException(404,str(e))
