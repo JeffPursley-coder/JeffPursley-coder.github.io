@@ -12,6 +12,10 @@ My specialty is designing practical systems for complex operations: clarifying p
 - **[Project & Program Delivery](project-management.html)** — PMP-led delivery methods, cross-functional coordination, process design, implementation controls, UAT and adoption.
 - **[AI & Technology Transformation](service-manager.html)** — real-world Google Workspace Studio/Gemini configuration and consulting-led automation.
 
+## Featured independent engineering lab
+
+- **[Juniper Vale Enterprise Transformation Command Center](transformation-lab.html)**: Interactive browser replay of one fictional business with integrated operating profit, resource-constrained program scheduling, CRM data-quality release decisions, controlled service action and human approval. The published [source archive](assets/files/JuniperVale_Transformation_Lab_Source.zip) contains Python FastAPI endpoints, fixed-seed synthetic data generation, a constrained subset optimizer, 31 passing pytest checks, evaluation cases and scenario evidence. It is not a public production API or a deployed language model.
+
 ## Real-world selected work
 
 - **[Service Manager Operating System](service-manager.html)** — consulted on a service manager's priorities and follow-through, then designed and configured six work states, urgent exceptions and three daily manager checkpoints in Google Workspace/Gemini. Sustained production impact has not been independently measured.
