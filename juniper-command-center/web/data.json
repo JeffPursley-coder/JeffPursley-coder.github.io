@@ -1,0 +1,450 @@
+{
+  "version": "2026.10.v1",
+  "release": "2026.10.v2",
+  "seed": 20261014,
+  "days": 15,
+  "branches": [
+    {
+      "id": "B01",
+      "name": "North Atlanta",
+      "technicians": 8,
+      "all": {
+        "baseline_orders": 406,
+        "completion_rate": 0.9630541871921182,
+        "average_service_minutes": 73.82019704433498,
+        "average_travel_minutes": 21.189655172413794,
+        "average_revenue": 186.9156010230179,
+        "average_materials": 16.531969309462916,
+        "on_time_rate": 0.8670076726342711,
+        "rework_rate": 0.043478260869565216
+      },
+      "services": {
+        "standard": {
+          "baseline_orders": 278,
+          "completion_rate": 0.960431654676259,
+          "average_service_minutes": 63.69064748201439,
+          "average_travel_minutes": 21.093525179856115,
+          "average_revenue": 145.11097378277154,
+          "average_materials": 11.0,
+          "on_time_rate": 0.8764044943820225,
+          "rework_rate": 0.04119850187265917
+        },
+        "commercial": {
+          "baseline_orders": 98,
+          "completion_rate": 0.9693877551020408,
+          "average_service_minutes": 88.75510204081633,
+          "average_travel_minutes": 21.224489795918366,
+          "average_revenue": 256.6484210526316,
+          "average_materials": 24.0,
+          "on_time_rate": 0.8631578947368421,
+          "rework_rate": 0.042105263157894736
+        },
+        "specialty": {
+          "baseline_orders": 30,
+          "completion_rate": 0.9666666666666667,
+          "average_service_minutes": 118.9,
+          "average_travel_minutes": 21.966666666666665,
+          "average_revenue": 343.3713793103448,
+          "average_materials": 43.0,
+          "on_time_rate": 0.7931034482758621,
+          "rework_rate": 0.06896551724137931
+        }
+      }
+    },
+    {
+      "id": "B02",
+      "name": "Woodstock",
+      "technicians": 8,
+      "all": {
+        "baseline_orders": 429,
+        "completion_rate": 0.9393939393939394,
+        "average_service_minutes": 72.33566433566433,
+        "average_travel_minutes": 22.023310023310025,
+        "average_revenue": 179.19729528535981,
+        "average_materials": 15.610421836228287,
+        "on_time_rate": 0.8883374689826302,
+        "rework_rate": 0.03225806451612903
+      },
+      "services": {
+        "standard": {
+          "baseline_orders": 319,
+          "completion_rate": 0.9435736677115988,
+          "average_service_minutes": 63.60188087774295,
+          "average_travel_minutes": 22.062695924764892,
+          "average_revenue": 145.08205980066444,
+          "average_materials": 11.0,
+          "on_time_rate": 0.9036544850498339,
+          "rework_rate": 0.03986710963455149
+        },
+        "commercial": {
+          "baseline_orders": 81,
+          "completion_rate": 0.9135802469135802,
+          "average_service_minutes": 90.41975308641975,
+          "average_travel_minutes": 21.54320987654321,
+          "average_revenue": 255.04013513513513,
+          "average_materials": 24.0,
+          "on_time_rate": 0.8378378378378378,
+          "rework_rate": 0.013513513513513514
+        },
+        "specialty": {
+          "baseline_orders": 29,
+          "completion_rate": 0.9655172413793104,
+          "average_service_minutes": 117.89655172413794,
+          "average_travel_minutes": 22.93103448275862,
+          "average_revenue": 345.4942857142857,
+          "average_materials": 43.0,
+          "on_time_rate": 0.8571428571428571,
+          "rework_rate": 0
+        }
+      }
+    },
+    {
+      "id": "B03",
+      "name": "Marietta",
+      "technicians": 8,
+      "all": {
+        "baseline_orders": 442,
+        "completion_rate": 0.9547511312217195,
+        "average_service_minutes": 72.78280542986425,
+        "average_travel_minutes": 21.192307692307693,
+        "average_revenue": 182.28127962085307,
+        "average_materials": 15.988151658767773,
+        "on_time_rate": 0.8720379146919431,
+        "rework_rate": 0.035545023696682464
+      },
+      "services": {
+        "standard": {
+          "baseline_orders": 314,
+          "completion_rate": 0.9585987261146497,
+          "average_service_minutes": 63.65605095541401,
+          "average_travel_minutes": 21.11464968152866,
+          "average_revenue": 145.3275415282392,
+          "average_materials": 11.0,
+          "on_time_rate": 0.8770764119601329,
+          "rework_rate": 0.03322259136212625
+        },
+        "commercial": {
+          "baseline_orders": 99,
+          "completion_rate": 0.9393939393939394,
+          "average_service_minutes": 88.58585858585859,
+          "average_travel_minutes": 21.696969696969695,
+          "average_revenue": 253.66559139784945,
+          "average_materials": 24.0,
+          "on_time_rate": 0.8387096774193549,
+          "rework_rate": 0.053763440860215055
+        },
+        "specialty": {
+          "baseline_orders": 29,
+          "completion_rate": 0.9655172413793104,
+          "average_service_minutes": 117.65517241379311,
+          "average_travel_minutes": 20.310344827586206,
+          "average_revenue": 342.43607142857144,
+          "average_materials": 43.0,
+          "on_time_rate": 0.9285714285714286,
+          "rework_rate": 0
+        }
+      }
+    },
+    {
+      "id": "B04",
+      "name": "Roswell",
+      "technicians": 8,
+      "all": {
+        "baseline_orders": 434,
+        "completion_rate": 0.9493087557603687,
+        "average_service_minutes": 72.86635944700461,
+        "average_travel_minutes": 21.05069124423963,
+        "average_revenue": 178.54131067961166,
+        "average_materials": 15.555825242718447,
+        "on_time_rate": 0.883495145631068,
+        "rework_rate": 0.02912621359223301
+      },
+      "services": {
+        "standard": {
+          "baseline_orders": 324,
+          "completion_rate": 0.9567901234567902,
+          "average_service_minutes": 64.97839506172839,
+          "average_travel_minutes": 21.36111111111111,
+          "average_revenue": 145.15887096774193,
+          "average_materials": 11.0,
+          "on_time_rate": 0.8935483870967742,
+          "rework_rate": 0.02903225806451613
+        },
+        "commercial": {
+          "baseline_orders": 79,
+          "completion_rate": 0.9240506329113924,
+          "average_service_minutes": 89.48101265822785,
+          "average_travel_minutes": 19.670886075949365,
+          "average_revenue": 253.383698630137,
+          "average_materials": 24.0,
+          "on_time_rate": 0.863013698630137,
+          "rework_rate": 0.0273972602739726
+        },
+        "specialty": {
+          "baseline_orders": 31,
+          "completion_rate": 0.9354838709677419,
+          "average_service_minutes": 112.96774193548387,
+          "average_travel_minutes": 21.322580645161292,
+          "average_revenue": 346.99172413793104,
+          "average_materials": 43.0,
+          "on_time_rate": 0.8275862068965517,
+          "rework_rate": 0.034482758620689655
+        }
+      }
+    },
+    {
+      "id": "B05",
+      "name": "Alpharetta",
+      "technicians": 7,
+      "all": {
+        "baseline_orders": 426,
+        "completion_rate": 0.9483568075117371,
+        "average_service_minutes": 73.28873239436619,
+        "average_travel_minutes": 21.342723004694836,
+        "average_revenue": 181.36487623762378,
+        "average_materials": 15.933168316831683,
+        "on_time_rate": 0.8861386138613861,
+        "rework_rate": 0.0594059405940594
+      },
+      "services": {
+        "standard": {
+          "baseline_orders": 313,
+          "completion_rate": 0.9456869009584664,
+          "average_service_minutes": 64.27476038338658,
+          "average_travel_minutes": 21.424920127795527,
+          "average_revenue": 145.56091216216217,
+          "average_materials": 11.0,
+          "on_time_rate": 0.8783783783783784,
+          "rework_rate": 0.057432432432432436
+        },
+        "commercial": {
+          "baseline_orders": 80,
+          "completion_rate": 0.9625,
+          "average_service_minutes": 89.65,
+          "average_travel_minutes": 21.6125,
+          "average_revenue": 253.9022077922078,
+          "average_materials": 24.0,
+          "on_time_rate": 0.922077922077922,
+          "rework_rate": 0.05194805194805195
+        },
+        "specialty": {
+          "baseline_orders": 33,
+          "completion_rate": 0.9393939393939394,
+          "average_service_minutes": 119.12121212121212,
+          "average_travel_minutes": 19.90909090909091,
+          "average_revenue": 343.0616129032258,
+          "average_materials": 43.0,
+          "on_time_rate": 0.8709677419354839,
+          "rework_rate": 0.0967741935483871
+        }
+      }
+    },
+    {
+      "id": "B06",
+      "name": "Canton",
+      "technicians": 7,
+      "all": {
+        "baseline_orders": 438,
+        "completion_rate": 0.9429223744292238,
+        "average_service_minutes": 73.45205479452055,
+        "average_travel_minutes": 21.422374429223744,
+        "average_revenue": 183.588401937046,
+        "average_materials": 15.995157384987893,
+        "on_time_rate": 0.8837772397094431,
+        "rework_rate": 0.031476997578692496
+      },
+      "services": {
+        "standard": {
+          "baseline_orders": 303,
+          "completion_rate": 0.9405940594059405,
+          "average_service_minutes": 64.00660066006601,
+          "average_travel_minutes": 21.231023102310232,
+          "average_revenue": 144.9521754385965,
+          "average_materials": 11.0,
+          "on_time_rate": 0.8736842105263158,
+          "rework_rate": 0.028070175438596492
+        },
+        "commercial": {
+          "baseline_orders": 113,
+          "completion_rate": 0.9469026548672567,
+          "average_service_minutes": 89.98230088495575,
+          "average_travel_minutes": 21.734513274336283,
+          "average_revenue": 254.5570093457944,
+          "average_materials": 24.0,
+          "on_time_rate": 0.9065420560747663,
+          "rework_rate": 0.037383177570093455
+        },
+        "specialty": {
+          "baseline_orders": 22,
+          "completion_rate": 0.9545454545454546,
+          "average_service_minutes": 118.63636363636364,
+          "average_travel_minutes": 22.454545454545453,
+          "average_revenue": 346.3352380952381,
+          "average_materials": 43.0,
+          "on_time_rate": 0.9047619047619048,
+          "rework_rate": 0.047619047619047616
+        }
+      }
+    },
+    {
+      "id": "B07",
+      "name": "Sandy Springs",
+      "technicians": 7,
+      "all": {
+        "baseline_orders": 429,
+        "completion_rate": 0.9370629370629371,
+        "average_service_minutes": 74.54079254079254,
+        "average_travel_minutes": 21.375291375291376,
+        "average_revenue": 183.2837064676617,
+        "average_materials": 16.029850746268657,
+        "on_time_rate": 0.900497512437811,
+        "rework_rate": 0.024875621890547265
+      },
+      "services": {
+        "standard": {
+          "baseline_orders": 297,
+          "completion_rate": 0.9528619528619529,
+          "average_service_minutes": 64.73400673400674,
+          "average_travel_minutes": 21.589225589225588,
+          "average_revenue": 145.25724381625443,
+          "average_materials": 11.0,
+          "on_time_rate": 0.9045936395759717,
+          "rework_rate": 0.014134275618374558
+        },
+        "commercial": {
+          "baseline_orders": 103,
+          "completion_rate": 0.912621359223301,
+          "average_service_minutes": 91.66990291262135,
+          "average_travel_minutes": 21.16504854368932,
+          "average_revenue": 254.52489361702126,
+          "average_materials": 24.0,
+          "on_time_rate": 0.8723404255319149,
+          "rework_rate": 0.0425531914893617
+        },
+        "specialty": {
+          "baseline_orders": 29,
+          "completion_rate": 0.8620689655172413,
+          "average_service_minutes": 114.13793103448276,
+          "average_travel_minutes": 19.93103448275862,
+          "average_revenue": 345.8764,
+          "average_materials": 43.0,
+          "on_time_rate": 0.96,
+          "rework_rate": 0.08
+        }
+      }
+    },
+    {
+      "id": "B08",
+      "name": "Kennesaw",
+      "technicians": 7,
+      "all": {
+        "baseline_orders": 447,
+        "completion_rate": 0.9440715883668904,
+        "average_service_minutes": 72.63534675615213,
+        "average_travel_minutes": 21.270693512304252,
+        "average_revenue": 181.77836492890995,
+        "average_materials": 15.867298578199053,
+        "on_time_rate": 0.8672985781990521,
+        "rework_rate": 0.04976303317535545
+      },
+      "services": {
+        "standard": {
+          "baseline_orders": 321,
+          "completion_rate": 0.940809968847352,
+          "average_service_minutes": 63.8816199376947,
+          "average_travel_minutes": 21.080996884735203,
+          "average_revenue": 144.95920529801325,
+          "average_materials": 11.0,
+          "on_time_rate": 0.8675496688741722,
+          "rework_rate": 0.033112582781456956
+        },
+        "commercial": {
+          "baseline_orders": 96,
+          "completion_rate": 0.9791666666666666,
+          "average_service_minutes": 88.38541666666667,
+          "average_travel_minutes": 21.833333333333332,
+          "average_revenue": 255.53648936170214,
+          "average_materials": 24.0,
+          "on_time_rate": 0.8404255319148937,
+          "rework_rate": 0.06382978723404255
+        },
+        "specialty": {
+          "baseline_orders": 30,
+          "completion_rate": 0.8666666666666667,
+          "average_service_minutes": 115.9,
+          "average_travel_minutes": 21.5,
+          "average_revenue": 342.7830769230769,
+          "average_materials": 43.0,
+          "on_time_rate": 0.9615384615384616,
+          "rework_rate": 0.19230769230769232
+        }
+      }
+    }
+  ],
+  "total_orders": 3451,
+  "total_technicians": 60,
+  "labor_rate": 27.5,
+  "travel_cost_per_minute": 0.26,
+  "fixed_daily_per_branch": 850.0,
+  "initiatives": [
+    {
+      "id": "CRM",
+      "name": "Customer data and CRM modernization",
+      "days": 16,
+      "cost": 52000,
+      "staff": 2,
+      "deps": [],
+      "benefit_annual": 87000,
+      "mandatory": true
+    },
+    {
+      "id": "DISPATCH",
+      "name": "Dispatch and capacity optimization",
+      "days": 22,
+      "cost": 75000,
+      "staff": 2,
+      "deps": [
+        "CRM"
+      ],
+      "benefit_annual": 168000,
+      "mandatory": false
+    },
+    {
+      "id": "AI",
+      "name": "AI-assisted service operations",
+      "days": 18,
+      "cost": 46000,
+      "staff": 2,
+      "deps": [
+        "CRM"
+      ],
+      "benefit_annual": 66000,
+      "mandatory": false
+    },
+    {
+      "id": "ADOPTION",
+      "name": "Workforce adoption and controls",
+      "days": 15,
+      "cost": 29000,
+      "staff": 1,
+      "deps": [
+        "CRM",
+        "DISPATCH",
+        "AI"
+      ],
+      "benefit_annual": 55000,
+      "mandatory": true
+    }
+  ],
+  "python_baseline": {
+    "requested": 3451,
+    "completed": 3213,
+    "unfulfilled": 238,
+    "revenue": 585067.51,
+    "direct_cost": 176848.01,
+    "contribution": 408219.5,
+    "fixed_operating_cost": 102000.0,
+    "operating_profit": 306219.5
+  },
+  "method": "Branch aggregates computed directly from lab.engine.DATA. Client recalculates using the same stated unit-economics assumptions. CP-SAT and transactional actions require local API."
+}
