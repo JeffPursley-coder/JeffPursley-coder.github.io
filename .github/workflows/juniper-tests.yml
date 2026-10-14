@@ -1,0 +1,41 @@
+name: Test Juniper Vale current release
+on:
+  push:
+    paths:
+      - 'juniper-command-center/**'
+      - '.github/workflows/juniper-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reproducible:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install reproducible dependencies
+        working-directory: juniper-command-center
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Run the full release suite
+        working-directory: juniper-command-center
+        run: |
+          set -o pipefail
+          python -m pytest -q | tee test-current-run.txt
+      - name: Verify synthetic generator and replay evaluation
+        working-directory: juniper-command-center
+        run: |
+          python -m lab.generate --out /tmp/juniper_synthetic_test.json
+          python -m lab.evaluate
+      - name: Keep run evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: juniper-vale-ci-evidence
+          path: |
+            juniper-command-center/test-current-run.txt
+            juniper-command-center/results/replay-evaluation.json
+          if-no-files-found: warn
