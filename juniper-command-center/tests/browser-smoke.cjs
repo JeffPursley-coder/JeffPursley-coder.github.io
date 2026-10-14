@@ -15,6 +15,7 @@ function el(id){
 const tabs=['executive','profit','program','service','evidence'].map(name=>{
  const e=el('data-tab-'+name);e.dataset.tab=name;return e;
 });
+el('scenario').value='baseline'; // Real HTML select defaults to its first <option>.
 const sandbox={
  document:{getElementById:el,querySelectorAll(s){return s==='.tab'?tabs:[]}},
  fetch:async()=>({ok:true,json:async()=>data}),
@@ -26,6 +27,7 @@ vm.runInContext(match[1],sandbox,{timeout:10000});
 setImmediate(()=>{
  try{
   assert.match(el('headline').innerHTML,/Operating profit/);
+  assert.doesNotMatch(el('headline').innerHTML,/0 \/ 0<\/strong>/,'baseline demand must be nonzero');
   const baseline=el('headline').innerHTML;
   el('price').value=1.2;el('price').events.input();
   assert.notEqual(el('headline').innerHTML,baseline,'pricing change recalculates results');
