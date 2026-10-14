@@ -92,7 +92,7 @@ def transition(incident_id:str,input:TransitionInput,authorization:str|None=Head
     except ValueError as e:raise HTTPException(409,str(e))
 
 @app.get('/',response_class=HTMLResponse)
-def landing():return '''<!doctype html><html lang="en"><meta charset="utf-8"><title>Juniper Vale API</title><body style="font:17px system-ui;max-width:720px;margin:5em auto;color:#17324d"><h1>Juniper Vale | Transformation Lab</h1><p>Running a synthetic-only FastAPI service. Explore the <a href="/docs">API documentation</a>, <a href="/api/catalog">scenario catalog</a>, and <a href="/api/program">program calculations</a>.</p><p>This local API does not authenticate real users or connect to a production CRM. The X-Role header is a demonstration role switch, not enterprise authentication.</p></body></html>'''
+def landing():return '''<!doctype html><html lang="en"><meta charset="utf-8"><title>Juniper Vale API</title><body style="font:17px system-ui;max-width:720px;margin:5em auto;color:#17324d"><h1>Juniper Vale | Transformation Lab</h1><p>Running a synthetic-only FastAPI service. Explore the <a href="/docs">API documentation</a>, <a href="/api/catalog">scenario catalog</a>, and <a href="/api/program">program calculations</a>.</p><p>This local-only API uses server-configured bearer tokens for privileged synthetic actions. It does not offer public multi-tenant identity or connect to a production CRM. Untrusted X-Role headers have no authority.</p></body></html>'''
 
 class OptimizationInputs(BaseModel):
     count:int=Field(default=15,ge=1,le=28)
