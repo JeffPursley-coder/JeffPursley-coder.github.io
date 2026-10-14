@@ -65,3 +65,19 @@ a:focus-visible,summary:focus-visible{outline:3px solid #b36800;outline-offset:4
 @media(max-width:780px){.preview img{max-height:360px}.systems-cards{grid-template-columns:1fr}}
 @media(max-width:430px){.preview img{max-height:280px}.card{padding:21px}}
 @media print{.preview img{max-height:300px}}
+
+
+/* Business transformation positioning and specialization cards */
+.signature{font-size:19px;line-height:1.5;max-width:900px;background:var(--tealsoft);color:var(--navy);border-left:4px solid var(--teal);padding:15px 19px;border-radius:0 14px 14px 0;margin:22px 0}
+.specialty-card{border-top:4px solid var(--teal);display:flex;flex-direction:column}
+.specialty-card:nth-child(2){border-top-color:var(--navy2)}
+.specialty-card:nth-child(3){border-top-color:#6e7b9e}
+.specialty-card a{margin-top:auto;padding-top:8px;font-weight:750}
+.specialty-card p{line-height:1.6}
+.card h4{margin:20px 0 4px;color:var(--navy)}
+#selected-work .card{display:flex;flex-direction:column;gap:4px}
+#selected-work .card a{margin-top:auto;font-weight:750}
+.pagehero .stats{margin-top:34px}
+@media(min-width:851px){.nav{column-gap:15px}.nav a{font-size:14px}}
+@media(max-width:780px){.signature{font-size:17px}.hero h1{max-width:660px}}
+@media print{.signature{background:#f1f5f6!important;color:#17324d!important}.specialty-card{border-top:2px solid #2b7a78}}
