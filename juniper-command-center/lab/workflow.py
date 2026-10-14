@@ -121,6 +121,11 @@ class WorkflowStore:
             db.execute('INSERT INTO audit(incident_id,actor_role,action,before_state,after_state,time,details) VALUES(?,?,?,?,?,?,?)',(incident_id,actor_role,action,src,dest,now,json.dumps({'simulated_only':True})))
             db.commit()
         return self.get(incident_id)
+    def get_appointment(self,order_id:str):
+        with self.connect() as db:
+            rec=db.execute('SELECT * FROM demo_appointments WHERE order_id=?',(order_id,)).fetchone()
+            if not rec:raise KeyError('appointment not found')
+            return dict(rec)
     def audit(self,incident_id:str):
         with self.connect() as db:return [dict(x) for x in db.execute('SELECT * FROM audit WHERE incident_id=? ORDER BY id',(incident_id,)).fetchall()]
     def reset(self):
