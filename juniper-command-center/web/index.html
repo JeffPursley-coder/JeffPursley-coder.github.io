@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Juniper Vale | Operating & Investment Decision Lab</title>
+<meta name="description" content="Interactive synthetic field-service economics and investment decisions, calculated from version-controlled inputs.">
+<link rel="canonical" href="https://jeffpursley-coder.github.io/juniper-command-center/web/">
+<style>
+:root{--navy:#17324d;--teal:#2b7a78;--bg:#fbfaf7;--ink:#293c47;--muted:#617581;--edge:#d8e3e7;--soft:#edf4f5;--red:#a43b3b}*{box-sizing:border-box}html{scroll-behavior:smooth}body{font:15px/1.54 system-ui,Segoe UI,Arial,sans-serif;margin:0;background:var(--bg);color:var(--ink)}a{color:var(--teal)}.shell{width:min(1210px,calc(100% - 40px));margin:auto}.top{background:white;border-bottom:1px solid var(--edge);padding:17px 0}.top .shell{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.brand{font-weight:850;color:var(--navy);font-size:19px;text-decoration:none}.top a{font-weight:650}.hero{background:#eff5f5;padding:43px 0;border-bottom:1px solid var(--edge)}.eyebrow{text-transform:uppercase;font-size:11px;letter-spacing:.13em;color:var(--teal);font-weight:850}.hero h1{margin:10px 0;font-size:clamp(31px,4vw,55px);line-height:1.08;letter-spacing:-.04em;color:var(--navy)}.hero p{max-width:800px;font-size:18px;color:#50636f}.subnote{font-size:12px;color:#5e727e}.toolbar{background:white;border:1px solid var(--edge);border-radius:14px;margin:20px 0;padding:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.toolbar select{min-width:245px}.tabs{display:flex;gap:8px;overflow-x:auto;margin:20px 0}.tab{white-space:nowrap;border:1px solid var(--edge);border-radius:9px;background:white;padding:10px 13px;font-weight:730;cursor:pointer;color:var(--navy)}.tab[aria-selected=true]{background:var(--navy);color:white}.tab-content[hidden]{display:none}.panel{border:1px solid var(--edge);background:white;border-radius:15px;padding:24px;margin:0 0 18px}.panel h2{font-size:26px;margin:0 0 8px;color:var(--navy)}.panel h3{color:var(--navy);margin:14px 0 5px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:15px}.metric{padding:15px;background:var(--soft);border-radius:11px;min-height:110px}.metric span{display:block;font-size:12px;color:#58717e}.metric strong{font-size:clamp(23px,2.5vw,32px);font-variant-numeric:tabular-nums;letter-spacing:-.04em;color:var(--navy)}.metric small{display:block;color:#5c6e77}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.control label{font-size:13px;font-weight:750;display:block;margin-bottom:5px}.control input{width:100%;padding:9px;border:1px solid #b0c4ca;border-radius:7px}.control output{font-size:12px;font-weight:700;color:var(--teal)}button,select,textarea{font:inherit}select,button{padding:10px 13px;border:1px solid #9fb7bd;border-radius:8px;background:white;color:var(--navy)}button{cursor:pointer;font-weight:750}.primary{background:var(--navy);color:white}.danger{color:var(--red)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #51b1a4;outline-offset:3px}.tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px;white-space:nowrap}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--edge)}td:not(:first-child),th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}th{background:var(--soft);font-weight:750;color:var(--navy)}.pill{background:#e3f2ef;color:#17615b;display:inline-block;padding:4px 8px;border-radius:25px;font-size:12px;font-weight:700}.pill.block{background:#fbe9e5;color:#983c32}.decision{border-left:4px solid var(--teal);padding:12px 16px;background:#f0f6f6}.bars{height:14px;background:#edf2f4;border-radius:8px;overflow:hidden}.fill{background:var(--teal);height:100%;width:0}.mutedlink{color:#567178;font-size:13px}.kv{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}.code{background:#eff4f6;padding:15px;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,Consolas,monospace}.footer{border-top:1px solid var(--edge);margin-top:35px;padding:30px 0;color:var(--muted)}.skip{position:absolute;left:-10000px}.skip:focus{left:10px;top:10px;background:white;padding:10px;z-index:50}@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.controls{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}}@media(max-width:540px){.grid,.controls{grid-template-columns:1fr}.shell{width:calc(100% - 26px)}.panel{padding:16px}.hero{padding:28px 0}}
+</style></head><body><a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="shell"><a class="brand" href="../../transformation-lab.html">Jeff Pursley <span style="color:var(--teal)">/ Juniper Vale</span></a><nav><a href="../../index.html">Portfolio</a> &nbsp; <a href="../README.md">Source guide</a> &nbsp; <a href="https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/tree/main/juniper-command-center">GitHub source</a></nav></div></header>
+<div class="hero"><div class="shell"><div class="eyebrow">Enterprise transformation / interactive synthetic case</div><h1>Operating decisions,<br>quantified.</h1><p>Explore how capacity, pricing, service mix and technology investment affect a fictional eight-branch field-service business. Inputs are generated from the same version-controlled Python model used by the technical application.</p><div class="subnote">Public interface: client-side calculation; not a hosted Python API, real-time field system, or deployed LLM.</div></div></div>
+<main id="main" class="shell">
+<div class="toolbar"><label for="scenario"><strong>Operating scenario</strong></label><select id="scenario"><option value="baseline">Baseline</option><option value="technician-shortage">Technician shortage</option><option value="crm-data-failure">Critical CRM data failure</option><option value="demand-surge">Demand surge</option></select><button id="reset">Reset assumptions</button><span class="pill" id="gate">Loading data…</span><span class="subnote" id="version"></span></div>
+<div class="tabs" role="tablist" aria-label="Command Center modules">
+<button class="tab" data-tab="executive" role="tab" aria-selected="true">Executive overview</button><button class="tab" data-tab="profit" role="tab" aria-selected="false">Profit &amp; Scale</button><button class="tab" data-tab="program" role="tab" aria-selected="false">Strategic Program</button><button class="tab" data-tab="service" role="tab" aria-selected="false">Service Command</button><button class="tab" data-tab="evidence" role="tab" aria-selected="false">Decision &amp; Evidence</button></div>
+<section class="tab-content" id="tab-executive"><div class="panel"><div class="eyebrow">Executive overview</div><h2>One operating model. Three decision disciplines.</h2><p class="muted">Baseline and scenarios are calculated from the versioned branch records, not predefined financial snapshots.</p><div class="grid" id="headline"></div><h3>Recommended management response</h3><div class="decision" id="exec-decision"></div></div><div class="split"><article class="panel"><h3>Profit & Scale</h3><p>Measure cost to serve, capacity trade-offs, fulfillment and the financial effect of changed staffing and demand.</p><p id="executive-ops"></p></article><article class="panel"><h3>Strategic Program</h3><p>Choose the investment combination that fits funding and protects mandatory CRM and adoption work.</p><p id="executive-program"></p></article></div></section>
+<section class="tab-content" id="tab-profit" hidden><div class="panel"><div class="eyebrow">Profit & scale engine</div><h2>Edit operating assumptions</h2><p class="muted">All controls recalculate branch statements and the consolidated results. The capacity calculation is an aggregate projection, not proof that every customer time window can be served. Detailed time-window feasibility uses the Python solver.</p><div class="controls">
+<div class="control"><label for="tech">Technicians added / unavailable</label><input id="tech" type="number" min="-35" max="20" step="1"><output id="tech-out"></output></div>
+<div class="control"><label for="demand">Demand multiplier</label><input id="demand" type="number" min=".2" max="3" step=".05"><output id="demand-out"></output></div>
+<div class="control"><label for="price">Service price multiplier</label><input id="price" type="number" min=".2" max="3" step=".05"><output id="price-out"></output></div>
+<div class="control"><label for="wage">Burdened labor multiplier</label><input id="wage" type="number" min=".2" max="3" step=".05"><output id="wage-out"></output></div>
+<div class="control"><label for="travel">Travel time multiplier</label><input id="travel" type="number" min=".2" max="3" step=".05"><output id="travel-out"></output></div>
+<div class="control"><label for="overtime">Overtime minutes per shift</label><input id="overtime" type="number" min="0" max="240" step="15"><output id="overtime-out"></output></div>
+<div class="control"><label for="quality">Eligible CRM data (%)</label><input id="quality" type="number" min="0" max="100" step=".5"><output id="quality-out"></output></div>
+</div><h3>Calculated financial summary</h3><div class="grid" id="profit-metrics"></div></div>
+<div class="panel"><h2>Branch performance</h2><p class="muted">Fixed expenses are modeled by branch and working day; contribution excludes fixed costs. Company totals reconcile to the branch rows.</p><div class="tablewrap"><table><thead><tr><th>Branch</th><th>Demand</th><th>Completed</th><th>Unfulfilled</th><th>Revenue</th><th>Contribution</th><th>Operating profit</th></tr></thead><tbody id="branch-rows"></tbody></table></div><p class="subnote" id="baseline-check"></p></div></section>
+<section class="tab-content" id="tab-program" hidden><div class="panel"><div class="eyebrow">Strategic program engine</div><h2>Constrained transformation investment</h2><p class="muted">The capital model selects a feasible subset of initiatives. CRM and workforce adoption are mandatory; shared adoption work follows only funded delivery initiatives. NPV reflects modeled benefits, not recorded savings.</p><div class="controls">
+<div class="control"><label for="budget">Investment limit ($)</label><input id="budget" type="number" min="0" max="1000000" step="5000"></div>
+<div class="control"><label for="staff">Shared technical staff</label><input id="staff" type="number" min="1" max="8" step="1"></div>
+<div class="control"><label for="adoption">Realized adoption (%)</label><input id="adoption" type="number" min="0" max="100" step="5"></div></div>
+<div class="grid" id="program-metrics"></div><h3>Recommended initiative selection</h3><p id="program-recommendation"></p><div class="tablewrap"><table><thead><tr><th>Initiative</th><th>Investment</th><th>Mandatory</th><th>Selected</th></tr></thead><tbody id="initiatives"></tbody></table></div></div>
+<div class="panel"><h2>Release governance</h2><p id="release-decision" class="decision"></p><p class="muted">Day-level resource-constrained delivery and Monte Carlo forecast are provided by the complete Python backend. This browser view does not invent a schedule percentile.</p></div></section>
+<section class="tab-content" id="tab-service" hidden><div class="panel"><div class="eyebrow">Service command / public replay</div><h2>Classify a fictional service exception</h2><p class="muted">This browser-only replay demonstrates review boundaries. It does not invoke an LLM, solve a new assignment, or modify an appointment. The Python application includes those separate controlled workflows.</p><label for="incident"><strong>Service note</strong></label><textarea id="incident" style="width:100%;min-height:100px;padding:12px;margin:7px 0 12px;border:1px solid #a2bcc2;border-radius:10px">Technician called out sick. Please reschedule WO-01-0044 and notify dispatch.</textarea><div class="kv"><button id="interpret" class="primary">Interpret note</button><span class="pill" id="incident-status">No proposal</span></div><pre class="code" id="interpretation">Choose Interpret note to view a deterministic replay.</pre></div><div class="panel"><h3>Backend workflow evidence</h3><p>The local Python API implements server-authorized proposals, SQLite audit events, approved state transitions, optimistic version checks, and an actual synthetic appointment-status update. The optional LLM connector requires a server-side API key.</p><p><a href="https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/blob/main/juniper-command-center/lab/workflow.py">Review transaction source</a> · <a href="https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/blob/main/juniper-command-center/lab/advanced.py">Review CP-SAT solver</a></p></div></section>
+<section class="tab-content" id="tab-evidence" hidden><div class="panel"><div class="eyebrow">Decision & evidence</div><h2>Inspect, test and reproduce</h2><p>This is a synthetic independent case study, not audited performance at an employer or a third-party client.</p><div class="split"><div><h3>Working source</h3><p><a href="https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/tree/main/juniper-command-center">Browse application modules, tests and model assumptions</a></p><p><a href="https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/actions/workflows/juniper-tests.yml">Review current CI test runs</a></p><p><a href="../../assets/files/JuniperVale_Transformation_Lab_Source.zip">Download historical source archive</a></p></div><div><h3>Technical boundaries</h3><p>The public page performs client-side aggregate calculations. OR-Tools, Monte Carlo, authenticated approvals, SQLite mutations and optional live model interpretation run locally through FastAPI.</p><p>Travel uses synthetic estimates; no road-network optimization, verified LLM accuracy, or production CRM integration is claimed.</p></div></div><p><a href="../../assets/files/JuniperVale_Executive_Transformation_Brief.pdf">Executive brief (PDF)</a> · <a href="../../assets/files/JuniperVale_Technical_Evaluation_Report.pdf">Technical evaluation (PDF)</a></p></div></section>
+</main><footer class="footer"><div class="shell">Juniper Vale Service Group is fictional. © Jeff Pursley. <a href="../../transformation-lab.html">Main Transformation Command Center case study</a></div></footer>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+const number=n=>new Intl.NumberFormat('en-US').format(n);
+const percent=n=>(100*n).toFixed(1)+'%';
+function roundEven(v,p=0){const m=10**p,x=v*m,f=Math.floor(x),d=x-f;return (Math.abs(d-.5)<1e-9?(f%2===0?f:f+1):Math.round(x))/m}
+const presets={
+ 'baseline':{tech:0,demand:1,price:1,wage:1,travel:1,overtime:0,quality:98.5},
+ 'technician-shortage':{tech:-15,demand:1,price:1,wage:1,travel:1,overtime:0,quality:98.5},
+ 'crm-data-failure':{tech:0,demand:1,price:1,wage:1,travel:1,overtime:0,quality:88},
+ 'demand-surge':{tech:0,demand:1.32,price:1,wage:1,travel:1,overtime:0,quality:98.5}
+};
+let dataset=null;
+function assumptions(){const a={};for(const k of ['tech','demand','price','wage','travel','overtime','quality'])a[k]=Number($(k).value);return a}
+function branchCalc(branch,a){
+ const b=branch.all;const days=dataset.days,tech=Math.max(0,roundEven(branch.technicians+a.tech*branch.technicians/60));
+ const capacity=tech*(480+a.overtime)*days;const avg=b.average_service_minutes+b.average_travel_minutes*a.travel;
+ const requested=roundEven(b.baseline_orders*a.demand),feasible=Math.min(requested,Math.max(0,Math.floor(capacity/avg)));
+ const eligible=Math.floor(feasible*a.quality/100),completed=Math.floor(eligible*b.completion_rate);
+ const revenue=roundEven(completed*b.average_revenue*a.price,2);
+ const direct=roundEven(completed*(b.average_materials+b.average_service_minutes/60*dataset.labor_rate*a.wage+b.average_travel_minutes*a.travel*dataset.travel_cost_per_minute),2);
+ const contribution=roundEven(revenue-direct,2),fixed=days*dataset.fixed_daily_per_branch;
+ return {name:branch.name,requested,completed,unfulfilled:requested-completed,eligible,technicians:tech,capacity,revenue,direct,contribution,fixed,profit:roundEven(contribution-fixed,2),utilization:capacity?completed*avg/capacity:0}
+}
+function financial(a){
+ const rows=dataset.branches.map(b=>branchCalc(b,a));
+ const company={requested:0,completed:0,unfulfilled:0,eligible:0,technicians:0,capacity:0,revenue:0,direct:0,contribution:0,fixed:0,profit:0};
+ for(const row of rows)for(const k in company)company[k]+=row[k];
+ return {rows,company};
+}
+function schedule(selected,staff){
+ const scheduled={};let remaining=[...selected];
+ for(let attempt=0;remaining.length && attempt<selected.length;attempt++){
+  const ready=remaining.filter(p=>p.deps.every(dep=>scheduled[dep]));
+  if(!ready.length)return null;
+  ready.sort((a,b)=>Number(b.mandatory)-Number(a.mandatory)||a.id.localeCompare(b.id));
+  const p=ready[0];let start=Math.max(0,...p.deps.map(d=>scheduled[d].finish));
+  let possible=false;
+  for(;start<1000;start++){
+   possible=true;
+   for(let day=start;day<start+p.days;day++){
+    const used=Object.values(scheduled).filter(s=>s.start<=day && day<s.finish).reduce((v,s)=>v+s.staff,0);
+    if(used+p.staff>staff){possible=false;break}
+   }
+   if(possible)break;
+  }
+  if(!possible || p.staff>staff)return null;
+  scheduled[p.id]={start,finish:start+p.days,staff:p.staff};remaining=remaining.filter(q=>q.id!==p.id);
+ }
+ return Math.max(...Object.values(scheduled).map(x=>x.finish));
+}
+function allocate(){
+ const budget=Math.max(0,Number($('budget').value)||0),staff=Math.max(1,Number($('staff').value)||1),adopt=Math.max(0,Math.min(1,Number($('adoption').value)/100));
+ const options=[],ps=dataset.initiatives,mandatory=ps.filter(p=>p.mandatory);
+ for(let mask=0;mask<2**ps.length;mask++){
+  const selected=ps.filter((p,i)=>mask&(1<<i)),ids=new Set(selected.map(p=>p.id));
+  if(mandatory.some(p=>!ids.has(p.id)))continue;
+  if(selected.some(p=>p.id!=='ADOPTION'&&p.deps.some(dep=>!ids.has(dep))))continue;
+  const spend=selected.reduce((a,p)=>a+p.cost,0);if(spend>budget)continue;
+  const plan=selected.map(p=>({...p,deps:p.deps.filter(d=>ids.has(d))}));
+  const finish=schedule(plan,staff);if(finish===null)continue;
+  let annual=0;
+  for(const p of plan){let benefit=p.benefit_annual*adopt;if(p.id==='AI'&&ids.has('DISPATCH'))benefit*=.75;if(p.id==='ADOPTION')benefit*=.8;annual+=benefit}
+  const discount=.11, npv=-spend+[.5,1,1].reduce((sum,weight,index)=>sum+annual*weight/(1+discount)**(index+1),0);
+  options.push({ids,spend,finish,annual,npv,payback:annual>0?spend/annual:null});
+ }
+ options.sort((a,b)=>b.npv-a.npv||a.spend-b.spend);
+ return {budget,options,selected:options[0]||null};
+}
+function box(label,value,detail=''){return '<div class="metric"><span>'+label+'</span><strong>'+value+'</strong><small>'+detail+'</small></div>'}
+function render(){
+ if(!dataset)return;
+ const a=assumptions();for(const k in a){const out=$(k+'-out');if(out)out.textContent=a[k]+(k==='quality'?'%':'')}
+ const {rows,company:c}=financial(a),baseline=financial(presets.baseline).company,delta=c.profit-baseline.profit;
+ const investment=allocate(),choice=investment.selected;
+ $('version').textContent='Data '+dataset.version+' · seed '+dataset.seed+' · '+dataset.total_orders.toLocaleString()+' modeled orders';
+ $('gate').textContent=a.quality<95?'CRM release blocked':'CRM gate eligible';$('gate').className='pill'+(a.quality<95?' block':'');
+ $('headline').innerHTML=box('Operating profit',money(c.profit),(delta>=0?'+':'')+money(delta)+' vs baseline')+box('Revenue',money(c.revenue))+box('Demand fulfilled',number(c.completed)+' / '+number(c.requested),percent(c.completed/Math.max(1,c.requested)))+box('Unfulfilled requests',number(c.unfulfilled));
+ $('profit-metrics').innerHTML=box('Contribution',money(c.contribution))+box('Direct cost',money(c.direct))+box('Fixed operating cost',money(c.fixed))+box('Capacity (tech-minutes)',number(c.capacity));
+ $('branch-rows').innerHTML=rows.map(b=>'<tr><td>'+b.name+'</td><td>'+number(b.requested)+'</td><td>'+number(b.completed)+'</td><td>'+number(b.unfulfilled)+'</td><td>'+money(b.revenue)+'</td><td>'+money(b.contribution)+'</td><td>'+money(b.profit)+'</td></tr>').join('');
+ $('baseline-check').textContent='Baseline verification against Python: browser baseline '+money(baseline.revenue)+' revenue vs Python '+money(dataset.python_baseline.revenue)+'; browser '+number(baseline.completed)+' completed vs Python '+number(dataset.python_baseline.completed)+'. Small rounding differences, if any, reflect floating-point arithmetic.';
+ $('program-metrics').innerHTML=box('Funding cap',money(investment.budget))+box('Selected investment',choice?money(choice.spend):'No viable mix')+box('Modeled portfolio NPV',choice?money(choice.npv):'Not feasible')+box('Modeled completion',choice?'Day '+choice.finish:'Blocked');
+ $('program-recommendation').textContent=choice?'Fund '+[...choice.ids].join(', ')+'. Net annual benefit after overlap: '+money(choice.annual)+'. Other combinations are compared by discounted NPV with the same budget and staffing limits.':'Budget or staffing capacity cannot fund the mandatory CRM and adoption work; increase available resources or revise scope.';
+ $('initiatives').innerHTML=dataset.initiatives.map(p=>'<tr><td>'+p.name+'</td><td>'+money(p.cost)+'</td><td>'+(p.mandatory?'Yes':'No')+'</td><td>'+(choice&&choice.ids.has(p.id)?'Selected':'Deferred')+'</td></tr>').join('');
+ $('release-decision').textContent=a.quality<95?'CRM migration quality is below the modeled 95% release threshold. Block cutover, remediate invalid records and rerun the quality gate.':'The CRM integrity gate is eligible for a formal decision, but quality eligibility is not authorization to release.';
+ let recommendation=a.quality<95?'Block CRM cutover and any downstream record mutation; prioritize data remediation.':c.unfulfilled>baseline.unfulfilled?'Demand exceeds the current fulfillment result. Evaluate qualified capacity and appointment feasibility before committing to staffing.':c.profit<baseline.profit?'The edited assumptions reduce modeled profit. Test an alternative or retain the baseline operating plan.':'Maintain controls while validating service quality and sensitivity of the improvement.';
+ $('exec-decision').textContent=recommendation;
+ $('executive-ops').textContent=number(c.unfulfilled)+' unmet service requests; modeled operating-profit change '+money(delta)+'.';
+ $('executive-program').textContent=choice?'Recommended '+[...choice.ids].join(' + ')+' at '+money(choice.spend)+' and modeled NPV '+money(choice.npv)+'.':'Mandatory work cannot be funded with the present inputs.';
+}
+function preset(){const p=presets[$('scenario').value];for(const k in p)$(k).value=p[k];render()}
+function replay(){
+ const note=$('incident').value.trim();if(note.length<3||note.length>1500){$('interpretation').textContent='Note must contain 3–1,500 characters.';return}
+ const s=note.toLowerCase();const injected=/ignore (previous|all) instructions|bypass approval|system prompt|developer message|override policy/i.test(s);
+ const categories=[['technician_absence',/absen|sick|call.?out/],['inventory',/stock|inventory|material|kit/],['data_quality',/wrong address|incorrect|duplicate|missing customer|crm/],['scheduling',/conflict|reschedul|appointment/],['repeat_service',/repeat|complaint|rework/],['equipment',/equipment|truck|pump/],['specialty',/certif|specialist/],['delay',/late|delay|missed/],['urgent',/urgent|emergency/]];
+ const category=(categories.find(x=>x[1].test(s))||['other'])[0],known=/\b(wo-\d+-\d+|job-\d+|appointment\s*#?\d+)\b/i.test(s);
+ const missing=[];if(!known)missing.push('Service order identifier');if(injected)missing.push('Untrusted embedded instruction');if(category==='other')missing.push('Clear exception category');
+ const allowed=known&&!injected&&category!=='other'&&category!=='data_quality'&&Number($('quality').value)>=95;
+ const obj={mode:'DETERMINISTIC_BROWSER_REPLAY',category,priority:/urgent|emergency|hazard|safety/.test(s)?'critical':'normal',action_type:allowed?'PROPOSE_FOR_REVIEW':'REVIEW_ONLY',missing_information:missing,approval_required:true,crm_release_eligible:Number($('quality').value)>=95,execution:'NONE — Browser cannot write CRM'};
+ $('incident-status').textContent=allowed?'Human review required':'Read-only review';
+ $('incident-status').className='pill'+(allowed?'':' block');
+ $('interpretation').textContent=JSON.stringify(obj,null,2);
+}
+async function boot(){
+ try{
+  const r=await fetch('./data.json',{cache:'no-store'});if(!r.ok)throw Error('Data could not be loaded');dataset=await r.json();
+  $('budget').value=202000;$('staff').value=4;$('adoption').value=70;
+  preset();$('incident-status').textContent='Ready for replay';
+ }catch(e){$('gate').textContent='Data unavailable';$('gate').className='pill block';$('version').textContent=e.message;}
+}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
+ for(const tab of document.querySelectorAll('.tab')){const active=tab===b;tab.setAttribute('aria-selected',String(active));$('tab-'+tab.dataset.tab).hidden=!active}
+}));
+$('scenario').addEventListener('change',preset);
+for(const name of ['tech','demand','price','wage','travel','overtime','quality','budget','staff','adoption'])$(name).addEventListener('input',render);
+$('reset').addEventListener('click',()=>{$('scenario').value='baseline';$('budget').value=202000;$('staff').value=4;$('adoption').value=70;preset()});
+$('interpret').addEventListener('click',replay);
+boot();
+</script></body></html>
