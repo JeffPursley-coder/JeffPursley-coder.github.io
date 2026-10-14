@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Juniper Vale | Enterprise Transformation Command Center | Jeff Pursley</title>
+<meta name="description" content="An interactive, reproducible field-service transformation case connecting operational economics, strategic delivery decisions and approval-controlled service workflows.">
+<link rel="canonical" href="https://jeffpursley-coder.github.io/transformation-lab.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{--navy:#17324d;--teal:#2b7a78;--ink:#2c3d47;--muted:#617581;--paper:#fbfaf7;--white:#fff;--soft:#f0f5f6;--line:#d9e4e8;--amber:#a66a11;--bad:#ae4d41}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font:16px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--paper);color:var(--ink);margin:0}a{color:var(--teal);text-underline-offset:3px}button,select,input,textarea{font:inherit}button{cursor:pointer}.shell{width:min(1190px,calc(100% - 44px));margin:auto}
+header{border-bottom:1px solid var(--line);background:rgba(251,250,247,.98);position:sticky;top:0;z-index:10}.mast{min-height:74px;display:flex;justify-content:space-between;align-items:center;gap:20px}.brand{font-weight:800;color:var(--navy);text-decoration:none;font-size:19px}.mastnav{display:flex;flex-wrap:wrap;gap:20px;font-size:14px;font-weight:650}.mastnav a{text-decoration:none;color:var(--ink)}.mastnav a[aria-current]{color:var(--teal)}.skip{position:absolute;left:-1000px}.skip:focus{left:10px;top:10px;padding:8px;background:white;z-index:99}
+.hero{padding:60px 0 44px;background:linear-gradient(120deg,#f0f5f6 0%,#fbfaf7 65%);border-bottom:1px solid var(--line)}
+.eyebrow{font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--teal);font-size:12px;margin:0 0 13px}
+h1,h2,h3{color:var(--navy);letter-spacing:-.035em;line-height:1.14}h1{font-size:clamp(37px,5.4vw,66px);max-width:900px;margin:0 0 20px}h2{font-size:clamp(28px,3vw,39px);margin:0 0 12px}h3{font-size:20px;margin:0 0 9px}.lede{font-size:clamp(17px,1.8vw,21px);color:#526670;max-width:820px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--navy);border-radius:10px;font-weight:750;padding:10px 15px;background:white;color:var(--navy);text-decoration:none}.btn.primary{background:var(--navy);color:white}.btn:disabled{opacity:.5;cursor:not-allowed}button:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #57aba5;outline-offset:3px}
+section{padding:45px 0}.panel{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:25px;box-shadow:0 2px 12px rgba(23,50,77,.025)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.four{grid-template-columns:repeat(4,minmax(0,1fr))}.subtle{color:var(--muted)}.small{font-size:13px}.metric{border:1px solid var(--line);border-radius:14px;background:white;padding:17px}.metric span{font-size:12px;color:var(--muted);display:block}.metric strong{font-size:clamp(23px,2.3vw,34px);color:var(--navy);display:block;letter-spacing:-.04em}.metric em{display:block;font-style:normal;font-size:12px;color:var(--muted)}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;padding:18px 20px;background:#e9f1f2;border:1px solid var(--line);border-radius:14px;margin:20px 0}.toolbar label{font-weight:750}.toolbar select{background:white;border:1px solid #aec1c5;border-radius:8px;padding:10px;max-width:100%;min-width:255px}.status{display:inline-flex;font-size:12px;padding:5px 9px;border-radius:50px;background:#e5f2f0;color:#1d6a66;font-weight:750}.status.warn{background:#fff2d7;color:#8c5906}.status.blocked{background:#faeae6;color:#98463a}.tabs{display:flex;gap:8px;overflow-x:auto;border-bottom:1px solid var(--line);margin:28px 0 23px;padding-bottom:10px}.tab{border:0;border-radius:8px;background:transparent;padding:10px 13px;font-weight:750;color:#536977;white-space:nowrap}.tab[aria-selected="true"]{background:var(--navy);color:white}.tabpanel[hidden]{display:none}.tag{display:inline-flex;background:#e7f2f0;color:#226e6a;font-size:11px;font-weight:800;letter-spacing:.04em;border-radius:40px;padding:5px 8px;margin-bottom:12px;text-transform:uppercase}
+.kicker{font-weight:650;color:var(--teal);font-size:13px;text-transform:uppercase;letter-spacing:.11em}.divider{border:0;border-top:1px solid var(--line);margin:25px 0}.bars{display:grid;gap:14px}.barrow{display:grid;grid-template-columns:100px 1fr 95px;align-items:center;gap:12px;font-size:13px}.bartrack{height:13px;background:#e6eff0;border-radius:20px;overflow:hidden}.barfill{height:100%;background:var(--teal);border-radius:20px;transition:width .2s}.barfill.alt{background:#a3b5c2}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px}th{text-align:left;font-size:12px;text-transform:uppercase;color:#647681;letter-spacing:.055em;background:#f1f6f7}td,th{padding:13px 12px;border-bottom:1px solid var(--line)}td strong{color:var(--navy)}.decision{border-left:3px solid var(--teal);padding:5px 0 5px 15px;color:var(--navy)}.warning{background:#fff5df;border:1px solid #ebd39e;border-radius:12px;padding:13px 16px;color:#6e4f12}.riskbar{position:relative;height:15px;background:#e5edf1;border-radius:20px;margin:20px 0 25px}.riskbar b{position:absolute;top:0;height:15px;background:#7aadb0;border-radius:15px}.riskbar span{position:absolute;top:19px;font-size:11px;color:var(--muted)}
+.schedule{display:grid;gap:13px}.schedrow{display:grid;grid-template-columns:150px minmax(0,1fr) 77px;gap:10px;align-items:center;font-size:13px}.timeline{position:relative;height:25px;border:1px solid var(--line);border-radius:5px;background:repeating-linear-gradient(90deg,#f4f7f7,#f4f7f7 9%,#e8eff0 9%,#e8eff0 10%)}.timeline span{position:absolute;top:3px;height:17px;border-radius:4px;background:var(--teal)}.timeline span.alt{background:#7f98af}.timeline span.critical{background:var(--navy)}
+.field{display:block;margin:13px 0 7px;font-size:14px;font-weight:750;color:var(--navy)}textarea{width:100%;padding:12px;border:1px solid #b5c7ca;border-radius:10px;resize:vertical;min-height:105px}pre{background:#f3f6f6;border:1px solid var(--line);padding:12px;border-radius:10px;white-space:pre-wrap;word-break:break-word;font-size:12px;line-height:1.6}.audit{margin-top:15px;display:grid;gap:6px}.audit div{font-size:13px;border-left:2px solid var(--teal);padding:7px 10px;background:#f5f8f8}.note{font-size:13px;color:var(--muted);max-width:920px}.evidence a{display:block;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:650}.footer{margin-top:25px;border-top:1px solid var(--line);padding:30px 0 45px;font-size:13px;color:#60747d}
+@media(max-width:800px){.mast{align-items:flex-start;padding:14px 0;flex-direction:column;gap:10px}.grid,.grid.three,.grid.four{grid-template-columns:1fr 1fr}.hero{padding:38px 0}.barrow{grid-template-columns:72px 1fr 75px}.schedrow{grid-template-columns:100px minmax(0,1fr) 55px}.toolbar select{min-width:0;width:100%}}@media(max-width:570px){.shell{width:calc(100% - 28px)}.grid,.grid.three,.grid.four{grid-template-columns:1fr}.panel{padding:19px}.mastnav{gap:13px}.hero{padding:33px 0}.toolbar{align-items:stretch}.tabs{margin-top:22px}}
+</style>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header><div class="shell mast"><a class="brand" href="index.html">Jeff Pursley <span class="subtle">/ Transformation Lab</span></a><nav class="mastnav" aria-label="Navigation"><a href="index.html">Portfolio</a><a href="operations.html">Operations</a><a href="project-management.html">Program Delivery</a><a href="ai.html">AI Case Studies</a><a href="#lab" aria-current="page">Command Center</a></nav></div></header>
+<main id="main">
+<div class="hero"><div class="shell">
+<p class="eyebrow">Independent engineering case study / version 2026.10.v1</p>
+<h1>One business. Three connected decision systems.</h1>
+<p class="lede">Juniper Vale is a fictional regional field-service organization. This Command Center brings service economics, transformation program delivery, and approval-controlled operations into one consistent management scenario.</p>
+<div class="actions"><a class="btn primary" href="#lab">Explore the command center</a><a class="btn" href="assets/files/JuniperVale_Executive_Transformation_Brief.pdf">Executive brief (PDF)</a><a class="btn" href="assets/files/JuniperVale_Transformation_Lab_Source.zip">Local source and tests</a></div>
+<p class="note">The public demonstration replays versioned outputs calculated by a local Python engine. It is interactive, but does not call a live CRM, model API, or writable backend. All company records and outcomes are synthetic.</p>
+</div></div>
+<section><div class="shell"><div class="grid three">
+<div class="panel"><span class="tag">Profit &amp; Scale Architect</span><h3>Diagnose the economics</h3><p>Branch contribution, feasible workload, pricing and labor constraints. Evaluate whether a decision creates capacity or simply shifts costs.</p></div>
+<div class="panel"><span class="tag">Strategic Program Architect</span><h3>Control the transformation</h3><p>Interdependent initiatives, limited technical resources, release conditions, investment trade-offs and modeled completion risk.</p></div>
+<div class="panel"><span class="tag">AI Operations Architect</span><h3>Control the action</h3><p>Structured service-note interpretation, qualification rules, human approval, simulated execution and explicit audit entries.</p></div>
+</div></div></section>
+<section id="lab"><div class="shell">
+<p class="eyebrow">Interactive scenario laboratory</p><h2>Enterprise Transformation Command Center</h2><p class="subtle">Switch a scenario once to update all three management views. Calculated snapshots: 15 fictional weekdays, eight branches, 60 baseline technicians.</p>
+<div class="toolbar"><div><label for="scenario">Operating disruption</label><div class="small subtle">All panels share one scenario identifier.</div></div><select id="scenario"><option value="baseline">Baseline operating model</option><option value="technician-shortage">Technician shortage (-15)</option><option value="crm-data-failure">Critical CRM data failure</option><option value="demand-surge">Demand surge (+32%)</option></select><button class="btn" id="reset">Reset scenario</button></div>
+<div class="grid four" aria-live="polite">
+<div class="metric"><span>Operating profit / period</span><strong id="kprofit"></strong><em id="kprofitdelta"></em></div>
+<div class="metric"><span>Completed services</span><strong id="kcompleted"></strong><em id="kdemand"></em></div>
+<div class="metric"><span>Unfulfilled demand</span><strong id="kunfulfilled"></strong><em>Requests not completed</em></div>
+<div class="metric"><span>Program completion</span><strong id="kfinish"></strong><em id="kgate"></em></div>
+</div>
+<div class="tabs" role="tablist" aria-label="Command Center views">
+<button class="tab" role="tab" aria-selected="true" aria-controls="panel-overview" id="tab-overview" data-tab="overview">Executive Overview</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="panel-profit" id="tab-profit" data-tab="profit">Profit &amp; Scale</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="panel-program" id="tab-program" data-tab="program">Strategic Program</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="panel-command" id="tab-command" data-tab="command">Service Command</button>
+<button class="tab" role="tab" aria-selected="false" aria-controls="panel-evidence" id="tab-evidence" data-tab="evidence">Decision &amp; Evidence</button></div>
+
+<div class="tabpanel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+<div class="grid"><div class="panel"><p class="kicker">Executive readout</p><h3 id="scenario-title"></h3><p id="scenario-story"></p><div class="decision"><strong>Recommended management decision</strong><p id="scenario-decision"></p></div><p class="note" id="scenario-id"></p></div>
+<div class="panel"><p class="kicker">Operating pressure</p><div class="bars" id="pressure-bars"></div><hr class="divider"><p><strong>Key constraint:</strong> <span id="scenario-constraint"></span></p><p class="note">Percentages and dollar amounts are scenario-model outputs, not claims of measured enterprise performance.</p></div></div>
+<div class="panel" style="margin-top:16px"><h3>Integrated decision flow</h3><div class="grid three">
+<div><span class="tag">Operations</span><p id="flow-ops"></p></div><div><span class="tag">Program</span><p id="flow-program"></p></div><div><span class="tag">Service Command</span><p id="flow-command"></p></div></div></div></div>
+
+<div class="tabpanel" id="panel-profit" role="tabpanel" aria-labelledby="tab-profit" hidden>
+<div class="grid"><div class="panel"><p class="kicker">Unit economics</p><h3>Modeled financial bridge</h3><div class="tablewrap"><table><tbody id="financial"></tbody></table></div><p class="note">Contribution = recognized revenue minus direct labor, materials and travel. Operating profit subtracts fixed branch costs; it is not EBITDA or cash flow.</p></div><div class="panel"><p class="kicker">Workforce capacity</p><h3>Feasibility and customer service</h3><div class="bars" id="service-bars"></div><p id="capacity-note"></p><div class="warning" id="operations-warning"></div></div></div>
+<div class="panel" style="margin-top:16px"><h3>Branch performance baseline</h3><p class="note">The browser view provides company-level scenario snapshots. The local Python source calculates all eight branch statements and reconciles them to company totals.</p><div class="grid four"><div class="metric"><span>Branches</span><strong>8</strong><em>Linked synthetic branch IDs</em></div><div class="metric"><span>Baseline technicians</span><strong>60</strong><em>Skill profiles by technician</em></div><div class="metric"><span>Baseline work orders</span><strong>3,451</strong><em>Generated from seed 20261014</em></div><div class="metric"><span>Peak day</span><strong>300</strong><em>Not average daily volume</em></div></div></div></div>
+
+<div class="tabpanel" id="panel-program" role="tabpanel" aria-labelledby="tab-program" hidden>
+<div class="grid"><div class="panel"><p class="kicker">Resource-constrained schedule</p><h3>Four dependent initiatives</h3><div id="gantt" class="schedule"></div><p class="note">Horizontal bars show modeled start/finish in program workdays, not calendar bookings. AI and Dispatch can run concurrently with four technical contributors.</p></div><div class="panel"><p class="kicker">Executive governance</p><h3>Release readiness</h3><p id="program-gate"></p><div class="warning" id="program-decision"></div><h3 style="margin-top:20px">Completion uncertainty</h3><p class="small">400 fixed-seed Monte Carlo draws, baseline resource level, independent triangular duration assumptions.</p><div class="riskbar"><b style="left:20%;width:40%"></b><span style="left:20%">P10 day 52</span><span style="left:48%">P50 day 57</span><span style="left:79%">P90 day 62</span></div><p class="small">Target: day 50. Modeled probability by that day: 2.8%.</p></div></div>
+<div class="panel" style="margin-top:16px"><p class="kicker">Investment committee</p><h3>Benefits with overlap controls</h3><div class="tablewrap"><table><thead><tr><th>Initiative</th><th>Investment</th><th>Adjusted annual benefit</th><th>Modeled three-year NPV</th><th>Requirement</th></tr></thead><tbody><tr><td>CRM modernization</td><td>$52,000</td><td>$60,900</td><td>$69,390</td><td>Mandatory</td></tr><tr><td>Dispatch optimization</td><td>$75,000</td><td>$117,600</td><td>$159,408</td><td>Discretionary</td></tr><tr><td>AI service operations</td><td>$46,000</td><td>$34,650</td><td>$23,067</td><td>Discretionary</td></tr><tr><td>Workforce adoption</td><td>$29,000</td><td>$30,800</td><td>$32,393</td><td>Mandatory</td></tr></tbody></table></div><p class="note">Illustrative investment: $202,000. NPV: 11% discount, three years, 70% benefit adoption and adjustments for shared benefits. These are assumed future benefits, not booked savings.</p></div></div>
+
+<div class="tabpanel" id="panel-command" role="tabpanel" aria-labelledby="tab-command" hidden>
+<div class="grid"><div class="panel"><p class="kicker">Synthetic incident intake</p><h3>Interpret. Review. Approve.</h3><label for="incident-note" class="field">Fictional technician or customer service note</label><textarea id="incident-note">Appointment #44 needs rescheduling because the technician is unavailable.</textarea>
+<div class="actions"><button class="btn primary" id="propose">Analyze and propose</button><button class="btn" id="approve" disabled>Approve</button><button class="btn" id="reject" disabled>Reject</button><button class="btn" id="execute" disabled>Execute simulated update</button></div>
+<p class="note">This is deterministic browser replay, not an LLM call. State and audit history remain within this page session. No live appointments are changed.</p></div>
+<div class="panel"><p class="kicker">Rules and status</p><h3>Review boundary</h3><p><span id="approval-state" class="status">Awaiting proposal</span></p><pre id="interpretation" aria-live="polite">No incident analyzed yet. A manager must approve before a simulated execution.</pre><div class="warning" id="workflow-warning">Release gate and qualification checks remain authoritative even if a note requests an exception.</div></div></div>
+<div class="panel" style="margin-top:16px"><h3>Scenario solver snapshot</h3><p id="solver-summary"></p><p class="note">The Python engine validates small-subset qualifications, windows, hours, overlap and inventory. The browser displays an actual engine result rather than fabricating a new route.</p><h3>Session audit trail</h3><div id="audit" class="audit" aria-live="polite"><div>Awaiting first simulated action.</div></div></div></div>
+
+<div class="tabpanel" id="panel-evidence" role="tabpanel" aria-labelledby="tab-evidence" hidden>
+<div class="grid"><div class="panel evidence"><p class="kicker">Download and reproduce</p><h3>Technical evidence</h3>
+<a href="assets/files/JuniperVale_Transformation_Lab_Source.zip">Source archive: FastAPI engine, tests, scenario outputs</a>
+<a href="assets/files/JuniperVale_Executive_Transformation_Brief.pdf">Executive transformation brief (PDF)</a>
+<a href="assets/files/JuniperVale_Technical_Evaluation_Report.pdf">Technical evaluation and limitations (PDF)</a>
+<a href="implementation.html">Original field-service implementation case</a>
+<a href="analytics.html">Original SQL analytics evidence</a>
+<a href="ai.html">Original responsible-AI design</a>
+</div>
+<div class="panel"><p class="kicker">Validated, not implied</p><h3>Execution record</h3><div class="tablewrap"><table><tbody>
+<tr><th>Local pytest results</th><td>31 passed</td></tr>
+<tr><th>Synthetic business data</th><td>3,451 orders / 8 branches / 60 technicians</td></tr>
+<tr><th>Replay evaluation</th><td>20 tested / 18 category matches / 2 mismatches</td></tr>
+<tr><th>Model-based LLM evaluation</th><td>Not run; no LLM integration</td></tr>
+<tr><th>Public API deployment</th><td>Not deployed; source runs locally</td></tr>
+<tr><th>Optimization</th><td>Bounded exact subset search, not OR-Tools VRPTW</td></tr>
+</tbody></table></div><p class="note">No claim of live customer impact, certified AI performance, or production reliability.</p></div></div>
+<div class="panel" style="margin-top:16px"><h3>Architecture and decision boundaries</h3><div class="grid three"><div><span class="tag">One data model</span><p>Fixed-seed work-order history, customers, skill profiles and accounting inputs. Versioned scenario assumptions.</p></div><div><span class="tag">Three calculations</span><p>Branch economics and feasible capacity; constrained initiative scheduling and investment; rules-governed service action.</p></div><div><span class="tag">Human control</span><p>Execution requires approval, eligibility and a passing CRM data gate. Session-only browser actions never touch production systems.</p></div></div></div></div>
+</div></section>
+</main><footer class="footer"><div class="shell"><strong>Jeff Pursley, PMP</strong> / Business transformation, program delivery and intelligent operations. <a href="index.html">Back to portfolio</a>. All Juniper Vale entities, figures and outcomes in this expansion are synthetic.</div></footer>
+<script>
+'use strict';
+const snapshots={
+ 'baseline':{title:'Baseline operating model',story:'Eight branches carry recurring service demand. The modeled business has contribution headroom, but incomplete or failed jobs still create customer follow-up pressure.',decision:'Prioritize eligibility, appointment reliability and exception handling before committing to permanent staffing expansion.',constraint:'Service exceptions and completion quality',requested:3451,completed:3213,unfulfilled:238,tech:60,profit:306219.50,revenue:585067.51,direct:176848.01,contribution:408219.50,fixed:102000,ontime:.881,util:.7033,finish:53,gate:true,solver:8,op:'A feasible workload exists with 60 technicians, but 238 modeled requests remain unfulfilled.',prog:'Four linked projects can complete in 53 workdays with four technical contributors.',command:'Eight of eight small-subset appointments are feasible. Human review is required.',ai:'Review suitable assignment recommendations before simulated dispatch.'},
+ 'technician-shortage':{title:'Technician shortage',story:'Fifteen field technicians become unavailable. A separate reduction of two program technical contributors introduces delivery contention and pushes out transformation milestones.',decision:'Protect priority coverage, reallocate qualified capacity and revise program commitments instead of overbooking technicians.',constraint:'Technician availability and resource contention',requested:3451,completed:3005,unfulfilled:446,tech:44,profit:279727.31,revenue:547258.00,direct:165530.69,contribution:381727.31,fixed:102000,ontime:.8497,util:.8968,finish:71,gate:true,solver:6,op:'Capacity pressure reduces modeled completions and increases unfulfilled service requests.',prog:'Two available technical contributors extend completion to day 71.',command:'Only six of eight solver jobs are feasible; do not override eligibility.',ai:'Escalate unassigned work and require manager approval.'},
+ 'crm-data-failure':{title:'Critical CRM data failure',story:'Modeled migration quality falls to 88%, below the program release standard. Ineligible records cannot safely enter downstream scheduling updates.',decision:'Block release. Remediate customer and technician references, repeat integrity checks and secure an explicit cutover decision.',constraint:'Below-threshold CRM master-data quality',requested:3451,completed:2869,unfulfilled:582,tech:60,profit:262515.77,revenue:522430.05,direct:157914.28,contribution:364515.77,fixed:102000,ontime:.881,util:.628,finish:53,gate:false,solver:7,op:'Unreliable records reduce eligible service throughput and modeled contribution.',prog:'Planned milestones remain day 53, but the migration release gate blocks the cutover.',command:'Simulated system changes are denied even when a proposed assignment appears feasible.',ai:'Hold all writes pending CRM remediation and review.'},
+ 'demand-surge':{title:'Demand surge',story:'Urgent workload expands by 32%. Contribution improves as more jobs are completed, but backlog and modeled on-time service deteriorate.',decision:'Protect promised appointment windows and add targeted flexible capacity; do not treat added contribution as proof of healthier service delivery.',constraint:'Peak service load and on-time fulfillment',requested:4554,completed:4083,unfulfilled:471,tech:60,profit:416699.32,revenue:743415.36,direct:224716.04,contribution:518699.32,fixed:102000,ontime:.8505,util:.8937,finish:53,gate:true,solver:8,op:'Higher demand raises revenue and contribution but doubles pressure on unfulfilled work.',prog:'Evaluate whether a higher-value dispatch rollout deserves earlier executive focus.',command:'Eight of eight small-subset appointments remain feasible, subject to approval.',ai:'Review surge alternatives with service-level trade-offs.'}
+};
+const formatUSD=x=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(x);
+const number=x=>new Intl.NumberFormat('en-US').format(x);
+const el=id=>document.getElementById(id);
+let current='baseline',workflow=null,audit=[];
+function percent(v){return (100*v).toFixed(1)+'%'}
+function bar(label,value,suffix){return '<div class="barrow"><span>'+label+'</span><div class="bartrack"><div class="barfill" style="width:'+Math.max(0,Math.min(100,value))+'%"></div></div><strong>'+suffix+'</strong></div>'}
+function render(){
+ const d=snapshots[current],b=snapshots.baseline,delta=d.profit-b.profit;
+ el('kprofit').textContent=formatUSD(d.profit);el('kprofitdelta').textContent=(delta>=0?'+':'')+formatUSD(delta)+' vs baseline';
+ el('kcompleted').textContent=number(d.completed);el('kdemand').textContent=number(d.requested)+' requested';
+ el('kunfulfilled').textContent=number(d.unfulfilled);el('kfinish').textContent='Day '+d.finish;
+ el('kgate').textContent=d.gate?'Release gate eligible':'Release blocked';
+ el('scenario-title').textContent=d.title;el('scenario-story').textContent=d.story;el('scenario-decision').textContent=d.decision;
+ el('scenario-constraint').textContent=d.constraint;
+ el('scenario-id').textContent='Shared scenario ID: JV-'+current+'-20261014  |  Data version: 2026.10.v1';
+ el('pressure-bars').innerHTML=bar('Utilization',d.util*100,percent(d.util))+bar('On time',d.ontime*100,percent(d.ontime))+bar('Fulfilled',100*d.completed/d.requested,percent(d.completed/d.requested));
+ el('flow-ops').textContent=d.op;el('flow-program').textContent=d.prog;el('flow-command').textContent=d.command;
+ const financial=[['Recognized revenue',formatUSD(d.revenue)],['Direct service costs','-'+formatUSD(d.direct)],['Contribution',formatUSD(d.contribution)],['Fixed branch costs','-'+formatUSD(d.fixed)],['Operating profit',formatUSD(d.profit)],['Cost per completed service',formatUSD(d.direct/d.completed)],['Revenue per completed service',formatUSD(d.revenue/d.completed)]];
+ el('financial').innerHTML=financial.map((v,i)=>'<tr><td'+(i===2||i===4?' style="font-weight:750"':'')+'>'+v[0]+'</td><td><strong>'+v[1]+'</strong></td></tr>').join('');
+ el('service-bars').innerHTML=bar('Fulfillment',100*d.completed/d.requested,percent(d.completed/d.requested))+bar('On time',100*d.ontime,percent(d.ontime))+bar('Utilization',100*d.util,percent(d.util));
+ el('capacity-note').textContent='Available technicians: '+d.tech+' / 60 baseline. '+number(d.unfulfilled)+' requests remain unfulfilled in this scenario.';
+ el('operations-warning').textContent=d.constraint+'. Forecast values are model outputs, not service guarantees.';
+ el('program-gate').innerHTML='<span class="status '+(d.gate?'':'blocked')+'">'+(d.gate?'Eligible for release review':'Cutover prohibited')+'</span> Migration quality: '+(current==='crm-data-failure'?'88.0%':'98.5%')+'. Required: 95%.';
+ el('program-decision').textContent=d.gate?'Proceed only after required sign-offs. A milestone date alone is not an approval.':'Quality failure overrides the planned finish date. Remediate identifiers and rerun migration validation before authorizing release.';
+ const items=current==='technician-shortage'?[['CRM',0,16],['AI',16,34],['Dispatch',34,56],['Adoption',56,71]]:[['CRM',0,16],['AI',16,34],['Dispatch',16,38],['Adoption',38,53]];
+ el('gantt').innerHTML=items.map((x,i)=>'<div class="schedrow"><strong>'+x[0]+'</strong><div class="timeline"><span class="'+(i===0?'critical':i===1?'alt':'')+'" style="left:'+(x[1]/75*100)+'%;width:'+((x[2]-x[1])/75*100)+'%"></span></div><span>Day '+x[2]+'</span></div>').join('');
+ el('solver-summary').textContent=d.solver+' of 8 appointments are feasible in the exact constrained subset search. '+(d.gate?'Program data gate eligible.':'CRM gate blocks any write.');
+ el('workflow-warning').textContent=d.gate?'Simulated execution requires a recognized appointment, manager approval, and no missing information.':'Critical CRM data failure: all simulated execution requests are blocked by the release gate.';
+ if(workflow){workflow=null;el('approval-state').textContent='Reset by scenario change';el('interpretation').textContent='Change of operating assumptions invalidated the pending proposal. Analyze the note again.'}
+ controlButtons();
+}
+function controlButtons(){
+ el('approve').disabled=!workflow||workflow.state!=='Pending Review';
+ el('reject').disabled=!workflow||workflow.state!=='Pending Review';
+ el('execute').disabled=!workflow||workflow.state!=='Approved';
+ if(workflow){const state=el('approval-state');state.textContent=workflow.state;state.className='status '+(workflow.state==='Rejected'?'blocked':workflow.state==='Approved'?'warn':'')}
+}
+function record(action,detail){
+ audit.unshift({action:action,detail:detail,time:new Date().toLocaleTimeString()});
+ el('audit').replaceChildren(...audit.map(x=>{const row=document.createElement('div');row.textContent=x.time+'  |  '+x.action+'  |  '+x.detail;return row}))
+}
+function analyze(){
+ const note=el('incident-note').value.trim();if(note.length<3||note.length>1500){alert('Use a fictional note between 3 and 1,500 characters.');return}
+ const s=note.toLowerCase(),inject=/ignore (previous|all) instructions|bypass approval|override policy|system prompt|developer message/.test(s);
+ let category='other';
+ for(const x of [['technician_absence',/absen|sick|call.?out/],['inventory',/stock|inventory|material|kit/],['data_quality',/wrong address|incorrect|duplicate|missing customer|crm/],['scheduling',/conflict|reschedul|appointment/],['repeat_service',/repeat|complaint|rework/],['equipment',/equipment|truck|pump/],['specialty',/certif|specialist/],['delay',/late|delay|missed/],['urgent',/urgent|emergency/]]){if(x[1].test(s)){category=x[0];break}}
+ const idMatch=/\b(wo-\d+|job-\d+|appointment\s*#?\d+)\b/.test(s);
+ const missing=[];if(!idMatch)missing.push('Service order reference');if(category==='other')missing.push('Unambiguous category');if(inject)missing.push('Untrusted instruction requires review');
+ workflow={state:'Pending Review',category:category,priority:/urgent|emergency|safety|hazard/.test(s)?'critical':/complaint|missed|absence|late/.test(s)?'high':'normal',missing:missing,action:inject||category==='data_quality'||category==='other'?'REVIEW_ONLY':'PROPOSE_RESCHEDULE',id:'DEMO-'+(audit.length+1)};
+ el('interpretation').textContent=JSON.stringify({incident_id:workflow.id,category:workflow.category,priority:workflow.priority,next_owner:workflow.priority==='critical'?'service_manager':'dispatch',action:workflow.action,review_required:true,missing_information:missing,execution_mode:'DETERMINISTIC_BROWSER_REPLAY'},null,2);
+ record('PROPOSED',workflow.category+' / scenario '+current);
+ controlButtons();
+}
+el('scenario').addEventListener('change',e=>{current=e.target.value;render()});
+el('reset').addEventListener('click',()=>{current='baseline';el('scenario').value=current;workflow=null;audit=[];el('audit').innerHTML='<div>Audit reset to baseline.</div>';render()});
+document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>{const active=button.dataset.tab;document.querySelectorAll('[data-tab]').forEach(tab=>{const yes=tab.dataset.tab===active;tab.setAttribute('aria-selected',String(yes));el('panel-'+tab.dataset.tab).hidden=!yes})}));
+el('propose').addEventListener('click',analyze);
+el('approve').addEventListener('click',()=>{if(!workflow||workflow.state!=='Pending Review')return;workflow.state='Approved';record('APPROVED','Simulated manager approval; not an execution');controlButtons()});
+el('reject').addEventListener('click',()=>{if(!workflow||workflow.state!=='Pending Review')return;workflow.state='Rejected';record('REJECTED','No simulated change applied');controlButtons()});
+el('execute').addEventListener('click',()=>{
+ if(!workflow||workflow.state!=='Approved')return;
+ const d=snapshots[current];
+ const issue=!d.gate?'CRM migration release gate below 95%':workflow.missing.length?'Missing information: '+workflow.missing.join(', '):workflow.action!=='PROPOSE_RESCHEDULE'?'Read-only or unsupported action':d.solver<1?'No feasible assignment':'';
+ if(issue){record('BLOCKED',issue);el('workflow-warning').textContent=issue+'; approval does not override safety rules.';return}
+ workflow.state='Executed';record('EXECUTED','Simulated local state only; no third-party updates');controlButtons();
+});
+render();
+</script></body></html>
