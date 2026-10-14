@@ -81,3 +81,6 @@ a:focus-visible,summary:focus-visible{outline:3px solid #b36800;outline-offset:4
 @media(min-width:851px){.nav{column-gap:15px}.nav a{font-size:14px}}
 @media(max-width:780px){.signature{font-size:17px}.hero h1{max-width:660px}}
 @media print{.signature{background:#f1f5f6!important;color:#17324d!important}.specialty-card{border-top:2px solid #2b7a78}}
+
+/* Five career-scope proof points on desktop */
+@media(min-width:941px){.hero .credentialstats{grid-template-columns:repeat(5,minmax(0,1fr))}.hero .credentialstats .stat{padding:17px}.hero .credentialstats .stat b{font-size:23px}}
