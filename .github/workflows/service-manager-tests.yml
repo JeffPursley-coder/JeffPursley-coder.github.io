@@ -1,0 +1,27 @@
+name: Service Manager Synthetic Tests
+on:
+  push:
+    paths:
+      - "service-manager/**"
+      - "service-manager-demo.html"
+      - ".github/workflows/service-manager-tests.yml"
+  pull_request:
+    paths:
+      - "service-manager/**"
+      - "service-manager-demo.html"
+      - ".github/workflows/service-manager-tests.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Execute deterministic 30-case acceptance suite
+        run: node --test service-manager/engine.test.mjs
