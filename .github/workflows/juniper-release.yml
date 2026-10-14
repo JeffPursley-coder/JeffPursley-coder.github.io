@@ -1,0 +1,147 @@
+name: Publish Juniper Vale verified release
+on:
+  push:
+    paths:
+      - 'juniper-command-center/RELEASE_REQUEST.md'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: juniper-vale-controlled-release
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install release dependencies
+        working-directory: juniper-command-center
+        run: python -m pip install -r requirements.txt
+      - name: Run full suite and regenerate synthetic model data
+        working-directory: juniper-command-center
+        shell: bash
+        run: |
+          set -euo pipefail
+          set -o pipefail
+          python -m pytest -q | tee test-current-run.txt
+          python -m lab.web_export
+          python -m lab.evaluate
+          python -m lab.generate --out /tmp/juniper-vale-generated.json
+      - name: Generate synchronized current reports and source ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp juniper-command-center/test-current-run.txt juniper-command-center/docs/current-tests.txt
+          cp juniper-command-center/test-current-run.txt juniper-command-center/docs/github-actions-test-results.txt
+          cp juniper-command-center/test-current-run.txt juniper-command-center/results/pytest.txt
+          cd juniper-command-center
+          python -m lab.reporting --out ../assets/files
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          from zipfile import ZipFile,ZIP_DEFLATED
+          from datetime import datetime,timezone
+          import json,os
+          root=Path('.')
+          version='2026.10.v2'
+          files=[]
+          for p in sorted(root.rglob('*')):
+              if not p.is_file():continue
+              parts=p.parts
+              if any(x in {'.git','.venv','.pytest_cache','__pycache__','.mypy_cache'} for x in parts):continue
+              if p.suffix in {'.pyc','.db','.sqlite','.sqlite3'}:continue
+              if p.name in {'test-current-run.txt','.env'}:continue
+              if 'token' in p.name.lower() and p.suffix in {'.json','.txt'}:continue
+              if p.name=='release-manifest.json':continue
+              files.append(p)
+          manifest={'release':version,'source_commit':os.environ['GITHUB_SHA'],
+                    'dataset_seed':20261014,'created_utc':datetime.now(timezone.utc).isoformat(),
+                    'files':{str(p):sha256(p.read_bytes()).hexdigest() for p in files}}
+          Path('release-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          files.append(Path('release-manifest.json'))
+          target=Path('../assets/files/JuniperVale_Transformation_Lab_Source.zip')
+          with ZipFile(target,'w',ZIP_DEFLATED,compresslevel=8) as z:
+              for p in files:
+                  z.write(p,arcname='JuniperVale-Transformation-Lab/'+str(p))
+          with ZipFile(target) as z:
+              assert z.testzip() is None
+              names=set(z.namelist())
+              for name in ('lab/advanced.py','lab/llm.py','lab/llm_evaluate.py',
+                           'tests/test_release.py','web/index.html','web/data.json',
+                           'docs/current-tests.txt','release-manifest.json'):
+                  assert 'JuniperVale-Transformation-Lab/'+name in names,name
+          print('Verified release ZIP',target.stat().st_size,'bytes,',len(files),'source items')
+          PY
+      - name: Validate browser JavaScript, reports and baseline consistency
+        working-directory: juniper-command-center
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('web/index.html').read_text()
+          m=re.search(r'<script>(.*?)</script>',p,re.S)
+          assert m
+          Path('/tmp/juniper-release.js').write_text(m.group(1))
+          PY
+          node --check /tmp/juniper-release.js
+          python - <<'PY'
+          from pathlib import Path
+          from lab.engine import DATA,operations
+          import json
+          d=json.loads(Path('web/data.json').read_text())
+          baseline=operations()
+          assert d['release']=='2026.10.v2' and d['seed']==DATA['seed']
+          assert d['total_orders']==len(DATA['orders'])
+          for k in ('requested','completed','revenue','direct_cost','operating_profit'):
+              assert abs(d['python_baseline'][k]-baseline[k])<.011,k
+          for name in ('JuniperVale_Executive_Transformation_Brief.pdf',
+                       'JuniperVale_Technical_Evaluation_Report.pdf'):
+              p=Path('../assets/files')/name
+              assert p.stat().st_size>2500 and p.read_bytes().startswith(b'%PDF-')
+          assert 'passed' in Path('docs/current-tests.txt').read_text()
+          print('PASS: suite, JS, browser data, model baseline, PDFs, ZIP')
+          PY
+      - name: Publish one protected set of matching files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$GITHUB_SHA" || {
+            echo 'Repository changed during the controlled release; refusing to overwrite or rebase published results.'
+            exit 1
+          }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add juniper-command-center/web/data.json \
+                  juniper-command-center/docs/current-tests.txt \
+                  juniper-command-center/docs/github-actions-test-results.txt \
+                  juniper-command-center/results/pytest.txt \
+                  juniper-command-center/results/replay-evaluation.json \
+                  juniper-command-center/release-manifest.json \
+                  assets/files/JuniperVale_Executive_Transformation_Brief.pdf \
+                  assets/files/JuniperVale_Technical_Evaluation_Report.pdf \
+                  assets/files/JuniperVale_Transformation_Lab_Source.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish synchronized Juniper Vale engineering release 2026.10.v2 [skip ci]"
+            git push origin HEAD:main
+          fi
+      - name: Upload evidence independently of publication
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: juniper-controlled-release-evidence
+          path: |
+            juniper-command-center/test-current-run.txt
+            juniper-command-center/release-manifest.json
+            juniper-command-center/web/data.json
+            assets/files/JuniperVale_Executive_Transformation_Brief.pdf
+            assets/files/JuniperVale_Technical_Evaluation_Report.pdf
+            assets/files/JuniperVale_Transformation_Lab_Source.zip
+          if-no-files-found: warn
