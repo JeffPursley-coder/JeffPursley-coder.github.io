@@ -56,12 +56,25 @@ class WorkflowStore:
         with self.connect() as db:
             db.execute('CREATE TABLE IF NOT EXISTS incidents (id TEXT PRIMARY KEY, note TEXT NOT NULL, category TEXT NOT NULL, priority TEXT NOT NULL, state TEXT NOT NULL, version INTEGER NOT NULL, suggestion TEXT NOT NULL, created TEXT NOT NULL, updated TEXT NOT NULL)')
             db.execute('CREATE TABLE IF NOT EXISTS audit (id INTEGER PRIMARY KEY AUTOINCREMENT, incident_id TEXT NOT NULL, actor_role TEXT NOT NULL, action TEXT NOT NULL, before_state TEXT, after_state TEXT NOT NULL, time TEXT NOT NULL, details TEXT NOT NULL, FOREIGN KEY(incident_id) REFERENCES incidents(id))')
+            db.execute('CREATE TABLE IF NOT EXISTS demo_appointments (order_id TEXT PRIMARY KEY,customer_id TEXT NOT NULL,branch_id TEXT NOT NULL,status TEXT NOT NULL,version INTEGER NOT NULL,scheduled_start INTEGER NOT NULL,scheduled_end INTEGER NOT NULL,updated TEXT NOT NULL)')
+            db.executemany('INSERT OR IGNORE INTO demo_appointments(order_id,customer_id,branch_id,status,version,scheduled_start,scheduled_end,updated) VALUES(?,?,?,?,?,?,?,?)',
+                [(o['id'],o['customer_id'],o['branch_id'],'SCHEDULED',1,o['window_start']*60,o['window_end']*60,self.time()) for o in DATA['orders']])
     @staticmethod
     def time():return datetime.now(timezone.utc).isoformat()
     def create(self,note:str,actor_role:str='dispatcher',incident_id:str|None=None):
         if actor_role not in ROLE_PERMISSIONS or 'propose' not in ROLE_PERMISSIONS[actor_role]: raise PermissionError('role cannot propose incidents')
         incident_id=incident_id or str(uuid.uuid4())
         suggestion=asdict(interpret(note,incident_id));now=self.time()
+        match=re.search(r'\\bWO-\\d{2}-\\d{4}\\b',note,re.I)
+        number=re.search(r'appointment\\s*#?\\s*(\\d+)\\b',note,re.I)
+        target=match.group().upper() if match else (f'WO-01-{int(number.group(1)):04d}' if number else None)
+        suggestion['target_work_order']=target
+        suggestion['source_order_version']=None
+        if target:
+            with self.connect() as db:
+                source=db.execute('SELECT version FROM demo_appointments WHERE order_id=?',(target,)).fetchone()
+                if source:suggestion['source_order_version']=source['version']
+                else:suggestion['missing_information'].append('Unknown service order reference')
         with self.connect() as db:
             db.execute('BEGIN IMMEDIATE')
             old=db.execute('SELECT id FROM incidents WHERE id=?',(incident_id,)).fetchone()
@@ -93,6 +106,16 @@ class WorkflowStore:
                 if suggestion['missing_information']:db.execute('ROLLBACK');raise ValueError('missing information blocks simulated write')
                 if suggestion['action_type']!='PROPOSE_RESCHEDULE':db.execute('ROLLBACK');raise ValueError('this category cannot execute a scheduling action')
                 if demo_schedule(scenario_assumptions())['jobs_assigned']<1:db.execute('ROLLBACK');raise ValueError('no feasible scheduling alternative')
+                target=suggestion.get('target_work_order')
+                if not target:db.execute('ROLLBACK');raise ValueError('missing service order reference')
+                current=db.execute('SELECT * FROM demo_appointments WHERE order_id=?',(target,)).fetchone()
+                if not current:db.execute('ROLLBACK');raise ValueError('unknown service order')
+                if current['version']!=suggestion.get('source_order_version'):
+                    db.execute('ROLLBACK');raise ValueError('stale appointment version; re-review')
+                if current['status']!='SCHEDULED':
+                    db.execute('ROLLBACK');raise ValueError('appointment no longer eligible')
+                db.execute('UPDATE demo_appointments SET status=?,version=version+1,updated=? WHERE order_id=?',
+                    ('RESCHEDULE_REQUIRED',now,target))
             if action=='resolve' and suggestion['missing_information']:db.execute('ROLLBACK');raise ValueError('completion evidence missing')
             db.execute('UPDATE incidents SET state=?,version=version+1,updated=? WHERE id=?',(dest,now,incident_id))
             db.execute('INSERT INTO audit(incident_id,actor_role,action,before_state,after_state,time,details) VALUES(?,?,?,?,?,?,?)',(incident_id,actor_role,action,src,dest,now,json.dumps({'simulated_only':True})))
@@ -102,4 +125,8 @@ class WorkflowStore:
         with self.connect() as db:return [dict(x) for x in db.execute('SELECT * FROM audit WHERE incident_id=? ORDER BY id',(incident_id,)).fetchall()]
     def reset(self):
         with self.connect() as db:
-            db.execute('DELETE FROM audit');db.execute('DELETE FROM incidents')
+            db.execute('BEGIN IMMEDIATE')
+            db.execute('DELETE FROM audit');db.execute('DELETE FROM incidents');db.execute('DELETE FROM demo_appointments')
+            db.executemany('INSERT INTO demo_appointments(order_id,customer_id,branch_id,status,version,scheduled_start,scheduled_end,updated) VALUES(?,?,?,?,?,?,?,?)',
+                [(o['id'],o['customer_id'],o['branch_id'],'SCHEDULED',1,o['window_start']*60,o['window_end']*60,self.time()) for o in DATA['orders']])
+            db.commit()
