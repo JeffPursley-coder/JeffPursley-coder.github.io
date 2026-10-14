@@ -48,6 +48,9 @@ jobs:
           Path('/tmp/juniper-web.js').write_text(m.group(1))
           PY
           node --check /tmp/juniper-web.js
+      - name: Generate current executive and technical PDF reports
+        working-directory: juniper-command-center
+        run: python -m lab.reporting --out ../assets/files
       - name: Publish matching browser inputs and release test evidence
         shell: bash
         run: |
@@ -55,7 +58,7 @@ jobs:
           cp juniper-command-center/test-current-run.txt juniper-command-center/docs/current-tests.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add juniper-command-center/web/data.json juniper-command-center/docs/current-tests.txt
+          git add juniper-command-center/web/data.json juniper-command-center/docs/current-tests.txt assets/files/JuniperVale_Executive_Transformation_Brief.pdf assets/files/JuniperVale_Technical_Evaluation_Report.pdf
           if ! git diff --cached --quiet; then
             git commit -m "Record verified Juniper Vale model inputs and tests [skip ci]"
             git stash push -u --quiet || true
