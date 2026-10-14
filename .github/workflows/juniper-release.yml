@@ -91,6 +91,8 @@ jobs:
           Path('/tmp/juniper-release.js').write_text(m.group(1))
           PY
           node --check /tmp/juniper-release.js
+          node tests/browser-smoke.cjs
+          python tests/check_links.py
           python - <<'PY'
           from pathlib import Path
           from lab.engine import DATA,operations
