@@ -125,13 +125,13 @@ function render(){
 }
 function preset(){const p=presets[$('scenario').value];for(const k in p)$(k).value=p[k];render()}
 function replay(){
- const note=$('incident').value.trim();if(note.length<3||note.length>1500){$('interpretation').textContent='Note must contain 3–1,500 characters.';return}
+ const note=$('incident').value.trim();if(note.length<3||note.length>1500){$('interpretation').textContent='Note must contain 3 to 1,500 characters.';return}
  const s=note.toLowerCase();const injected=/ignore (previous|all) instructions|bypass approval|system prompt|developer message|override policy/i.test(s);
  const categories=[['technician_absence',/absen|sick|call.?out/],['inventory',/stock|inventory|material|kit/],['data_quality',/wrong address|incorrect|duplicate|missing customer|crm/],['scheduling',/conflict|reschedul|appointment/],['repeat_service',/repeat|complaint|rework/],['equipment',/equipment|truck|pump/],['specialty',/certif|specialist/],['delay',/late|delay|missed/],['urgent',/urgent|emergency/]];
  const category=(categories.find(x=>x[1].test(s))||['other'])[0],known=/\b(wo-\d+-\d+|job-\d+|appointment\s*#?\d+)\b/i.test(s);
  const missing=[];if(!known)missing.push('Service order identifier');if(injected)missing.push('Untrusted embedded instruction');if(category==='other')missing.push('Clear exception category');
  const allowed=known&&!injected&&category!=='other'&&category!=='data_quality'&&Number($('quality').value)>=95;
- const obj={mode:'DETERMINISTIC_BROWSER_REPLAY',category,priority:/urgent|emergency|hazard|safety/.test(s)?'critical':'normal',action_type:allowed?'PROPOSE_FOR_REVIEW':'REVIEW_ONLY',missing_information:missing,approval_required:true,crm_release_eligible:Number($('quality').value)>=95,execution:'NONE — Browser cannot write CRM'};
+ const obj={mode:'DETERMINISTIC_BROWSER_REPLAY',category,priority:/urgent|emergency|hazard|safety/.test(s)?'critical':'normal',action_type:allowed?'PROPOSE_FOR_REVIEW':'REVIEW_ONLY',missing_information:missing,approval_required:true,crm_release_eligible:Number($('quality').value)>=95,execution:'NONE. Browser cannot write CRM'};
  $('incident-status').textContent=allowed?'Human review required':'Read-only review';
  $('incident-status').className='pill'+(allowed?'':' block');
  $('interpretation').textContent=JSON.stringify(obj,null,2);
