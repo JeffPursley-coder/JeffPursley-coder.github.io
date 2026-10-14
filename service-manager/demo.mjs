@@ -23,7 +23,7 @@ function show(id){
   const active=b.dataset.case===id;
   b.setAttribute("aria-pressed",String(active));b.classList.toggle("selected",active);
  });
- const badge=document.getElementById("state-badge");badge.className="state-badge "+(output.state==="NEEDS_REVIEW"?"review":output.state==="RESOLVED"?"done":"");
+ const badge=document.getElementById("state-badge");badge.textContent=output.state.replaceAll("_"," ");badge.className="state-badge "+(output.state==="NEEDS_REVIEW"?"review":output.state==="RESOLVED"?"done":"");
 }
 for(const id of featuredCaseIds){
  const item=byId.get(id);if(!item)continue;
