@@ -65,8 +65,8 @@ class WorkflowStore:
         if actor_role not in ROLE_PERMISSIONS or 'propose' not in ROLE_PERMISSIONS[actor_role]: raise PermissionError('role cannot propose incidents')
         incident_id=incident_id or str(uuid.uuid4())
         suggestion=asdict(interpret(note,incident_id));now=self.time()
-        match=re.search(r'\\bWO-\\d{2}-\\d{4}\\b',note,re.I)
-        number=re.search(r'appointment\\s*#?\\s*(\\d+)\\b',note,re.I)
+        match=re.search(r'\bWO-\d{2}-\d{4}\b',note,re.I)
+        number=re.search(r'appointment\s*#?\s*(\d+)\b',note,re.I)
         target=match.group().upper() if match else (f'WO-01-{int(number.group(1)):04d}' if number else None)
         suggestion['target_work_order']=target
         suggestion['source_order_version']=None
