@@ -14,7 +14,7 @@ My specialty is designing practical systems for complex operations: clarifying p
 
 ## Featured independent engineering lab
 
-- **[Juniper Vale Enterprise Transformation Command Center](transformation-lab.html)**: Interactive browser replay of one fictional business with integrated operating profit, resource-constrained program scheduling, CRM data-quality release decisions, controlled service action and human approval. The published [source archive](assets/files/JuniperVale_Transformation_Lab_Source.zip) contains Python FastAPI endpoints, fixed-seed synthetic data generation, a constrained subset optimizer, 31 passing pytest checks, evaluation cases and scenario evidence. It is not a public production API or a deployed language model.
+- **[Juniper Vale Enterprise Transformation Command Center](transformation-lab.html)**: An independent, synthetic eight-branch transformation case. Its [public calculated Decision Lab](juniper-command-center/web/) supports editable operations and portfolio investment scenarios; the [browsable Python source](juniper-command-center/) includes OR-Tools CP-SAT scheduling, constrained program resources, Monte Carlo analysis, authenticated SQLite workflow transactions, 35-case optional LLM evaluation harness and executed pytest evidence. The Python backend is locally reproducible, not hosted as a writable public service. See [current CI](https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/actions/workflows/juniper-tests.yml) rather than a historical test count.
 
 ## Real-world selected work
 
