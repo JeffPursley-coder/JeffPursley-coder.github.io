@@ -87,7 +87,7 @@ a:focus-visible,summary:focus-visible{outline:3px solid #b36800;outline-offset:4
 
 
 /* Premium navy design system, October 2026 */
-:root{--navy:#eef8fd;--navy2:#183a53;--teal:#62d9df;--ink:#e5f0f7;--muted:#aac0d0;--line:#2c4b5e;--bg:#071625;--soft:#0c2235;--tealsoft:#123940;--white:#f4fbff;--ambersoft:#31281f;--amber:#cfac70}
+:root{--navy:#102e43;--navy2:#183a53;--teal:#62d9df;--ink:#e5f0f7;--muted:#aac0d0;--line:#2c4b5e;--bg:#071625;--soft:#0c2235;--tealsoft:#123940;--white:#f4fbff;--ambersoft:#31281f;--amber:#cfac70}
 html{scroll-padding-top:86px}body{background:#071625;color:#e5f0f7;font-family:Inter,"Segoe UI",system-ui,Arial,sans-serif;line-height:1.65}a{color:#83e5e9}
 .shell{width:min(1200px,calc(100% - 58px))}
 .head{z-index:40;background:rgba(6,20,34,.95);border-color:#254052;backdrop-filter:blur(16px)}.navwrap{gap:24px;min-height:79px;padding:11px 0}
