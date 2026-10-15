@@ -120,3 +120,11 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #7d
 @media(max-width:430px){.home-hero .btn{width:100%}.hero-visual{height:295px}.visual-board{max-width:245px;min-height:282px}.visual-statement{font-size:33px}.proof-grid>div{display:block}.proof-grid b{margin-top:5px}.project-body{padding:20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project-card,.project-card img,.btn{transition:none!important}.project-card:hover,.btn:hover{transform:none!important}}
 @media print{body{background:white!important;color:#222!important}.hero-visual{display:none!important}.section p,.lede{color:#444!important}.section h2,.pagehero h1,.card h3{color:#21313e!important}.card,.stat,.phase,.item{background:#fff!important;color:#222!important;border-color:#bbb!important}}
+
+
+/* Case-study masthead art integrates the project identity without changing case content. */
+.pagehero.case-hero{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 91% 35%,#164359,#091d2d 72%)}
+.pagehero.case-hero::after{content:"";position:absolute;right:0;top:12%;height:78%;width:min(44%,550px);background-image:var(--case-art);background-size:cover;background-position:60% center;opacity:.23;mask-image:linear-gradient(to right,transparent,black 40%);pointer-events:none;z-index:0}
+.pagehero.case-hero>.shell{position:relative;z-index:1}
+.pagehero.case-hero h1,.pagehero.case-hero .lede{max-width:810px}
+@media(max-width:780px){.pagehero.case-hero::after{display:none}}
