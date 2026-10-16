@@ -2,7 +2,7 @@
 
 [View my professional portfolio](https://jeffpursley-coder.github.io/)
 
-I connect **operations leadership, project delivery and intelligent technology**. My background includes co-building a service business with approximately 21 employees, leading a 15-person team across five markets, and supervising a roughly 25-person licensed sales team that ranked first during the Annual Enrollment Period. I hold two bachelor's degrees in Operations Management and Computer Information Systems, along with PMP, CSM and CSPO credentials.
+I connect **operations leadership, project delivery and intelligent technology**. My background includes helping grow Dragonfly from 4 to 21 employees, generating approximately $2.5 million in revenue over two years and reducing repeat calls by about 25%; leading 15 employees across 15 territories at Safe Haven; and supervising a roughly 25-person team that ranked first during the Annual Enrollment Period. I hold two bachelor's degrees in Operations Management and Computer Information Systems, along with PMP, CSM and CSPO credentials.
 
 My specialty is designing practical systems for complex operations: clarifying priorities and ownership, coordinating change, and making follow-through visible to the people running the business.
 
@@ -18,7 +18,7 @@ My specialty is designing practical systems for complex operations: clarifying p
 
 ## Real-world selected work
 
-- **[Service Manager Operating System](service-manager.html)**: translated a real field-service manager's operating requirements into Google Workspace / Gemini workflow configuration, six current work states, urgent escalation and three daily management checkpoints. A separate [interactive synthetic demonstration](service-manager-demo.html), [30-case acceptance suite](service-manager/engine.test.mjs) and [passing GitHub Actions run](https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/actions/workflows/service-manager-tests.yml) provide reproducible rule-level evidence, not a corporate Gemini benchmark.
+- **[Service Manager Operating System](service-manager.html)**: translated a real field-service manager's operating requirements into Google Workspace / Gemini workflow configuration, six current work states, urgent escalation and three daily management checkpoints. The real configured workflow reduced measured manual email triage time by 50%. A separate [interactive synthetic demonstration](service-manager-demo.html), [30-case acceptance suite](service-manager/engine.test.mjs) and [passing GitHub Actions run](https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/actions/workflows/service-manager-tests.yml) provide reproducible rule-level evidence, not a corporate Gemini benchmark.
 - **[Customer Operations & CRM Review](crm-review.html)**: assessed call patterns, intake, escalation, handoffs and CRM outcome reporting; developed practical recommendations.
 - **[CBATES and WeVote](experience.html)**: nonprofit project coordination and distributed software team delivery, including Scrum and Jira/Confluence.
 
@@ -28,7 +28,7 @@ My specialty is designing practical systems for complex operations: clarifying p
 - **[Service analytics](analytics.html)** and **[AI operations design](ai.html)**: SQL and modeled scenarios, plus responsible-AI evaluation and safeguards.
 - **[Source documents and workbooks](project-files.html)**: inspect the underlying case material.
 
-Juniper Vale uses fictional organizations and synthetic outcomes. The operational cases describe actual work without publishing private client or workplace records.
+Juniper Vale is an independent implementation lab and consultancy using synthetic data and simulated outcomes. The operational cases describe actual work without publishing private client or workplace records.
 
 
 ## Dragonfly business transformation

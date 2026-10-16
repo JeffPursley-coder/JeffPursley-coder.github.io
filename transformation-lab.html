@@ -48,7 +48,7 @@ header .mastnav a:hover,header .mastnav a[aria-current]{color:#6adce1}
 <div class="hero"><div class="shell">
 <p class="eyebrow">Independent engineering case study / current Python release 2026.10.v2</p>
 <h1>One business. Three connected decision systems.</h1>
-<p class="lede">Juniper Vale is a fictional regional field-service organization. This Command Center brings service economics, transformation program delivery, and approval-controlled operations into one consistent management scenario.</p>
+<p class="lede">Juniper Vale is an independent implementation lab and consultancy using synthetic data to model a regional field-service organization. This Command Center brings service economics, transformation program delivery, and approval-controlled operations into one consistent management scenario.</p>
 <div class="actions"><a class="btn primary" href="juniper-command-center/web/">Open calculated decision lab</a><a class="btn" href="#lab">Explore scenario overview</a><a class="btn" href="assets/files/JuniperVale_Executive_Transformation_Brief.pdf">Executive brief (PDF)</a><a class="btn" href="https://github.com/JeffPursley-coder/JeffPursley-coder.github.io/tree/main/juniper-command-center">Browse source and tests</a></div>
 <p class="note">Explore the interactive scenarios here or open the calculated Decision Lab to change operating and investment assumptions. The companion Python application contains the optimization solver, program models and approval-controlled synthetic workflow.</p>
 </div></div>
@@ -59,7 +59,7 @@ header .mastnav a:hover,header .mastnav a[aria-current]{color:#6adce1}
 <div class="panel"><span class="tag">AI Operations Architect</span><h3>Control the action</h3><p>Structured service-note interpretation, qualification rules, human approval, simulated execution and explicit audit entries.</p></div>
 </div></div></section>
 <section id="lab"><div class="shell">
-<p class="eyebrow">Interactive scenario laboratory</p><h2>Enterprise Transformation Command Center</h2><p class="subtle">Switch a scenario once to update all three management views. Calculated snapshots: 15 fictional weekdays, eight branches, 60 baseline technicians.</p>
+<p class="eyebrow">Interactive scenario laboratory</p><h2>Enterprise Transformation Command Center</h2><p class="subtle">Switch a scenario once to update all three management views. Calculated snapshots: 15 modeled weekdays, eight branches, 60 baseline technicians.</p>
 <div class="toolbar"><div><label for="scenario">Operating disruption</label><div class="small subtle">All panels share one scenario identifier.</div></div><select id="scenario"><option value="baseline">Baseline operating model</option><option value="technician-shortage">Technician shortage (-15)</option><option value="crm-data-failure">Critical CRM data failure</option><option value="demand-surge">Demand surge (+32%)</option></select><button class="btn" id="reset">Reset scenario</button></div>
 <div class="grid four" aria-live="polite">
 <div class="metric"><span>Operating profit / period</span><strong id="kprofit"></strong><em id="kprofitdelta"></em></div>
@@ -76,7 +76,7 @@ header .mastnav a:hover,header .mastnav a[aria-current]{color:#6adce1}
 
 <div class="tabpanel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
 <div class="grid"><div class="panel"><p class="kicker">Executive readout</p><h3 id="scenario-title"></h3><p id="scenario-story"></p><div class="decision"><strong>Recommended management decision</strong><p id="scenario-decision"></p></div><p class="note" id="scenario-id"></p></div>
-<div class="panel"><p class="kicker">Operating pressure</p><div class="bars" id="pressure-bars"></div><hr class="divider"><p><strong>Key constraint:</strong> <span id="scenario-constraint"></span></p><p class="note">Figures are calculated from the fictional company's scenario assumptions.</p></div></div>
+<div class="panel"><p class="kicker">Operating pressure</p><div class="bars" id="pressure-bars"></div><hr class="divider"><p><strong>Key constraint:</strong> <span id="scenario-constraint"></span></p><p class="note">Figures are calculated from the modeled company's synthetic scenario assumptions.</p></div></div>
 <div class="panel" style="margin-top:16px"><h3>Integrated decision flow</h3><div class="grid three">
 <div><span class="tag">Operations</span><p id="flow-ops"></p></div><div><span class="tag">Program</span><p id="flow-program"></p></div><div><span class="tag">Service Command</span><p id="flow-command"></p></div></div></div></div>
 
