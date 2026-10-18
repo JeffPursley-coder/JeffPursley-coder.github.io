@@ -237,3 +237,17 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #7d
  .hero-visual.portrait-visual{height:475px}
  .portrait-frame{height:465px}
 }
+
+/* Recruiter-first hierarchy: a visible action without removing the professional portrait. */
+.hero-actions{margin-top:21px}
+.hero-specialties{margin-top:18px}
+@media(max-width:680px){
+ .hero.home-hero{padding:29px 0 43px!important}
+ .hero-name{font-size:17px;margin-bottom:8px}
+ .home-hero h1{font-size:clamp(33px,8.4vw,44px);line-height:1.055;margin-bottom:18px}
+ .home-hero .lede{font-size:15px;line-height:1.55}
+ .hero-actions{margin-top:18px}
+ .hero-specialties{margin-top:17px}
+ .hero-location{margin-top:18px}
+}
+@media print{.hero-actions{display:none!important}}
