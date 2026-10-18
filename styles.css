@@ -213,3 +213,16 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #7d
  .project-card,.card,.tool-grid article,.approach>div,.credentials,.stat,.phase,.item,.case-artwork {break-inside:avoid!important;page-break-inside:avoid!important;}
  a{color:#096879!important;text-decoration:none!important;}
 }
+/* Career chronology & print action */
+.print-action{font:inherit;cursor:pointer}
+.career-section .section-head em{font-style:normal;color:var(--teal)}
+.career-timeline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.career-role{display:grid;grid-template-columns:92px minmax(0,1fr);gap:16px;background:#112e42;border:1px solid #31566b;border-radius:16px;padding:22px}
+.career-role-period{color:#77e0e6;font-size:13px;font-weight:800}
+.career-role h3{font-size:20px;color:#eef8fb;margin:0 0 10px;line-height:1.25}
+.career-role p{font-size:14px;line-height:1.6;margin:0 0 12px;color:#b8cddd}
+.career-role strong{color:#82e4e9;font-size:13px;line-height:1.5}
+.career-footnote{margin-top:20px;color:#b8cddd;font-size:13px}
+@media(max-width:800px){.career-timeline{grid-template-columns:1fr}.career-role{grid-template-columns:85px minmax(0,1fr)}}
+@media(max-width:440px){.career-role{grid-template-columns:1fr;gap:9px;padding:18px}}
+@media print{.print-action{display:none!important}.career-timeline{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8pt!important}.career-role{background:#fff!important;border:1px solid #b7cbd2!important;padding:9pt!important;grid-template-columns:1fr!important;break-inside:avoid!important}.career-role-period,.career-role h3,.career-role strong{color:#164452!important}.career-role p,.career-footnote{color:#344f5a!important}.career-role h3{font-size:10pt!important;margin:4pt 0!important}.career-role p,.career-role strong{font-size:8pt!important}}
