@@ -2,6 +2,8 @@
 
 [View my professional portfolio](https://jeffpursley-coder.github.io/)
 
+[View the print-ready executive profile](https://jeffpursley-coder.github.io/executive-profile.html) (use **Save / Print PDF** to create a concise recruiter copy).
+
 I lead operations, drive business growth, and build the systems that make it possible. My experience includes helping scale Dragonfly from 4 to 21 employees, generating approximately $2.5 million in revenue over two years and reducing repeat service calls by about 25%; turning around a 15-person Safe Haven team across 15 territories while increasing quarterly revenue by 25%; and leading the top-ranked Annual Enrollment team at TogetherHealth. I hold two completed bachelor's degrees in Operations Management and Computer Information Systems, alongside PMP, CSM and CSPO certifications.
 
 I have made real operating decisions about staffing, payroll budgets, pricing, service quality, productivity and costs. I connect business strategy to execution through process improvements, project and program delivery, business systems and practical AI automation.
