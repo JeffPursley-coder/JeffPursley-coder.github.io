@@ -251,3 +251,28 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #7d
  .hero-location{margin-top:18px}
 }
 @media print{.hero-actions{display:none!important}}
+
+/* Portfolio rebuild: cohesive operating leadership, project delivery and business systems */
+.portfolio-home .home-hero .hero-bridge{color:#c6dfe8;font-size:15px;line-height:1.7;max-width:650px;margin:0 0 8px}
+.portfolio-home .hero-specialties span{background:rgba(30,80,101,.66);border-color:#427c8d}
+.portfolio-home .proof-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+.portfolio-home .proof-grid>div{display:block;padding:11px 13px}
+.portfolio-home .proof-grid strong{display:block;font-size:27px;white-space:nowrap;margin-bottom:7px}
+.portfolio-home .proof-grid span{display:block;line-height:1.46}
+.portfolio-home .project-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.portfolio-home .project-card .project-body{display:flex;flex-direction:column;flex:1}
+.portfolio-home .project-card .project-foot{margin-top:auto}
+.portfolio-home .case-visual{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:22px 27px;position:relative;overflow:hidden}
+.portfolio-home .safehaven-art{background:linear-gradient(135deg,#eff8f8,#d9e9ed);color:#16374a}
+.portfolio-home .nonprofit-art{background:linear-gradient(135deg,#f8fafc,#e1ebf0);color:#17394e}
+.portfolio-home .case-kicker{font-size:11px;letter-spacing:.12em;font-weight:850;color:#347283}
+.portfolio-home .case-result{font-size:clamp(47px,5vw,73px);line-height:1.04;letter-spacing:-.065em;font-weight:850;color:#14394c;margin-top:12px}
+.portfolio-home .case-result.case-words{font-size:clamp(29px,3vw,43px);line-height:1.06;letter-spacing:-.04em}
+.portfolio-home .case-caption{font-size:12px;font-weight:750;margin-top:8px;color:#365768}
+.portfolio-home .case-rule{position:absolute;left:0;bottom:0;width:75%;height:6px;background:linear-gradient(90deg,#22616f,#63c7c8)}
+.portfolio-home .tool-note{color:#aac7d4;font-size:12px;line-height:1.65;margin:14px 0}
+.case-source-note{color:var(--muted);font-size:12px;max-width:900px;line-height:1.65;margin-top:20px}
+@media(max-width:1120px){.portfolio-home .proof-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.portfolio-home .proof-grid>div:nth-child(3n){border-right:0}}
+@media(max-width:980px){.portfolio-home .project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.portfolio-home .proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.portfolio-home .proof-grid>div{padding:14px 10px!important}.portfolio-home .proof-grid>div:nth-child(3n){border-right:1px solid #315367}.portfolio-home .proof-grid>div:nth-child(2n){border-right:0}.portfolio-home .proof-grid strong{font-size:24px}.portfolio-home .project-grid{grid-template-columns:1fr}.portfolio-home .case-visual{min-height:180px}.portfolio-home .home-hero .hero-bridge{font-size:14px}}
+@media print{.portfolio-home .proof-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.portfolio-home .case-visual{background:#eaf1f3!important;min-height:105px!important}.portfolio-home .case-result,.portfolio-home .case-kicker,.portfolio-home .case-caption{color:#17394e!important}}

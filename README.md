@@ -1,18 +1,22 @@
-# Jeff Pursley, PMP | Business Transformation & Intelligent Operations
+# Jeff Pursley, PMP | Operations & Program Management Leader
 
-[View my professional portfolio](https://jeffpursley-coder.github.io/)
+[View the professional portfolio](https://jeffpursley-coder.github.io/) · [Open the print-ready executive profile](https://jeffpursley-coder.github.io/executive-profile.html)
 
-[View the print-ready executive profile](https://jeffpursley-coder.github.io/executive-profile.html) (use **Save / Print PDF** to create a concise recruiter copy).
+**I know how to run an operation. And how to build a better one.** My experience connects real operating responsibility with project delivery, process improvement and business systems implementation.
 
-I lead operations, drive business growth, and build the systems that make it possible. My experience includes helping scale Dragonfly from 4 to 21 employees, generating approximately $2.5 million in revenue over two years and reducing repeat service calls by about 25%; turning around a 15-person Safe Haven team across 15 territories while increasing quarterly revenue by 25%; and leading the top-ranked Annual Enrollment team at TogetherHealth. I hold two completed bachelor's degrees in Operations Management and Computer Information Systems, alongside PMP, CSM and CSPO certifications.
+I helped scale Dragonfly from 4 to 21 employees, with approximately $2.5M in revenue over two years and about 25% fewer repeat service calls. At Safe Haven, I led a 15-person turnaround associated with 25% quarterly team revenue growth and shortened new-hire readiness from 2–3 weeks to approximately one week; my later regional scope included three teams, three managers and approximately 48 employees. I also configured workflows that cut measured manual email triage by 50%.
 
-I have made real operating decisions about staffing, payroll budgets, pricing, service quality, productivity and costs. I connect business strategy to execution through process improvements, project and program delivery, business systems and practical AI automation.
+I have completed bachelor's degrees in Operations Management and Computer Information Systems, and hold PMP, CSM and CSPO credentials.
 
-## Three career paths, one professional foundation
+## One professional identity, three connected capabilities
 
-- **[Operations & Business Strategy](operations.html)**: service-business building, distributed leadership, staffing, dispatch, customer operations, scaling processes and management systems.
-- **[Project & Program Delivery](project-management.html)**: PMP-led delivery methods, cross-functional coordination, process design, implementation controls, UAT and adoption.
-- **[AI & Technology Transformation](service-manager.html)**: real-world Google Workspace Studio/Gemini configuration and consulting-led automation.
+- **[Operations leadership](operations.html):** People, staffing, service economics, customer delivery and operating performance.
+- **[Project & program management](project-management.html):** Requirements, dependencies, risks, cross-functional execution, testing and adoption.
+- **[Business systems & AI implementation](service-manager.html):** Workflow configuration, automation and practical systems changes.
+
+## Real operating improvement
+
+- **[Safe Haven turnaround](safe-haven.html):** Measurable team improvement, employee readiness, management routines and broader regional leadership. Historical results are first-person reported accomplishments, distinct from public employer source records.
 
 ## Featured independent engineering lab
 
