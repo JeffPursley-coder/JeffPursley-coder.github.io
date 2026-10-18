@@ -226,3 +226,14 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #7d
 @media(max-width:800px){.career-timeline{grid-template-columns:1fr}.career-role{grid-template-columns:85px minmax(0,1fr)}}
 @media(max-width:440px){.career-role{grid-template-columns:1fr;gap:9px;padding:18px}}
 @media print{.print-action{display:none!important}.career-timeline{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8pt!important}.career-role{background:#fff!important;border:1px solid #b7cbd2!important;padding:9pt!important;grid-template-columns:1fr!important;break-inside:avoid!important}.career-role-period,.career-role h3,.career-role strong{color:#164452!important}.career-role p,.career-footnote{color:#344f5a!important}.career-role h3{font-size:10pt!important;margin:4pt 0!important}.career-role p,.career-role strong{font-size:8pt!important}}
+
+/* Keep core evidence and calls to action closer to the first desktop viewport. */
+@media screen and (min-width:1101px){
+ .hero.home-hero{padding:58px 0 54px}
+ .home-hero h1{font-size:clamp(45px,4.1vw,59px);line-height:1.065;margin-bottom:19px}
+ .home-hero .lede{font-size:16px;line-height:1.55}
+ .hero-specialties{margin-top:17px}
+ .hero-location{margin-top:15px}
+ .hero-visual.portrait-visual{height:475px}
+ .portrait-frame{height:465px}
+}
