@@ -23,3 +23,35 @@ jobs:
           node-version: '22'
       - name: Validate portfolio
         run: node scripts/check-portfolio.mjs
+
+      - name: Browser rendering and PDF smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$CHROME" ]; then
+            echo "Chrome/Chromium is not installed on this runner"
+            exit 1
+          fi
+          mkdir -p render-evidence
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=1440,900 --screenshot="$PWD/render-evidence/home-desktop.png" \
+            "file://$PWD/index.html" >/dev/null 2>&1
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars \
+            --window-size=390,844 --screenshot="$PWD/render-evidence/home-mobile.png" \
+            "file://$PWD/index.html" >/dev/null 2>&1
+          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --no-pdf-header-footer \
+            --print-to-pdf="$PWD/render-evidence/executive-profile.pdf" \
+            "file://$PWD/executive-profile.html" >/dev/null 2>&1
+          test -s render-evidence/home-desktop.png
+          test -s render-evidence/home-mobile.png
+          test -s render-evidence/executive-profile.pdf
+          file render-evidence/*
+          if command -v pdfinfo >/dev/null; then
+            pdfinfo render-evidence/executive-profile.pdf | grep -E 'Pages:|Page size:'
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-browser-smoke
+          path: render-evidence/
+          retention-days: 7
