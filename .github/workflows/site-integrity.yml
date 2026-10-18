@@ -1,0 +1,25 @@
+name: Portfolio integrity
+on:
+  push:
+    paths:
+      - '**/*.html'
+      - 'styles.css'
+      - 'scripts/check-portfolio.mjs'
+      - '.github/workflows/site-integrity.yml'
+  pull_request:
+    paths:
+      - '**/*.html'
+      - 'styles.css'
+      - 'scripts/check-portfolio.mjs'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate portfolio
+        run: node scripts/check-portfolio.mjs
