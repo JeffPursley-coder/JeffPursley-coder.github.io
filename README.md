@@ -2,9 +2,9 @@
 
 [View the professional portfolio](https://jeffpursley-coder.github.io/) · [Open the print-ready executive profile](https://jeffpursley-coder.github.io/executive-profile.html)
 
-**I know how to run an operation. And how to build a better one.** My experience connects real operating responsibility with project delivery, process improvement and business systems implementation.
+**I've built a business, led its people, and fixed what wasn't working. I bring all three to the work.** I co-built Dragonfly, led operations, delivered performance improvements and configured real business workflows. My approach connects people, process and systems with actual operating consequences.
 
-I helped scale Dragonfly from 4 to 21 employees, with approximately $2.5M in revenue over two years and about 25% fewer repeat service calls. At Safe Haven, I led a 15-person turnaround associated with 25% quarterly team revenue growth and shortened new-hire readiness from 2–3 weeks to approximately one week; my later regional scope included three teams, three managers and approximately 48 employees. I also configured workflows that cut measured manual email triage by 50%.
+I co-built and helped scale Dragonfly from 4 to 21 employees, with approximately $2.5M in revenue over two years and about 25% fewer repeat service calls. At Safe Haven, I led a 15-person turnaround associated with 25% quarterly team revenue growth and shortened new-hire readiness from 2–3 weeks to approximately one week; my later regional scope included three teams, three managers and approximately 48 employees. I also configured workflows that cut measured manual email triage by 50%.
 
 I have completed bachelor's degrees in Operations Management and Computer Information Systems, and hold PMP, CSM and CSPO credentials.
 
