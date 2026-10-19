@@ -22,7 +22,7 @@
   const sidebar = (items, selected, foot = 'Illustrative workspace') => `<aside class="ci-sidebar" aria-hidden="true"><span class="ci-sidelabel">WORKSPACE</span>${items.map((i) => `<div class="ci-navitem${i === selected ? ' sel' : ''}">${i}</div>`).join('')}<div class="ci-sidefoot">${foot}</div></aside>`;
   const panel = (content, extra = '') => `<div class="ci-panel ${extra}">${content}</div>`;
   const bar = (text, value, percent) => `<div class="ci-barrows"><div class="ci-barlabel"><span>${text}</span><b>${value}</b></div><div class="ci-track"><span style="--fill:${percent}%"></span></div></div>`;
-  const spark = `<svg class="ci-spark" viewBox="0 0 490 100" role="presentation" aria-hidden="true" preserveAspectRatio="none"><defs><linearGradient id="ci-revenue-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#43c8d5" stop-opacity=".3"/><stop offset="100%" stop-color="#43c8d5" stop-opacity="0"/></linearGradient></defs><path d="M0 89 L0 70 L82 63 L163 56 L244 45 L326 47 L408 30 L490 24 L490 89Z" fill="url(#ci-revenue-area)"/><path d="M0 70 L82 63 L163 56 L244 45 L326 47 L408 30 L490 24" fill="none" stroke="#68dcd8" stroke-width="3" class="ci-draw"/><path d="M0 89 H490" stroke="#31556a" stroke-width="1"/></svg>`;
+  const spark = `<svg class="ci-spark" viewBox="0 0 490 100" role="presentation" aria-hidden="true" preserveAspectRatio="none"><defs><linearGradient id="ci-revenue-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#43c8d5" stop-opacity=".3"/><stop offset="100%" stop-color="#43c8d5" stop-opacity="0"/></linearGradient></defs><path d="M0 89 L0 70 L98 63 L196 56 L294 23 L392 49 L490 24 L490 89Z" fill="url(#ci-revenue-area)"/><path d="M0 70 L98 63 L196 56 L294 23 L392 49 L490 24" fill="none" stroke="#68dcd8" stroke-width="3" class="ci-draw"/><path d="M0 89 H490" stroke="#31556a" stroke-width="1"/></svg>`;
   const app = (kind, name, area, content) => `<section class="ci-window ci-${kind}" aria-label="${name} illustrative software interface">${chrome(name, area)}<div class="ci-appbody">${content}</div></section>`;
 
   const operations = app('ops', 'Dragonfly / Operations Control', 'Overview  /  Service profitability',
@@ -132,10 +132,11 @@
   };
   const stop = (byUser=false) => {
     if (!playing && overlay.getAttribute('aria-hidden') === 'true') return;
-    ++epoch;
+    const completedEpoch = ++epoch;
     timeouts.forEach(clearTimeout); timeouts.length = 0;
     playing = false;
     phase('exit');
+    window.setTimeout(() => { if (!playing && epoch === completedEpoch) overlay.className = 'ci phase-off'; }, 760);
     document.documentElement.classList.remove('ci-lock');
     overlay.setAttribute('aria-hidden','true');
     overlay.setAttribute('inert','');
