@@ -8,7 +8,7 @@
   const SEEN_KEY = 'jp-cinematic-intro-seen-v1';
   // Approximately 33% faster pacing: 1,570ms / 1.33 ≈ 1,180ms.
   const WORKSPACE_MS = 1180;
-  const TOTAL_MS = 780 + 5 * WORKSPACE_MS + 890 + 440 + 1050 + 1530;
+  const TOTAL_MS = 780 + 5 * WORKSPACE_MS + 1040 + 420 + 1130 + 1740;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const path = location.pathname.replace(/\/+$/, '/') || '/';
   const isHome = path === '/' || path === '/index.html';
@@ -95,7 +95,22 @@
     <div class="ci-stage" aria-hidden="true">${operations}${project}${program}${impl}${code}</div>
     <div class="ci-progress" aria-hidden="true">${titles.map(()=>'<span></span>').join('')}</div><div class="ci-footnote">CONCEPT INTERFACES · ALL WORKSPACE SCENARIOS & DATA ARE ILLUSTRATIVE</div>
     <div class="ci-intro-title" aria-hidden="true"><div><strong>MULTIPLE<br>WORKSPACES</strong></div></div>
-    <div class="ci-finale" aria-hidden="true"><div class="ci-finale-leader">ONE LEADER</div><div class="ci-finale-name">JEFF PURSLEY</div></div>
+    <div class="ci-converge" aria-hidden="true">
+      <svg class="ci-thread-field" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <path class="ci-thread" pathLength="1" d="M50 66 C230 70 315 212 500 300"/>
+        <path class="ci-thread" pathLength="1" d="M950 105 C770 78 644 228 500 300"/>
+        <path class="ci-thread" pathLength="1" d="M0 358 C228 378 358 315 500 300"/>
+        <path class="ci-thread" pathLength="1" d="M1000 434 C765 414 632 335 500 300"/>
+        <path class="ci-thread" pathLength="1" d="M470 600 C483 496 493 379 500 300"/>
+      </svg><span class="ci-converge-core"></span>
+    </div>
+    <div class="ci-finale" aria-hidden="true"><div class="ci-finale-aura"></div>
+      <div class="ci-finale-lockup">
+        <div class="ci-finale-leader">ONE LEADER</div>
+        <div class="ci-finale-name">JEFF PURSLEY</div>
+        <div class="ci-finale-rule"><span class="ci-finale-diamond"></span></div>
+      </div>
+    </div>
     <span class="ci-live" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"></span></div>
     <div class="ci-loader" aria-hidden="true"><div class="ci-loader-track"><span class="ci-loader-fill"></span></div><div class="ci-loader-row"><span class="ci-loader-dot">●</span><span class="ci-loader-message">Preparing workspaces</span><span class="ci-loader-percent">0%</span></div></div>`;
   document.body.append(overlay);
@@ -172,7 +187,7 @@
     loaderMessage.textContent = byUser ? 'Introduction skipped' : 'Workspace sequence complete';
     playing = false;
     phase('exit');
-    window.setTimeout(() => { if (!playing && epoch === completedEpoch) overlay.className = 'ci phase-off'; }, 760);
+    window.setTimeout(() => { if (!playing && epoch === completedEpoch) overlay.className = 'ci phase-off'; }, 900);
     document.documentElement.classList.remove('ci-lock');
     overlay.setAttribute('aria-hidden','true');
     overlay.setAttribute('inert','');
@@ -214,13 +229,13 @@
       await wait(WORKSPACE_MS); if(run!==epoch)return;
     }
     phase('shuffle'); loaderMessage.textContent='Bringing workspaces together'; live.textContent='Five workspaces converge.';
-    await wait(890); if(run!==epoch)return;
+    await wait(1040); if(run!==epoch)return;
     phase('close');
-    await wait(440); if(run!==epoch)return;
+    await wait(420); if(run!==epoch)return;
     phase('leader'); loaderMessage.textContent='ONE LEADER'; live.textContent='One leader.';
-    await wait(1050); if(run!==epoch)return;
+    await wait(1130); if(run!==epoch)return;
     phase('name'); loaderMessage.textContent='JEFF PURSLEY'; live.textContent='Jeff Pursley.';
-    await wait(1530); if(run!==epoch)return;
+    await wait(1740); if(run!==epoch)return;
     stop(false);
   };
   skip.addEventListener('click',()=>stop(true));
