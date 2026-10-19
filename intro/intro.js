@@ -5,10 +5,8 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-cinematic-intro-seen-v1';
+  const SEEN_KEY = 'jp-laptop-intro-seen-v2';
   // Approximately 33% faster pacing: 1,570ms / 1.33 ≈ 1,180ms.
-  const WORKSPACE_MS = 1180;
-  const TOTAL_MS = 780 + 5 * WORKSPACE_MS + 1040 + 420 + 1130 + 1740;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const path = location.pathname.replace(/\/+$/, '/') || '/';
   const isHome = path === '/' || path === '/index.html';
@@ -86,168 +84,191 @@
   materials: <span class="ci-num">14900</span>
 }); <span class="ci-comment">// 47.7 percent</span></div></div><div class="ci-terminal"><div class="ci-termhead">TERMINAL &nbsp; | &nbsp; PROBLEMS &nbsp; | &nbsp; OUTPUT</div><div>$ npm test -- --run</div><div class="ci-success">✓ grossMargin › handles expenses correctly</div><div class="ci-success">✓ grossMargin › protects zero revenue</div><div><span class="ci-success">12 passed</span> &nbsp; | &nbsp; 0 failed &nbsp; | &nbsp; 0 skipped</div></div></div>`);
 
+
+  // The original five illustrative application screens above are preserved.
+  // The new presentation connects them with a single visible laptop and cursor.
+  const STEPS = [
+    {short:'OPERATIONS',name:'Operations Control'},
+    {short:'PROJECTS',name:'Project Atlas'},
+    {short:'PROGRAM',name:'Transformation Program Office'},
+    {short:'IMPLEMENTATION',name:'Implementation Hub'},
+    {short:'CODE',name:'Workflow Engine'}
+  ];
+  const OPEN_MS = 540;
+  const MOVE_MS = 410;
+  const CLICK_MS = 140;
+  const HOLD_MS = 920;
+  const CLOSE_MS = 940;
+  const LEADER_MS = 1050;
+  const NAME_MS = 1480;
+  const LANDING_MS = 540;
+  const LAPTOP_TOTAL_MS = OPEN_MS + STEPS.length*(MOVE_MS+CLICK_MS+HOLD_MS) + CLOSE_MS + LEADER_MS + NAME_MS + LANDING_MS;
+  const workspaceMarkup = [operations,project,program,impl,code]
+    .map((markup,i)=>`<div class="li-workspace${i===0?' active':''}" data-workspace="${i}">${markup}</div>`).join('');
   const overlay = document.createElement('div');
   overlay.id = 'cinematic-intro';
-  overlay.className = 'ci phase-intro';
-  overlay.setAttribute('aria-hidden', 'true');
-  overlay.innerHTML = `<div class="ci-shell"><div class="ci-top"><div class="ci-top-identity"><div class="ci-brand">JEFF PURSLEY / PORTFOLIO</div><div class="ci-always">MULTIPLE WORKSPACES</div></div><button type="button" class="ci-skip" aria-label="Skip portfolio introduction">Skip intro ↗</button></div>
-    <div class="ci-head"><div><p class="ci-kicker">MULTIPLE WORKSPACES</p><h2 class="ci-heading">Operations Control</h2></div><div class="ci-deck">Financial performance · Field capacity · Service delivery</div></div>
-    <div class="ci-stage" aria-hidden="true">${operations}${project}${program}${impl}${code}</div>
-    <div class="ci-progress" aria-hidden="true">${titles.map(()=>'<span></span>').join('')}</div><div class="ci-footnote">CONCEPT INTERFACES · ALL WORKSPACE SCENARIOS & DATA ARE ILLUSTRATIVE</div>
-    <div class="ci-intro-title" aria-hidden="true"><div><strong>MULTIPLE<br>WORKSPACES</strong></div></div>
-    <div class="ci-converge" aria-hidden="true">
-      <svg class="ci-thread-field" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" focusable="false">
-        <path class="ci-thread" pathLength="1" d="M50 66 C230 70 315 212 500 300"/>
-        <path class="ci-thread" pathLength="1" d="M950 105 C770 78 644 228 500 300"/>
-        <path class="ci-thread" pathLength="1" d="M0 358 C228 378 358 315 500 300"/>
-        <path class="ci-thread" pathLength="1" d="M1000 434 C765 414 632 335 500 300"/>
-        <path class="ci-thread" pathLength="1" d="M470 600 C483 496 493 379 500 300"/>
-      </svg><span class="ci-converge-core"></span>
+  overlay.className = 'li phase-off';
+  overlay.setAttribute('aria-hidden','true');
+  overlay.innerHTML = `<div class="li-shell">
+    <div class="li-top"><div class="li-identity">
+      <div class="li-brand">JEFF PURSLEY / PORTFOLIO</div>
+      <div class="li-computer">Jeff’s Computer</div>
+      <div class="li-subtitle">MULTIPLE WORKSPACES</div>
+    </div><button class="li-skip" type="button" aria-label="Skip portfolio introduction">Skip intro ↗</button></div>
+    <div class="li-stage" aria-hidden="true"><div class="li-desk-wrap">
+      <div class="li-backglow"></div><div class="li-desk-surface"></div>
+      <div class="li-laptop"><div class="li-screen-shell">
+        <div class="li-screen-bezel"><span class="li-camera"></span><div class="li-screen">
+          <div class="li-topbar"><div class="li-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+            <strong class="li-window-title">Jeff’s Computer</strong>
+            <span class="li-demo">Illustrative workspaces</span>
+          </div>
+          <div class="li-tabs">${STEPS.map((t,i)=>`<div class="li-tab${i===0?' active':''}" data-tab="${i}">${t.short}</div>`).join('')}</div>
+          <div class="li-workspace-stage">${workspaceMarkup}</div>
+          <div class="li-cursor"><svg viewBox="0 0 24 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.1 2.6L18.4 17.9L11.9 18.9L15.6 27.1L12.4 28.5L8.8 20.2L4.1 24.5V2.6Z" fill="#fff" stroke="#0D2430" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="li-cursor-ring"></span></div>
+        </div></div>
+      </div><div class="li-base" aria-hidden="true"><div class="li-base-deck"><div class="li-hinge"></div>
+        <div class="li-keyboard">${Array.from({length:78},()=>'<i></i>').join('')}</div>
+        <div class="li-trackpad"></div><div class="li-front-lip"></div>
+      </div></div></div></div>
     </div>
-    <div class="ci-finale" aria-hidden="true"><div class="ci-finale-aura"></div>
-      <div class="ci-finale-lockup">
-        <div class="ci-finale-leader">ONE LEADER</div>
-        <div class="ci-finale-name">JEFF PURSLEY</div>
-        <div class="ci-finale-rule"><span class="ci-finale-diamond"></span></div>
-      </div>
+    <div class="li-center-copy" aria-hidden="true"><div class="li-center-lock">
+      <div class="li-one">ONE LEADER</div><div class="li-name">JEFF PURSLEY</div>
+      <div class="li-rule"><span class="li-phase-dot"></span></div>
+    </div></div>
+    <div class="li-note">ORIGINAL CONCEPT INTERFACES · ALL WORKSPACE DATA IS ILLUSTRATIVE</div>
+    <div class="li-loader" aria-hidden="true"><div class="li-loader-track"><span class="li-loader-fill"></span></div>
+      <div class="li-loader-row"><span class="li-dot">●</span><span class="li-loader-message">Opening Jeff’s Computer</span><span class="li-loader-percent">0%</span></div>
     </div>
-    <span class="ci-live" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"></span></div>
-    <div class="ci-loader" aria-hidden="true"><div class="ci-loader-track"><span class="ci-loader-fill"></span></div><div class="ci-loader-row"><span class="ci-loader-dot">●</span><span class="ci-loader-message">Preparing workspaces</span><span class="ci-loader-percent">0%</span></div></div>`;
-  document.body.append(overlay);
-  const hero = document.querySelector('.home-hero');
-  const replay = document.createElement('button');
-  replay.type = 'button';
-  replay.className = 'ci-replay';
-  replay.textContent = '↻ Replay introduction';
-  replay.setAttribute('aria-label','Replay five-workspace introduction');
-  replay.style.cssText = 'display:inline-flex;align-items:center;min-height:36px;margin:16px 0 0;background:transparent;color:inherit;border:1px solid currentColor;opacity:.72;border-radius:30px;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer';
-  if (hero) {
-    const loc = hero.querySelector('.hero-location') || hero.querySelector('.hero-copy');
-    if (loc) loc.insertAdjacentElement('afterend', replay);
-  }
-
-  const windows = [...overlay.querySelectorAll('.ci-window')];
-  const indicators = [...overlay.querySelectorAll('.ci-progress span')];
-  const label = overlay.querySelector('.ci-heading');
-  const kicker = overlay.querySelector('.ci-kicker');
-  const deck = overlay.querySelector('.ci-deck');
-  const live = overlay.querySelector('.ci-live');
-  const skip = overlay.querySelector('.ci-skip');
-  const loader = overlay.querySelector('.ci-loader');
-  const loaderMessage = overlay.querySelector('.ci-loader-message');
-  const loaderPercent = overlay.querySelector('.ci-loader-percent');
-  loader.style.setProperty('--ci-intro-duration', `${TOTAL_MS}ms`);
-  const wait = (ms) => new Promise((resolve) => { const t = window.setTimeout(resolve, ms); timeouts.push(t); });
-  const timeouts = [];
-  let epoch = 0;
-  let playing = false;
-  let returnFocus = null;
-  let progressTimer = null;
-  const safeStorage = (action, value) => { try { if (action === 'get') return window.localStorage.getItem(SEEN_KEY); window.localStorage.setItem(SEEN_KEY,value); } catch (_) { return null; } };
-  const phase = (name) => { overlay.className = `ci phase-${name}`; };
-  const resetProjectCard = () => {
-    const moving = overlay.querySelector('.ci-project .ci-task.move');
-    const columns = overlay.querySelectorAll('.ci-project .ci-column');
-    if (!moving || columns.length !== 4) return;
-    columns[1].insertBefore(moving, columns[1].querySelector('.ci-task'));
-    columns[1].querySelector('.ci-count').textContent = '3';
-    columns[2].querySelector('.ci-count').textContent = '2';
+    <span class="li-live" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"></span>
+  </div>`;
+  document.body.appendChild(overlay);
+  const hero=document.querySelector('.home-hero');
+  const replay=document.createElement('button');
+  replay.type='button'; replay.className='li-replay';
+  replay.textContent='↻ Replay introduction';
+  replay.setAttribute('aria-label','Replay laptop introduction');
+  (hero?.querySelector('.hero-copy')||hero||document.body).appendChild(replay);
+  const skip=overlay.querySelector('.li-skip');
+  const screen=overlay.querySelector('.li-screen');
+  const cursor=overlay.querySelector('.li-cursor');
+  const tabs=[...overlay.querySelectorAll('.li-tab')];
+  const workspaces=[...overlay.querySelectorAll('.li-workspace')];
+  const loader=overlay.querySelector('.li-loader');
+  const loaderMessage=overlay.querySelector('.li-loader-message');
+  const loaderPercent=overlay.querySelector('.li-loader-percent');
+  const live=overlay.querySelector('.li-live');
+  loader.style.setProperty('--duration',`${LAPTOP_TOTAL_MS}ms`);
+  let epoch=0, playing=false, progressTimer=null, exitTimer=null, returnFocus=null;
+  const pending=new Set();
+  const wait=(ms)=>new Promise(resolve=>{
+    const entry={id:null,done:resolve};
+    entry.id=window.setTimeout(()=>{pending.delete(entry);resolve();},ms);
+    pending.add(entry);
+  });
+  const clearPending=()=>{
+    for(const item of pending){window.clearTimeout(item.id);item.done();}
+    pending.clear();
   };
-  const advanceProjectCard = () => {
-    const moving = overlay.querySelector('.ci-project .ci-task.move');
-    const columns = overlay.querySelectorAll('.ci-project .ci-column');
-    if (!moving || columns.length !== 4 || !playing) return;
-    const from = moving.getBoundingClientRect();
-    columns[2].appendChild(moving);
-    const to = moving.getBoundingClientRect();
-    if (!reduced.matches && moving.animate) moving.animate([
-      {transform:`translate(${from.left-to.left}px, ${from.top-to.top}px)`,opacity:.88},
-      {transform:'translate(0, 0)',opacity:1}
-    ], {duration:580,easing:'cubic-bezier(.18,.74,.2,1)'});
-    columns[1].querySelector('.ci-count').textContent = '2';
-    columns[2].querySelector('.ci-count').textContent = '3';
+  const safeStorage=(action)=>{
+    try {return action==='read' ? window.localStorage.getItem(SEEN_KEY) : window.localStorage.setItem(SEEN_KEY,'1');}
+    catch(_) {return null;}
   };
-  const show = (index) => {
-    const [a, b, c] = titles[index];
-    kicker.textContent = `MULTIPLE WORKSPACES · ${a}`;
-    loaderMessage.textContent = `${a} · ${b}`;
-    label.textContent = b;
-    deck.textContent = c;
-    live.textContent = `${a}. ${b}. ${c}. Illustrative interface.`;
-    windows.forEach((w, n) => { w.classList.toggle('is-active', n===index); w.classList.toggle('is-before', n<index); w.classList.toggle('is-after', n>index); });
-    indicators.forEach((dot,n)=>dot.classList.toggle('sel',n===index));
-    if (index===1) timeouts.push(window.setTimeout(advanceProjectCard,600));
+  const phase=(value)=>{overlay.className=`li phase-${value}`};
+  const active=(index)=>{
+    tabs.forEach((tab,i)=>tab.classList.toggle('active',i===index));
+    workspaces.forEach((item,i)=>{
+      item.classList.toggle('active',i===index);
+      item.querySelector('.ci-window')?.classList.toggle('is-active',i===index);
+    });
+    live.textContent=`${titles[index][0]}. ${titles[index][1]}. ${titles[index][2]}. Illustrative demonstration.`;
+    loaderMessage.textContent=`Opening ${STEPS[index].short.toLowerCase()} workspace`;
   };
-  const stop = (byUser=false) => {
-    if (!playing && overlay.getAttribute('aria-hidden') === 'true') return;
-    const completedEpoch = ++epoch;
-    timeouts.forEach(clearTimeout); timeouts.length = 0;
-    window.clearInterval(progressTimer); progressTimer = null;
-    loaderPercent.textContent = byUser ? loaderPercent.textContent : '100%';
-    loaderMessage.textContent = byUser ? 'Introduction skipped' : 'Workspace sequence complete';
-    playing = false;
+  const moveCursor=(x,y)=>{
+    cursor.style.setProperty('--cursor-x',`${x}px`);
+    cursor.style.setProperty('--cursor-y',`${y}px`);
+  };
+  const pointAt=(index)=>{
+    const rect=tabs[index].getBoundingClientRect();
+    const origin=screen.getBoundingClientRect();
+    moveCursor(rect.left-origin.left+rect.width*.52,rect.top-origin.top+rect.height*.44);
+  };
+  const stop=(skipped=false)=>{
+    if(!playing) return;
+    const closingEpoch=++epoch;
+    clearPending();
+    window.clearInterval(progressTimer); progressTimer=null;
+    window.clearTimeout(exitTimer);
+    playing=false;
+    if(!skipped){loaderPercent.textContent='100%';loaderMessage.textContent='Opening portfolio';}
     phase('exit');
-    window.setTimeout(() => { if (!playing && epoch === completedEpoch) overlay.className = 'ci phase-off'; }, 900);
-    document.documentElement.classList.remove('ci-lock');
-    overlay.setAttribute('aria-hidden','true');
-    overlay.setAttribute('inert','');
-    document.querySelectorAll('[data-ci-inert]').forEach(x => {x.inert=false;x.removeAttribute('data-ci-inert');});
-    safeStorage('set','1');
-    document.documentElement.classList.add('ci-home-arrive');
-    window.setTimeout(()=>document.documentElement.classList.remove('ci-home-arrive'),950);
-    if (returnFocus && document.contains(returnFocus)) returnFocus.focus({preventScroll:true});
+    overlay.setAttribute('aria-hidden','true'); overlay.inert=true;
+    document.documentElement.classList.remove('li-lock');
+    document.querySelectorAll('[data-li-inert]').forEach(el=>{el.inert=false;el.removeAttribute('data-li-inert');});
+    safeStorage('write');
+    document.documentElement.classList.add('li-home-arrive');
+    window.setTimeout(()=>document.documentElement.classList.remove('li-home-arrive'),1000);
+    if(returnFocus&&document.contains(returnFocus))returnFocus.focus({preventScroll:true});
+    exitTimer=window.setTimeout(()=>{if(!playing&&epoch===closingEpoch)overlay.className='li phase-off';},930);
   };
-  const play = async (manual=false) => {
-    if (playing || reduced.matches) return;
-    playing = true;
-    returnFocus = manual ? replay : document.querySelector('.home-hero h1');
-    if (returnFocus && !returnFocus.hasAttribute('tabindex')) returnFocus.setAttribute('tabindex','-1');
-    document.querySelectorAll('body > *:not(#cinematic-intro)').forEach(x => {if (!x.inert) {x.inert=true;x.setAttribute('data-ci-inert','');}});
-    overlay.removeAttribute('inert');
-    overlay.setAttribute('aria-hidden','false');
-    document.documentElement.classList.add('ci-lock');
-    overlay.className='ci phase-intro';
-    windows.forEach(w=>w.className=w.className.replace(/\s+is-(active|before|after)/g,''));
-    resetProjectCard();
-    loader.classList.remove('ci-running');
-    void loader.offsetWidth; // Re-arm the native CSS progress animation on replay.
-    loader.classList.add('ci-running');
-    loaderPercent.textContent = '0%';
-    loaderMessage.textContent = 'Preparing workspaces';
-    const startTime = performance.now();
-    window.clearInterval(progressTimer);
-    progressTimer = window.setInterval(() => {
-      loaderPercent.textContent = `${Math.min(99, Math.floor((performance.now() - startTime) * 100 / TOTAL_MS))}%`;
-    }, 100);
-    live.textContent='Multiple workspaces. Five illustrative professional environments.';
-    skip.focus({preventScroll:true});
-    const run = ++epoch;
-    await wait(780); if(run!==epoch)return;
-    phase('work');
-    for(let i=0;i<windows.length;i++) {
-      show(i);
-      await wait(WORKSPACE_MS); if(run!==epoch)return;
+  const play=async(manual=false)=>{
+    if(playing||reduced.matches)return;
+    window.clearTimeout(exitTimer);
+    playing=true;
+    returnFocus=manual?replay:document.querySelector('.home-hero h1');
+    if(returnFocus&&!returnFocus.hasAttribute('tabindex'))returnFocus.setAttribute('tabindex','-1');
+    for(const el of document.querySelectorAll('body > *:not(#cinematic-intro)')){
+      if(!el.inert){el.inert=true;el.setAttribute('data-li-inert','');}
     }
-    phase('shuffle'); loaderMessage.textContent='Bringing workspaces together'; live.textContent='Five workspaces converge.';
-    await wait(1040); if(run!==epoch)return;
-    phase('close');
-    await wait(420); if(run!==epoch)return;
-    phase('leader'); loaderMessage.textContent='ONE LEADER'; live.textContent='One leader.';
-    await wait(1130); if(run!==epoch)return;
-    phase('name'); loaderMessage.textContent='JEFF PURSLEY'; live.textContent='Jeff Pursley.';
-    await wait(1740); if(run!==epoch)return;
-    stop(false);
+    overlay.inert=false;
+    overlay.setAttribute('aria-hidden','false');
+    document.documentElement.classList.add('li-lock');
+    phase('desk'); active(0);
+    const cursorScreen=screen.getBoundingClientRect();
+    moveCursor(cursorScreen.width*.11,cursorScreen.height*.24);
+    loader.classList.remove('running');
+    void loader.offsetWidth;
+    loader.classList.add('running');
+    loaderPercent.textContent='0%';
+    loaderMessage.textContent='Opening Jeff’s Computer';
+    const start=performance.now();
+    window.clearInterval(progressTimer);
+    progressTimer=window.setInterval(()=>{
+      loaderPercent.textContent=`${Math.min(99,Math.floor((performance.now()-start)*100/LAPTOP_TOTAL_MS))}%`;
+    },100);
+    live.textContent='Jeff’s Computer. Five illustrated professional workspaces.';
+    skip.focus({preventScroll:true});
+    const token=++epoch;
+    await wait(OPEN_MS); if(token!==epoch)return;
+    for(let i=0;i<STEPS.length;i++){
+      pointAt(i);
+      await wait(MOVE_MS); if(token!==epoch)return;
+      cursor.classList.add('is-clicking');
+      await wait(CLICK_MS); if(token!==epoch)return;
+      cursor.classList.remove('is-clicking');
+      active(i);
+      await wait(HOLD_MS); if(token!==epoch)return;
+    }
+    phase('close');live.textContent='The laptop closes.';
+    loaderMessage.textContent='Closing Jeff’s Computer';
+    await wait(CLOSE_MS);if(token!==epoch)return;
+    phase('leader');live.textContent='One leader.';loaderMessage.textContent='ONE LEADER';
+    await wait(LEADER_MS);if(token!==epoch)return;
+    phase('name');live.textContent='Jeff Pursley.';loaderMessage.textContent='JEFF PURSLEY';
+    await wait(NAME_MS);if(token!==epoch)return;
+    await wait(LANDING_MS);if(token!==epoch)return;
+    stop();
   };
   skip.addEventListener('click',()=>stop(true));
   replay.addEventListener('click',()=>play(true));
-  overlay.addEventListener('keydown',(e)=>{ if(e.key==='Escape') {e.preventDefault();stop(true);} if(e.key==='Tab'){e.preventDefault();skip.focus();} });
-  reduced.addEventListener?.('change',(e)=>{if(e.matches)stop(false);});
-  // Never intercept hash navigation, internal page-to-page links, or return visits.
-  let fromOwnSite = false;
-  try { fromOwnSite = !!document.referrer && new URL(document.referrer).origin===location.origin; } catch(_) { /* external referrer */ }
-  // Explicit browser reloads replay; ordinary returns and internal navigation still skip.
-  const navEntry = window.performance.getEntriesByType?.('navigation')?.[0];
-  const isReload = navEntry?.type === 'reload' || window.performance.navigation?.type === 1;
-  if(!reduced.matches && (isReload || (!safeStorage('get') && !fromOwnSite))) play(false);
+  overlay.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){e.preventDefault();stop(true);}
+    if(e.key==='Tab'){e.preventDefault();skip.focus();}
+  });
+  reduced.addEventListener?.('change',e=>{if(e.matches)stop(true)});
+  let fromOwnSite=false;
+  try{fromOwnSite=!!document.referrer&&new URL(document.referrer).origin===location.origin;}catch(_){}
+  const nav=performance.getEntriesByType?.('navigation')?.[0];
+  const reload=nav?.type==='reload'||performance.navigation?.type===1;
+  if(!reduced.matches&&(reload||(!safeStorage('read')&&!fromOwnSite)))play(false);
 })();
-
