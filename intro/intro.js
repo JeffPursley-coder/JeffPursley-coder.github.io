@@ -104,7 +104,7 @@
   const LEADER_MS = 1050;
   const NAME_MS = 1480;
   const LANDING_MS = 540;
-  const TOTAL_MS = OPEN_MS + STEPS.length*(MOVE_MS+CLICK_MS+HOLD_MS) + CLOSE_MS + LEADER_MS + NAME_MS + LANDING_MS;
+  const LAPTOP_TOTAL_MS = OPEN_MS + STEPS.length*(MOVE_MS+CLICK_MS+HOLD_MS) + CLOSE_MS + LEADER_MS + NAME_MS + LANDING_MS;
   const workspaceMarkup = [operations,project,program,impl,code]
     .map((markup,i)=>`<div class="li-workspace${i===0?' active':''}" data-workspace="${i}">${markup}</div>`).join('');
   const overlay = document.createElement('div');
@@ -160,7 +160,7 @@
   const loaderMessage=overlay.querySelector('.li-loader-message');
   const loaderPercent=overlay.querySelector('.li-loader-percent');
   const live=overlay.querySelector('.li-live');
-  loader.style.setProperty('--duration',`${TOTAL_MS}ms`);
+  loader.style.setProperty('--duration',`${LAPTOP_TOTAL_MS}ms`);
   let epoch=0, playing=false, progressTimer=null, exitTimer=null, returnFocus=null;
   const pending=new Set();
   const wait=(ms)=>new Promise(resolve=>{
@@ -236,7 +236,7 @@
     const start=performance.now();
     window.clearInterval(progressTimer);
     progressTimer=window.setInterval(()=>{
-      loaderPercent.textContent=`${Math.min(99,Math.floor((performance.now()-start)*100/TOTAL_MS))}%`;
+      loaderPercent.textContent=`${Math.min(99,Math.floor((performance.now()-start)*100/LAPTOP_TOTAL_MS))}%`;
     },100);
     live.textContent='Jeff’s Computer. Five illustrated professional workspaces.';
     skip.focus({preventScroll:true});
