@@ -5,10 +5,8 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-cinematic-intro-seen-v1';
+  const SEEN_KEY = 'jp-laptop-intro-seen-v2';
   // Approximately 33% faster pacing: 1,570ms / 1.33 ≈ 1,180ms.
-  const WORKSPACE_MS = 1180;
-  const TOTAL_MS = 780 + 5 * WORKSPACE_MS + 1040 + 420 + 1130 + 1740;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const path = location.pathname.replace(/\/+$/, '/') || '/';
   const isHome = path === '/' || path === '/index.html';
@@ -109,7 +107,7 @@
     .map((markup,i)=>`<div class="li-workspace${i===0?' active':''}" data-workspace="${i}">${markup}</div>`).join('');
   const overlay = document.createElement('div');
   overlay.id = 'cinematic-intro';
-  overlay.className = 'li phase-desk';
+  overlay.className = 'li phase-off';
   overlay.setAttribute('aria-hidden','true');
   overlay.innerHTML = `<div class="li-shell">
     <div class="li-top"><div class="li-identity">
