@@ -115,8 +115,8 @@
     <div class="li-top"><div class="li-identity">
       <div class="li-brand">JEFF PURSLEY / PORTFOLIO</div>
       <div class="li-computer">Jeff’s Computer</div>
-      <div class="li-subtitle">MANY WORKSPACES</div>
     </div><button class="li-skip" type="button" aria-label="Skip portfolio introduction">Skip intro ↗</button></div>
+    <h2 class="li-main-heading">MANY WORKSPACES</h2>
     <div class="li-stage" aria-hidden="true"><div class="li-desk-wrap">
       <div class="li-backglow"></div><div class="li-desk-surface"></div>
       <div class="li-laptop"><div class="li-screen-shell">

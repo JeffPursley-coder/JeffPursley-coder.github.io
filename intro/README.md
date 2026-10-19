@@ -20,3 +20,6 @@ Validation: run `node --check intro/intro.js` and `node scripts/check-intro.mjs`
 - Cursor speed / button delay / workspace hold changed from 485 / 155 / 745 ms to **340 / 120 / 560 ms** respectively. Full sequence ~10.0 seconds versus ~12.2 seconds.
 - Desktop laptop max width raised from 1050 px to **1185 px**, with a height-aware cap for shorter screens; slimmer display sides and a larger desktop window region. Mobile screen uses narrower side margins and a slightly larger usable area.
 - All five dashboards, illustrative-data notices, skip/replay, reduced-motion behavior and the final title reveal remain unchanged.
+
+## Headline update
+**MANY WORKSPACES** is a standalone, very large, bold white, center-aligned heading directly above the laptop. It stays on screen while the five desktop windows are minimized and while the lid closes, then fades away for the clean **ONE LEADER → JEFF PURSLEY** finale. The small corner label has been removed. Responsive typography and height-aware laptop sizing prevent overlap with the headline on smaller screens. No other on-screen copy, case studies, or animation pacing is changed.
