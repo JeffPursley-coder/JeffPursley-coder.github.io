@@ -6,6 +6,9 @@
 (() => {
   'use strict';
   const SEEN_KEY = 'jp-cinematic-intro-seen-v1';
+  // Approximately 33% faster pacing: 1,570ms / 1.33 ≈ 1,180ms.
+  const WORKSPACE_MS = 1180;
+  const TOTAL_MS = 780 + 5 * WORKSPACE_MS + 890 + 440 + 1050 + 1530;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const path = location.pathname.replace(/\/+$/, '/') || '/';
   const isHome = path === '/' || path === '/index.html';
@@ -87,13 +90,14 @@
   overlay.id = 'cinematic-intro';
   overlay.className = 'ci phase-intro';
   overlay.setAttribute('aria-hidden', 'true');
-  overlay.innerHTML = `<div class="ci-shell"><div class="ci-top"><div class="ci-brand">JEFF PURSLEY / PORTFOLIO</div><button type="button" class="ci-skip" aria-label="Skip portfolio introduction">Skip intro ↗</button></div>
+  overlay.innerHTML = `<div class="ci-shell"><div class="ci-top"><div class="ci-top-identity"><div class="ci-brand">JEFF PURSLEY / PORTFOLIO</div><div class="ci-always">MULTIPLE WORKSPACES</div></div><button type="button" class="ci-skip" aria-label="Skip portfolio introduction">Skip intro ↗</button></div>
     <div class="ci-head"><div><p class="ci-kicker">MULTIPLE WORKSPACES</p><h2 class="ci-heading">Operations Control</h2></div><div class="ci-deck">Financial performance · Field capacity · Service delivery</div></div>
     <div class="ci-stage" aria-hidden="true">${operations}${project}${program}${impl}${code}</div>
     <div class="ci-progress" aria-hidden="true">${titles.map(()=>'<span></span>').join('')}</div><div class="ci-footnote">CONCEPT INTERFACES · ALL WORKSPACE SCENARIOS & DATA ARE ILLUSTRATIVE</div>
     <div class="ci-intro-title" aria-hidden="true"><div><strong>MULTIPLE<br>WORKSPACES</strong></div></div>
     <div class="ci-finale" aria-hidden="true"><div class="ci-finale-leader">ONE LEADER</div><div class="ci-finale-name">JEFF PURSLEY</div></div>
-    <span class="ci-live" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"></span></div>`;
+    <span class="ci-live" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"></span></div>
+    <div class="ci-loader" aria-hidden="true"><div class="ci-loader-track"><span class="ci-loader-fill"></span></div><div class="ci-loader-row"><span class="ci-loader-dot">●</span><span class="ci-loader-message">Preparing workspaces</span><span class="ci-loader-percent">0%</span></div></div>`;
   document.body.append(overlay);
   const hero = document.querySelector('.home-hero');
   const replay = document.createElement('button');
@@ -114,11 +118,16 @@
   const deck = overlay.querySelector('.ci-deck');
   const live = overlay.querySelector('.ci-live');
   const skip = overlay.querySelector('.ci-skip');
+  const loader = overlay.querySelector('.ci-loader');
+  const loaderMessage = overlay.querySelector('.ci-loader-message');
+  const loaderPercent = overlay.querySelector('.ci-loader-percent');
+  loader.style.setProperty('--ci-intro-duration', `${TOTAL_MS}ms`);
   const wait = (ms) => new Promise((resolve) => { const t = window.setTimeout(resolve, ms); timeouts.push(t); });
   const timeouts = [];
   let epoch = 0;
   let playing = false;
   let returnFocus = null;
+  let progressTimer = null;
   const safeStorage = (action, value) => { try { if (action === 'get') return window.localStorage.getItem(SEEN_KEY); window.localStorage.setItem(SEEN_KEY,value); } catch (_) { return null; } };
   const phase = (name) => { overlay.className = `ci phase-${name}`; };
   const resetProjectCard = () => {
@@ -146,6 +155,7 @@
   const show = (index) => {
     const [a, b, c] = titles[index];
     kicker.textContent = `MULTIPLE WORKSPACES · ${a}`;
+    loaderMessage.textContent = `${a} · ${b}`;
     label.textContent = b;
     deck.textContent = c;
     live.textContent = `${a}. ${b}. ${c}. Illustrative interface.`;
@@ -157,6 +167,9 @@
     if (!playing && overlay.getAttribute('aria-hidden') === 'true') return;
     const completedEpoch = ++epoch;
     timeouts.forEach(clearTimeout); timeouts.length = 0;
+    window.clearInterval(progressTimer); progressTimer = null;
+    loaderPercent.textContent = byUser ? loaderPercent.textContent : '100%';
+    loaderMessage.textContent = byUser ? 'Introduction skipped' : 'Workspace sequence complete';
     playing = false;
     phase('exit');
     window.setTimeout(() => { if (!playing && epoch === completedEpoch) overlay.className = 'ci phase-off'; }, 760);
@@ -181,6 +194,16 @@
     overlay.className='ci phase-intro';
     windows.forEach(w=>w.className=w.className.replace(/\s+is-(active|before|after)/g,''));
     resetProjectCard();
+    loader.classList.remove('ci-running');
+    void loader.offsetWidth; // Re-arm the native CSS progress animation on replay.
+    loader.classList.add('ci-running');
+    loaderPercent.textContent = '0%';
+    loaderMessage.textContent = 'Preparing workspaces';
+    const startTime = performance.now();
+    window.clearInterval(progressTimer);
+    progressTimer = window.setInterval(() => {
+      loaderPercent.textContent = `${Math.min(99, Math.floor((performance.now() - startTime) * 100 / TOTAL_MS))}%`;
+    }, 100);
     live.textContent='Multiple workspaces. Five illustrative professional environments.';
     skip.focus({preventScroll:true});
     const run = ++epoch;
@@ -188,15 +211,15 @@
     phase('work');
     for(let i=0;i<windows.length;i++) {
       show(i);
-      await wait(1570); if(run!==epoch)return;
+      await wait(WORKSPACE_MS); if(run!==epoch)return;
     }
-    phase('shuffle'); live.textContent='Five workspaces converge.';
+    phase('shuffle'); loaderMessage.textContent='Bringing workspaces together'; live.textContent='Five workspaces converge.';
     await wait(890); if(run!==epoch)return;
     phase('close');
     await wait(440); if(run!==epoch)return;
-    phase('leader'); live.textContent='One leader.';
+    phase('leader'); loaderMessage.textContent='ONE LEADER'; live.textContent='One leader.';
     await wait(1050); if(run!==epoch)return;
-    phase('name'); live.textContent='Jeff Pursley.';
+    phase('name'); loaderMessage.textContent='JEFF PURSLEY'; live.textContent='Jeff Pursley.';
     await wait(1530); if(run!==epoch)return;
     stop(false);
   };
@@ -207,6 +230,9 @@
   // Never intercept hash navigation, internal page-to-page links, or return visits.
   let fromOwnSite = false;
   try { fromOwnSite = !!document.referrer && new URL(document.referrer).origin===location.origin; } catch(_) { /* external referrer */ }
-  if(!reduced.matches && !safeStorage('get') && !fromOwnSite) play(false);
+  // Explicit browser reloads replay; ordinary returns and internal navigation still skip.
+  const navEntry = window.performance.getEntriesByType?.('navigation')?.[0];
+  const isReload = navEntry?.type === 'reload' || window.performance.navigation?.type === 1;
+  if(!reduced.matches && (isReload || (!safeStorage('get') && !fromOwnSite))) play(false);
 })();
 
