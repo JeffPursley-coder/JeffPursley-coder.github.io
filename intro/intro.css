@@ -26,3 +26,5 @@ html.ci-lock,html.ci-lock body{overflow:hidden!important}.ci-shell{position:rela
 @media(min-width:1001px) and (max-height:820px){.ci-top{height:48px}.ci-head{min-height:82px}.ci-stage{height:min(70vh,560px)}.ci-progress{height:35px}}
 @media(max-width:350px){.ci-ops .ci-work{padding:9px}.ci-kpi{height:65px;min-height:0;padding:5px 8px}.ci-kpi .ci-big{font-size:19px;margin:3px 0}.ci-kpi .ci-pname{font-size:9px;margin-bottom:2px}.ci-kpi small{font-size:8px}.ci-ops-main .ci-panel{padding:7px 9px}.ci-spark{height:62px}}
 
+
+@media(prefers-reduced-motion:reduce){.ci-replay{display:none!important}}
