@@ -96,8 +96,8 @@
   ];
   // All five illustrative applications are already open on the desktop.
   const OPEN_MS=620, MOVE_MS=340, CLICK_MS=120, HOLD_MS=560;
-  const DESKTOP_MS=420, CLOSE_MS=980, LEADER_MS=1030, NAME_MS=1530, LANDING_MS=350;
-  const LAPTOP_TOTAL_MS=OPEN_MS+STEPS.length*(MOVE_MS+CLICK_MS+HOLD_MS)+DESKTOP_MS+CLOSE_MS+LEADER_MS+NAME_MS+LANDING_MS;
+  const DESKTOP_MS=420, CLOSE_MS=980, MANY_MS=1130, LEADER_MS=1150, NAME_MS=1650, LANDING_MS=350;
+  const LAPTOP_TOTAL_MS=OPEN_MS+STEPS.length*(MOVE_MS+CLICK_MS+HOLD_MS)+DESKTOP_MS+CLOSE_MS+MANY_MS+LEADER_MS+NAME_MS+LANDING_MS;
   const symbols=['▥','▦','◇','◈','⌘'];
   const labels=['OPERATIONS CONTROL','PROJECT ATLAS','PROGRAM OFFICE','IMPLEMENTATION HUB','WORKFLOW ENGINE'];
   const workspaceMarkup=[operations,project,program,impl,code].map((markup,i)=>
@@ -116,7 +116,7 @@
       <div class="li-brand">JEFF PURSLEY / PORTFOLIO</div>
       <div class="li-computer">Jeff’s Computer</div>
     </div><button class="li-skip" type="button" aria-label="Skip portfolio introduction">Skip intro ↗</button></div>
-    <h2 class="li-main-heading">MANY WORKSPACES</h2>
+    <h2 class="li-main-heading">I fix the processes</h2>
     <div class="li-stage" aria-hidden="true"><div class="li-desk-wrap">
       <div class="li-backglow"></div><div class="li-desk-surface"></div>
       <div class="li-laptop"><div class="li-screen-shell">
@@ -142,8 +142,7 @@
       </div></div></div></div>
     </div>
     <div class="li-center-copy" aria-hidden="true"><div class="li-center-lock">
-      <div class="li-one">ONE LEADER</div><div class="li-name">JEFF PURSLEY</div>
-      <div class="li-rule"><span class="li-phase-dot"></span></div>
+      <div class="li-many">MANY WORKSPACES</div><div class="li-one">ONE LEADER</div><div class="li-name">JEFF PURSLEY</div>
     </div></div>
     <div class="li-note">ORIGINAL CONCEPT INTERFACES · ALL WORKSPACE DATA IS ILLUSTRATIVE</div>
     <div class="li-loader" aria-hidden="true"><div class="li-loader-track"><span class="li-loader-fill"></span></div>
@@ -269,6 +268,8 @@
     await wait(DESKTOP_MS); if(token!==epoch)return;
     phase('close');live.textContent='The laptop closes.';
     await wait(CLOSE_MS);if(token!==epoch)return;
+    phase('many');live.textContent='Many workspaces.';loaderMessage.textContent='MANY WORKSPACES';
+    await wait(MANY_MS);if(token!==epoch)return;
     phase('leader');live.textContent='One leader.';loaderMessage.textContent='ONE LEADER';
     await wait(LEADER_MS);if(token!==epoch)return;
     phase('name');live.textContent='Jeff Pursley.';loaderMessage.textContent='JEFF PURSLEY';

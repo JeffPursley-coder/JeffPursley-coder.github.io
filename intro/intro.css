@@ -295,3 +295,44 @@ html.li-lock,html.li-lock body{overflow:hidden!important}
   .li-laptop{width:min(850px,100%,calc((100dvh - 205px)*1.64))}
 }
 @media(prefers-reduced-motion:reduce){.li-main-heading{transition:none!important}}
+
+/* Three independent title cards after the laptop lid closes.
+   The workspace screen and metadata fade away so ONLY the current title is in focus. */
+.li.phase-close .li-main-heading,
+.li.phase-many .li-main-heading{opacity:0}
+.li.phase-many .li-screen-shell{transform:rotateX(-90deg);filter:brightness(.44)}
+.li.phase-many .li-laptop{opacity:0}
+.li-stage{transition:opacity .48s ease}
+.li.phase-many .li-stage,
+.li.phase-leader .li-stage,
+.li.phase-name .li-stage{opacity:0;pointer-events:none}
+.li-identity,.li-note,.li-loader{transition:opacity .35s ease}
+.li.phase-many .li-identity,
+.li.phase-leader .li-identity,
+.li.phase-name .li-identity,
+.li.phase-many .li-note,
+.li.phase-leader .li-note,
+.li.phase-name .li-note,
+.li.phase-many .li-loader,
+.li.phase-leader .li-loader,
+.li.phase-name .li-loader{opacity:0;pointer-events:none}
+.li.phase-many .li-center-copy{opacity:1}
+.li-many{position:absolute;top:50%;left:50%;width:max-content;max-width:96vw;white-space:nowrap;text-align:center;
+  font-size:clamp(33px,5.45vw,76px);font-weight:850;letter-spacing:.085em;line-height:1.08;color:#f6fcff;
+  opacity:0;transform:translate(-50%,-50%) translateY(24px) scale(.96);
+  transition:opacity .42s ease,transform .72s cubic-bezier(.2,.78,.16,1)}
+.li.phase-many .li-many{opacity:1;transform:translate(-50%,-50%);transition-delay:.14s}
+.li.phase-leader .li-many,.li.phase-name .li-many{opacity:0;transform:translate(-50%,-50%) translateY(-22px) scale(.965);transition-delay:0s}
+.li.phase-leader .li-one{transition-delay:.35s}
+.li.phase-name .li-one{opacity:0;transform:translate(-50%,-50%) translateY(-24px) scale(.96);letter-spacing:.2em;transition-delay:0s}
+.li.phase-name .li-name{transform:translate(-50%,-50%) scale(1);transition-delay:.30s}
+.li.phase-leader .li-rule,.li.phase-name .li-rule{opacity:0}
+@media(max-width:620px){
+  .li-many{font-size:clamp(23px,7.1vw,40px);letter-spacing:.035em;max-width:94vw}
+  .li.phase-name .li-one{transform:translate(-50%,-50%) translateY(-17px) scale(.965)}
+  .li.phase-name .li-name{transform:translate(-50%,-50%) scale(1)}
+}
+@media(max-width:350px){.li-many{font-size:23px;letter-spacing:.015em}}
+@media(prefers-reduced-motion:reduce){
+  .li-stage,.li-identity,.li-note,.li-loader,.li-many{transition:none!important}
+}
