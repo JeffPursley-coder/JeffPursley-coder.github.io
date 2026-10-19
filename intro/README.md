@@ -6,7 +6,8 @@ A dependency-free overlay that enhances the existing GitHub Pages homepage witho
 - Exact opener: **MULTIPLE WORKSPACES**.
 - Five original, expressly **illustrative** interfaces: Operations, Project Management, Program Office, Implementation, Code & Automation.
 - 780 ms opener; each interface is presented for 1,180 ms; windows converge; exact ending **ONE LEADER** → **JEFF PURSLEY**.
-- Overlay fades to the existing homepage. **MULTIPLE WORKSPACES** stays visible in the header throughout (including closing). A slim bottom progress meter tracks the animation, not network loading. A visible Skip intro control, keyboard Escape, and a small Replay introduction control are included.
+- Five fine SVG traces follow the converging windows toward a focal point, then a reserved circular field and restrained rule introduce **ONE LEADER**. The heading contracts into an eyebrow while **JEFF PURSLEY** reveals from below; the overlay and actual homepage cross-fade with a subtle settling motion. Closing sequence: convergence 1,040 ms; collapse 420 ms; ONE LEADER hold 1,130 ms; JEFF PURSLEY hold 1,740 ms. Total approximately 11 seconds, plus exit fade.
+- **MULTIPLE WORKSPACES** stays visible in the header throughout (including closing). A slim bottom progress meter tracks the animation, not network loading. A visible Skip intro control, keyboard Escape, and a small Replay introduction control are included.
 
 ## Data integrity
 No illustrated KPI is presented as a verified historical business result. These are simulations, **not screenshots** from proprietary software or representations of employer production systems.
@@ -30,3 +31,6 @@ Run `node --check intro/intro.js` and `node scripts/check-intro.mjs`.
 Browser observations were made in local headless Chromium at 320, 390 and 1366 px with responsive/mobile and desktop workspaces, including all five stages, end transition, Skip, Replay and zero horizontal overflow. Safari, Firefox and Edge still require hands-on review in their native engines; do not represent Chromium verification as cross-browser certification.
 
 **Publication**: proposed for review only on the feature branch. GitHub Pages main stays unchanged until the PR is approved and merged.
+
+## Finale review (October 2026)
+This iteration is staged in a feature branch for approval, not published. Uses only CSS transitions and inline SVG line paths; no image or video downloads. Mobile and desktop Chromium screenshots were reviewed (320, 390, 1366 px) with no horizontal overflow or JavaScript exceptions. Native Safari/Firefox still require on-device verification. The standalone review page uses a simplified homepage background; production reuses the unchanged actual homepage.
