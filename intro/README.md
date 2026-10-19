@@ -23,3 +23,6 @@ Validation: run `node --check intro/intro.js` and `node scripts/check-intro.mjs`
 
 ## Headline update
 **MANY WORKSPACES** is a standalone, very large, bold white, center-aligned heading directly above the laptop. It stays on screen while the five desktop windows are minimized and while the lid closes, then fades away for the clean **ONE LEADER → JEFF PURSLEY** finale. The small corner label has been removed. Responsive typography and height-aware laptop sizing prevent overlap with the headline on smaller screens. No other on-screen copy, case studies, or animation pacing is changed.
+
+## Sequential text-only ending
+The heading above the running laptop now reads **I fix the processes**. Once the last application minimizes and the laptop closes, the computer UI and progress graphics clear, leaving three successive bold text-only screens: **MANY WORKSPACES**, then **ONE LEADER**, then **JEFF PURSLEY**. Each phrase takes the center alone rather than remaining visible under the following phrase. The initial laptop title and established window-minimizing pace are unchanged. The three finale holds are 1,130 / 1,150 / 1,650 ms respectively; the progress meter accounts for the additional phrase. The accessible Skip control remains available until the homepage is revealed.
