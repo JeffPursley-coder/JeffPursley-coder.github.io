@@ -143,7 +143,6 @@
     </div>
     <div class="li-center-copy" aria-hidden="true"><div class="li-center-lock">
       <div class="li-many">MANY WORKSPACES</div><div class="li-one">ONE LEADER</div><div class="li-name">JEFF PURSLEY</div>
-      <div class="li-rule"><span class="li-phase-dot"></span></div>
     </div></div>
     <div class="li-note">ORIGINAL CONCEPT INTERFACES · ALL WORKSPACE DATA IS ILLUSTRATIVE</div>
     <div class="li-loader" aria-hidden="true"><div class="li-loader-track"><span class="li-loader-fill"></span></div>
