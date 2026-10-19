@@ -49,3 +49,45 @@ html.ci-lock,html.ci-lock body{overflow:hidden!important}.ci-shell{position:rela
 @media(max-width:620px){.ci-always{font-size:11px;letter-spacing:.08em}.ci-top-identity{gap:3px}.ci-loader-row{height:34px;font-size:10px;padding:0 14px;gap:7px}.ci-loader-dot{font-size:9px}}
 @media(max-width:350px){.ci-always{font-size:10px;letter-spacing:.06em}.ci-loader-message{max-width:calc(100vw - 90px)}}
 @media(prefers-reduced-motion:reduce){.ci-loader.ci-running .ci-loader-fill{animation:none}}
+
+/* Finale v2: five interface traces resolve into one controlled typographic lockup.
+   Decorative elements are aria-hidden in markup and native CSS keeps it framework-free. */
+.ci-converge{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;transition:opacity .36s ease;overflow:hidden}
+.ci-thread-field{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ci-thread{fill:none;stroke:#7bdbdd;stroke-width:1.15;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.63}
+.ci-thread:nth-child(2){stroke:#63abd0;opacity:.62}
+.ci-thread:nth-child(3){stroke:#80d3ce;opacity:.5}
+.ci-thread:nth-child(4){stroke:#5899c6;opacity:.65}
+.ci-thread:nth-child(5){stroke:#b5e6e2;opacity:.5}
+.ci-converge-core{position:absolute;left:50%;top:50%;width:10px;height:10px;border:1px solid #a2e7e8;transform:translate(-50%,-50%) rotate(45deg) scale(.1);opacity:0;box-shadow:0 0 0 6px rgba(109,212,217,.045);transition:transform .5s cubic-bezier(.2,.75,.2,1),opacity .3s}
+.ci:is(.phase-shuffle,.phase-close,.phase-leader) .ci-converge{opacity:1}
+.ci:is(.phase-shuffle,.phase-close,.phase-leader) .ci-thread{animation:ci-converge-draw .94s cubic-bezier(.24,.7,.1,1) both}
+.ci:is(.phase-shuffle,.phase-close,.phase-leader) .ci-thread:nth-child(2){animation-delay:.06s}
+.ci:is(.phase-shuffle,.phase-close,.phase-leader) .ci-thread:nth-child(3){animation-delay:.1s}
+.ci:is(.phase-shuffle,.phase-close,.phase-leader) .ci-thread:nth-child(4){animation-delay:.14s}
+.ci:is(.phase-shuffle,.phase-close,.phase-leader) .ci-thread:nth-child(5){animation-delay:.18s}
+@keyframes ci-converge-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.ci:is(.phase-shuffle,.phase-close) .ci-converge-core{opacity:.85;transform:translate(-50%,-50%) rotate(45deg) scale(1)}
+.ci.phase-leader .ci-converge{opacity:0}
+.ci.phase-name .ci-converge{opacity:0}
+.ci-finale{isolation:isolate;overflow:visible}
+.ci-finale-aura{position:absolute;width:min(85vw,660px);height:min(85vw,660px);left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%) scale(.91);border:1px solid rgba(116,196,212,.12);box-shadow:0 0 0 72px rgba(74,142,168,.025),inset 0 0 0 72px rgba(17,58,77,.04);background:radial-gradient(circle,rgba(45,117,140,.115),transparent 66%);opacity:0;transition:opacity .9s,transform 1.3s cubic-bezier(.16,.75,.2,1);pointer-events:none}
+.ci:is(.phase-leader,.phase-name) .ci-finale-aura{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.ci-finale-lockup{position:relative;width:min(100%,1150px);height:240px;max-width:100%;display:block;isolation:isolate}
+.ci-finale-leader,.ci-finale-name{position:absolute;top:50%;left:50%;width:max-content;max-width:98vw;white-space:nowrap;text-align:center;transform-origin:center center}
+.ci-finale-leader{font-size:clamp(35px,5.5vw,71px);letter-spacing:.29em;font-weight:780;color:#effcff;line-height:1.13;opacity:0;transform:translate(-50%,-50%) translateY(22px) scale(.92);transition:transform .9s cubic-bezier(.2,.82,.18,1),opacity .55s,letter-spacing .9s,color .9s}
+.ci.phase-leader .ci-finale-leader{opacity:1;transform:translate(-50%,-50%) translateY(0) scale(1);letter-spacing:.2em}
+.ci.phase-name .ci-finale-leader{opacity:1;font-size:clamp(35px,5.5vw,71px);color:#a6cbd7;transform:translate(-50%,-50%) translateY(-78px) scale(.36);letter-spacing:.36em}
+.ci-finale-name{font-size:clamp(54px,8.2vw,116px);font-weight:850;letter-spacing:-.048em;line-height:1.06;color:#f4fcff;text-shadow:0 12px 55px rgba(89,204,225,.07);opacity:0;clip-path:inset(100% 0 0 0);transform:translate(-50%,-50%) translateY(48px) scale(.96);transition:clip-path .85s cubic-bezier(.18,.7,.18,1),transform .96s cubic-bezier(.18,.8,.18,1),opacity .58s ease,letter-spacing .94s}
+.ci.phase-name .ci-finale-name{opacity:1;clip-path:inset(0 0 0 0);transform:translate(-50%,-50%) translateY(12px) scale(1);letter-spacing:-.035em}
+.ci-finale-rule{position:absolute;top:calc(50% + 62px);left:50%;width:min(54vw,360px);height:1px;opacity:0;background:linear-gradient(90deg,transparent,rgba(108,213,218,.6) 27%,#9aebec 50%,rgba(108,213,218,.6) 73%,transparent);transform:translateX(-50%) scaleX(.04);transition:opacity .36s,transform .9s cubic-bezier(.17,.76,.18,1),top .9s}
+.ci.phase-leader .ci-finale-rule{opacity:.82;transform:translateX(-50%) scaleX(.5)}
+.ci.phase-name .ci-finale-rule{opacity:.85;top:calc(50% + 94px);transform:translateX(-50%) scaleX(1)}
+.ci-finale-diamond{display:block;position:absolute;left:50%;top:50%;width:6px;height:6px;transform:translate(-50%,-50%) rotate(45deg);background:#8de4e2;border:1px solid #10374a}
+.ci.phase-exit{transition:opacity .9s cubic-bezier(.33,0,.22,1)}
+.ci-home-arrive .home-hero .hero-copy,.ci-home-arrive .home-hero .portrait-visual{animation:ci-landing-reveal .97s cubic-bezier(.2,.74,.16,1) both}
+.ci-home-arrive .home-hero .portrait-visual{animation-delay:.09s}
+@keyframes ci-landing-reveal{from{opacity:.78;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:620px){.ci-finale-lockup{height:195px}.ci-finale-leader{font-size:clamp(29px,8.4vw,43px);letter-spacing:.18em}.ci.phase-leader .ci-finale-leader{letter-spacing:.14em}.ci.phase-name .ci-finale-leader{font-size:clamp(29px,8.4vw,43px);transform:translate(-50%,-50%) translateY(-55px) scale(.52);letter-spacing:.21em}.ci-finale-name{font-size:clamp(36px,10.9vw,61px);letter-spacing:-.055em}.ci.phase-name .ci-finale-name{letter-spacing:-.045em;transform:translate(-50%,-50%) translateY(13px)}.ci-finale-rule{top:calc(50% + 48px);width:min(74vw,320px)}.ci.phase-name .ci-finale-rule{top:calc(50% + 68px)}.ci-finale-aura{width:88vw;height:88vw;box-shadow:0 0 0 42px rgba(74,142,168,.02)}}
+@media(max-width:350px){.ci-finale-name{font-size:36px}.ci-finale-leader{font-size:29px}}
+@media(prefers-reduced-motion:reduce){.ci-converge,.ci-finale-aura,.ci-finale-rule{transition:none!important;animation:none!important}.ci-thread{animation:none!important}}
