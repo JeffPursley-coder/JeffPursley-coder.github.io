@@ -95,8 +95,8 @@
     {short:'CODE',name:'Workflow Engine'}
   ];
   // All five illustrative applications are already open on the desktop.
-  const OPEN_MS=760, MOVE_MS=485, CLICK_MS=155, HOLD_MS=745;
-  const DESKTOP_MS=600, CLOSE_MS=980, LEADER_MS=1030, NAME_MS=1530, LANDING_MS=350;
+  const OPEN_MS=620, MOVE_MS=340, CLICK_MS=120, HOLD_MS=560;
+  const DESKTOP_MS=420, CLOSE_MS=980, LEADER_MS=1030, NAME_MS=1530, LANDING_MS=350;
   const LAPTOP_TOTAL_MS=OPEN_MS+STEPS.length*(MOVE_MS+CLICK_MS+HOLD_MS)+DESKTOP_MS+CLOSE_MS+LEADER_MS+NAME_MS+LANDING_MS;
   const symbols=['▥','▦','◇','◈','⌘'];
   const labels=['OPERATIONS CONTROL','PROJECT ATLAS','PROGRAM OFFICE','IMPLEMENTATION HUB','WORKFLOW ENGINE'];
@@ -115,7 +115,7 @@
     <div class="li-top"><div class="li-identity">
       <div class="li-brand">JEFF PURSLEY / PORTFOLIO</div>
       <div class="li-computer">Jeff’s Computer</div>
-      <div class="li-subtitle">MULTIPLE WORKSPACES</div>
+      <div class="li-subtitle">MANY WORKSPACES</div>
     </div><button class="li-skip" type="button" aria-label="Skip portfolio introduction">Skip intro ↗</button></div>
     <div class="li-stage" aria-hidden="true"><div class="li-desk-wrap">
       <div class="li-backglow"></div><div class="li-desk-surface"></div>

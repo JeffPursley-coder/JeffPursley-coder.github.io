@@ -6,7 +6,7 @@ const js=readFileSync('intro/intro.js','utf8');
 const css=readFileSync('intro/intro.css','utf8');
 assert.match(html,/intro\/intro\.css/);
 assert.match(html,/intro\/intro\.js/);
-for(const phrase of ['MULTIPLE WORKSPACES','ONE LEADER','JEFF PURSLEY','Illustrative demo','Skip intro','Replay introduction']){
+for(const phrase of ['MANY WORKSPACES','ONE LEADER','JEFF PURSLEY','Illustrative demo','Skip intro','Replay introduction']){
   assert.ok(js.includes(phrase), 'Intro missing '+phrase);
 }
 for(const type of ['ops','project','program','impl','code']){
@@ -16,6 +16,11 @@ assert.ok(js.includes('prefers-reduced-motion'));
 assert.ok(js.includes('localStorage'));
 assert.ok(js.includes('location.hash') && js.includes('document.referrer'));
 assert.match(js,/Jeff’s Computer/);
+assert.match(js,/<div class="li-subtitle">MANY WORKSPACES<\/div>/);
+assert.match(js,/OPEN_MS=620, MOVE_MS=340, CLICK_MS=120, HOLD_MS=560/);
+assert.match(js,/DESKTOP_MS=420, CLOSE_MS=980, LEADER_MS=1030, NAME_MS=1530, LANDING_MS=350/);
+assert.match(css,/\.li-laptop\{position:relative;width:min\(1185px/);
+assert.match(css,/\.li-screen-shell\{position:absolute;left:2\.5%;right:2\.5%/);
 assert.match(js,/li-desktop-icons/);
 assert.match(js,/li-os-wallpaper/);
 assert.match(js,/li-os-menubar/);
