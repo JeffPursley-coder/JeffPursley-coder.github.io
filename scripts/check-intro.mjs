@@ -15,6 +15,12 @@ for(const type of ['ops','project','program','impl','code']){
 assert.ok(js.includes('prefers-reduced-motion'));
 assert.ok(js.includes('localStorage'));
 assert.ok(js.includes('location.hash') && js.includes('document.referrer'));
+assert.match(js,/const WORKSPACE_MS = 1180/);
+assert.match(js,/isReload \|\|/);
+assert.match(js,/ci-always/);
+assert.match(js,/ci-loader-percent/);
+assert.match(css,/ci-loader-progress/);
+assert.match(css,/\.ci-column \.ci-task:nth-child\(n\+3\)/);
 assert.equal(126400-51250-14900,60250);
 assert.equal(60250-24100,36150);
 assert.equal(127000+119400+126400,372800);
