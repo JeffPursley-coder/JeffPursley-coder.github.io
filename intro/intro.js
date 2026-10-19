@@ -121,6 +121,28 @@
   let returnFocus = null;
   const safeStorage = (action, value) => { try { if (action === 'get') return window.localStorage.getItem(SEEN_KEY); window.localStorage.setItem(SEEN_KEY,value); } catch (_) { return null; } };
   const phase = (name) => { overlay.className = `ci phase-${name}`; };
+  const resetProjectCard = () => {
+    const moving = overlay.querySelector('.ci-project .ci-task.move');
+    const columns = overlay.querySelectorAll('.ci-project .ci-column');
+    if (!moving || columns.length !== 4) return;
+    columns[1].insertBefore(moving, columns[1].querySelector('.ci-task'));
+    columns[1].querySelector('.ci-count').textContent = '3';
+    columns[2].querySelector('.ci-count').textContent = '2';
+  };
+  const advanceProjectCard = () => {
+    const moving = overlay.querySelector('.ci-project .ci-task.move');
+    const columns = overlay.querySelectorAll('.ci-project .ci-column');
+    if (!moving || columns.length !== 4 || !playing) return;
+    const from = moving.getBoundingClientRect();
+    columns[2].appendChild(moving);
+    const to = moving.getBoundingClientRect();
+    if (!reduced.matches && moving.animate) moving.animate([
+      {transform:`translate(${from.left-to.left}px, ${from.top-to.top}px)`,opacity:.88},
+      {transform:'translate(0, 0)',opacity:1}
+    ], {duration:580,easing:'cubic-bezier(.18,.74,.2,1)'});
+    columns[1].querySelector('.ci-count').textContent = '2';
+    columns[2].querySelector('.ci-count').textContent = '3';
+  };
   const show = (index) => {
     const [a, b, c] = titles[index];
     kicker.textContent = `MULTIPLE WORKSPACES · ${a}`;
@@ -129,6 +151,7 @@
     live.textContent = `${a}. ${b}. ${c}. Illustrative interface.`;
     windows.forEach((w, n) => { w.classList.toggle('is-active', n===index); w.classList.toggle('is-before', n<index); w.classList.toggle('is-after', n>index); });
     indicators.forEach((dot,n)=>dot.classList.toggle('sel',n===index));
+    if (index===1) timeouts.push(window.setTimeout(advanceProjectCard,600));
   };
   const stop = (byUser=false) => {
     if (!playing && overlay.getAttribute('aria-hidden') === 'true') return;
@@ -157,6 +180,7 @@
     document.documentElement.classList.add('ci-lock');
     overlay.className='ci phase-intro';
     windows.forEach(w=>w.className=w.className.replace(/\s+is-(active|before|after)/g,''));
+    resetProjectCard();
     live.textContent='Multiple workspaces. Five illustrative professional environments.';
     skip.focus({preventScroll:true});
     const run = ++epoch;
