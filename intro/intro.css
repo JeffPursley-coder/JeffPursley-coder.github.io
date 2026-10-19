@@ -29,3 +29,7 @@ html.ci-lock,html.ci-lock body{overflow:hidden!important}.ci-shell{position:rela
 
 @media(max-width:620px){.ci-program-head{margin-bottom:5px}.ci-program-head small{display:none}.ci-program .ci-panel{padding:9px 11px}.ci-program .ci-pname{margin-bottom:4px}.ci-roadmap{gap:2px}.ci-roadmap>span{padding:3px 0}}
 
+
+/* Keep the complete interface stack gone for the closing titles. */
+.ci.phase-leader .ci-window,.ci.phase-name .ci-window{opacity:0!important;transform:translate3d(0,0,-380px) scale(.1)!important;filter:brightness(2)!important;pointer-events:none}
+.ci.phase-leader .ci-head,.ci.phase-name .ci-head,.ci.phase-leader .ci-progress,.ci.phase-name .ci-progress{opacity:0}
