@@ -91,7 +91,7 @@
     <div class="ci-head"><div><p class="ci-kicker">MULTIPLE WORKSPACES</p><h2 class="ci-heading">Operations Control</h2></div><div class="ci-deck">Financial performance · Field capacity · Service delivery</div></div>
     <div class="ci-stage" aria-hidden="true">${operations}${project}${program}${impl}${code}</div>
     <div class="ci-progress" aria-hidden="true">${titles.map(()=>'<span></span>').join('')}</div><div class="ci-footnote">CONCEPT INTERFACES · ALL WORKSPACE SCENARIOS & DATA ARE ILLUSTRATIVE</div>
-    <div class="ci-intro-title" aria-hidden="true"><div><strong>MULTIPLE<br>WORKSPACES</strong><small>ONE CONNECTED WAY OF LEADING WORK</small></div></div>
+    <div class="ci-intro-title" aria-hidden="true"><div><strong>MULTIPLE<br>WORKSPACES</strong></div></div>
     <div class="ci-finale" aria-hidden="true"><div class="ci-finale-leader">ONE LEADER</div><div class="ci-finale-name">JEFF PURSLEY</div></div>
     <span class="ci-live" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"></span></div>`;
   document.body.append(overlay);
