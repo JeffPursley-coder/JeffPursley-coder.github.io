@@ -1,0 +1,25 @@
+name: Cinematic intro integrity
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'intro/**'
+      - 'scripts/check-intro.mjs'
+      - '.github/workflows/intro-tests.yml'
+  push:
+    branches: [feature/cinematic-workspace-intro]
+    paths:
+      - 'intro/**'
+      - 'scripts/check-intro.mjs'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check intro/intro.js
+      - run: node scripts/check-intro.mjs
