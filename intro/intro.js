@@ -5,7 +5,7 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-laptop-intro-seen-v2';
+  const SEEN_KEY = 'jp-desktop-minimize-intro-v3';
   // Approximately 33% faster pacing: 1,570ms / 1.33 ≈ 1,180ms.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const path = location.pathname.replace(/\/+$/, '/') || '/';
@@ -94,17 +94,19 @@
     {short:'IMPLEMENTATION',name:'Implementation Hub'},
     {short:'CODE',name:'Workflow Engine'}
   ];
-  const OPEN_MS = 540;
-  const MOVE_MS = 410;
-  const CLICK_MS = 140;
-  const HOLD_MS = 920;
-  const CLOSE_MS = 940;
-  const LEADER_MS = 1050;
-  const NAME_MS = 1480;
-  const LANDING_MS = 540;
-  const LAPTOP_TOTAL_MS = OPEN_MS + STEPS.length*(MOVE_MS+CLICK_MS+HOLD_MS) + CLOSE_MS + LEADER_MS + NAME_MS + LANDING_MS;
-  const workspaceMarkup = [operations,project,program,impl,code]
-    .map((markup,i)=>`<div class="li-workspace${i===0?' active':''}" data-workspace="${i}">${markup}</div>`).join('');
+  // All five illustrative applications are already open on the desktop.
+  const OPEN_MS=760, MOVE_MS=485, CLICK_MS=155, HOLD_MS=745;
+  const DESKTOP_MS=600, CLOSE_MS=980, LEADER_MS=1030, NAME_MS=1530, LANDING_MS=350;
+  const LAPTOP_TOTAL_MS=OPEN_MS+STEPS.length*(MOVE_MS+CLICK_MS+HOLD_MS)+DESKTOP_MS+CLOSE_MS+LEADER_MS+NAME_MS+LANDING_MS;
+  const symbols=['▥','▦','◇','◈','⌘'];
+  const labels=['OPERATIONS CONTROL','PROJECT ATLAS','PROGRAM OFFICE','IMPLEMENTATION HUB','WORKFLOW ENGINE'];
+  const workspaceMarkup=[operations,project,program,impl,code].map((markup,i)=>
+    `<div class="li-desktop-window" data-window="${i}" style="--stack:${i};z-index:${10-i}">
+      <div class="li-window-head"><span class="li-window-symbol">${symbols[i]}</span>
+        <span class="li-window-caption">${labels[i]}</span>
+        <div class="li-window-actions"><span class="li-minimize">−</span><span class="li-maximize">□</span><span class="li-close-symbol">×</span></div>
+      </div><div class="li-window-content">${markup}</div>
+    </div>`).join('');
   const overlay = document.createElement('div');
   overlay.id = 'cinematic-intro';
   overlay.className = 'li phase-off';
@@ -119,12 +121,19 @@
       <div class="li-backglow"></div><div class="li-desk-surface"></div>
       <div class="li-laptop"><div class="li-screen-shell">
         <div class="li-screen-bezel"><span class="li-camera"></span><div class="li-screen">
-          <div class="li-topbar"><div class="li-lights" aria-hidden="true"><i></i><i></i><i></i></div>
-            <strong class="li-window-title">Jeff’s Computer</strong>
-            <span class="li-demo">Illustrative workspaces</span>
+          <div class="li-desktop">
+            <div class="li-os-menubar"><span class="li-os-apple">◈</span><b>Jeff’s Computer</b><span>File</span><span>View</span><span>Window</span><span class="li-os-status">● &nbsp; Wi-Fi &nbsp; ◉</span></div>
+            <div class="li-os-wallpaper">
+              <div class="li-wallpaper-shape one"></div><div class="li-wallpaper-shape two"></div><div class="li-wallpaper-grid"></div>
+              <div class="li-desktop-icons">${STEPS.map((w,i)=>`<div class="li-desktop-icon"><span>${symbols[i]}</span><small>${w.short}</small></div>`).join('')}</div>
+              <div class="li-wallpaper-label">JEFF’S COMPUTER <span>/ WORKSPACE</span></div>
+            </div>
+            <div class="li-os-windows">${workspaceMarkup}</div>
+            <div class="li-taskbar"><span class="li-taskbar-start">◈</span>
+              <div class="li-taskbar-apps">${STEPS.map((w,i)=>`<span class="li-task-app" data-task="${i}"><b>${symbols[i]}</b><small>${w.short}</small><i></i></span>`).join('')}</div>
+              <span class="li-taskbar-end">▤ &nbsp;●</span>
+            </div>
           </div>
-          <div class="li-tabs">${STEPS.map((t,i)=>`<div class="li-tab${i===0?' active':''}" data-tab="${i}">${t.short}</div>`).join('')}</div>
-          <div class="li-workspace-stage">${workspaceMarkup}</div>
           <div class="li-cursor"><svg viewBox="0 0 24 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.1 2.6L18.4 17.9L11.9 18.9L15.6 27.1L12.4 28.5L8.8 20.2L4.1 24.5V2.6Z" fill="#fff" stroke="#0D2430" stroke-width="1.4" stroke-linejoin="round"/></svg><span class="li-cursor-ring"></span></div>
         </div></div>
       </div><div class="li-base" aria-hidden="true"><div class="li-base-deck"><div class="li-hinge"></div>
@@ -147,13 +156,13 @@
   const replay=document.createElement('button');
   replay.type='button'; replay.className='li-replay';
   replay.textContent='↻ Replay introduction';
-  replay.setAttribute('aria-label','Replay laptop introduction');
+  replay.setAttribute('aria-label','Replay desktop window minimizing introduction');
   (hero?.querySelector('.hero-copy')||hero||document.body).appendChild(replay);
   const skip=overlay.querySelector('.li-skip');
   const screen=overlay.querySelector('.li-screen');
   const cursor=overlay.querySelector('.li-cursor');
-  const tabs=[...overlay.querySelectorAll('.li-tab')];
-  const workspaces=[...overlay.querySelectorAll('.li-workspace')];
+  const windows=[...overlay.querySelectorAll('.li-desktop-window')];
+  const taskbar=[...overlay.querySelectorAll('.li-task-app')];
   const loader=overlay.querySelector('.li-loader');
   const loaderMessage=overlay.querySelector('.li-loader-message');
   const loaderPercent=overlay.querySelector('.li-loader-percent');
@@ -175,23 +184,23 @@
     catch(_) {return null;}
   };
   const phase=(value)=>{overlay.className=`li phase-${value}`};
-  const active=(index)=>{
-    tabs.forEach((tab,i)=>tab.classList.toggle('active',i===index));
-    workspaces.forEach((item,i)=>{
-      item.classList.toggle('active',i===index);
-      item.querySelector('.ci-window')?.classList.toggle('is-active',i===index);
+  const resetWindows=()=>{
+    windows.forEach((item,i)=>{
+      item.classList.remove('is-minimizing','is-minimized');
+      item.querySelector('.li-minimize')?.classList.remove('is-pressed');
+      item.querySelector('.ci-window')?.classList.toggle('is-active',i===0);
     });
-    live.textContent=`${titles[index][0]}. ${titles[index][1]}. ${titles[index][2]}. Illustrative demonstration.`;
-    loaderMessage.textContent=`Opening ${STEPS[index].short.toLowerCase()} workspace`;
+    taskbar.forEach(icon=>icon.classList.remove('minimized'));
+    cursor.classList.remove('is-clicking');
   };
   const moveCursor=(x,y)=>{
     cursor.style.setProperty('--cursor-x',`${x}px`);
     cursor.style.setProperty('--cursor-y',`${y}px`);
   };
   const pointAt=(index)=>{
-    const rect=tabs[index].getBoundingClientRect();
+    const rect=windows[index].querySelector('.li-minimize').getBoundingClientRect();
     const origin=screen.getBoundingClientRect();
-    moveCursor(rect.left-origin.left+rect.width*.52,rect.top-origin.top+rect.height*.44);
+    moveCursor(rect.left-origin.left+rect.width*.47,rect.top-origin.top+rect.height*.37);
   };
   const stop=(skipped=false)=>{
     if(!playing) return;
@@ -223,34 +232,42 @@
     overlay.inert=false;
     overlay.setAttribute('aria-hidden','false');
     document.documentElement.classList.add('li-lock');
-    phase('desk'); active(0);
+    phase('desktop'); resetWindows();
     const cursorScreen=screen.getBoundingClientRect();
-    moveCursor(cursorScreen.width*.11,cursorScreen.height*.24);
+    moveCursor(cursorScreen.width*.80,cursorScreen.height*.80);
     loader.classList.remove('running');
     void loader.offsetWidth;
     loader.classList.add('running');
     loaderPercent.textContent='0%';
-    loaderMessage.textContent='Opening Jeff’s Computer';
+    loaderMessage.textContent='Five open applications on Jeff’s Computer';
     const start=performance.now();
     window.clearInterval(progressTimer);
     progressTimer=window.setInterval(()=>{
       loaderPercent.textContent=`${Math.min(99,Math.floor((performance.now()-start)*100/LAPTOP_TOTAL_MS))}%`;
     },100);
-    live.textContent='Jeff’s Computer. Five illustrated professional workspaces.';
+    live.textContent='Jeff’s Computer desktop. Five professional application windows already open.';
     skip.focus({preventScroll:true});
     const token=++epoch;
     await wait(OPEN_MS); if(token!==epoch)return;
-    for(let i=0;i<STEPS.length;i++){
+    for(let i=0;i<windows.length;i++){
+      loaderMessage.textContent=`Minimizing ${STEPS[i].short.toLowerCase()}`;
       pointAt(i);
       await wait(MOVE_MS); if(token!==epoch)return;
       cursor.classList.add('is-clicking');
+      windows[i].querySelector('.li-minimize').classList.add('is-pressed');
       await wait(CLICK_MS); if(token!==epoch)return;
       cursor.classList.remove('is-clicking');
-      active(i);
+      windows[i].querySelector('.li-minimize').classList.remove('is-pressed');
+      windows[i].classList.add('is-minimizing');
+      taskbar[i].classList.add('minimized');
+      live.textContent=`Minimized ${STEPS[i].short}. ${windows.length-i-1} applications remaining.`;
       await wait(HOLD_MS); if(token!==epoch)return;
+      windows[i].classList.add('is-minimized');
     }
+    loaderMessage.textContent='Desktop clear · Closing laptop';
+    live.textContent='All five applications minimized. The desktop is clear.';
+    await wait(DESKTOP_MS); if(token!==epoch)return;
     phase('close');live.textContent='The laptop closes.';
-    loaderMessage.textContent='Closing Jeff’s Computer';
     await wait(CLOSE_MS);if(token!==epoch)return;
     phase('leader');live.textContent='One leader.';loaderMessage.textContent='ONE LEADER';
     await wait(LEADER_MS);if(token!==epoch)return;
