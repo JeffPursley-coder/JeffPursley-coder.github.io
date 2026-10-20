@@ -1,12 +1,12 @@
 /**
- * Many Workspaces → One Manager → Jeff Pursley.
+ * Many Workspaces → One Leader → Jeff Pursley.
  * Two full-bleed, opposing six-screen filmstrips of locally hosted demo interfaces.
  * Vanilla JS / CSS; original GitHub Pages portfolio stays underneath.
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-many-workspaces-intro-v2';
-  const TIMING = { travel: 6200, manager: 1150, name: 1900, fade: 650 };
+  const SEEN_KEY = 'jp-many-workspaces-intro-v3';
+  const TIMING = { travel: 6000, title: 2000, fade: 650 };
   const pathname = location.pathname.replace(/\/+$/, '') || '/';
   const forced = new URLSearchParams(location.search).get('intro') === '1';
   if ((pathname !== '/' && pathname !== '/index.html') ||
@@ -53,7 +53,7 @@
   overlay.setAttribute('aria-hidden', 'true');
   overlay.setAttribute('role', 'dialog');
   overlay.setAttribute('aria-modal', 'true');
-  overlay.setAttribute('aria-label', 'Many workspaces, one manager, Jeff Pursley');
+  overlay.setAttribute('aria-label', 'Many workspaces, one leader, Jeff Pursley');
   overlay.innerHTML = [
     '<div class="ws-top"><span class="ws-brand">JEFF PURSLEY <span>/ PROFESSIONAL PORTFOLIO</span></span>',
     '<button class="ws-skip" type="button">Skip intro <span aria-hidden="true">↗</span></button></div>',
@@ -63,7 +63,7 @@
       '<div class="ws-center">',
         '<div class="ws-center-glow"></div>',
         '<div class="ws-title ws-title-many">MANY WORKSPACES</div>',
-        '<div class="ws-title ws-title-manager">ONE MANAGER</div>',
+        '<div class="ws-title ws-title-manager">ONE LEADER</div>',
         '<div class="ws-title ws-title-name">JEFF PURSLEY</div>',
       '</div>',
     '</div>',
@@ -159,16 +159,17 @@
     void overlay.offsetWidth;
     await wait(60);
     if (token !== generation) return;
+    // Keep both strips moving through all three two-second title phases.
     phase('moving');
-    await wait(TIMING.travel);
+    await wait(TIMING.title);
     if (token !== generation) return;
-    phase('manager');
-    live.textContent = 'One manager.';
-    await wait(TIMING.manager);
+    phase('leader');
+    live.textContent = 'One leader.';
+    await wait(TIMING.title);
     if (token !== generation) return;
     phase('name');
     live.textContent = 'Jeff Pursley.';
-    await wait(TIMING.name);
+    await wait(TIMING.title);
     if (token !== generation) return;
     finish();
   }
