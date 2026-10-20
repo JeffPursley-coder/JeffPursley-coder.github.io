@@ -42,3 +42,4 @@ The current version supersedes the earlier timing and heading notes above:
 - Skip, Escape, replay, first-visit persistence, direct-link bypass and reduced-motion support are unchanged.
 
 Validation: `node --check intro/intro.js` and `node scripts/check-intro.mjs`. Check actual layout on both desktop and iOS Safari after deployment.
+- CI now runs the intro regression checks on updates to `main` as well as the original feature branch.
