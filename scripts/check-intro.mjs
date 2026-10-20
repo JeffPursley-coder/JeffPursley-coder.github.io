@@ -6,7 +6,7 @@ const js=readFileSync('intro/intro.js','utf8');
 const css=readFileSync('intro/intro.css','utf8');
 assert.match(html,/intro\/intro\.css/);
 assert.match(html,/intro\/intro\.js/);
-for(const phrase of ['MANY WORKSPACES','ONE LEADER','JEFF PURSLEY','Illustrative demo','Skip intro','Replay introduction']){
+for(const phrase of ['MANY WORKSPACES','ONE LEADER','JEFF PURSLEY','Illustrative demo','Skip intro','Watch the intro']){
   assert.ok(js.includes(phrase), 'Intro missing '+phrase);
 }
 for(const type of ['ops','project','program','impl','code']){
