@@ -43,3 +43,9 @@ The current version supersedes the earlier timing and heading notes above:
 
 Validation: `node --check intro/intro.js` and `node scripts/check-intro.mjs`. Check actual layout on both desktop and iOS Safari after deployment.
 - CI now runs the intro regression checks on updates to `main` as well as the original feature branch.
+
+## October 19 — Seven-second enterprise-operator edit (current)
+
+Current running time **7.735 seconds**. Supersedes older timing notes. The five animated laptop windows present **Revenue & Operations → Project Delivery → Strategic Programs / PMO → Enterprise Systems Implementation → Technical Automation**. This covers financial/revenue management, staffing, project and program governance, enterprise-systems implementation and coding without naming target employers. The animation keeps **I fix what slows businesses down** at the start and **MANY WORKSPACES → ONE LEADER → JEFF PURSLEY** at the end. Closing descriptor: **Operations · Revenue Management · Programs · Technology**. All software screens and numbers are illustrative; this is an HTML/CSS/JS cinematic sequence, not a video download.
+
+Shortened cursor/minimize/lid transitions to fit the pacing. Regression tests and asset cache version updated to `20261019c`.
