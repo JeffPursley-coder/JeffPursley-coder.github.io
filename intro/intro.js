@@ -101,11 +101,11 @@
   const DESKTOP_MS=160, CLOSE_MS=650, MANY_MS=620, LEADER_MS=660, NAME_MS=1130, LANDING_MS=180;
   const LAPTOP_TOTAL_MS=OPEN_MS+STEPS.length*(ACTION_MOVE_MS+ACTION_CLICK_MS+ACTION_HOLD_MS+MOVE_MS+CLICK_MS+HOLD_MS)+DESKTOP_MS+CLOSE_MS+MANY_MS+LEADER_MS+NAME_MS+LANDING_MS;
   const ACTIONS = [
-    {kicker:'OPERATIONS / CAPACITY',prompt:'Review route capacity',result:'Capacity issue assigned'},
-    {kicker:'PROJECT / DELIVERY',prompt:'Advance route assignment',result:'Story advanced to review'},
-    {kicker:'PROGRAM / GOVERNANCE',prompt:'Assign risk ownership',result:'Program risk owner set'},
-    {kicker:'IMPLEMENTATION / UAT',prompt:'Request business sign-off',result:'UAT follow-up requested'},
-    {kicker:'AUTOMATION / TESTING',prompt:'Run workflow tests',result:'12 checks passed'}
+    {kicker:'OPERATIONS / CAPACITY',prompt:'Review route capacity',result:'Capacity issue assigned',metric:'82% route utilization',detail:'Staffing · service quality · margins'},
+    {kicker:'PROJECT / DELIVERY',prompt:'Advance route assignment',result:'Story advanced to review',metric:'Sprint 08 / Delivery Board',detail:'Backlog · ownership · workflow'},
+    {kicker:'PROGRAM / GOVERNANCE',prompt:'Assign risk ownership',result:'Program risk owner set',metric:'Four connected initiatives',detail:'Roadmap · dependencies · decisions'},
+    {kicker:'IMPLEMENTATION / UAT',prompt:'Request business sign-off',result:'UAT follow-up requested',metric:'84% go-live readiness',detail:'Testing · cutover · adoption'},
+    {kicker:'AUTOMATION / TESTING',prompt:'Run workflow tests',result:'12 checks passed',metric:'Workflow Engine / Development',detail:'Business logic · source · test results'}
   ];
   const symbols=['▥','▦','◇','◈','⌘'];
   const labels=['OPERATIONS CONTROL','PROJECT ATLAS','PROGRAM OFFICE','IMPLEMENTATION HUB','WORKFLOW ENGINE'];
@@ -114,7 +114,7 @@
       <div class="li-window-head"><span class="li-window-symbol">${symbols[i]}</span>
         <span class="li-window-caption">${labels[i]}</span>
         <div class="li-window-actions"><span class="li-minimize">−</span><span class="li-maximize">□</span><span class="li-close-symbol">×</span></div>
-      </div><div class="li-window-content">${markup}<div class="li-action-card" aria-hidden="true">
+      </div><div class="li-window-content">${markup}<div class="li-mobile-spotlight" aria-hidden="true"><small>${STEPS[i].name}</small><strong>${ACTIONS[i].metric}</strong><span>${ACTIONS[i].detail}</span></div><div class="li-action-card" aria-hidden="true">
         <div class="li-action-kicker">${ACTIONS[i].kicker}</div>
         <div class="li-action-hit"><span class="li-action-prompt">${ACTIONS[i].prompt}</span><span class="li-action-arrow">↗</span></div>
         <strong class="li-action-result">✓ ${ACTIONS[i].result}</strong>
