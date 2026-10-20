@@ -29,3 +29,16 @@ The heading above the running laptop now reads **I fix the processes**. Once the
 
 ## Final motion polish
 The existing three full-screen finale title cards now get a subtle upward reveal, quick text sharpening, understated cyan radial lighting, and a thin light line beneath (not across) the text. The three phrases remain separate and never overlap. The JEFF PURSLEY reveal has slightly stronger letter-spacing and scale settling. Finale holds are 1,280 ms for MANY WORKSPACES, 1,280 ms for ONE LEADER, and 1,850 ms for JEFF PURSLEY. The refinement adds only 0.48 seconds to the introduction. Reduced-motion CSS disables the animation. Laptop, five workspaces, homepage content, controls, and illustrative data remain intact.
+
+## Hiring-manager and usability pass (October 19, 2026)
+
+The current version supersedes the earlier timing and heading notes above:
+- Opening statement: **I fix what slows businesses down.** Displayed as two lines to maintain legibility across widescreen and phone sizes.
+- Five meaningful *illustrative* interactions now precede the minimize animation: assigning a field-capacity issue, advancing a project story to review, assigning a program risk owner, requesting implementation UAT sign-off, and running workflow checks. Project cards and relevant status text update as the cursor acts, and all changes reset on replay.
+- Timing is approximately **8.535 seconds**, down from 11.88 seconds. The entire laptop/minimize/reveal structure remains.
+- The concluding title cards are still **MANY WORKSPACES → ONE LEADER → JEFF PURSLEY**. A short descriptor follows beneath the name: **Operations Leadership · Project Delivery · Business Systems**.
+- Mobile keeps the laptop, but replaces unreadably tiny dashboard detail with a succinct per-workspace highlight above a compact action prompt. Desktop retains the full financial, backlog, program, implementation and code interfaces.
+- Existing illustrative-demo notices and the portfolio's genuine achievement figures are retained; no new data-separation screen was added.
+- Skip, Escape, replay, first-visit persistence, direct-link bypass and reduced-motion support are unchanged.
+
+Validation: `node --check intro/intro.js` and `node scripts/check-intro.mjs`. Check actual layout on both desktop and iOS Safari after deployment.
