@@ -7,7 +7,7 @@ on:
       - 'scripts/check-intro.mjs'
       - '.github/workflows/intro-tests.yml'
   push:
-    branches: [feature/cinematic-workspace-intro]
+    branches: [main, feature/cinematic-workspace-intro]
     paths:
       - 'intro/**'
       - 'scripts/check-intro.mjs'
