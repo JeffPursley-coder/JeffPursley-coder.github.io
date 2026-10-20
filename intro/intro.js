@@ -5,7 +5,7 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-desktop-minimize-intro-v3';
+  const SEEN_KEY = 'jp-desktop-minimize-intro-v4';
   // Approximately 33% faster pacing: 1,570ms / 1.33 ≈ 1,180ms.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const path = location.pathname.replace(/\/+$/, '/') || '/';
@@ -95,9 +95,18 @@
     {short:'CODE',name:'Workflow Engine'}
   ];
   // All five illustrative applications are already open on the desktop.
-  const OPEN_MS=620, MOVE_MS=340, CLICK_MS=120, HOLD_MS=560;
-  const DESKTOP_MS=420, CLOSE_MS=980, MANY_MS=1280, LEADER_MS=1280, NAME_MS=1850, LANDING_MS=350;
-  const LAPTOP_TOTAL_MS=OPEN_MS+STEPS.length*(MOVE_MS+CLICK_MS+HOLD_MS)+DESKTOP_MS+CLOSE_MS+MANY_MS+LEADER_MS+NAME_MS+LANDING_MS;
+  // Approximately 8.5 seconds: each workspace gets one meaningful action before minimizing.
+  const OPEN_MS=360, ACTION_MOVE_MS=140, ACTION_CLICK_MS=95, ACTION_HOLD_MS=160;
+  const MOVE_MS=160, CLICK_MS=85, HOLD_MS=315;
+  const DESKTOP_MS=160, CLOSE_MS=650, MANY_MS=620, LEADER_MS=660, NAME_MS=1130, LANDING_MS=180;
+  const LAPTOP_TOTAL_MS=OPEN_MS+STEPS.length*(ACTION_MOVE_MS+ACTION_CLICK_MS+ACTION_HOLD_MS+MOVE_MS+CLICK_MS+HOLD_MS)+DESKTOP_MS+CLOSE_MS+MANY_MS+LEADER_MS+NAME_MS+LANDING_MS;
+  const ACTIONS = [
+    {kicker:'OPERATIONS / CAPACITY',prompt:'Review route capacity',result:'Capacity issue assigned'},
+    {kicker:'PROJECT / DELIVERY',prompt:'Advance route assignment',result:'Story advanced to review'},
+    {kicker:'PROGRAM / GOVERNANCE',prompt:'Assign risk ownership',result:'Program risk owner set'},
+    {kicker:'IMPLEMENTATION / UAT',prompt:'Request business sign-off',result:'UAT follow-up requested'},
+    {kicker:'AUTOMATION / TESTING',prompt:'Run workflow tests',result:'12 checks passed'}
+  ];
   const symbols=['▥','▦','◇','◈','⌘'];
   const labels=['OPERATIONS CONTROL','PROJECT ATLAS','PROGRAM OFFICE','IMPLEMENTATION HUB','WORKFLOW ENGINE'];
   const workspaceMarkup=[operations,project,program,impl,code].map((markup,i)=>
@@ -105,7 +114,11 @@
       <div class="li-window-head"><span class="li-window-symbol">${symbols[i]}</span>
         <span class="li-window-caption">${labels[i]}</span>
         <div class="li-window-actions"><span class="li-minimize">−</span><span class="li-maximize">□</span><span class="li-close-symbol">×</span></div>
-      </div><div class="li-window-content">${markup}</div>
+      </div><div class="li-window-content">${markup}<div class="li-action-card" aria-hidden="true">
+        <div class="li-action-kicker">${ACTIONS[i].kicker}</div>
+        <div class="li-action-hit"><span class="li-action-prompt">${ACTIONS[i].prompt}</span><span class="li-action-arrow">↗</span></div>
+        <strong class="li-action-result">✓ ${ACTIONS[i].result}</strong>
+      </div></div>
     </div>`).join('');
   const overlay = document.createElement('div');
   overlay.id = 'cinematic-intro';
@@ -116,7 +129,7 @@
       <div class="li-brand">JEFF PURSLEY / PORTFOLIO</div>
       <div class="li-computer">Jeff’s Computer</div>
     </div><button class="li-skip" type="button" aria-label="Skip portfolio introduction">Skip intro ↗</button></div>
-    <h2 class="li-main-heading">I fix the processes</h2>
+    <h2 class="li-main-heading">I fix what slows <span>businesses down.</span></h2>
     <div class="li-stage" aria-hidden="true"><div class="li-desk-wrap">
       <div class="li-backglow"></div><div class="li-desk-surface"></div>
       <div class="li-laptop"><div class="li-screen-shell">
@@ -142,7 +155,7 @@
       </div></div></div></div>
     </div>
     <div class="li-center-copy" aria-hidden="true"><div class="li-center-lock">
-      <div class="li-many">MANY WORKSPACES</div><div class="li-one">ONE LEADER</div><div class="li-name">JEFF PURSLEY</div>
+      <div class="li-many">MANY WORKSPACES</div><div class="li-one">ONE LEADER</div><div class="li-name">JEFF PURSLEY</div><div class="li-role">Operations Leadership · Project Delivery · Business Systems</div>
     </div></div>
     <div class="li-note">ORIGINAL CONCEPT INTERFACES · ALL WORKSPACE DATA IS ILLUSTRATIVE</div>
     <div class="li-loader" aria-hidden="true"><div class="li-loader-track"><span class="li-loader-fill"></span></div>
@@ -185,12 +198,52 @@
   const phase=(value)=>{overlay.className=`li phase-${value}`};
   const resetWindows=()=>{
     windows.forEach((item,i)=>{
-      item.classList.remove('is-minimizing','is-minimized');
+      item.classList.remove('is-minimizing','is-minimized','is-focused','is-action-complete');
       item.querySelector('.li-minimize')?.classList.remove('is-pressed');
+      item.querySelector('.li-action-hit')?.classList.remove('is-pressed');
       item.querySelector('.ci-window')?.classList.toggle('is-active',i===0);
     });
+    // Restore the illustrative changes so replay begins with the original screens.
+    windows[0]?.querySelector('.ci-ops-kpis .ci-panel:nth-child(4)')?.classList.remove('li-action-updated');
+    const projectColumns=windows[1]?.querySelectorAll('.ci-column');
+    const projectStory=windows[1]?.querySelector('.ci-task.move');
+    if(projectColumns?.length>=3 && projectStory){
+      projectColumns[1].insertBefore(projectStory,projectColumns[1].querySelector('.ci-task'));
+      projectColumns[1].querySelector('.ci-count').textContent='3';
+      projectColumns[2].querySelector('.ci-count').textContent='2';
+    }
+    const riskState=windows[2]?.querySelector('.ci-risk .ci-warn');
+    if(riskState)riskState.textContent='HIGH';
+    const signoff=windows[3]?.querySelector('.ci-check:not(.passed) span:last-child');
+    if(signoff)signoff.textContent='Business UAT sign-off pending';
+    windows[4]?.querySelector('.ci-terminal')?.classList.remove('li-action-updated');
     taskbar.forEach(icon=>icon.classList.remove('minimized'));
     cursor.classList.remove('is-clicking');
+    windows[0]?.classList.add('is-focused');
+  };
+  const completeAction=(index)=>{
+    const item=windows[index];
+    item.classList.add('is-action-complete');
+    if(index===0)item.querySelector('.ci-ops-kpis .ci-panel:nth-child(4)')?.classList.add('li-action-updated');
+    if(index===1){
+      const cols=item.querySelectorAll('.ci-column');
+      const story=item.querySelector('.ci-task.move');
+      if(cols.length>=3 && story){
+        cols[2].insertBefore(story,cols[2].querySelector('.ci-task'));
+        cols[1].querySelector('.ci-count').textContent='2';
+        cols[2].querySelector('.ci-count').textContent='3';
+      }
+    }
+    if(index===2){
+      const state=item.querySelector('.ci-risk .ci-warn');
+      if(state)state.textContent='OWNER SET';
+    }
+    if(index===3){
+      const signoff=item.querySelector('.ci-check:not(.passed) span:last-child');
+      if(signoff)signoff.textContent='UAT follow-up requested';
+    }
+    if(index===4)item.querySelector('.ci-terminal')?.classList.add('li-action-updated');
+    live.textContent=ACTIONS[index].result+'.';
   };
   const moveCursor=(x,y)=>{
     cursor.style.setProperty('--cursor-x',`${x}px`);
@@ -200,6 +253,11 @@
     const rect=windows[index].querySelector('.li-minimize').getBoundingClientRect();
     const origin=screen.getBoundingClientRect();
     moveCursor(rect.left-origin.left+rect.width*.47,rect.top-origin.top+rect.height*.37);
+  };
+  const pointAction=(index)=>{
+    const rect=windows[index].querySelector('.li-action-hit').getBoundingClientRect();
+    const origin=screen.getBoundingClientRect();
+    moveCursor(rect.left-origin.left+rect.width*.7,rect.top-origin.top+rect.height*.5);
   };
   const stop=(skipped=false)=>{
     if(!playing) return;
@@ -249,7 +307,17 @@
     const token=++epoch;
     await wait(OPEN_MS); if(token!==epoch)return;
     for(let i=0;i<windows.length;i++){
-      loaderMessage.textContent=`Minimizing ${STEPS[i].short.toLowerCase()}`;
+      loaderMessage.textContent=`Working in ${STEPS[i].short.toLowerCase()}`;
+      pointAction(i);
+      await wait(ACTION_MOVE_MS); if(token!==epoch)return;
+      cursor.classList.add('is-clicking');
+      windows[i].querySelector('.li-action-hit').classList.add('is-pressed');
+      await wait(ACTION_CLICK_MS); if(token!==epoch)return;
+      cursor.classList.remove('is-clicking');
+      windows[i].querySelector('.li-action-hit').classList.remove('is-pressed');
+      completeAction(i);
+      loaderMessage.textContent=ACTIONS[i].result;
+      await wait(ACTION_HOLD_MS); if(token!==epoch)return;
       pointAt(i);
       await wait(MOVE_MS); if(token!==epoch)return;
       cursor.classList.add('is-clicking');
@@ -262,6 +330,7 @@
       live.textContent=`Minimized ${STEPS[i].short}. ${windows.length-i-1} applications remaining.`;
       await wait(HOLD_MS); if(token!==epoch)return;
       windows[i].classList.add('is-minimized');
+      windows[i+1]?.classList.add('is-focused');
     }
     loaderMessage.textContent='Desktop clear · Closing laptop';
     live.textContent='All five applications minimized. The desktop is clear.';
