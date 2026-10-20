@@ -1,51 +1,17 @@
-# Jeff's Computer — Desktop Windows Cinematic Intro
+# Jeff's Brain — portfolio homepage animation
 
-The animation shows an unbranded laptop with a full operating-system style desktop: abstract navy wallpaper, menu bar, visible desktop icons and a bottom application taskbar. Five independent illustrative application windows begin already open, overlapping in a staggered stack.
+The former five-workspace cinematic intro has been replaced by a new sequence showing Jeff's celebratory black silhouette connected by glowing cables to a terminal monitor.
 
-A white pointer travels to the **minimize (−)** control on the frontmost window and clicks it. That window contracts toward the taskbar and uncovers the next window. The sequence is:
-**Operations → Projects → Program Office → Implementation → Code**.
+The silhouette is a compact vector outline traced from the exact uploaded image with both fists raised. As seventeen professional and humorous capabilities process, **each individual bar runs from 0 to 100%**, then flashes its completion status. The silhouette fills from bottom to top after each successful action. Dad Jokes triggers a monitor wobble; 1 Magic Trick triggers a sparkle. A final PMP / PASSED / ABOVE TARGET card interrupts the terminal before a JEFF PURSLEY / Many functions. One manager. / SYSTEM ONLINE reveal. The overlay fades to the existing professional homepage and portrait.
 
-The larger laptop screen and slimmer bezel make the dashboard windows easier to see at desktop and phone sizes. **MANY WORKSPACES** stays above the laptop throughout the presentation, including the closing reveal. After all five are minimized, the viewer sees the **clear desktop**, then the laptop lid closes and the title sequence reads exactly **ONE LEADER → JEFF PURSLEY**, fading into the existing portfolio.
+Timing: 700 ms startup + 17 × 635 ms items + 1100 ms PMP + 1450 ms reveal, about 14 seconds. Displaying all 17 requested titles makes a 6–8 second version illegible.
 
-Original dashboard/backlog/PMO/deployment/code screens remain unchanged. Financial figures and software screens are **illustrative**, not actual employer records. No branded enterprise UI is copied.
+## Edit the animation
 
-The bar at the bottom measures animation completion, not actual page loading. Skip, Escape, replay from the homepage, refreshing to replay, first-visit persistence, direct-link/anchor bypass, and prefers-reduced-motion behavior remain. The overlay does not remove or modify the homepage content or navigation.
+Modify the `INSTALLS` array and `TIMING` object near the beginning of `intro/intro.js`. Modify responsive colors and positioning in `intro/intro.css`. No third-party dependencies or additional network assets are required.
 
-Changes are browser-native CSS and JavaScript with no packages, paid services, video or extra network requests.
+First direct homepage visits and reloads play the intro; existing internal navigation, anchors, and reduced-motion preferences bypass it. The homepage provides **Watch the intro**, a full-screen **Skip intro** control, and Escape to close. Direct preview: `https://jeffpursley-coder.github.io/?intro=1`.
 
-Validation: run `node --check intro/intro.js` and `node scripts/check-intro.mjs`. Check mobile and desktop behavior manually, especially the lid-close perspective in native iOS Safari.
+## Validate
 
-## October 19 refinements
-- Persistent heading changed to **MANY WORKSPACES**.
-- Cursor speed / button delay / workspace hold changed from 485 / 155 / 745 ms to **340 / 120 / 560 ms** respectively. Full sequence ~10.0 seconds versus ~12.2 seconds.
-- Desktop laptop max width raised from 1050 px to **1185 px**, with a height-aware cap for shorter screens; slimmer display sides and a larger desktop window region. Mobile screen uses narrower side margins and a slightly larger usable area.
-- All five dashboards, illustrative-data notices, skip/replay, reduced-motion behavior and the final title reveal remain unchanged.
-
-## Headline update
-**MANY WORKSPACES** is a standalone, very large, bold white, center-aligned heading directly above the laptop. It stays on screen while the five desktop windows are minimized and while the lid closes, then fades away for the clean **ONE LEADER → JEFF PURSLEY** finale. The small corner label has been removed. Responsive typography and height-aware laptop sizing prevent overlap with the headline on smaller screens. No other on-screen copy, case studies, or animation pacing is changed.
-
-## Sequential text-only ending
-The heading above the running laptop now reads **I fix the processes**. Once the last application minimizes and the laptop closes, the computer UI and progress graphics clear, leaving three successive bold text-only screens: **MANY WORKSPACES**, then **ONE LEADER**, then **JEFF PURSLEY**. Each phrase takes the center alone rather than remaining visible under the following phrase. The initial laptop title and established window-minimizing pace are unchanged. The three finale holds are 1,130 / 1,150 / 1,650 ms respectively; the progress meter accounts for the additional phrase. The accessible Skip control remains available until the homepage is revealed.
-
-## Final motion polish
-The existing three full-screen finale title cards now get a subtle upward reveal, quick text sharpening, understated cyan radial lighting, and a thin light line beneath (not across) the text. The three phrases remain separate and never overlap. The JEFF PURSLEY reveal has slightly stronger letter-spacing and scale settling. Finale holds are 1,280 ms for MANY WORKSPACES, 1,280 ms for ONE LEADER, and 1,850 ms for JEFF PURSLEY. The refinement adds only 0.48 seconds to the introduction. Reduced-motion CSS disables the animation. Laptop, five workspaces, homepage content, controls, and illustrative data remain intact.
-
-## Hiring-manager and usability pass (October 19, 2026)
-
-The current version supersedes the earlier timing and heading notes above:
-- Opening statement: **I fix what slows businesses down.** Displayed as two lines to maintain legibility across widescreen and phone sizes.
-- Five meaningful *illustrative* interactions now precede the minimize animation: assigning a field-capacity issue, advancing a project story to review, assigning a program risk owner, requesting implementation UAT sign-off, and running workflow checks. Project cards and relevant status text update as the cursor acts, and all changes reset on replay.
-- Timing is approximately **8.535 seconds**, down from 11.88 seconds. The entire laptop/minimize/reveal structure remains.
-- The concluding title cards are still **MANY WORKSPACES → ONE LEADER → JEFF PURSLEY**. A short descriptor follows beneath the name: **Operations Leadership · Project Delivery · Business Systems**.
-- Mobile keeps the laptop, but replaces unreadably tiny dashboard detail with a succinct per-workspace highlight above a compact action prompt. Desktop retains the full financial, backlog, program, implementation and code interfaces.
-- Existing illustrative-demo notices and the portfolio's genuine achievement figures are retained; no new data-separation screen was added.
-- Skip, Escape, replay, first-visit persistence, direct-link bypass and reduced-motion support are unchanged.
-
-Validation: `node --check intro/intro.js` and `node scripts/check-intro.mjs`. Check actual layout on both desktop and iOS Safari after deployment.
-- CI now runs the intro regression checks on updates to `main` as well as the original feature branch.
-
-## October 19 — Seven-second enterprise-operator edit (current)
-
-Current running time **7.735 seconds**. Supersedes older timing notes. The five animated laptop windows present **Revenue & Operations → Project Delivery → Strategic Programs / PMO → Enterprise Systems Implementation → Technical Automation**. This covers financial/revenue management, staffing, project and program governance, enterprise-systems implementation and coding without naming target employers. The animation keeps **I fix what slows businesses down** at the start and **MANY WORKSPACES → ONE LEADER → JEFF PURSLEY** at the end. Closing descriptor: **Operations · Revenue Management · Programs · Technology**. All software screens and numbers are illustrative; this is an HTML/CSS/JS cinematic sequence, not a video download.
-
-Shortened cursor/minimize/lid transitions to fit the pacing. Regression tests and asset cache version updated to `20261019c`.
+`node --check intro/intro.js` and `node scripts/check-intro.mjs`. GitHub Actions automatically checks the introduction after pushes to `main`. Review desktop and mobile iOS Safari after deployment.

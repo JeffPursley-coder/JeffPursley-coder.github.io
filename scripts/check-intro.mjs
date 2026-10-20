@@ -1,99 +1,40 @@
-// Dependency-free structural and accounting checks for illustrative intro.
+// Structural regression checks for Jeff's Brain homepage intro.
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 const html=readFileSync('index.html','utf8');
 const js=readFileSync('intro/intro.js','utf8');
 const css=readFileSync('intro/intro.css','utf8');
-assert.match(html,/intro\/intro\.css/);
-assert.match(html,/intro\/intro\.js/);
-for(const phrase of ['MANY WORKSPACES','ONE LEADER','JEFF PURSLEY','Illustrative demo','Skip intro','Watch the intro']){
-  assert.ok(js.includes(phrase), 'Intro missing '+phrase);
+assert.match(html,/intro\/intro\.css\?v=20261020a/);
+assert.match(html,/intro\/intro\.js\?v=20261020a/);
+const expected=[
+  'how to make the best steak','Project Management','Program Management',
+  'Implementation','Revenue Management','how to make an omelette','Bottlenecks',
+  'Supply Chain Logistics','Business Systems','Accountability','Leadership',
+  'Budgeting','Dad Jokes','Process Automation','1 Magic Trick',
+  'SCRUM','Operational Knowledge'
+];
+for(const term of expected) assert.ok(js.includes("name:'"+term+"'"),'Missing: '+term);
+assert.equal((js.match(/done:'/g)||[]).length,17,'Expected exactly seventeen installs');
+for(const marker of ['PMP','PASSED','ABOVE TARGET','JEFF PURSLEY','Many functions. One manager.',
+  'Skip intro','Watch the intro','prefers-reduced-motion','localStorage','jp-person-clip',
+  'jp-person-fill','setFigure','setProgress','jp-cable-pulse','jp-joke-dad',
+  'jp-joke-magic','location.hash','document.referrer']) {
+    assert.ok(js.includes(marker),'Missing feature: '+marker);
 }
-for(const type of ['ops','project','program','impl','code']){
-  assert.ok(js.includes("app('"+type+"'"),'Missing '+type+' workspace');
-}
-assert.ok(js.includes('prefers-reduced-motion'));
-assert.ok(js.includes('localStorage'));
-assert.ok(js.includes('location.hash') && js.includes('document.referrer'));
-assert.match(js,/const forcePreview = new URLSearchParams\(location.search\).get\('intro'\) === '1'/);
-assert.match(js,/forcePreview\|\|reload/);
-assert.match(js,/heroHeading\.insertAdjacentElement\('afterend',replay\)/);
-assert.match(js,/Watch the intro/);
-assert.match(html,/intro\/intro\.js\?v=20261019c/);
-assert.match(html,/intro\/intro\.css\?v=20261019c/);
-assert.match(js,/Jeff’s Computer/);
-assert.match(js,/<h2 class="li-main-heading">I fix what slows <span>businesses down\.<\/span><\/h2>/);
-assert.match(js,/<div class="li-many">MANY WORKSPACES<\/div>/);
-assert.match(js,/MANY_MS=540, LEADER_MS=560, NAME_MS=1200/);
-assert.match(js,/CLOSE_MS\);if\(token!==epoch\)return;\s*phase\('many'\)[\s\S]*?wait\(MANY_MS\)[\s\S]*?phase\('leader'\)[\s\S]*?phase\('name'\)/);
-assert.match(css,/\.li\.phase-name \.li-one\{opacity:0/);
-assert.match(css,/\.li\.phase-many \.li-stage,[\s\S]*?\.li\.phase-name \.li-stage\{opacity:0/);
-assert.match(css,/\.li\.phase-many \.li-many\{opacity:1/);
-assert.match(css,/\.li\.phase-many \.li-many\{[\s\S]*?animation:li-finale-enter/);
-assert.match(css,/\.li\.phase-leader \.li-one\{[\s\S]*?animation:li-finale-enter/);
-assert.match(css,/\.li\.phase-name \.li-name\{[\s\S]*?animation:li-finale-name/);
-assert.match(css,/\.li-center-copy::before\{/);
-assert.match(css,/\.li-center-copy::after\{/);
-assert.match(css,/@keyframes li-finale-enter/);
-assert.match(css,/@keyframes li-finale-name/);
-assert.match(css,/\.li\.phase-name \.li-one\{opacity:0/);
-assert.match(css,/\.li\.phase-leader \.li-many/);
-assert.match(css,/@media\(prefers-reduced-motion:reduce\)\{[\s\S]*?animation:none!important/);
-assert.doesNotMatch(js,/<div class="li-rule">/);
-assert.doesNotMatch(js,/<div class="li-subtitle">MANY WORKSPACES<\/div>/);
-assert.match(css,/\.li-main-heading\{[^}]*text-align:center;[^}]*font-size:clamp\(40px,5\.9vw,78px\);[^}]*font-weight:900;/);
-assert.match(css,/\.li-main-heading span\{display:block;color:#b5ebed\}/);
-assert.match(css,/\.li-main-heading\{[^}]*color:#f6fcff;/);
-assert.match(css,/\.li\.phase-leader \.li-main-heading/);
-assert.match(css,/\.li-laptop\{width:min\(1185px,100%,calc\(\(100dvh - 285px\)\*1\.64\)\)\}/);
-assert.match(js,/OPEN_MS=300, ACTION_MOVE_MS=135, ACTION_CLICK_MS=75, ACTION_HOLD_MS=140/);
-assert.match(js,/DESKTOP_MS=100, CLOSE_MS=550, MANY_MS=540, LEADER_MS=560, NAME_MS=1200, LANDING_MS=160/);
-assert.match(css,/\.li-laptop\{position:relative;width:min\(1185px/);
-assert.match(css,/\.li-screen-shell\{position:absolute;left:2\.5%;right:2\.5%/);
-assert.match(js,/li-desktop-icons/);
-assert.match(js,/const ACTIONS = \[/);
-assert.equal((js.match(/kicker:'/g) || []).length,5,'Exactly five workspace actions');
-assert.match(js,/pointAction\(i\)/);
-assert.match(js,/completeAction\(i\)/);
-assert.match(js,/li-mobile-spotlight/);
-assert.match(js,/li-role/);
-assert.match(css,/\.li-action-card\{/);
-assert.match(css,/\.li-mobile-spotlight\{/);
-assert.match(css,/\.li\.phase-name \.li-role\{opacity:1/);
-const sequenceMs=300+5*(135+75+140+135+75+305)+100+550+540+560+1200+160;
-assert.equal(sequenceMs,7735,'Sequence should run in 6–8 seconds');
-assert.ok(sequenceMs>=6000&&sequenceMs<=8000,'Intro must be 6–8 seconds');
-assert.match(js,/REVENUE & OPERATIONS/);
-assert.match(js,/STRATEGIC PROGRAM \/ PMO/);
-assert.match(js,/Revenue Management/);
-assert.match(js,/li-os-wallpaper/);
-assert.match(js,/li-os-menubar/);
-assert.match(js,/li-desktop-window/);
-assert.match(js,/li-minimize/);
-assert.match(js,/is-minimizing/);
-assert.match(js,/li-taskbar/);
-assert.match(js,/LAPTOP_TOTAL_MS/);
-assert.match(js,/phase\('close'\)/);
-assert.match(js,/phase\('leader'\)/);
-assert.match(js,/phase\('name'\)/);
-assert.match(js,/reload\|\|/);
-assert.match(js,/li phase-off/);
-assert.match(css,/\.li-desktop-window\.is-minimizing/);
-assert.match(css,/\.li\.phase-close \.li-screen-shell/);
-assert.match(css,/\.li\.phase-name \.li-name/);
-assert.match(css,/\.li-loader\.running \.li-loader-fill/);
-assert.match(css,/prefers-reduced-motion/);
-assert.equal(126400-51250-14900,60250);
-assert.equal(60250-24100,36150);
-assert.equal(127000+119400+126400,372800);
-assert.equal(Math.round(60250/126400*1000)/10,47.7);
-assert.equal(Math.round(910000/1240000*1000)/10,73.4);
-assert.equal(Math.round(112/120*1000)/10,93.3);
+assert.match(js,/get\('intro'\)==='1'/);
+assert.match(js,/setProgress\(100\)/);
+assert.match(js,/setFigure\(\(i\+1\)\/INSTALLS\.length\)/);
+assert.match(js,/finish\(true\)/);
+assert.match(css,/\.jp-person-fill\{/);
+assert.match(css,/\.jp-intro\.jp-finale \.jp-final/);
+assert.match(css,/@media\(max-width:760px\)/);
+assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
+assert.doesNotMatch(js,/MANY WORKSPACES|li-laptop|li-desktop-window/);
 let depth=0;
-for(const c of css.replace(/\/\*[\s\S]*?\*\//g,'')){
-  if(c==='{')depth++;
-  if(c==='}')depth--;
+for(const ch of css.replace(/\/\*[\s\S]*?\*\//g,'')){
+  if(ch==='{')depth++;
+  if(ch==='}')depth--;
   assert.ok(depth>=0,'Extra closing CSS brace');
 }
-assert.equal(depth,0,'Unbalanced intro stylesheet');
-console.log('Desktop intro PASS: five business workspaces, revenue management, mobile highlights, ~7.7s runtime, final titles and accessible controls.');
+assert.equal(depth,0,'Unbalanced CSS braces');
+console.log("Jeff's Brain PASS: 17 installs, silhouette fill, PMP, humor, responsive and accessible controls.");
