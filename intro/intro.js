@@ -10,7 +10,10 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const path = location.pathname.replace(/\/+$/, '/') || '/';
   const isHome = path === '/' || path === '/index.html';
-  if (!isHome || location.hash || location.search) return;
+  // A shareable direct preview bypasses first-visit storage and referrer rules.
+  // All other query strings and page anchors continue to bypass the intro.
+  const forcePreview = new URLSearchParams(location.search).get('intro') === '1';
+  if (!isHome || location.hash || (location.search && !forcePreview)) return;
 
   const titles = [
     ['01 / BUSINESS OPERATIONS', 'Operations Control', 'Financial performance · Field capacity · Service delivery'],
@@ -167,9 +170,12 @@
   const hero=document.querySelector('.home-hero');
   const replay=document.createElement('button');
   replay.type='button'; replay.className='li-replay';
-  replay.textContent='↻ Replay introduction';
+  replay.textContent='↻ Watch the intro';
   replay.setAttribute('aria-label','Replay desktop window minimizing introduction');
-  (hero?.querySelector('.hero-copy')||hero||document.body).appendChild(replay);
+  const heroHeading=hero?.querySelector('.hero-copy h1');
+  // Make the replay accessible without scrolling through the homepage on phones.
+  if(heroHeading)heroHeading.insertAdjacentElement('afterend',replay);
+  else (hero?.querySelector('.hero-copy')||hero||document.body).appendChild(replay);
   const skip=overlay.querySelector('.li-skip');
   const screen=overlay.querySelector('.li-screen');
   const cursor=overlay.querySelector('.li-cursor');
@@ -357,5 +363,5 @@
   try{fromOwnSite=!!document.referrer&&new URL(document.referrer).origin===location.origin;}catch(_){}
   const nav=performance.getEntriesByType?.('navigation')?.[0];
   const reload=nav?.type==='reload'||performance.navigation?.type===1;
-  if(!reduced.matches&&(reload||(!safeStorage('read')&&!fromOwnSite)))play(false);
+  if(!reduced.matches&&(forcePreview||reload||(!safeStorage('read')&&!fromOwnSite)))play(false);
 })();
