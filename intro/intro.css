@@ -488,3 +488,20 @@ html.li-lock,html.li-lock body{overflow:hidden!important}
     transition:none!important;animation:none!important
   }
 }
+
+/* Small laptop screens: show a genuine workspace overview without microscopic dashboards. */
+@media(max-width:620px){
+  .li-mobile-spotlight{inset:3px 4px 31px;padding:4px 6px;gap:2px}
+  .li-mobile-spotlight small{font-size:7px;line-height:1.15}
+  .li-mobile-spotlight strong{font-size:clamp(11px,3vw,15px);line-height:1.08}
+  .li-mobile-spotlight span{font-size:7px;line-height:1.15}
+  .li-action-kicker{display:none}
+  .li-action-card{right:4px;left:4px;bottom:3px;padding:3px 4px}
+  .li-action-hit{min-height:14px;padding:2px 4px;font-size:8px}
+  .li-action-result{min-height:14px;font-size:8px}
+}
+@media(max-width:350px){
+  .li-mobile-spotlight{inset:2px 3px 29px;padding:3px 5px}
+  .li-mobile-spotlight span{display:none}
+  .li-mobile-spotlight strong{font-size:11px}
+}
