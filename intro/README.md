@@ -1,15 +1,16 @@
-# Many Workspaces — Homepage Intro
+# Many Workspaces — full-screen GitHub Pages intro
 
-This intro runs on the homepage of Jeff Pursley's GitHub Pages portfolio. It shows **12 software-inspired demo screenshots** in three alternating horizontal rows. Images are local assets under `assets/workspaces/` and never request external software accounts.
+This is the **large-screen, two-row revision** of the homepage animation. All **12** pre-existing software-inspired demo images remain local in `assets/workspaces/`. No fictional NexaPlan or NexaField files are used.
 
-Sequence: **MANY WORKSPACES** (4.55 s) → **ONE MANAGER** (1.2 s) → **JEFF PURSLEY** (1.65 s) → fade to the unchanged portfolio (0.65 s). The twelve screenshots are displayed before the final name reveal. Three are normally visible per row, with the fourth moving into view; smaller screens show two cards per row and traverse two card widths.
+- Top six screens: Operations Manager (Dynamics 365 Field Service), Project Manager (Microsoft Planner), Program Manager (Planview), Implementation Specialist (ServiceNow + Jira), Revenue Management (Power BI), Supply Chain (SAP IBP).
+- Bottom six screens: Budgeting (Excel + Power BI), Business Systems (Power Platform), Process Automation (Power Automate), Leadership (Teams + Power BI), AI Implementation (Copilot Studio), Scrum (Jira).
 
-- Implementation: `intro/intro.js` + `intro/intro.css`
-- Full-screen Skip / Escape, homepage Replay, keyboard handling, and reduced-motion support
-- First direct homepage visit or reload autoplays; internal navigation and hash links bypass
-- Forced preview: `https://jeffpursley-coder.github.io/?intro=1`
-- Automated check: `node --check intro/intro.js && node scripts/check-intro.mjs`
+Both strips use **native 16:9 ratios** with large cards. The top moves right and the bottom moves left. At runtime, travel distance is calculated as the **entire six-card strip width minus the viewport**; this ensures all 12 screens pass into view instead of merely showing a fourth card. The center band remains stationary.
 
-Screenshots are **fictional demonstration data in software-inspired interfaces**, not evidence of personal experience with every named product.
+Sequence: **MANY WORKSPACES** for 6.2 s → **ONE MANAGER** for 1.15 s → **JEFF PURSLEY** for 1.9 s → fade into the unchanged homepage for 0.65 s (about 9.9 s total). Labels show both the job function and real software name.
 
-The homepage hero, navigation, case studies and remaining content were not changed; only the stylesheet/script version tokens in `index.html` were bumped for cache refresh.
+Skip/Escape, manual Replay, first-visit autoplay, cache busting and reduced-motion support remain. Forced preview: https://jeffpursley-coder.github.io/?intro=1 .
+
+Automated checks: `node --check intro/intro.js` and `node scripts/check-intro.mjs` plus the site's usual integrity workflow.
+
+**Disclosure:** Workspace image content contains fictional demonstration records. The recreations are not native authenticated sessions, nor evidence of experience with every vendor product.
