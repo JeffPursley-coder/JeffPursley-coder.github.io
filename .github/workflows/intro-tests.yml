@@ -4,12 +4,14 @@ on:
     paths:
       - 'index.html'
       - 'intro/**'
+      - 'assets/workspaces/**'
       - 'scripts/check-intro.mjs'
       - '.github/workflows/intro-tests.yml'
   push:
     branches: [main, feature/cinematic-workspace-intro]
     paths:
       - 'intro/**'
+      - 'assets/workspaces/**'
       - 'scripts/check-intro.mjs'
 permissions:
   contents: read
