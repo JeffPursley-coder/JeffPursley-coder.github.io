@@ -6,7 +6,7 @@
 (() => {
   'use strict';
   const SEEN_KEY = 'jp-desktop-minimize-intro-v4';
-  // Approximately 33% faster pacing: 1,570ms / 1.33 ≈ 1,180ms.
+  // Fast seven-second reel: five connected enterprise workspaces and one leadership story.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const path = location.pathname.replace(/\/+$/, '/') || '/';
   const isHome = path === '/' || path === '/index.html';
@@ -16,11 +16,11 @@
   if (!isHome || location.hash || (location.search && !forcePreview)) return;
 
   const titles = [
-    ['01 / BUSINESS OPERATIONS', 'Operations Control', 'Financial performance · Field capacity · Service delivery'],
-    ['02 / PROJECT DELIVERY', 'Project Atlas', 'Sprint execution · Backlog ownership · Work in progress'],
-    ['03 / PROGRAM LEADERSHIP', 'Transformation Program Office', 'Multiple workstreams · Dependencies · Governance'],
-    ['04 / SYSTEMS IMPLEMENTATION', 'Implementation Hub', 'Requirements · Migration · User acceptance · Cutover'],
-    ['05 / CODE & AUTOMATION', 'Workflow Engine', 'Source control · Test execution · Business logic']
+    ['01 / REVENUE & OPERATIONS', 'Revenue & Operations', 'Margin · Service profitability · Workforce capacity'],
+    ['02 / PROJECT DELIVERY', 'Project Delivery', 'Global execution · Sprints · Ownership'],
+    ['03 / STRATEGIC PROGRAMS', 'Strategic Program Office', 'PMO · Supply chain · Governance'],
+    ['04 / ENTERPRISE IMPLEMENTATION', 'Enterprise Implementation', 'ERP/WMS concepts · Testing · Adoption'],
+    ['05 / TECHNICAL AUTOMATION', 'Technical Operations', 'Automation · Business logic · Validation']
   ];
   const chrome = (title, section) => `<div class="ci-appbar"><div class="ci-lights" aria-hidden="true"><i></i><i></i><i></i></div><span class="ci-appname">${title}</span><span class="ci-appmeta">${section}</span><span class="ci-demo">Illustrative demo</span></div>`;
   const sidebar = (items, selected, foot = 'Illustrative workspace') => `<aside class="ci-sidebar" aria-hidden="true"><span class="ci-sidelabel">WORKSPACE</span>${items.map((i) => `<div class="ci-navitem${i === selected ? ' sel' : ''}">${i}</div>`).join('')}<div class="ci-sidefoot">${foot}</div></aside>`;
@@ -29,9 +29,9 @@
   const spark = `<svg class="ci-spark" viewBox="0 0 490 100" role="presentation" aria-hidden="true" preserveAspectRatio="none"><defs><linearGradient id="ci-revenue-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#43c8d5" stop-opacity=".3"/><stop offset="100%" stop-color="#43c8d5" stop-opacity="0"/></linearGradient></defs><path d="M0 89 L0 70 L98 63 L196 56 L294 23 L392 49 L490 24 L490 89Z" fill="url(#ci-revenue-area)"/><path d="M0 70 L98 63 L196 56 L294 23 L392 49 L490 24" fill="none" stroke="#68dcd8" stroke-width="3" class="ci-draw"/><path d="M0 89 H490" stroke="#31556a" stroke-width="1"/></svg>`;
   const app = (kind, name, area, content) => `<section class="ci-window ci-${kind}" aria-label="${name} illustrative software interface">${chrome(name, area)}<div class="ci-appbody">${content}</div></section>`;
 
-  const operations = app('ops', 'Dragonfly / Operations Control', 'Overview  /  Service profitability',
-    sidebar(['◫ Overview', '▥ Financial reporting', '⌁ Route capacity', '◷ Scheduling', '◇ Quality & CX'], '◫ Overview', 'Demo dataset · Not employer records') +
-    `<div class="ci-work"><div class="ci-sectionline"><strong>Operations overview</strong><small>Q3 illustrative scenario · USD</small></div><div class="ci-ops-kpis">
+  const operations = app('ops', 'Revenue & Operations / Control Room', 'Overview  /  Service profitability',
+    sidebar(['◫ Overview', '▥ Revenue & Margin', '⌁ Supply Chain Capacity', '◷ Scheduling', '◇ Quality & CX'], '◫ Overview', 'Demo dataset · Not employer records') +
+    `<div class="ci-work"><div class="ci-sectionline"><strong>Revenue & Operations</strong><small>Q3 illustrative scenario · USD</small></div><div class="ci-ops-kpis">
       ${[['MONTHLY REVENUE','$126,400','Q3 total $372,800'],['GROSS MARGIN','47.7%','Gross profit $60,250'],['OPERATING PROFIT','$36,150','After $24,100 overhead'],['ROUTE UTILIZATION','82%','18 / 22 planned slots']].map(x=>panel(`<div class="ci-pname">${x[0]}</div><b class="ci-big">${x[1]}</b><small>${x[2]}</small>`,'ci-kpi')).join('')}</div>
       <div class="ci-ops-main">${panel(`<div class="ci-sectionline"><span class="ci-pname">Revenue trend</span><span class="ci-tag">+5.9% vs prior month</span></div>${spark}<div class="ci-barlabel"><small>APR</small><small>MAY</small><small>JUN</small><small>JUL</small><small>AUG</small><small>SEP</small></div>`)}
       ${panel(`<div class="ci-pname">Cost allocation / September</div><div class="ci-barrows">${bar('Service labor','$51,250',57)}${bar('Materials & supplies','$14,900',17)}${bar('Operating overhead','$24,100',27)}</div><p class="ci-micro" style="margin:8px 0 0">Monthly cost base: $90,250</p>`)}</div>
@@ -42,7 +42,7 @@
 
   const task = (id, title, priority, initials, state = '') => `<div class="ci-task ${state}"><div class="ci-taskbottom"><span>#${id} · Story</span><em>${priority}</em></div><strong>${title}</strong><div class="ci-taskbottom"><span>Sprint 08</span><span class="ci-avatar">${initials}</span></div></div>`;
   const column = (title, items, count) => `<div class="ci-column"><div class="ci-coltitle">${title}<span class="ci-count">${count}</span></div>${items}</div>`;
-  const project = app('project', 'Project Atlas / Delivery Board', 'Boards  /  Sprint 08',
+  const project = app('project', 'Project Delivery / Execution Board', 'Boards  /  Sprint 08',
     sidebar(['▧ Overview', '▤ Boards', '☷ Backlogs', '◫ Sprint 08', '◇ Queries', '▦ Delivery plans'], '▤ Boards','Iteration: 05–16 Oct') +
     `<div class="ci-work"><div class="ci-proj-top"><div><h3>Field Service Platform</h3><div class="ci-micro">Sprint 08 · 05–16 Oct · Delivery team</div></div><div class="ci-proj-stats"><div class="ci-proj-pill"><b>24 / 31</b>Story points</div><div class="ci-proj-pill ci-proj-progress"><b class="ci-good">77%</b>Completed</div><div class="ci-proj-pill"><b>16 Oct</b>Release review</div></div></div><div class="ci-board">
       ${column('TO DO', task(248,'Add region-level KPI filter','P2','ML') + task(253,'Confirm retry policy','P1','AK'), '4')}
@@ -51,7 +51,7 @@
       ${column('DONE', task(231,'Approve service data map','P1','ML','is-done') + task(234,'Define acceptance criteria','P2','SR','is-done'), '8')}
     </div></div>`);
 
-  const program = app('program', 'Enterprise Transformation / Program Office', 'Portfolio governance  /  Wave 02',
+  const program = app('program', 'Strategic Initiatives / Program Office', 'Portfolio governance  /  Wave 02',
     sidebar(['◇ Executive status', '▥ Roadmap', '⋈ Dependencies', '▣ Investment', '⚑ RAID & decisions', '◷ Resources'], '◇ Executive status','Steering group · Weekly') +
     `<div class="ci-work"><div class="ci-program-head"><div><h3>Service Modernization Program</h3><small>Four connected initiatives · Gate review: 23 Oct</small></div><span class="ci-tag">Executive watchlist · 2 amber</span></div><div class="ci-program-grid">
       ${panel(`<div class="ci-sectionline"><span class="ci-pname">Integrated delivery roadmap</span><span class="ci-micro">SEP → FEB</span></div><div class="ci-roadmap"><span></span>${['SEP','OCT','NOV','DEC','JAN','FEB'].map(x=>`<div class="ci-time">${x}</div>`).join('')}
@@ -64,7 +64,7 @@
       ${panel(`<div class="ci-pname">RAID / escalation queue</div><div class="ci-risk"><span>R-014 · Data quality / owner AK</span><b class="ci-warn">HIGH</b></div><div class="ci-risk"><span>D-007 · Cutover window / sponsor</span><b class="ci-bad">DECISION</b></div><div class="ci-risk"><span>I-021 · Vendor API limit / owner JP</span><b class="ci-good">MITIGATED</b></div>`)}
     </div></div>`);
 
-  const impl = app('impl', 'Service Transformation / Implementation Hub', 'Release readiness  /  Wave 01',
+  const impl = app('impl', 'Enterprise Systems / Implementation Hub', 'Release readiness  /  Wave 01',
     sidebar(['◉ Readiness', '☷ Requirements', '⋈ Integrations', '▤ Data migration', '▣ Testing & UAT', '✓ Cutover'], '◉ Readiness','Go/no-go gate · Demo') +
     `<div class="ci-work"><div class="ci-impl-head"><h3>Deployment readiness review</h3><span class="ci-tag">Release candidate 1.4</span></div><div class="ci-impl-grid">
       ${panel(`<div class="ci-pname">Go-live readiness</div><div class="ci-ring">84%</div>${bar('Requirements configured','46 / 50',92)}<div style="height:12px"></div>${bar('UAT cases passed','112 / 120',93.3)}<p class="ci-micro">8 UAT cases outstanding</p>`)}
@@ -72,7 +72,7 @@
       ${panel(`<div class="ci-pname">Interface / integration chain</div><div class="ci-flow"><span class="ci-node">Field Ops</span><span class="ci-arrow">→</span><span class="ci-node">Service API</span><span class="ci-arrow">→</span><span class="ci-node">Finance</span></div><div class="ci-pname">Open exceptions</div><div class="ci-testrow"><span>Critical defects</span><b class="ci-good">0</b></div><div class="ci-testrow"><span>High defects</span><b class="ci-warn">2</b></div><div class="ci-testrow"><span>Training complete</span><b>39 / 44</b></div>`)}
     </div></div>`);
 
-  const code = app('code', 'Workflow Engine / Development', 'service-ops  /  local demo',
+  const code = app('code', 'Technical Operations / Automation', 'service-ops  /  local demo',
     sidebar(['EXPLORER', '▾ src', '  ◇ kpi.js', '  ◇ service-events.js', '▾ tests', '  ◇ kpi.test.js', '  ◇ package.json'], '  ◇ kpi.js','● 2 changes · main') +
     `<div class="ci-work"><div class="ci-tabs"><span class="ci-tab sel">◇ kpi.js</span><span class="ci-tab">◇ kpi.test.js</span><span class="ci-tab">◇ package.json</span></div><div class="ci-codearea"><div class="ci-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12</div><div class="ci-source"><span class="ci-comment">// Illustrative service operations logic</span>
 <span class="ci-kw">export function</span> <span class="ci-fn">grossMargin</span>(data) {
@@ -91,27 +91,27 @@
   // The original five illustrative application screens above are preserved.
   // The new presentation connects them with a single visible laptop and cursor.
   const STEPS = [
-    {short:'OPERATIONS',name:'Operations Control'},
-    {short:'PROJECTS',name:'Project Atlas'},
-    {short:'PROGRAM',name:'Transformation Program Office'},
-    {short:'IMPLEMENTATION',name:'Implementation Hub'},
-    {short:'CODE',name:'Workflow Engine'}
+    {short:'REVENUE + OPS',name:'Revenue & Operations'},
+    {short:'PROJECTS',name:'Project Delivery'},
+    {short:'PROGRAM / PMO',name:'Strategic Program Office'},
+    {short:'IMPLEMENTATION',name:'Enterprise Systems'},
+    {short:'AUTOMATION',name:'Technical Operations'}
   ];
   // All five illustrative applications are already open on the desktop.
-  // Approximately 8.5 seconds: each workspace gets one meaningful action before minimizing.
-  const OPEN_MS=360, ACTION_MOVE_MS=140, ACTION_CLICK_MS=95, ACTION_HOLD_MS=160;
-  const MOVE_MS=160, CLICK_MS=85, HOLD_MS=315;
-  const DESKTOP_MS=160, CLOSE_MS=650, MANY_MS=620, LEADER_MS=660, NAME_MS=1130, LANDING_MS=180;
+  // 7.735 seconds: five meaningful workspace actions and three separate closing titles.
+  const OPEN_MS=300, ACTION_MOVE_MS=135, ACTION_CLICK_MS=75, ACTION_HOLD_MS=140;
+  const MOVE_MS=135, CLICK_MS=75, HOLD_MS=305;
+  const DESKTOP_MS=100, CLOSE_MS=550, MANY_MS=540, LEADER_MS=560, NAME_MS=1200, LANDING_MS=160;
   const LAPTOP_TOTAL_MS=OPEN_MS+STEPS.length*(ACTION_MOVE_MS+ACTION_CLICK_MS+ACTION_HOLD_MS+MOVE_MS+CLICK_MS+HOLD_MS)+DESKTOP_MS+CLOSE_MS+MANY_MS+LEADER_MS+NAME_MS+LANDING_MS;
   const ACTIONS = [
-    {kicker:'OPERATIONS / CAPACITY',prompt:'Review route capacity',result:'Capacity issue assigned',metric:'82% route utilization',detail:'Staffing · service quality · margins'},
-    {kicker:'PROJECT / DELIVERY',prompt:'Advance route assignment',result:'Story advanced to review',metric:'Sprint 08 / Delivery Board',detail:'Backlog · ownership · workflow'},
-    {kicker:'PROGRAM / GOVERNANCE',prompt:'Assign risk ownership',result:'Program risk owner set',metric:'Four connected initiatives',detail:'Roadmap · dependencies · decisions'},
-    {kicker:'IMPLEMENTATION / UAT',prompt:'Request business sign-off',result:'UAT follow-up requested',metric:'84% go-live readiness',detail:'Testing · cutover · adoption'},
-    {kicker:'AUTOMATION / TESTING',prompt:'Run workflow tests',result:'12 checks passed',metric:'Workflow Engine / Development',detail:'Business logic · source · test results'}
+    {kicker:'REVENUE / OPERATIONS',prompt:'Assign capacity exception',result:'Capacity issue assigned',metric:'Revenue · margin · capacity',detail:'Financial performance · people · service'},
+    {kicker:'PROJECT / DELIVERY',prompt:'Advance delivery task',result:'Story advanced to review',metric:'Project execution / Delivery Board',detail:'Stakeholders · schedule · delivery'},
+    {kicker:'PROGRAM / PMO',prompt:'Assign program risk owner',result:'Program risk owner set',metric:'Programs · governance · strategy',detail:'Initiatives · dependencies · resources'},
+    {kicker:'ENTERPRISE SYSTEMS',prompt:'Request UAT approval',result:'UAT follow-up requested',metric:'ERP / WMS / business readiness',detail:'Migration · testing · cutover'},
+    {kicker:'TECHNICAL AUTOMATION',prompt:'Validate workflow rules',result:'12 checks passed',metric:'Automations · testing · logic',detail:'Configuration · development · controls'}
   ];
   const symbols=['▥','▦','◇','◈','⌘'];
-  const labels=['OPERATIONS CONTROL','PROJECT ATLAS','PROGRAM OFFICE','IMPLEMENTATION HUB','WORKFLOW ENGINE'];
+  const labels=['REVENUE & OPERATIONS','PROJECT DELIVERY','STRATEGIC PROGRAM / PMO','ENTERPRISE IMPLEMENTATION','TECHNICAL AUTOMATION'];
   const workspaceMarkup=[operations,project,program,impl,code].map((markup,i)=>
     `<div class="li-desktop-window" data-window="${i}" style="--stack:${i};z-index:${10-i}">
       <div class="li-window-head"><span class="li-window-symbol">${symbols[i]}</span>
@@ -158,7 +158,7 @@
       </div></div></div></div>
     </div>
     <div class="li-center-copy" aria-hidden="true"><div class="li-center-lock">
-      <div class="li-many">MANY WORKSPACES</div><div class="li-one">ONE LEADER</div><div class="li-name">JEFF PURSLEY</div><div class="li-role">Operations Leadership · Project Delivery · Business Systems</div>
+      <div class="li-many">MANY WORKSPACES</div><div class="li-one">ONE LEADER</div><div class="li-name">JEFF PURSLEY</div><div class="li-role">Operations · Revenue Management · Programs · Technology</div>
     </div></div>
     <div class="li-note">ORIGINAL CONCEPT INTERFACES · ALL WORKSPACE DATA IS ILLUSTRATIVE</div>
     <div class="li-loader" aria-hidden="true"><div class="li-loader-track"><span class="li-loader-fill"></span></div>
@@ -302,7 +302,7 @@
     void loader.offsetWidth;
     loader.classList.add('running');
     loaderPercent.textContent='0%';
-    loaderMessage.textContent='Five open applications on Jeff’s Computer';
+    loaderMessage.textContent='Five workspaces · One operating system';
     const start=performance.now();
     window.clearInterval(progressTimer);
     progressTimer=window.setInterval(()=>{
