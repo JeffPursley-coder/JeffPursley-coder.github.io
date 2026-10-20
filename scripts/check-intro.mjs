@@ -15,6 +15,12 @@ for(const type of ['ops','project','program','impl','code']){
 assert.ok(js.includes('prefers-reduced-motion'));
 assert.ok(js.includes('localStorage'));
 assert.ok(js.includes('location.hash') && js.includes('document.referrer'));
+assert.match(js,/const forcePreview = new URLSearchParams\(location.search\).get\('intro'\) === '1'/);
+assert.match(js,/forcePreview\|\|reload/);
+assert.match(js,/heroHeading\.insertAdjacentElement\('afterend',replay\)/);
+assert.match(js,/Watch the intro/);
+assert.match(html,/intro\/intro\.js\?v=20261019b/);
+assert.match(html,/intro\/intro\.css\?v=20261019b/);
 assert.match(js,/Jeff’s Computer/);
 assert.match(js,/<h2 class="li-main-heading">I fix what slows <span>businesses down\.<\/span><\/h2>/);
 assert.match(js,/<div class="li-many">MANY WORKSPACES<\/div>/);
