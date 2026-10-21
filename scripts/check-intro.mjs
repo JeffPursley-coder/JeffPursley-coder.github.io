@@ -32,7 +32,7 @@ for(const [role,software,file] of workspaces){
 }
 assert.equal((js.match(/\{ role: '/g)||[]).length,12,'Exactly 12 screens');
 for(const phrase of ['gm-role-callout','gm-min','gm-minimizing','gm-minimized','gm-pointer',
-  'gm-powering','gm-vanish','gm-skip','Watch the intro','prefers-reduced-motion',
+  'gm-powering','gm-skip','Watch the intro','prefers-reduced-motion',
   'location.hash','document.referrer','localStorage','forced','placePointerOn','gm-screen-reader']){
  assert.ok(js.includes(phrase),'Missing behavior: '+phrase);
 }
@@ -40,6 +40,7 @@ for(const phrase of ['garage-monitor-off.webp','gm-window-head','gm-role-callout
   'gm-crt-shut','gm-power-off','gm-replay','gm-pointer','max-width:760px']){
  assert.ok(css.includes(phrase),'Missing CSS: '+phrase);
 }
+assert.match(js,/phase\('vanish'\)/);
 assert.doesNotMatch(js,/jp-person-fill|jp-brain-intro|ws-track|ws-row-top|li-laptop/);
 let braces=0;
 for(const c of css.replace(/\/\*[\s\S]*?\*\//g,'')){if(c==='{')braces++;if(c==='}')braces--;assert.ok(braces>=0,'Extra CSS brace')}
