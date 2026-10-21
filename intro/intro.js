@@ -6,8 +6,8 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-garage-monitor-v4';
-  const TIMING = Object.freeze({ startup: 250, hold: 135, click: 95, shrink: 220, gap: 20, powerOff: 470, nameHold: 1050, fade: 650 });
+  const SEEN_KEY = 'jp-garage-monitor-v5';
+  const TIMING = Object.freeze({ startup: 300, hold: 700, click: 100, shrink: 300, gap: 65, powerOff: 500, nameHold: 1050, fade: 650 });
   const WORKSPACES = [
     { role: 'Scrum', software: 'Jira Software', file: '12_scrum_jira.webp' },
     { role: 'Project Management', software: 'Microsoft Planner', file: '02_project_manager_microsoft_planner.webp' },
@@ -19,8 +19,7 @@
     { role: 'Budgeting', software: 'Microsoft Excel + Power BI', file: '07_budgeting_excel_power_bi.webp' },
     { role: 'Implementation', software: 'ServiceNow + Jira', file: '04_implementation_specialist_servicenow_jira.webp' },
     { role: 'Process Automation', software: 'Microsoft Power Automate', file: '09_process_automation_power_automate.webp' },
-    { role: 'AI Implementation', software: 'Microsoft Copilot Studio', file: '11_ai_implementation_copilot_studio.webp' },
-    { role: 'Leadership', software: 'Microsoft Teams + Power BI', file: '10_leadership_teams_power_bi.webp' }
+    { role: 'AI Implementation', software: 'Microsoft Copilot Studio', file: '11_ai_implementation_copilot_studio.webp' }
   ];
   const pathname = location.pathname.replace(/\/+$/, '') || '/';
   const forced = new URLSearchParams(location.search).get('intro') === '1';
@@ -32,7 +31,7 @@
   // Each nearly full-screen software window stays readable; the stack peeks at the edges.
   const placements = [
     [7,10,87], [8,9,86], [6,11,87], [9,8,86], [7,12,86], [8,10,87],
-    [6,9,88], [8,11,86], [7,8,87], [9,12,86], [6,10,88], [8,9,87]
+    [6,9,88], [8,11,86], [7,8,87], [9,12,86], [6,10,88]
   ];
   const windowMarkup = WORKSPACES.map((w,i) => {
     const [x,y,width]=placements[i];
@@ -72,7 +71,7 @@
           '<div class="gm-copy gm-copy-name">JEFF PURSLEY</div>',
         '</div>',
       '</div>',
-      '<div class="gm-cinematic" aria-hidden="true"><span class="gm-cinema-many">MANY WORKSPACES</span><span class="gm-cinema-one">ONE LEADER</span></div>',
+      '<div class="gm-cinematic" aria-hidden="true"><span class="gm-cinema-many">MANY WORKSPACES</span><span class="gm-cinema-arrow">→</span><span class="gm-cinema-one">ONLY ONE MANAGER</span></div>',
       '<button class="gm-skip" type="button">Skip intro ↗</button>',
       '<p class="gm-screen-reader" role="status" aria-live="polite"></p>',
     '</div>'
@@ -155,16 +154,14 @@
     showName(false);showCinema(null);
     for(const w of windows){w.classList.remove('gm-minimizing','gm-minimized','gm-active');w.style.removeProperty('--to-x');w.style.removeProperty('--to-y')}
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
-    live.textContent="Jeff's Garage. Twelve software workspaces.";
+    live.textContent="Jeff's Garage. Eleven software workspaces.";
     skip.focus({preventScroll:true});
     await wait(TIMING.startup);if(token!==generation)return;
     for(let i=0;i<windows.length;i++){
       const w=windows[i];
       w.classList.add('gm-active');
       if(i===0)showCinema('many');
-      if(i===3)showCinema(null);
-      if(i===6)showCinema('one');
-      if(i===9)showCinema(null);
+      if(i===Math.floor(WORKSPACES.length/2))showCinema('one');
       showRole(i);
       const button=w.querySelector('.gm-min');
       await wait(TIMING.hold);if(token!==generation)return;
@@ -181,12 +178,12 @@
       w.classList.add('gm-minimized');w.classList.remove('gm-active');
       await wait(TIMING.gap);if(token!==generation)return;
     }
-    live.textContent='All twelve workspaces minimized. Monitor powering off.';
-    showCinema(null);
+    live.textContent='All eleven workspaces minimized. Monitor powering off.';
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
     desktop.classList.add('gm-powering');
     await wait(TIMING.powerOff);if(token!==generation)return;
     showName(true);
+    showCinema(null);
     live.textContent='Jeff Pursley.';
     await wait(TIMING.nameHold);if(token!==generation)return;
     phase('vanish');

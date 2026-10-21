@@ -16,7 +16,7 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
 .gm-windows{position:absolute;inset:0;z-index:3;pointer-events:none}
 .gm-window{position:absolute;left:var(--wx);top:var(--wy);width:var(--ww);aspect-ratio:1.61;z-index:var(--stack);border:1px solid rgba(155,210,239,.7);border-radius:clamp(5px,.65vw,12px);overflow:hidden;background:#ebf4fb;box-shadow:0 9px 27px rgba(1,8,19,.55),0 1px 0 rgba(255,255,255,.38) inset;transform-origin:center center;opacity:1;will-change:transform,opacity}
 .gm-window.gm-active{box-shadow:0 10px 40px rgba(0,3,10,.82),0 0 0 2px rgba(103,200,243,.42)}
-.gm-window.gm-minimizing{transition:transform .22s cubic-bezier(.35,.03,.63,.6),opacity .22s linear;transform:translate(var(--to-x),var(--to-y)) scale(.05);opacity:0}
+.gm-window.gm-minimizing{transition:transform .3s cubic-bezier(.35,.03,.63,.6),opacity .3s linear;transform:translate(var(--to-x),var(--to-y)) scale(.05);opacity:0}
 .gm-window.gm-minimized{display:none}
 .gm-window-head{height:clamp(21px,2.5vw,39px);background:linear-gradient(180deg,#202d40,#142235);color:#f4fbff;display:flex;align-items:center;gap:8px;padding:0 clamp(6px,1.1vw,16px);font-size:clamp(9px,1.05vw,16px);min-width:0}
 .gm-app-icon{font-size:clamp(11px,1.3vw,19px);color:#56c6ff;flex:none}
@@ -52,10 +52,18 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
 .gm-copy-name.gm-copy-on{opacity:1;transform:translate(-50%,-50%) scale(1)}
 /* Full-viewport cinematic overlays; dark gradient behind text, never clipped to the monitor. */
 /* A smaller, localized black opacity spotlight near the lower edge of the applications. */
-.gm-cinematic{position:absolute;inset:0;z-index:45;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .19s ease,visibility .19s ease;background:radial-gradient(ellipse 32% 13% at 50% 81%,rgba(0,0,0,.88) 0%,rgba(0,0,0,.64) 48%,rgba(0,0,0,0) 100%)}
+/* The smaller opacity spotlight stays beneath the app stack, above the frame. */
+.gm-cinematic{position:absolute;inset:0;z-index:45;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .24s ease,visibility .24s ease;background:radial-gradient(ellipse 30% 10% at 50% 76.5%,rgba(0,0,0,.88) 0%,rgba(0,0,0,.55) 54%,rgba(0,0,0,0) 100%)}
 .gm-cinematic.gm-cinematic-visible{opacity:1;visibility:visible}
-.gm-cinematic span{position:absolute;top:81%;left:50%;max-width:96%;width:max-content;white-space:nowrap;opacity:0;transform:translate(-50%,-35%) scale(.96);transition:opacity .18s ease,transform .22s ease;text-align:center;font:950 clamp(35px,6.6vw,105px)/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.035em;color:#fff;text-shadow:0 5px 24px #000,0 0 22px #64c9ff99}
-.gm-cinematic.gm-cinematic-many .gm-cinema-many,.gm-cinematic.gm-cinematic-one .gm-cinema-one{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.gm-cinematic span{position:absolute;top:76.5%;left:50%;max-width:94%;width:max-content;white-space:nowrap;opacity:0;text-align:center;font:900 clamp(33px,5.45vw,84px)/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.027em;color:#fff;text-shadow:0 5px 24px #000,0 0 19px #64c9ff99;transition:opacity .42s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.gm-cinema-many{transform:translate(-50%,-50%) scale(.93)}
+.gm-cinema-one{transform:translate(25%,-50%) scale(.9)}
+.gm-cinema-arrow{font-size:clamp(30px,5vw,62px)!important;transform:translate(-50%,-50%) scale(.5)}
+.gm-cinematic.gm-cinematic-many .gm-cinema-many{opacity:1;transform:translate(-50%,-50%) scale(1)}
+/* The first heading glides aside and points to the conclusion. Both remain visible. */
+.gm-cinematic.gm-cinematic-one .gm-cinema-many{opacity:.92;transform:translate(-114%,-50%) scale(.56)}
+.gm-cinematic.gm-cinematic-one .gm-cinema-arrow{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.gm-cinematic.gm-cinematic-one .gm-cinema-one{opacity:1;transform:translate(10%,-50%) scale(.68)}
 @keyframes gm-minimize-click{0%{filter:brightness(1.8)}100%{filter:brightness(1)}}
 @keyframes gm-click-ring{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(1.25)}}
 .gm-skip{position:absolute;z-index:50;top:clamp(24px,4.5%,70px);right:clamp(24px,3%,52px);border:1px solid rgba(113,189,240,.78);border-radius:999px;padding:7px 13px;color:#e8f7ff;background:rgba(3,19,35,.88);font:700 clamp(10px,1vw,14px) system-ui,sans-serif;cursor:pointer}
@@ -75,11 +83,14 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
  .gm-role-text{font-size:clamp(9px,2.6vw,12px);padding:5px 7px;white-space:nowrap;overflow-wrap:normal}
  .gm-taskbar{min-height:37px;gap:9px;font-size:13px}.gm-search{min-width:40px;max-width:80px;font-size:9px}
  .gm-tray{display:none}
- .gm-cinematic{background:radial-gradient(ellipse 45% 12% at 50% 83%,rgba(0,0,0,.85) 0%,rgba(0,0,0,.60) 48%,rgba(0,0,0,0) 100%)}
- .gm-cinematic span{top:83%;font-size:clamp(24px,7.1vw,58px);max-width:96%;letter-spacing:.02em}
+ .gm-cinematic{background:radial-gradient(ellipse 43% 10% at 50% 78%,rgba(0,0,0,.84) 0%,rgba(0,0,0,.58) 55%,rgba(0,0,0,0) 100%)}
+ .gm-cinematic span{top:78%;font-size:clamp(22px,6.1vw,46px);max-width:96%;letter-spacing:.015em}
+ .gm-cinematic.gm-cinematic-one .gm-cinema-many{transform:translate(-50%,-125%) scale(.71)}
+ .gm-cinematic.gm-cinematic-one .gm-cinema-arrow{transform:translate(-50%,-40%) rotate(90deg) scale(.6);font-size:clamp(23px,5vw,34px)!important}
+ .gm-cinematic.gm-cinematic-one .gm-cinema-one{transform:translate(-50%,5%) scale(.82)}
  .gm-copy-name{font-size:clamp(27px,7.2vw,53px);letter-spacing:.055em}
  .gm-skip{top:18px;right:16px;font-size:11px}
 }
-@media(max-width:390px){.gm-window{left:2%!important;width:96%!important}.gm-role-text{font-size:clamp(8px,2.45vw,10px)}.gm-taskbar{gap:7px}.gm-cinematic span{font-size:clamp(23px,6.8vw,31px)}}
+@media(max-width:390px){.gm-window{left:2%!important;width:96%!important}.gm-role-text{font-size:clamp(8px,2.45vw,10px)}.gm-taskbar{gap:7px}.gm-cinematic span{font-size:clamp(20px,5.8vw,29px)}}
 @media(prefers-reduced-motion:reduce){.gm-intro,.gm-intro *{animation:none!important;transition:none!important}.gm-replay{display:none!important}}
 @media print{.gm-intro,.gm-replay{display:none!important}}
