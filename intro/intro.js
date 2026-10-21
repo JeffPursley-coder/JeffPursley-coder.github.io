@@ -1,19 +1,17 @@
 /**
- * Jeff's Garage Monitor — one screen, twelve real-software-inspired demo workspaces.
+ * Jeff's Garage Monitor — one screen, nine real-software-inspired demo workspaces.
  * Each title stays in its own faux application chrome. The role label sits off to
  * the side with a connector; its minimize icon clicks itself, then powers off.
  * All images are illustrative portfolio demos, not authenticated vendor screens.
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-garage-monitor-v5';
+  const SEEN_KEY = 'jp-garage-monitor-v6';
   const TIMING = Object.freeze({ startup: 300, hold: 700, click: 100, shrink: 300, gap: 65, powerOff: 500, nameHold: 1050, fade: 650 });
   const WORKSPACES = [
-    { role: 'Scrum', software: 'Jira Software', file: '12_scrum_jira.webp' },
     { role: 'Project Management', software: 'Microsoft Planner', file: '02_project_manager_microsoft_planner.webp' },
     { role: 'Program Management', software: 'Planview Program Portfolio', file: '03_program_manager_planview.webp' },
     { role: 'Revenue Management', software: 'Microsoft Power BI', file: '05_revenue_management_power_bi.webp' },
-    { role: 'Business Systems', software: 'Dynamics 365 + Power Platform', file: '08_business_systems_power_platform.webp' },
     { role: 'Supply Chain', software: 'SAP Integrated Business Planning', file: '06_supply_chain_sap_ibp.webp' },
     { role: 'Operations Management', software: 'Dynamics 365 Field Service', file: '01_operations_manager_dynamics_365_field_service.webp' },
     { role: 'Budgeting', software: 'Microsoft Excel + Power BI', file: '07_budgeting_excel_power_bi.webp' },
@@ -30,8 +28,8 @@
   const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   // Each nearly full-screen software window stays readable; the stack peeks at the edges.
   const placements = [
-    [7,10,87], [8,9,86], [6,11,87], [9,8,86], [7,12,86], [8,10,87],
-    [6,9,88], [8,11,86], [7,8,87], [9,12,86], [6,10,88]
+    [8,9,86], [6,11,87], [9,8,86], [8,10,87], [6,9,88],
+    [8,11,86], [7,8,87], [9,12,86], [6,10,88]
   ];
   const windowMarkup = WORKSPACES.map((w,i) => {
     const [x,y,width]=placements[i];
@@ -62,7 +60,7 @@
           '</div>',
           '<div class="gm-windows">'+windowMarkup+'</div>',
           '<svg class="gm-role-link" aria-hidden="true" preserveAspectRatio="none"><path></path><circle r="3.5"></circle></svg>',
-          '<div class="gm-role-callout"><span class="gm-role-text">Scrum</span></div>',
+          '<div class="gm-role-callout"><span class="gm-role-text">Project Management</span></div>',
           '<div class="gm-taskbar" aria-hidden="true"><span class="gm-start">⊞</span><span class="gm-search">⌕ &nbsp; Search</span>',
             '<span>▤</span><span>🌐</span><span>▦</span><span>▥</span><span>◆</span><span class="gm-tray">⌃　◕　◖))　▣</span></div>',
           '<div class="gm-crt-shut" aria-hidden="true"></div>',
@@ -154,7 +152,7 @@
     showName(false);showCinema(null);
     for(const w of windows){w.classList.remove('gm-minimizing','gm-minimized','gm-active');w.style.removeProperty('--to-x');w.style.removeProperty('--to-y')}
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
-    live.textContent="Jeff's Garage. Eleven software workspaces.";
+    live.textContent="Jeff's Garage. Nine software workspaces.";
     skip.focus({preventScroll:true});
     await wait(TIMING.startup);if(token!==generation)return;
     for(let i=0;i<windows.length;i++){
@@ -178,7 +176,7 @@
       w.classList.add('gm-minimized');w.classList.remove('gm-active');
       await wait(TIMING.gap);if(token!==generation)return;
     }
-    live.textContent='All eleven workspaces minimized. Monitor powering off.';
+    live.textContent='All nine workspaces minimized. Monitor powering off.';
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
     desktop.classList.add('gm-powering');
     await wait(TIMING.powerOff);if(token!==generation)return;
