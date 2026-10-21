@@ -1,16 +1,21 @@
-# Many Workspaces — full-screen GitHub Pages intro
+# Jeff's Garage monitor introduction
 
-This is the **large-screen, two-row revision** of the homepage animation. All **12** pre-existing software-inspired demo images remain local in `assets/workspaces/`. No fictional NexaPlan or NexaField files are used.
+The homepage has a **standalone rugged retro monitor** as the entire cinematic stage: no laptop, keyboard or stand. The actual frame is based on Jeff's uploaded powered-off monitor image (`assets/img/garage-monitor-off.webp`). The desktop powers on inside the frame with an editable Windows-inspired wallpaper, icons and taskbar.
 
-- Top six screens: Operations Manager (Dynamics 365 Field Service), Project Manager (Microsoft Planner), Program Manager (Planview), Implementation Specialist (ServiceNow + Jira), Revenue Management (Power BI), Supply Chain (SAP IBP).
-- Bottom six screens: Budgeting (Excel + Power BI), Business Systems (Power Platform), Process Automation (Power Automate), Leadership (Teams + Power BI), AI Implementation (Copilot Studio), Scrum (Jira).
+The site reuses all 12 locally hosted software-inspired portfolio screens in `assets/workspaces/`. Their actual software names are in the window title bars: Jira, Microsoft Planner, Planview, Power BI, Dynamics 365, SAP IBP, Excel, ServiceNow, Power Automate, Microsoft Copilot Studio, and Teams. **Role labels are external to the windows**, left-aligned alongside the currently active window and connected by a small bright cyan line. The cursor travels to each minimize button and quickly contracts that window into the taskbar. Once all 12 are minimized, the desktop flickers/shrinks off; the dark monitor fades out, revealing the existing professional homepage.
 
-Both strips use **native 16:9 ratios** with large cards. The top moves right and the bottom moves left. At runtime, travel distance is calculated as the **entire six-card strip width minus the viewport**; this ensures all 12 screens pass into view instead of merely showing a fourth card. The center band remains stationary while both filmstrips keep scrolling through every text change.
+The screenshots are illustrative interface recreations, not live sessions or verified employer records.
 
-Sequence: **MANY WORKSPACES** for 2 s → **ONE LEADER** for 2 s → **JEFF PURSLEY** for 2 s → fade into the unchanged homepage for 0.65 s (about 6.65 s total). The screenshot rows travel continuously through all three titles, with no stopping or restarting. Labels show both the job function and real software name.
+## Play, skip, replay
 
-Skip/Escape, manual Replay, first-visit autoplay, cache busting and reduced-motion support remain. Forced preview: https://jeffpursley-coder.github.io/?intro=1 .
+The intro plays on first direct visits and reloads; `?intro=1` forces it. It does not intercept anchor/deep links, internal navigation, or people with reduced-motion preferences. Skip intro and Escape end the animation; a `Watch the intro` button appears in the homepage hero. The portfolio and its existing portrait and case studies are not modified.
 
-Automated checks: `node --check intro/intro.js` and `node scripts/check-intro.mjs` plus the site's usual integrity workflow.
+## Customize
 
-**Disclosure:** Workspace image content contains fictional demonstration records. The recreations are not native authenticated sessions, nor evidence of experience with every vendor product.
+- `intro/intro.js`: `WORKSPACES` lists each role, actual software window title, and image; `placements` controls the 12 window positions; `TIMING` controls speed.
+- `intro/intro.css`: monitor, desktop, callout, pointer and power-off animation.
+- `assets/img/garage-monitor-off.webp`: optimized local monitor frame artwork.
+
+## Verify
+
+Run `node --check intro/intro.js` and `node scripts/check-intro.mjs`. GitHub Actions runs both when the intro changes. After deployment, verify desktop and mobile Safari and use `https://jeffpursley-coder.github.io/?intro=1` to replay.
