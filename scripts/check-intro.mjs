@@ -4,8 +4,8 @@ import { readFileSync, existsSync } from 'node:fs';
 const html=readFileSync('index.html','utf8');
 const js=readFileSync('intro/intro.js','utf8');
 const css=readFileSync('intro/intro.css','utf8');
-assert.match(html,/intro\/intro\.css\?v=20261021-garage-v2/);
-assert.match(html,/intro\/intro\.js\?v=20261021-garage-v2/);
+assert.match(html,/intro\/intro\.css\?v=20261021-garage-v3/);
+assert.match(html,/intro\/intro\.js\?v=20261021-garage-v3/);
 assert.ok(existsSync('assets/img/garage-monitor-off.webp'),'Monitor asset must exist');
 const asset=readFileSync('assets/img/garage-monitor-off.webp');
 assert.equal(asset.toString('ascii',0,4),'RIFF','Monitor asset must be WebP RIFF');
@@ -31,26 +31,30 @@ for(const [role,software,file] of workspaces){
  assert.ok(existsSync('assets/workspaces/'+file),'Screenshot missing: '+file);
 }
 assert.equal((js.match(/\{ role: '/g)||[]).length,12,'Exactly 12 screens');
-for(const phrase of ['gm-role-callout','gm-min','gm-minimizing','gm-minimized','gm-pointer',
+for(const phrase of ['gm-role-callout','gm-min','gm-minimizing','gm-minimized','gm-cinematic',
   'gm-powering','gm-skip','Watch the intro','prefers-reduced-motion',
-  'location.hash','document.referrer','localStorage','forced','placePointerOn','gm-screen-reader']){
+  'location.hash','document.referrer','localStorage','forced','gm-screen-reader']){
  assert.ok(js.includes(phrase),'Missing behavior: '+phrase);
 }
 for(const phrase of ['garage-monitor-off.webp','gm-window-head','gm-role-callout',
-  'gm-crt-shut','gm-power-off','gm-replay','gm-pointer','max-width:760px']){
+  'gm-crt-shut','gm-power-off','gm-replay','gm-cinematic','max-width:760px']){
  assert.ok(css.includes(phrase),'Missing CSS: '+phrase);
 }
 assert.match(js,/phase\('vanish'\)/);
-for(const phrase of ['MANY WORKSPACES','ONE LEADER','JEFF PURSLEY','gm-copy-overlay',"showCopy('many')","showCopy('one')","showCopy('name')",'nameHold: 1100','await wait(TIMING.powerOff)']){
+assert.doesNotMatch(js,/gm-pointer|placePointerOn|move: 155/);
+assert.match(js,/\[7,10,87\]/);
+assert.match(css,/gm-click-ring/);
+assert.match(css,/gm-cinematic-visible/);
+for(const phrase of ['MANY WORKSPACES','ONE LEADER','JEFF PURSLEY','gm-copy-overlay',"showCinema('many')","showCinema('one')","showName(true)",'nameHold: 1050','await wait(TIMING.powerOff)']){
  assert.ok(js.includes(phrase),'Missing title beat or timing: '+phrase);
 }
-for(const selector of ['.gm-copy-many.gm-copy-on','.gm-copy-one.gm-copy-on','.gm-copy-name.gm-copy-on','.gm-copy-overlay']){
+for(const selector of ['.gm-cinematic.gm-cinematic-many .gm-cinema-many','.gm-cinematic.gm-cinematic-one .gm-cinema-one','.gm-copy-name.gm-copy-on','.gm-copy-overlay']){
  assert.ok(css.includes(selector),'Missing style: '+selector);
 }
-assert.ok(js.indexOf("showCopy('name')")>js.indexOf("await wait(TIMING.powerOff)"),'Name must follow power-off');
-assert.ok(js.indexOf("showCopy('one')")>js.indexOf("showCopy('many')"),'One leader must follow many workspaces');
+assert.ok(js.indexOf('showName(true)')>js.indexOf("await wait(TIMING.powerOff)"),'Name must follow power-off');
+assert.ok(js.indexOf("showCinema('one')")>js.indexOf("showCinema('many')"),'One leader must follow many workspaces');
 assert.doesNotMatch(js,/jp-person-fill|jp-brain-intro|ws-track|ws-row-top|li-laptop/);
 let braces=0;
 for(const c of css.replace(/\/\*[\s\S]*?\*\//g,'')){if(c==='{')braces++;if(c==='}')braces--;assert.ok(braces>=0,'Extra CSS brace')}
 assert.equal(braces,0,'CSS braces balanced');
-console.log('Garage monitor intro PASS: 12 workspaces, side callouts, cursor minimization, power off and accessibility.');
+console.log('Garage monitor intro PASS: 12 workspaces, side callouts, animated minimize-icon clicks, power off and accessibility.');

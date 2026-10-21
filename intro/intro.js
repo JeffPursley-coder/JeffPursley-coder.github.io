@@ -1,13 +1,13 @@
 /**
  * Jeff's Garage Monitor — one screen, twelve real-software-inspired demo workspaces.
  * Each title stays in its own faux application chrome. The role label sits off to
- * the side with a connector; a pointer minimizes each window, then powers off.
+ * the side with a connector; its minimize icon clicks itself, then powers off.
  * All images are illustrative portfolio demos, not authenticated vendor screens.
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-garage-monitor-v1';
-  const TIMING = Object.freeze({ startup: 430, hold: 165, move: 155, click: 65, shrink: 245, gap: 55, powerOff: 585, nameHold: 1100, fade: 750 });
+  const SEEN_KEY = 'jp-garage-monitor-v3';
+  const TIMING = Object.freeze({ startup: 250, hold: 115, click: 90, shrink: 190, gap: 15, powerOff: 470, nameHold: 1050, fade: 650 });
   const WORKSPACES = [
     { role: 'Scrum', software: 'Jira Software', file: '12_scrum_jira.webp' },
     { role: 'Project Management', software: 'Microsoft Planner', file: '02_project_manager_microsoft_planner.webp' },
@@ -29,10 +29,10 @@
   if (!hero) return;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  // Top window is most prominent. The other 11 peek out from staggered positions.
+  // Each nearly full-screen software window stays readable; the stack peeks at the edges.
   const placements = [
-    [25,19,67], [23,15,68], [27,12,66], [22,21,67], [25,16,68], [21,11,69],
-    [26,20,67], [23,13,67], [28,17,66], [22,22,69], [24,10,68], [27,14,66]
+    [7,10,87], [8,9,86], [6,11,87], [9,8,86], [7,12,86], [8,10,87],
+    [6,9,88], [8,11,86], [7,8,87], [9,12,86], [6,10,88], [8,9,87]
   ];
   const windowMarkup = WORKSPACES.map((w,i) => {
     const [x,y,width]=placements[i];
@@ -63,17 +63,15 @@
           '</div>',
           '<div class="gm-windows">'+windowMarkup+'</div>',
           '<div class="gm-role-callout"><span class="gm-role-text">Scrum</span><i></i></div>',
-          '<div class="gm-pointer" aria-hidden="true"><svg viewBox="0 0 23 29" width="23" height="29"><path d="M3 2L19 17.5l-7.8 1 4.6 8.1-4.3 2L7.4 20l-4.4 5V2Z" fill="white" stroke="#16273c" stroke-width="1.8" stroke-linejoin="round"/></svg></div>',
           '<div class="gm-taskbar" aria-hidden="true"><span class="gm-start">⊞</span><span class="gm-search">⌕ &nbsp; Search</span>',
             '<span>▤</span><span>🌐</span><span>▦</span><span>▥</span><span>◆</span><span class="gm-tray">⌃　◕　◖))　▣</span></div>',
           '<div class="gm-crt-shut" aria-hidden="true"></div>',
         '</div>',
         '<div class="gm-copy-overlay" aria-hidden="true">',
-          '<div class="gm-copy gm-copy-many">MANY WORKSPACES</div>',
-          '<div class="gm-copy gm-copy-one">ONE LEADER</div>',
           '<div class="gm-copy gm-copy-name">JEFF PURSLEY</div>',
         '</div>',
       '</div>',
+      '<div class="gm-cinematic" aria-hidden="true"><span class="gm-cinema-many">MANY WORKSPACES</span><span class="gm-cinema-one">ONE LEADER</span></div>',
       '<button class="gm-skip" type="button">Skip intro ↗</button>',
       '<p class="gm-screen-reader" role="status" aria-live="polite"></p>',
     '</div>'
@@ -87,12 +85,15 @@
   if(heading)heading.insertAdjacentElement('afterend',replay);
   else (hero.querySelector('.hero-copy')||hero).appendChild(replay);
   const q = selector => overlay.querySelector(selector);
-  const skip=q('.gm-skip'),screen=q('.gm-screen'),desktop=q('.gm-desktop'),pointer=q('.gm-pointer');
+  const skip=q('.gm-skip'),screen=q('.gm-screen'),desktop=q('.gm-desktop');
   const label=q('.gm-role-text'),callout=q('.gm-role-callout'),live=q('.gm-screen-reader');
   const windows=[...overlay.querySelectorAll('.gm-window')];
-  const copyBeats={many:q('.gm-copy-many'),one:q('.gm-copy-one'),name:q('.gm-copy-name')};
-  function showCopy(which){
-    for(const [beat,node] of Object.entries(copyBeats))node.classList.toggle('gm-copy-on',beat===which);
+  const nameText=q('.gm-copy-name'),cinema=q('.gm-cinematic');
+  function showName(visible){nameText.classList.toggle('gm-copy-on',visible)}
+  function showCinema(beat){
+    cinema.classList.toggle('gm-cinematic-visible',Boolean(beat));
+    cinema.classList.toggle('gm-cinematic-many',beat==='many');
+    cinema.classList.toggle('gm-cinematic-one',beat==='one');
   }
   let running=false,generation=0,returnFocus=null,closeTimer=null;
   const waits=new Set();
@@ -106,11 +107,6 @@
   })}
   function cancelWaits(){for(const t of waits){clearTimeout(t.id);t.resolve()}waits.clear()}
   function phase(p){overlay.className='gm-intro gm-'+p}
-  function placePointerOn(button){
-    const r=button.getBoundingClientRect(),s=screen.getBoundingClientRect();
-    pointer.style.left=(r.left-s.left+r.width*.46)+'px';
-    pointer.style.top=(r.top-s.top+r.height*.35)+'px';
-  }
   function showRole(i){
     label.textContent=WORKSPACES[i].role;
     const box=windows[i].getBoundingClientRect(),s=screen.getBoundingClientRect();
@@ -144,27 +140,25 @@
     overlay.inert=false;overlay.setAttribute('aria-hidden','false');
     document.documentElement.classList.add('gm-locked');
     phase('ready');desktop.classList.remove('gm-powering');
-    showCopy(null);
-    pointer.classList.remove('gm-click');
+    showName(false);showCinema(null);
     for(const w of windows){w.classList.remove('gm-minimizing','gm-minimized','gm-active');w.style.removeProperty('--to-x');w.style.removeProperty('--to-y')}
     callout.classList.remove('gm-visible');
-    pointer.style.left='46%';pointer.style.top='74%';
     live.textContent="Jeff's Garage. Twelve software workspaces.";
     skip.focus({preventScroll:true});
     await wait(TIMING.startup);if(token!==generation)return;
     for(let i=0;i<windows.length;i++){
       const w=windows[i];
       w.classList.add('gm-active');
-      if(i===0)showCopy('many');
-      if(i===6)showCopy('one');
+      if(i===0)showCinema('many');
+      if(i===3)showCinema(null);
+      if(i===6)showCinema('one');
+      if(i===9)showCinema(null);
       showRole(i);
       const button=w.querySelector('.gm-min');
       await wait(TIMING.hold);if(token!==generation)return;
-      placePointerOn(button);
-      await wait(TIMING.move);if(token!==generation)return;
-      pointer.classList.add('gm-click');button.classList.add('gm-pressed');
+      button.classList.add('gm-pressed');
       await wait(TIMING.click);if(token!==generation)return;
-      pointer.classList.remove('gm-click');button.classList.remove('gm-pressed');
+      button.classList.remove('gm-pressed');
       const rect=w.getBoundingClientRect(),s=screen.getBoundingClientRect();
       const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
       w.style.setProperty('--to-x',(s.left+s.width*.47-cx)+'px');
@@ -176,11 +170,11 @@
       await wait(TIMING.gap);if(token!==generation)return;
     }
     live.textContent='All twelve workspaces minimized. Monitor powering off.';
-    pointer.style.left='98%';pointer.style.top='82%';
+    showCinema(null);
     callout.classList.remove('gm-visible');
     desktop.classList.add('gm-powering');
     await wait(TIMING.powerOff);if(token!==generation)return;
-    showCopy('name');
+    showName(true);
     live.textContent='Jeff Pursley.';
     await wait(TIMING.nameHold);if(token!==generation)return;
     phase('vanish');
