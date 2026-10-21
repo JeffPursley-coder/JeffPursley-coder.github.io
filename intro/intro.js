@@ -6,8 +6,8 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-garage-monitor-v6';
-  const TIMING = Object.freeze({ startup: 300, hold: 700, click: 100, shrink: 300, gap: 65, powerOff: 500, nameHold: 1050, fade: 650 });
+  const SEEN_KEY = 'jp-garage-monitor-v7';
+  const TIMING = Object.freeze({ startup: 300, hold: 700, click: 100, shrink: 300, gap: 65, powerOff: 560, nameHold: 1400, fade: 700 });
   const WORKSPACES = [
     { role: 'Project Management', software: 'Microsoft Planner', file: '02_project_manager_microsoft_planner.webp' },
     { role: 'Program Management', software: 'Planview Program Portfolio', file: '03_program_manager_planview.webp' },
@@ -65,14 +65,12 @@
             '<span>▤</span><span>🌐</span><span>▦</span><span>▥</span><span>◆</span><span class="gm-tray">⌃　◕　◖))　▣</span></div>',
           '<div class="gm-crt-shut" aria-hidden="true"></div>',
         '</div>',
-        '<div class="gm-copy-overlay" aria-hidden="true">',
-          '<div class="gm-copy gm-copy-name">JEFF PURSLEY</div>',
-        '</div>',
       '</div>',
-      '<div class="gm-cinematic" aria-hidden="true"><span class="gm-cinema-many">MANY WORKSPACES</span><span class="gm-cinema-arrow">→</span><span class="gm-cinema-one">ONLY ONE MANAGER</span></div>',
+      '<div class="gm-cinematic" aria-hidden="true"><span class="gm-cinema-many">MANY WORKSPACES</span><span class="gm-cinema-arrow">↓</span><span class="gm-cinema-one">AND ONLY ONE MANAGER</span></div>',
       '<button class="gm-skip" type="button">Skip intro ↗</button>',
       '<p class="gm-screen-reader" role="status" aria-live="polite"></p>',
-    '</div>'
+    '</div>',
+    '<div class="gm-copy-overlay" aria-hidden="true"><div class="gm-copy gm-copy-name">JEFF PURSLEY</div></div>'
   ].join('');
   document.body.appendChild(overlay);
   const replay=document.createElement('button');
@@ -178,13 +176,15 @@
     }
     live.textContent='All nine workspaces minimized. Monitor powering off.';
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
+    // CRT, frame and the headline disappear together; the name is a separate final card.
+    overlay.classList.add('gm-shutting');
     desktop.classList.add('gm-powering');
     await wait(TIMING.powerOff);if(token!==generation)return;
-    showName(true);
     showCinema(null);
+    showName(true);
     live.textContent='Jeff Pursley.';
     await wait(TIMING.nameHold);if(token!==generation)return;
-    phase('vanish');
+    overlay.classList.add('gm-vanish');
     live.textContent='Opening Jeff Pursley portfolio.';
     await wait(TIMING.fade);if(token!==generation)return;
     finish();

@@ -46,24 +46,32 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
 @keyframes gm-power-off{0%{opacity:1;filter:brightness(1);transform:scaleY(1)}55%{opacity:1;filter:brightness(1.65) saturate(.55);transform:scaleY(.93)}76%{opacity:1;filter:brightness(2.8) saturate(0);transform:scaleY(.008)}85%{opacity:1;filter:brightness(2);transform:scale(.09,.005)}100%{opacity:0;filter:brightness(0);transform:scale(0,.002)}}
 @keyframes gm-off-glow{0%,35%{opacity:0}65%{opacity:.2}100%{opacity:1}}
 /* Name is on the powered-off glass; other two captions float above the entire monitor. */
-.gm-copy-overlay{position:absolute;inset:0;z-index:40;pointer-events:none;isolation:isolate}
-.gm-copy{position:absolute;left:50%;opacity:0;transition:opacity .24s ease,transform .24s ease;text-align:center;color:#f8fcff;line-height:1.1;text-shadow:0 3px 17px #000,0 0 30px rgba(77,205,255,.5)}
-.gm-copy-name{top:50%;width:95%;transform:translate(-50%,-40%) scale(.94);font:900 clamp(32px,6vw,80px)/1.05 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.11em;text-shadow:0 1px 35px #77b8df82,0 4px 24px #000}
+/* Full-screen title, not attached to the disappearing monitor: only Jeff Pursley remains. */
+.gm-copy-overlay{position:absolute;inset:0;z-index:60;pointer-events:none;isolation:isolate}
+.gm-copy{position:absolute;left:50%;opacity:0;transition:opacity .4s ease,transform .45s cubic-bezier(.2,.8,.2,1);text-align:center;color:#fff;line-height:1.04}
+.gm-copy-name{top:50%;width:97%;white-space:nowrap;transform:translate(-50%,-47%) scale(.93);font:900 clamp(44px,7.7vw,122px)/1.03 "Arial Narrow","Helvetica Neue",Arial,"Segoe UI",sans-serif;letter-spacing:.095em;-webkit-text-stroke:.9px rgba(207,231,248,.82);text-shadow:0 2px 18px rgba(0,0,0,.9),0 0 25px rgba(106,163,207,.3)}
 .gm-copy-name.gm-copy-on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+/* Short CRT flicker removes the entire monitor and its headline simultaneously. */
+.gm-intro.gm-shutting .gm-monitor{animation:gm-monitor-flick-out .56s steps(1,end) forwards;pointer-events:none}
+.gm-intro.gm-shutting::before{content:"";position:absolute;inset:0;z-index:55;background:#fff;pointer-events:none;animation:gm-screen-flash .56s linear both}
+@keyframes gm-monitor-flick-out{0%{opacity:1;filter:brightness(1)}14%{opacity:.7;filter:brightness(2.5)}20%{opacity:1;filter:brightness(1)}35%{opacity:.35;filter:brightness(2)}43%{opacity:.95;filter:brightness(1.7)}61%{opacity:.12;transform:scaleY(.96);filter:brightness(2.8)}72%{opacity:.4;transform:scaleY(.03)}83%,100%{opacity:0;transform:scaleY(.002);visibility:hidden}}
+@keyframes gm-screen-flash{0%,30%,48%,67%,100%{opacity:0}36%{opacity:.2}55%{opacity:.12}73%{opacity:.05}}
 /* Full-viewport cinematic overlays; dark gradient behind text, never clipped to the monitor. */
 /* A smaller, localized black opacity spotlight near the lower edge of the applications. */
 /* The smaller opacity spotlight stays beneath the app stack, above the frame. */
-.gm-cinematic{position:absolute;inset:0;z-index:45;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .24s ease,visibility .24s ease;background:radial-gradient(ellipse 30% 10% at 50% 76.5%,rgba(0,0,0,.88) 0%,rgba(0,0,0,.55) 54%,rgba(0,0,0,0) 100%)}
+/* Title sequence in the lower part of the monitor: bounce upward, then downward arrow. */
+.gm-cinematic{position:absolute;inset:0;z-index:45;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease;background:radial-gradient(ellipse 37% 15% at 50% 77%,rgba(0,0,0,.88) 0%,rgba(0,0,0,.52) 54%,rgba(0,0,0,0) 100%)}
 .gm-cinematic.gm-cinematic-visible{opacity:1;visibility:visible}
-.gm-cinematic span{position:absolute;top:76.5%;left:50%;max-width:94%;width:max-content;white-space:nowrap;opacity:0;text-align:center;font:900 clamp(33px,5.45vw,84px)/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.027em;color:#fff;text-shadow:0 5px 24px #000,0 0 19px #64c9ff99;transition:opacity .42s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
-.gm-cinema-many{transform:translate(-50%,-50%) scale(.93)}
-.gm-cinema-one{transform:translate(25%,-50%) scale(.9)}
-.gm-cinema-arrow{font-size:clamp(30px,5vw,62px)!important;transform:translate(-50%,-50%) scale(.5)}
+.gm-cinematic span{position:absolute;left:50%;width:max-content;max-width:96%;white-space:nowrap;opacity:0;text-align:center;color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.95),0 0 22px rgba(125,198,236,.35);transition:opacity .32s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.gm-cinema-many{top:76.5%;font:950 clamp(36px,5.2vw,82px)/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.028em;transform:translate(-50%,-50%) scale(.95)}
+.gm-cinema-arrow{top:77.8%;font:950 clamp(38px,5.2vw,72px)/1 system-ui,-apple-system,"Segoe UI",sans-serif;transform:translate(-50%,-50%) scale(.52)}
+.gm-cinema-one{top:85%;font:950 clamp(38px,5.3vw,85px)/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.01em;transform:translate(-50%,-30%) scale(.88)}
 .gm-cinematic.gm-cinematic-many .gm-cinema-many{opacity:1;transform:translate(-50%,-50%) scale(1)}
-/* The first heading glides aside and points to the conclusion. Both remain visible. */
-.gm-cinematic.gm-cinematic-one .gm-cinema-many{opacity:.92;transform:translate(-114%,-50%) scale(.56)}
-.gm-cinematic.gm-cinematic-one .gm-cinema-arrow{opacity:1;transform:translate(-50%,-50%) scale(1)}
-.gm-cinematic.gm-cinematic-one .gm-cinema-one{opacity:1;transform:translate(10%,-50%) scale(.68)}
+.gm-cinematic.gm-cinematic-one .gm-cinema-many{opacity:1;animation:gm-many-bounce-up .75s cubic-bezier(.2,.82,.2,1) both}
+.gm-cinematic.gm-cinematic-one .gm-cinema-arrow{opacity:1;transform:translate(-50%,-50%) scale(1);transition-delay:.2s}
+.gm-cinematic.gm-cinematic-one .gm-cinema-one{opacity:1;transform:translate(-50%,-50%) scale(1);transition-delay:.33s}
+/* The second beat is a clear upward bounce; the arrow and conclusion have breathing room. */
+@keyframes gm-many-bounce-up{0%{transform:translate(-50%,-50%) scale(1)}53%{transform:translate(-50%,-186%) scale(.86)}72%{transform:translate(-50%,-151%) scale(.88)}86%{transform:translate(-50%,-166%) scale(.87)}100%{transform:translate(-50%,-160%) scale(.87)}}
 @keyframes gm-minimize-click{0%{filter:brightness(1.8)}100%{filter:brightness(1)}}
 @keyframes gm-click-ring{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(1.25)}}
 .gm-skip{position:absolute;z-index:50;top:clamp(24px,4.5%,70px);right:clamp(24px,3%,52px);border:1px solid rgba(113,189,240,.78);border-radius:999px;padding:7px 13px;color:#e8f7ff;background:rgba(3,19,35,.88);font:700 clamp(10px,1vw,14px) system-ui,sans-serif;cursor:pointer}
@@ -83,14 +91,13 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
  .gm-role-text{font-size:clamp(9px,2.6vw,12px);padding:5px 7px;white-space:nowrap;overflow-wrap:normal}
  .gm-taskbar{min-height:37px;gap:9px;font-size:13px}.gm-search{min-width:40px;max-width:80px;font-size:9px}
  .gm-tray{display:none}
- .gm-cinematic{background:radial-gradient(ellipse 43% 10% at 50% 78%,rgba(0,0,0,.84) 0%,rgba(0,0,0,.58) 55%,rgba(0,0,0,0) 100%)}
- .gm-cinematic span{top:78%;font-size:clamp(22px,6.1vw,46px);max-width:96%;letter-spacing:.015em}
- .gm-cinematic.gm-cinematic-one .gm-cinema-many{transform:translate(-50%,-125%) scale(.71)}
- .gm-cinematic.gm-cinematic-one .gm-cinema-arrow{transform:translate(-50%,-40%) rotate(90deg) scale(.6);font-size:clamp(23px,5vw,34px)!important}
- .gm-cinematic.gm-cinematic-one .gm-cinema-one{transform:translate(-50%,5%) scale(.82)}
- .gm-copy-name{font-size:clamp(27px,7.2vw,53px);letter-spacing:.055em}
+ .gm-cinematic{background:radial-gradient(ellipse 47% 15% at 50% 77%,rgba(0,0,0,.86) 0%,rgba(0,0,0,.57) 54%,rgba(0,0,0,0) 100%)}
+ .gm-cinema-many{top:75.5%;font-size:clamp(22px,6vw,42px);letter-spacing:.015em}
+ .gm-cinema-arrow{top:77.9%;font-size:clamp(27px,7vw,48px)}
+ .gm-cinema-one{top:85.3%;font-size:clamp(22px,6.15vw,44px);letter-spacing:.005em}
+ .gm-copy-name{font-size:clamp(33px,8.2vw,67px);letter-spacing:.055em}
  .gm-skip{top:18px;right:16px;font-size:11px}
 }
-@media(max-width:390px){.gm-window{left:2%!important;width:96%!important}.gm-role-text{font-size:clamp(8px,2.45vw,10px)}.gm-taskbar{gap:7px}.gm-cinematic span{font-size:clamp(20px,5.8vw,29px)}}
+@media(max-width:390px){.gm-window{left:2%!important;width:96%!important}.gm-role-text{font-size:clamp(8px,2.45vw,10px)}.gm-taskbar{gap:7px}.gm-cinema-many{font-size:clamp(21px,5.8vw,27px)}.gm-cinema-arrow{font-size:clamp(25px,6.3vw,32px)}.gm-cinema-one{font-size:clamp(20px,5.5vw,27px)}.gm-copy-name{font-size:clamp(30px,8vw,39px)}}
 @media(prefers-reduced-motion:reduce){.gm-intro,.gm-intro *{animation:none!important;transition:none!important}.gm-replay{display:none!important}}
 @media print{.gm-intro,.gm-replay{display:none!important}}
