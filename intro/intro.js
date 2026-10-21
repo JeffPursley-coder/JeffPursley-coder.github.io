@@ -6,8 +6,8 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-garage-monitor-v3';
-  const TIMING = Object.freeze({ startup: 250, hold: 115, click: 90, shrink: 190, gap: 15, powerOff: 470, nameHold: 1050, fade: 650 });
+  const SEEN_KEY = 'jp-garage-monitor-v4';
+  const TIMING = Object.freeze({ startup: 250, hold: 135, click: 95, shrink: 220, gap: 20, powerOff: 470, nameHold: 1050, fade: 650 });
   const WORKSPACES = [
     { role: 'Scrum', software: 'Jira Software', file: '12_scrum_jira.webp' },
     { role: 'Project Management', software: 'Microsoft Planner', file: '02_project_manager_microsoft_planner.webp' },
@@ -62,7 +62,8 @@
             '<div><b>▥</b><span>Teams</span></div>',
           '</div>',
           '<div class="gm-windows">'+windowMarkup+'</div>',
-          '<div class="gm-role-callout"><span class="gm-role-text">Scrum</span><i></i></div>',
+          '<svg class="gm-role-link" aria-hidden="true" preserveAspectRatio="none"><path></path><circle r="3.5"></circle></svg>',
+          '<div class="gm-role-callout"><span class="gm-role-text">Scrum</span></div>',
           '<div class="gm-taskbar" aria-hidden="true"><span class="gm-start">⊞</span><span class="gm-search">⌕ &nbsp; Search</span>',
             '<span>▤</span><span>🌐</span><span>▦</span><span>▥</span><span>◆</span><span class="gm-tray">⌃　◕　◖))　▣</span></div>',
           '<div class="gm-crt-shut" aria-hidden="true"></div>',
@@ -86,7 +87,7 @@
   else (hero.querySelector('.hero-copy')||hero).appendChild(replay);
   const q = selector => overlay.querySelector(selector);
   const skip=q('.gm-skip'),screen=q('.gm-screen'),desktop=q('.gm-desktop');
-  const label=q('.gm-role-text'),callout=q('.gm-role-callout'),live=q('.gm-screen-reader');
+  const label=q('.gm-role-text'),callout=q('.gm-role-callout'),link=q('.gm-role-link'),live=q('.gm-screen-reader');
   const windows=[...overlay.querySelectorAll('.gm-window')];
   const nameText=q('.gm-copy-name'),cinema=q('.gm-cinematic');
   function showName(visible){nameText.classList.toggle('gm-copy-on',visible)}
@@ -109,10 +110,21 @@
   function phase(p){overlay.className='gm-intro gm-'+p}
   function showRole(i){
     label.textContent=WORKSPACES[i].role;
-    const box=windows[i].getBoundingClientRect(),s=screen.getBoundingClientRect();
-    const relativeTop=Math.max(7,Math.min(76,(box.top-s.top+s.height*.025)/s.height*100));
-    callout.style.top=relativeTop+'%';
+    // Box stays in the empty upper-right strip ABOVE the app's own titlebar.
+    // This guarantees software names in the upper-left remain unobstructed.
     callout.classList.add('gm-visible');
+    const s=screen.getBoundingClientRect();
+    const w=windows[i].getBoundingClientRect();
+    const c=callout.getBoundingClientRect();
+    const startX=Math.max(2,c.left-s.left+6),startY=Math.max(2,c.bottom-s.top);
+    const endX=Math.max(2,Math.min(s.width-5,w.right-s.left-13));
+    const endY=Math.max(2,Math.min(s.height-5,w.top-s.top+2));
+    link.setAttribute('viewBox','0 0 '+s.width+' '+s.height);
+    link.querySelector('path').setAttribute('d',
+      'M '+startX+' '+startY+' L '+startX+' '+(startY+7)+' L '+endX+' '+endY);
+    link.querySelector('circle').setAttribute('cx',String(endX));
+    link.querySelector('circle').setAttribute('cy',String(endY));
+    link.classList.add('gm-visible');
     live.textContent=WORKSPACES[i].role+'. '+WORKSPACES[i].software+'.';
   }
   function finish(skipped=false){
@@ -142,7 +154,7 @@
     phase('ready');desktop.classList.remove('gm-powering');
     showName(false);showCinema(null);
     for(const w of windows){w.classList.remove('gm-minimizing','gm-minimized','gm-active');w.style.removeProperty('--to-x');w.style.removeProperty('--to-y')}
-    callout.classList.remove('gm-visible');
+    callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
     live.textContent="Jeff's Garage. Twelve software workspaces.";
     skip.focus({preventScroll:true});
     await wait(TIMING.startup);if(token!==generation)return;
@@ -164,14 +176,14 @@
       w.style.setProperty('--to-x',(s.left+s.width*.47-cx)+'px');
       w.style.setProperty('--to-y',(s.top+s.height*.93-cy)+'px');
       w.classList.add('gm-minimizing');
-      callout.classList.remove('gm-visible');
+      callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
       await wait(TIMING.shrink);if(token!==generation)return;
       w.classList.add('gm-minimized');w.classList.remove('gm-active');
       await wait(TIMING.gap);if(token!==generation)return;
     }
     live.textContent='All twelve workspaces minimized. Monitor powering off.';
     showCinema(null);
-    callout.classList.remove('gm-visible');
+    callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
     desktop.classList.add('gm-powering');
     await wait(TIMING.powerOff);if(token!==generation)return;
     showName(true);

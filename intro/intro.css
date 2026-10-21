@@ -16,7 +16,7 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
 .gm-windows{position:absolute;inset:0;z-index:3;pointer-events:none}
 .gm-window{position:absolute;left:var(--wx);top:var(--wy);width:var(--ww);aspect-ratio:1.61;z-index:var(--stack);border:1px solid rgba(155,210,239,.7);border-radius:clamp(5px,.65vw,12px);overflow:hidden;background:#ebf4fb;box-shadow:0 9px 27px rgba(1,8,19,.55),0 1px 0 rgba(255,255,255,.38) inset;transform-origin:center center;opacity:1;will-change:transform,opacity}
 .gm-window.gm-active{box-shadow:0 10px 40px rgba(0,3,10,.82),0 0 0 2px rgba(103,200,243,.42)}
-.gm-window.gm-minimizing{transition:transform .19s cubic-bezier(.35,.03,.63,.6),opacity .19s linear;transform:translate(var(--to-x),var(--to-y)) scale(.05);opacity:0}
+.gm-window.gm-minimizing{transition:transform .22s cubic-bezier(.35,.03,.63,.6),opacity .22s linear;transform:translate(var(--to-x),var(--to-y)) scale(.05);opacity:0}
 .gm-window.gm-minimized{display:none}
 .gm-window-head{height:clamp(21px,2.5vw,39px);background:linear-gradient(180deg,#202d40,#142235);color:#f4fbff;display:flex;align-items:center;gap:8px;padding:0 clamp(6px,1.1vw,16px);font-size:clamp(9px,1.05vw,16px);min-width:0}
 .gm-app-icon{font-size:clamp(11px,1.3vw,19px);color:#56c6ff;flex:none}
@@ -28,11 +28,14 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
 .gm-window-buttons .gm-min.gm-pressed::after{content:'';position:absolute;inset:-9px;border:2px solid #8ce8ff;border-radius:5px;pointer-events:none;animation:gm-click-ring .18s ease-out both}
 .gm-window-picture{height:calc(100% - clamp(21px,2.5vw,39px));overflow:hidden;background:#e9f5fb}
 .gm-window-picture img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
-.gm-role-callout{position:absolute;z-index:17;left:0.8%;width:clamp(60px,11%,132px);display:flex;align-items:center;gap:0;pointer-events:none;opacity:0;transform:translateX(-7px);transition:opacity .12s ease,transform .12s ease}
-.gm-role-callout.gm-visible{opacity:1;transform:translateX(0)}
-.gm-role-text{max-width:100%;width:100%;background:rgba(4,24,47,.93);border:1px solid #5cc9fa;border-radius:3px;color:#f4faff;line-height:1.2;font-weight:850;font-size:clamp(9px,1.15vw,16px);padding:clamp(5px,.65vw,10px);text-align:center;box-shadow:0 0 14px rgba(50,160,240,.35)}
-.gm-role-callout i{position:absolute;left:100%;height:2px;width:clamp(8px,4vw,50px);background:#68d3ff;box-shadow:0 0 10px rgba(86,212,255,.7)}
-.gm-role-callout i:after{content:"";position:absolute;right:-4px;top:-4px;width:9px;height:9px;border-radius:50%;background:#6ddeff;box-shadow:0 0 10px #2eaef2}
+/* Role labels sit ABOVE the title bars on the right; all words stay unbroken. */
+.gm-role-callout{position:absolute;z-index:18;top:1.25%;right:1.7%;left:auto;width:max-content;max-width:96%;display:flex;justify-content:flex-end;pointer-events:none;opacity:0;transform:translateY(-5px);transition:opacity .12s ease,transform .12s ease}
+.gm-role-callout.gm-visible{opacity:1;transform:translateY(0)}
+.gm-role-text{display:block;width:auto;max-width:100%;white-space:nowrap;overflow-wrap:normal;background:rgba(3,24,45,.96);border:1px solid #66cbf4;border-radius:5px;color:#f4faff;line-height:1.15;font-weight:850;font-size:clamp(10px,1vw,15px);padding:clamp(5px,.55vw,9px) clamp(8px,.85vw,13px);text-align:center;box-shadow:0 0 12px rgba(50,160,240,.3)}
+.gm-role-link{position:absolute;inset:0;width:100%;height:100%;z-index:17;pointer-events:none;opacity:0;transition:opacity .12s ease;overflow:visible}
+.gm-role-link.gm-visible{opacity:1}
+.gm-role-link path{fill:none;stroke:#6ad4ff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px #35b6ed)}
+.gm-role-link circle{fill:#8ce7ff;stroke:#1f8dcc;stroke-width:1.2;filter:drop-shadow(0 0 4px #38c5ff)}
 .gm-taskbar{position:absolute;z-index:4;bottom:0;left:0;right:0;height:8.5%;min-height:25px;background:rgba(4,18,37,.87);display:flex;align-items:center;gap:clamp(9px,1.65vw,25px);padding:0 2%;border-top:1px solid rgba(175,212,238,.3);color:#e5f5ff;font-size:clamp(12px,1.75vw,23px)}
 .gm-taskbar .gm-start{font-size:1.32em;color:#30adfb}
 .gm-search{flex:0 1 24%;min-width:54px;border-radius:99px;background:#214166ab;border:1px solid #45769b77;padding:3px 10px;font-size:clamp(8px,.9vw,13px)}
@@ -48,10 +51,11 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
 .gm-copy-name{top:50%;width:95%;transform:translate(-50%,-40%) scale(.94);font:900 clamp(32px,6vw,80px)/1.05 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.11em;text-shadow:0 1px 35px #77b8df82,0 4px 24px #000}
 .gm-copy-name.gm-copy-on{opacity:1;transform:translate(-50%,-50%) scale(1)}
 /* Full-viewport cinematic overlays; dark gradient behind text, never clipped to the monitor. */
-.gm-cinematic{position:absolute;inset:0;z-index:45;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .19s ease,visibility .19s ease;background:radial-gradient(ellipse 65% 36% at 50% 48%,rgba(0,0,0,.91) 0%,rgba(0,0,0,.7) 51%,rgba(0,0,0,.08) 100%)}
+/* A smaller, localized black opacity spotlight near the lower edge of the applications. */
+.gm-cinematic{position:absolute;inset:0;z-index:45;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .19s ease,visibility .19s ease;background:radial-gradient(ellipse 32% 13% at 50% 81%,rgba(0,0,0,.88) 0%,rgba(0,0,0,.64) 48%,rgba(0,0,0,0) 100%)}
 .gm-cinematic.gm-cinematic-visible{opacity:1;visibility:visible}
-.gm-cinematic span{position:absolute;max-width:95vw;opacity:0;transform:translateY(22px) scale(.95);transition:opacity .18s ease,transform .22s ease;text-align:center;font:950 clamp(38px,8.8vw,142px)/.98 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.055em;color:#fff;text-shadow:0 5px 34px #000,0 0 35px #64c9ffbb;overflow-wrap:normal}
-.gm-cinematic.gm-cinematic-many .gm-cinema-many,.gm-cinematic.gm-cinematic-one .gm-cinema-one{opacity:1;transform:translateY(0) scale(1)}
+.gm-cinematic span{position:absolute;top:81%;left:50%;max-width:96%;width:max-content;white-space:nowrap;opacity:0;transform:translate(-50%,-35%) scale(.96);transition:opacity .18s ease,transform .22s ease;text-align:center;font:950 clamp(35px,6.6vw,105px)/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.035em;color:#fff;text-shadow:0 5px 24px #000,0 0 22px #64c9ff99}
+.gm-cinematic.gm-cinematic-many .gm-cinema-many,.gm-cinematic.gm-cinematic-one .gm-cinema-one{opacity:1;transform:translate(-50%,-50%) scale(1)}
 @keyframes gm-minimize-click{0%{filter:brightness(1.8)}100%{filter:brightness(1)}}
 @keyframes gm-click-ring{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(1.25)}}
 .gm-skip{position:absolute;z-index:50;top:clamp(24px,4.5%,70px);right:clamp(24px,3%,52px);border:1px solid rgba(113,189,240,.78);border-radius:999px;padding:7px 13px;color:#e8f7ff;background:rgba(3,19,35,.88);font:700 clamp(10px,1vw,14px) system-ui,sans-serif;cursor:pointer}
@@ -67,15 +71,15 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
  .gm-window-head{height:27px;font-size:10px;padding:0 5px}
  .gm-window-picture{height:calc(100% - 27px)}
  .gm-window-buttons span{min-width:19px;font-size:14px}
- .gm-role-callout{left:1%;width:20%;top:var(--cy)}
- .gm-role-text{font-size:9px;padding:5px 2px;overflow-wrap:anywhere}
- .gm-role-callout i{width:9px}
+ .gm-role-callout{left:auto;right:1.2%;top:1.35%;width:max-content;max-width:96%}
+ .gm-role-text{font-size:clamp(9px,2.6vw,12px);padding:5px 7px;white-space:nowrap;overflow-wrap:normal}
  .gm-taskbar{min-height:37px;gap:9px;font-size:13px}.gm-search{min-width:40px;max-width:80px;font-size:9px}
  .gm-tray{display:none}
- .gm-cinematic span{font-size:clamp(35px,9.5vw,76px);max-width:94vw;letter-spacing:.03em}
+ .gm-cinematic{background:radial-gradient(ellipse 45% 12% at 50% 83%,rgba(0,0,0,.85) 0%,rgba(0,0,0,.60) 48%,rgba(0,0,0,0) 100%)}
+ .gm-cinematic span{top:83%;font-size:clamp(24px,7.1vw,58px);max-width:96%;letter-spacing:.02em}
  .gm-copy-name{font-size:clamp(27px,7.2vw,53px);letter-spacing:.055em}
  .gm-skip{top:18px;right:16px;font-size:11px}
 }
-@media(max-width:390px){.gm-window{left:2%!important;width:96%!important}.gm-role-text{font-size:8px}.gm-taskbar{gap:7px}.gm-cinematic span{font-size:clamp(32px,9.1vw,49px)}}
+@media(max-width:390px){.gm-window{left:2%!important;width:96%!important}.gm-role-text{font-size:clamp(8px,2.45vw,10px)}.gm-taskbar{gap:7px}.gm-cinematic span{font-size:clamp(23px,6.8vw,31px)}}
 @media(prefers-reduced-motion:reduce){.gm-intro,.gm-intro *{animation:none!important;transition:none!important}.gm-replay{display:none!important}}
 @media print{.gm-intro,.gm-replay{display:none!important}}

@@ -4,8 +4,8 @@ import { readFileSync, existsSync } from 'node:fs';
 const html=readFileSync('index.html','utf8');
 const js=readFileSync('intro/intro.js','utf8');
 const css=readFileSync('intro/intro.css','utf8');
-assert.match(html,/intro\/intro\.css\?v=20261021-garage-v3/);
-assert.match(html,/intro\/intro\.js\?v=20261021-garage-v3/);
+assert.match(html,/intro\/intro\.css\?v=20261021-garage-v4/);
+assert.match(html,/intro\/intro\.js\?v=20261021-garage-v4/);
 assert.ok(existsSync('assets/img/garage-monitor-off.webp'),'Monitor asset must exist');
 const asset=readFileSync('assets/img/garage-monitor-off.webp');
 assert.equal(asset.toString('ascii',0,4),'RIFF','Monitor asset must be WebP RIFF');
@@ -45,6 +45,15 @@ assert.doesNotMatch(js,/gm-pointer|placePointerOn|move: 155/);
 assert.match(js,/\[7,10,87\]/);
 assert.match(css,/gm-click-ring/);
 assert.match(css,/gm-cinematic-visible/);
+assert.match(css,/ellipse 32% 13% at 50% 81%/);
+assert.match(css,/\.gm-role-callout\{[^}]*right:1\.7%/);
+assert.match(css,/\.gm-role-text\{[^}]*white-space:nowrap/);
+assert.match(css,/\.gm-role-link path\{/);
+assert.match(js,/gm-role-link/);
+assert.match(js,/const startX=/);
+assert.match(js,/const endX=/);
+assert.match(js,/hold: 135, click: 95, shrink: 220, gap: 20/);
+assert.doesNotMatch(js,/callout\.style\.top=/);
 for(const phrase of ['MANY WORKSPACES','ONE LEADER','JEFF PURSLEY','gm-copy-overlay',"showCinema('many')","showCinema('one')","showName(true)",'nameHold: 1050','await wait(TIMING.powerOff)']){
  assert.ok(js.includes(phrase),'Missing title beat or timing: '+phrase);
 }
@@ -57,4 +66,4 @@ assert.doesNotMatch(js,/jp-person-fill|jp-brain-intro|ws-track|ws-row-top|li-lap
 let braces=0;
 for(const c of css.replace(/\/\*[\s\S]*?\*\//g,'')){if(c==='{')braces++;if(c==='}')braces--;assert.ok(braces>=0,'Extra CSS brace')}
 assert.equal(braces,0,'CSS braces balanced');
-console.log('Garage monitor intro PASS: 12 workspaces, side callouts, animated minimize-icon clicks, power off and accessibility.');
+console.log('Garage monitor intro PASS: 12 workspaces, upper-right unbroken callouts, slightly slower minimize-icon clicks, power off and accessibility.');
