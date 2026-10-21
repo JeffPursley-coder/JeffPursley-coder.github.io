@@ -2,7 +2,7 @@
 
 The homepage has a **standalone rugged retro monitor** as the entire cinematic stage: no laptop, keyboard or stand. The actual frame is based on Jeff's uploaded powered-off monitor image (`assets/img/garage-monitor-off.webp`). The desktop powers on inside the frame with an editable Windows-inspired wallpaper, icons and taskbar.
 
-The site reuses all 12 locally hosted software-inspired portfolio screens in `assets/workspaces/`. Their actual software names are in the window title bars: Jira, Microsoft Planner, Planview, Power BI, Dynamics 365, SAP IBP, Excel, ServiceNow, Power Automate, Microsoft Copilot Studio, and Teams. **Role labels are external to the windows**, left-aligned alongside the currently active window and connected by a small bright cyan line. The cursor travels to each minimize button and quickly contracts that window into the taskbar. Once all 12 are minimized, the desktop flickers/shrinks off; the dark monitor fades out, revealing the existing professional homepage.
+The site reuses all 12 locally hosted software-inspired portfolio screens in `assets/workspaces/`. Their actual software names are in the window title bars: Jira, Microsoft Planner, Planview, Power BI, Dynamics 365, SAP IBP, Excel, ServiceNow, Power Automate, Microsoft Copilot Studio, and Teams. **Role labels are external to the windows**, left-aligned alongside the currently active window and connected by a small bright cyan line. The cursor travels to each minimize button and quickly contracts that window into the taskbar. The cinematic copy reads **MANY WORKSPACES** while the first six windows minimize, changes to **ONE LEADER** while the last six minimize, then the desktop flickers/shrinks off. **JEFF PURSLEY** appears centered on the powered-off monitor for 1.1 seconds before the monitor fades out to reveal the existing professional homepage.
 
 The screenshots are illustrative interface recreations, not live sessions or verified employer records.
 
@@ -13,7 +13,7 @@ The intro plays on first direct visits and reloads; `?intro=1` forces it. It doe
 ## Customize
 
 - `intro/intro.js`: `WORKSPACES` lists each role, actual software window title, and image; `placements` controls the 12 window positions; `TIMING` controls speed.
-- `intro/intro.css`: monitor, desktop, callout, pointer and power-off animation.
+- `intro/intro.css`: monitor, desktop, callout, pointer, three title beats and power-off animation.
 - `assets/img/garage-monitor-off.webp`: optimized local monitor frame artwork.
 
 ## Verify

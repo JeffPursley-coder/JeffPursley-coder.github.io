@@ -44,6 +44,13 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
 .gm-desktop.gm-powering .gm-crt-shut{animation:gm-off-glow .585s linear forwards}
 @keyframes gm-power-off{0%{opacity:1;filter:brightness(1);transform:scaleY(1)}55%{opacity:1;filter:brightness(1.65) saturate(.55);transform:scaleY(.93)}76%{opacity:1;filter:brightness(2.8) saturate(0);transform:scaleY(.008)}85%{opacity:1;filter:brightness(2);transform:scale(.09,.005)}100%{opacity:0;filter:brightness(0);transform:scale(0,.002)}}
 @keyframes gm-off-glow{0%,35%{opacity:0}65%{opacity:.2}100%{opacity:1}}
+/* Three title beats inside monitor glass, above windows and below skip. */
+.gm-copy-overlay{position:absolute;inset:0;z-index:40;pointer-events:none;isolation:isolate}
+.gm-copy{position:absolute;left:50%;opacity:0;transition:opacity .24s ease,transform .24s ease;text-align:center;color:#f8fcff;line-height:1.1;text-shadow:0 3px 17px #000,0 0 30px rgba(77,205,255,.5)}
+.gm-copy-many,.gm-copy-one{top:4%;white-space:nowrap;transform:translate(-50%,10px) scale(.96);font:900 clamp(18px,3.1vw,42px)/1.1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.15em;padding:.28em .55em;background:rgba(2,13,29,.77);border:1px solid rgba(123,208,255,.42);border-radius:8px;box-shadow:0 7px 24px #0009}
+.gm-copy-name{top:50%;width:95%;transform:translate(-50%,-40%) scale(.94);font:900 clamp(32px,6vw,80px)/1.05 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.11em;text-shadow:0 1px 35px #77b8df82,0 4px 24px #000}
+.gm-copy-many.gm-copy-on,.gm-copy-one.gm-copy-on{opacity:1;transform:translate(-50%,0) scale(1)}
+.gm-copy-name.gm-copy-on{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .gm-skip{position:absolute;z-index:50;top:clamp(24px,4.5%,70px);right:clamp(24px,3%,52px);border:1px solid rgba(113,189,240,.78);border-radius:999px;padding:7px 13px;color:#e8f7ff;background:rgba(3,19,35,.88);font:700 clamp(10px,1vw,14px) system-ui,sans-serif;cursor:pointer}
 .gm-skip:hover,.gm-skip:focus-visible{background:#184a6d;outline-offset:4px}
 .gm-screen-reader{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
@@ -63,6 +70,8 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
  .gm-taskbar{min-height:37px;gap:9px;font-size:13px}.gm-search{min-width:40px;max-width:80px;font-size:9px}
  .gm-tray{display:none}
  .gm-pointer svg{width:18px}
+ .gm-copy-many,.gm-copy-one{font-size:clamp(17px,4.4vw,25px);letter-spacing:.08em;max-width:97%;white-space:normal}
+ .gm-copy-name{font-size:clamp(27px,7.2vw,53px);letter-spacing:.055em}
  .gm-skip{top:18px;right:16px;font-size:11px}
 }
 @media(max-width:390px){.gm-window{left:18%!important;width:80%!important}.gm-role-text{font-size:8px}.gm-taskbar{gap:7px}}

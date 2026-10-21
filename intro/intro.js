@@ -7,7 +7,7 @@
 (() => {
   'use strict';
   const SEEN_KEY = 'jp-garage-monitor-v1';
-  const TIMING = Object.freeze({ startup: 430, hold: 165, move: 155, click: 65, shrink: 245, gap: 55, powerOff: 585, fade: 750 });
+  const TIMING = Object.freeze({ startup: 430, hold: 165, move: 155, click: 65, shrink: 245, gap: 55, powerOff: 585, nameHold: 1100, fade: 750 });
   const WORKSPACES = [
     { role: 'Scrum', software: 'Jira Software', file: '12_scrum_jira.webp' },
     { role: 'Project Management', software: 'Microsoft Planner', file: '02_project_manager_microsoft_planner.webp' },
@@ -68,6 +68,11 @@
             '<span>▤</span><span>🌐</span><span>▦</span><span>▥</span><span>◆</span><span class="gm-tray">⌃　◕　◖))　▣</span></div>',
           '<div class="gm-crt-shut" aria-hidden="true"></div>',
         '</div>',
+        '<div class="gm-copy-overlay" aria-hidden="true">',
+          '<div class="gm-copy gm-copy-many">MANY WORKSPACES</div>',
+          '<div class="gm-copy gm-copy-one">ONE LEADER</div>',
+          '<div class="gm-copy gm-copy-name">JEFF PURSLEY</div>',
+        '</div>',
       '</div>',
       '<button class="gm-skip" type="button">Skip intro ↗</button>',
       '<p class="gm-screen-reader" role="status" aria-live="polite"></p>',
@@ -85,6 +90,10 @@
   const skip=q('.gm-skip'),screen=q('.gm-screen'),desktop=q('.gm-desktop'),pointer=q('.gm-pointer');
   const label=q('.gm-role-text'),callout=q('.gm-role-callout'),live=q('.gm-screen-reader');
   const windows=[...overlay.querySelectorAll('.gm-window')];
+  const copyBeats={many:q('.gm-copy-many'),one:q('.gm-copy-one'),name:q('.gm-copy-name')};
+  function showCopy(which){
+    for(const [beat,node] of Object.entries(copyBeats))node.classList.toggle('gm-copy-on',beat===which);
+  }
   let running=false,generation=0,returnFocus=null,closeTimer=null;
   const waits=new Set();
   function storage(mode){
@@ -135,6 +144,7 @@
     overlay.inert=false;overlay.setAttribute('aria-hidden','false');
     document.documentElement.classList.add('gm-locked');
     phase('ready');desktop.classList.remove('gm-powering');
+    showCopy(null);
     pointer.classList.remove('gm-click');
     for(const w of windows){w.classList.remove('gm-minimizing','gm-minimized','gm-active');w.style.removeProperty('--to-x');w.style.removeProperty('--to-y')}
     callout.classList.remove('gm-visible');
@@ -145,6 +155,8 @@
     for(let i=0;i<windows.length;i++){
       const w=windows[i];
       w.classList.add('gm-active');
+      if(i===0)showCopy('many');
+      if(i===6)showCopy('one');
       showRole(i);
       const button=w.querySelector('.gm-min');
       await wait(TIMING.hold);if(token!==generation)return;
@@ -168,6 +180,9 @@
     callout.classList.remove('gm-visible');
     desktop.classList.add('gm-powering');
     await wait(TIMING.powerOff);if(token!==generation)return;
+    showCopy('name');
+    live.textContent='Jeff Pursley.';
+    await wait(TIMING.nameHold);if(token!==generation)return;
     phase('vanish');
     live.textContent='Opening Jeff Pursley portfolio.';
     await wait(TIMING.fade);if(token!==generation)return;
