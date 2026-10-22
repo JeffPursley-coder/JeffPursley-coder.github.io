@@ -6,13 +6,13 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-garage-monitor-v8';
-  const TIMING = Object.freeze({ startup: 300, hold: 700, click: 100, shrink: 300, gap: 65, powerOff: 560, nameHold: 1400, fade: 700 });
+  const SEEN_KEY = 'jp-garage-monitor-v9';
+  const TIMING = Object.freeze({ startup: 1200, hold: 350, click: 100, shrink: 250, gap: 50, credentialHold: 2000, powerOff: 560, nameHold: 1400, fade: 700 });
   const CREDENTIALS = [
-    { name: 'PMP', status: 'PASSED' },
     { name: 'Certified Scrum Product Owner', status: 'CERTIFIED' },
     { name: 'Certified ScrumMaster', status: 'CERTIFIED' },
     { name: 'Google Project Management', status: 'COMPLETED' },
+    { name: 'Project Management Professional (PMP)', status: 'PASSED' },
     { name: 'BSBA, Operations Management', status: 'COMPLETED' },
     { name: 'B.S., Computer Information Systems', status: 'COMPLETED' }
   ];
@@ -74,10 +74,11 @@
           '<div class="gm-crt-shut" aria-hidden="true"></div>',
         '</div>',
       '</div>',
+      '<span class="gm-monitor-led" aria-hidden="true"></span>',
       '<div class="gm-load-panel" aria-hidden="true">',
         '<div class="gm-load-head"><span class="gm-run-file"><span class="gm-run-prompt">&gt;</span> Running: <strong>JeffPursley.exe</strong></span><span class="gm-progress-number">0%</span></div>',
         '<div class="gm-progress-track"><div class="gm-progress-fill"></div></div>',
-        '<div class="gm-load-details"><span class="gm-verify-name">PMP</span><span class="gm-verify-state">Status: PASSED</span></div>',
+        '<div class="gm-load-details"><span class="gm-verify-name">Certified Scrum Product Owner</span><span class="gm-verify-state">Status: CERTIFIED</span></div>',
       '</div>',
       '<button class="gm-skip" type="button">Skip intro ↗</button>',
       '<p class="gm-screen-reader" role="status" aria-live="polite"></p>',
@@ -99,23 +100,32 @@
   const nameText=q('.gm-copy-name'),panel=q('.gm-load-panel');
   const progressBar=q('.gm-progress-fill'),progressText=q('.gm-progress-number');
   const credentialText=q('.gm-verify-name'),statusText=q('.gm-verify-state');
+  const led=q('.gm-monitor-led');
   function showName(visible){nameText.classList.toggle('gm-copy-on',visible)}
+  function setLed(state){led.dataset.state=state}
   function updateProgress(completed){
     const count=Math.max(0,Math.min(windows.length,completed));
     const value=Math.round(count/windows.length*100);
     progressBar.style.width=value+'%';
     progressText.textContent=value+'%';
-    if(count===windows.length){
-      credentialText.textContent='Release Status';
-      statusText.textContent='READY';
-      panel.classList.add('gm-load-ready');
-    }else{
-      const idx=Math.min(CREDENTIALS.length-1,Math.floor(count*CREDENTIALS.length/windows.length));
-      const check=CREDENTIALS[idx];
-      credentialText.textContent=check.name;
-      statusText.textContent='Status: '+check.status;
-      panel.classList.remove('gm-load-ready');
+  }
+  function showCredential(index){
+    const item=CREDENTIALS[index];
+    credentialText.textContent=item.name;
+    statusText.textContent='Status: '+item.status;
+    panel.classList.remove('gm-load-ready');
+  }
+  async function cycleCredentials(token){
+    for(let i=0;i<CREDENTIALS.length;i++){
+      showCredential(i);
+      await wait(TIMING.credentialHold);
+      if(token!==generation)return;
     }
+  }
+  function showReady(){
+    credentialText.textContent='Release Status';
+    statusText.textContent='READY';
+    panel.classList.add('gm-load-ready');
   }
   let running=false,generation=0,returnFocus=null,closeTimer=null;
   const waits=new Set();
@@ -172,13 +182,20 @@
     }
     overlay.inert=false;overlay.setAttribute('aria-hidden','false');
     document.documentElement.classList.add('gm-locked');
-    phase('ready');desktop.classList.remove('gm-powering');
-    showName(false);updateProgress(0);
+    phase('ready');
+    overlay.classList.add('gm-booting');
+    desktop.classList.remove('gm-powering');
+    setLed('boot');
+    showName(false);updateProgress(0);showCredential(0);
     for(const w of windows){w.classList.remove('gm-minimizing','gm-minimized','gm-active');w.style.removeProperty('--to-x');w.style.removeProperty('--to-y')}
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
     live.textContent="Jeff's Garage. Nine software workspaces.";
     skip.focus({preventScroll:true});
     await wait(TIMING.startup);if(token!==generation)return;
+    overlay.classList.remove('gm-booting');
+    overlay.classList.add('gm-powered');
+    setLed('on');
+    const credentialSequence=cycleCredentials(token);
     for(let i=0;i<windows.length;i++){
       const w=windows[i];
       w.classList.add('gm-active');
@@ -200,11 +217,15 @@
       live.textContent=progressText.textContent+' loaded. '+credentialText.textContent+'. '+statusText.textContent+'.';
       await wait(TIMING.gap);if(token!==generation)return;
     }
+    await credentialSequence;if(token!==generation)return;
+    showReady();
     live.textContent='JeffPursley.exe 100 percent. Release status ready.';
     await wait(700);if(token!==generation)return;
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
     // CRT, loader and desktop disappear together; the name is a separate final card.
+    overlay.classList.remove('gm-powered');
     overlay.classList.add('gm-shutting');
+    setLed('off');
     desktop.classList.add('gm-powering');
     await wait(TIMING.powerOff);if(token!==generation)return;
     showName(true);
