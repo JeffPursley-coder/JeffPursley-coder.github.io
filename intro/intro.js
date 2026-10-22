@@ -6,8 +6,16 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-garage-monitor-v7';
+  const SEEN_KEY = 'jp-garage-monitor-v8';
   const TIMING = Object.freeze({ startup: 300, hold: 700, click: 100, shrink: 300, gap: 65, powerOff: 560, nameHold: 1400, fade: 700 });
+  const CREDENTIALS = [
+    { name: 'PMP', status: 'PASSED' },
+    { name: 'Certified Scrum Product Owner', status: 'CERTIFIED' },
+    { name: 'Certified ScrumMaster', status: 'CERTIFIED' },
+    { name: 'Google Project Management', status: 'COMPLETED' },
+    { name: 'BSBA, Operations Management', status: 'COMPLETED' },
+    { name: 'B.S., Computer Information Systems', status: 'COMPLETED' }
+  ];
   const WORKSPACES = [
     { role: 'Project Management', software: 'Microsoft Planner', file: '02_project_manager_microsoft_planner.webp' },
     { role: 'Program Management', software: 'Planview Program Portfolio', file: '03_program_manager_planview.webp' },
@@ -66,7 +74,11 @@
           '<div class="gm-crt-shut" aria-hidden="true"></div>',
         '</div>',
       '</div>',
-      '<div class="gm-cinematic" aria-hidden="true"><span class="gm-cinema-many">MANY WORKSPACES</span><span class="gm-cinema-arrow">↓</span><span class="gm-cinema-one">AND ONLY ONE MANAGER</span></div>',
+      '<div class="gm-load-panel" aria-hidden="true">',
+        '<div class="gm-load-head"><span class="gm-run-file"><span class="gm-run-prompt">&gt;</span> Running: <strong>JeffPursley.exe</strong></span><span class="gm-progress-number">0%</span></div>',
+        '<div class="gm-progress-track"><div class="gm-progress-fill"></div></div>',
+        '<div class="gm-load-details"><span class="gm-verify-name">PMP</span><span class="gm-verify-state">Status: PASSED</span></div>',
+      '</div>',
       '<button class="gm-skip" type="button">Skip intro ↗</button>',
       '<p class="gm-screen-reader" role="status" aria-live="polite"></p>',
     '</div>',
@@ -84,12 +96,26 @@
   const skip=q('.gm-skip'),screen=q('.gm-screen'),desktop=q('.gm-desktop');
   const label=q('.gm-role-text'),callout=q('.gm-role-callout'),link=q('.gm-role-link'),live=q('.gm-screen-reader');
   const windows=[...overlay.querySelectorAll('.gm-window')];
-  const nameText=q('.gm-copy-name'),cinema=q('.gm-cinematic');
+  const nameText=q('.gm-copy-name'),panel=q('.gm-load-panel');
+  const progressBar=q('.gm-progress-fill'),progressText=q('.gm-progress-number');
+  const credentialText=q('.gm-verify-name'),statusText=q('.gm-verify-state');
   function showName(visible){nameText.classList.toggle('gm-copy-on',visible)}
-  function showCinema(beat){
-    cinema.classList.toggle('gm-cinematic-visible',Boolean(beat));
-    cinema.classList.toggle('gm-cinematic-many',beat==='many');
-    cinema.classList.toggle('gm-cinematic-one',beat==='one');
+  function updateProgress(completed){
+    const count=Math.max(0,Math.min(windows.length,completed));
+    const value=Math.round(count/windows.length*100);
+    progressBar.style.width=value+'%';
+    progressText.textContent=value+'%';
+    if(count===windows.length){
+      credentialText.textContent='Release Status';
+      statusText.textContent='READY';
+      panel.classList.add('gm-load-ready');
+    }else{
+      const idx=Math.min(CREDENTIALS.length-1,Math.floor(count*CREDENTIALS.length/windows.length));
+      const check=CREDENTIALS[idx];
+      credentialText.textContent=check.name;
+      statusText.textContent='Status: '+check.status;
+      panel.classList.remove('gm-load-ready');
+    }
   }
   let running=false,generation=0,returnFocus=null,closeTimer=null;
   const waits=new Set();
@@ -147,7 +173,7 @@
     overlay.inert=false;overlay.setAttribute('aria-hidden','false');
     document.documentElement.classList.add('gm-locked');
     phase('ready');desktop.classList.remove('gm-powering');
-    showName(false);showCinema(null);
+    showName(false);updateProgress(0);
     for(const w of windows){w.classList.remove('gm-minimizing','gm-minimized','gm-active');w.style.removeProperty('--to-x');w.style.removeProperty('--to-y')}
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
     live.textContent="Jeff's Garage. Nine software workspaces.";
@@ -156,8 +182,6 @@
     for(let i=0;i<windows.length;i++){
       const w=windows[i];
       w.classList.add('gm-active');
-      if(i===0)showCinema('many');
-      if(i===Math.floor(WORKSPACES.length/2))showCinema('one');
       showRole(i);
       const button=w.querySelector('.gm-min');
       await wait(TIMING.hold);if(token!==generation)return;
@@ -172,15 +196,17 @@
       callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
       await wait(TIMING.shrink);if(token!==generation)return;
       w.classList.add('gm-minimized');w.classList.remove('gm-active');
+      updateProgress(i+1);
+      live.textContent=progressText.textContent+' loaded. '+credentialText.textContent+'. '+statusText.textContent+'.';
       await wait(TIMING.gap);if(token!==generation)return;
     }
-    live.textContent='All nine workspaces minimized. Monitor powering off.';
+    live.textContent='JeffPursley.exe 100 percent. Release status ready.';
+    await wait(700);if(token!==generation)return;
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
-    // CRT, frame and the headline disappear together; the name is a separate final card.
+    // CRT, loader and desktop disappear together; the name is a separate final card.
     overlay.classList.add('gm-shutting');
     desktop.classList.add('gm-powering');
     await wait(TIMING.powerOff);if(token!==generation)return;
-    showCinema(null);
     showName(true);
     live.textContent='Jeff Pursley.';
     await wait(TIMING.nameHold);if(token!==generation)return;
