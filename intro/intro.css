@@ -5,8 +5,8 @@
 .gm-intro.gm-fading,.gm-intro.gm-vanish{opacity:0;visibility:hidden;pointer-events:none}
 html.gm-locked,html.gm-locked body{overflow:hidden!important}
 .gm-monitor{position:relative;flex:none;aspect-ratio:3/2;width:min(100vw,150vh);height:auto;max-height:100dvh;background:#101010 url('../assets/img/garage-monitor-off.webp') center/100% 100% no-repeat;isolation:isolate;filter:drop-shadow(0 0 26px #000a)}
-/* Sharply rendered vector overlay inspired by the supplied full-resolution frame. */
-.gm-monitor::after{content:"";position:absolute;inset:0;z-index:54;pointer-events:none;background:url('../assets/img/garage-monitor-frame-v9.svg') center/100% 100% no-repeat}
+/* The exact uploaded photograph forms the bezel; only the display glass is transparent. */
+.gm-monitor::after{content:"";position:absolute;inset:0;z-index:54;pointer-events:none;background:url('../assets/img/garage-monitor-frame-photo-v10.webp') center/100% 100% no-repeat}
 .gm-monitor-led{position:absolute;z-index:57;right:1.9%;bottom:13.7%;width:clamp(7px,1.1%,17px);aspect-ratio:1;border-radius:50%;background:#ffd44e;border:1px solid #ffed9d;box-shadow:0 0 4px 2px #100e0c,0 0 13px 4px #ffcd4e9c}
 .gm-monitor-led[data-state="boot"]{background:#ffd44e;border-color:#ffed9d;box-shadow:0 0 4px 2px #100e0c,0 0 13px 4px #ffcd4e9c}
 .gm-monitor-led[data-state="on"]{background:#38ef87;border-color:#afffd1;box-shadow:0 0 4px 2px #100e0c,0 0 16px 4px #24e67eaf}
@@ -102,10 +102,12 @@ html.gm-locked,html.gm-locked body{overflow:hidden!important}
  .gm-load-panel{bottom:12.5%;width:83%;max-width:none;padding:10px 11px 11px;border-radius:7px}
  .gm-load-head{font-size:clamp(10px,2.7vw,14px);margin-bottom:7px;gap:6px}
  .gm-progress-track{height:10px}
- .gm-load-details{font-size:clamp(9px,2.5vw,13px);margin-top:7px;min-height:16px;gap:7px}
+ .gm-load-details{flex-direction:column;align-items:flex-start;font-size:clamp(10px,2.65vw,14px);margin-top:7px;min-height:16px;gap:3px}
+ .gm-verify-name{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.2}
+ .gm-verify-state{font-size:.9em}
  .gm-copy-name{font-size:clamp(33px,8.2vw,67px);letter-spacing:.055em}
  .gm-skip{top:18px;right:16px;font-size:11px}
 }
-@media(max-width:390px){.gm-window{left:2%!important;width:96%!important}.gm-role-text{font-size:clamp(8px,2.45vw,10px)}.gm-taskbar{gap:7px}.gm-load-panel{width:86%;padding:9px 9px 10px}.gm-load-head{font-size:10px}.gm-load-details{font-size:9px}.gm-copy-name{font-size:clamp(30px,8vw,39px)}}
+@media(max-width:390px){.gm-window{left:2%!important;width:96%!important}.gm-role-text{font-size:clamp(8px,2.45vw,10px)}.gm-taskbar{gap:7px}.gm-load-panel{width:86%;padding:9px 9px 10px}.gm-load-head{font-size:10px}.gm-load-details{font-size:10px}.gm-copy-name{font-size:clamp(30px,8vw,39px)}}
 @media(prefers-reduced-motion:reduce){.gm-intro,.gm-intro *{animation:none!important;transition:none!important}.gm-replay{display:none!important}}
 @media print{.gm-intro,.gm-replay{display:none!important}}

@@ -6,13 +6,13 @@
  */
 (() => {
   'use strict';
-  const SEEN_KEY = 'jp-garage-monitor-v9';
-  const TIMING = Object.freeze({ startup: 1200, hold: 350, click: 100, shrink: 250, gap: 50, credentialHold: 2000, powerOff: 560, nameHold: 1400, fade: 700 });
+  const SEEN_KEY = 'jp-garage-monitor-v10';
+  const TIMING = Object.freeze({ startup: 1200, hold: 350, click: 100, shrink: 250, gap: 50, powerOff: 560, nameHold: 1400, fade: 700 });
   const CREDENTIALS = [
     { name: 'Certified Scrum Product Owner', status: 'CERTIFIED' },
     { name: 'Certified ScrumMaster', status: 'CERTIFIED' },
     { name: 'Google Project Management', status: 'COMPLETED' },
-    { name: 'Project Management Professional (PMP)', status: 'PASSED' },
+    { name: 'PMP (Project Management Professional)', status: 'PASSED' },
     { name: 'BSBA, Operations Management', status: 'COMPLETED' },
     { name: 'B.S., Computer Information Systems', status: 'COMPLETED' }
   ];
@@ -103,29 +103,26 @@
   const led=q('.gm-monitor-led');
   function showName(visible){nameText.classList.toggle('gm-copy-on',visible)}
   function setLed(state){led.dataset.state=state}
-  function updateProgress(completed){
-    const count=Math.max(0,Math.min(windows.length,completed));
-    const value=Math.round(count/windows.length*100);
-    progressBar.style.width=value+'%';
-    progressText.textContent=value+'%';
-  }
+  // Six factual credentials are displayed within the nine workspace events.
+  const CREDENTIAL_STAGES=[0,0,1,2,2,3,4,5,5];
   function showCredential(index){
     const item=CREDENTIALS[index];
     credentialText.textContent=item.name;
     statusText.textContent='Status: '+item.status;
     panel.classList.remove('gm-load-ready');
   }
-  async function cycleCredentials(token){
-    for(let i=0;i<CREDENTIALS.length;i++){
-      showCredential(i);
-      await wait(TIMING.credentialHold);
-      if(token!==generation)return;
-    }
-  }
   function showReady(){
     credentialText.textContent='Release Status';
     statusText.textContent='READY';
     panel.classList.add('gm-load-ready');
+  }
+  function updateProgress(completed){
+    const count=Math.max(0,Math.min(windows.length,completed));
+    const value=Math.round(count/windows.length*100);
+    progressBar.style.width=value+'%';
+    progressText.textContent=value+'%';
+    if(count===windows.length)showReady();
+    else showCredential(CREDENTIAL_STAGES[count]);
   }
   let running=false,generation=0,returnFocus=null,closeTimer=null;
   const waits=new Set();
@@ -186,7 +183,7 @@
     overlay.classList.add('gm-booting');
     desktop.classList.remove('gm-powering');
     setLed('boot');
-    showName(false);updateProgress(0);showCredential(0);
+    showName(false);updateProgress(0);
     for(const w of windows){w.classList.remove('gm-minimizing','gm-minimized','gm-active');w.style.removeProperty('--to-x');w.style.removeProperty('--to-y')}
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
     live.textContent="Jeff's Garage. Nine software workspaces.";
@@ -195,7 +192,6 @@
     overlay.classList.remove('gm-booting');
     overlay.classList.add('gm-powered');
     setLed('on');
-    const credentialSequence=cycleCredentials(token);
     for(let i=0;i<windows.length;i++){
       const w=windows[i];
       w.classList.add('gm-active');
@@ -217,8 +213,6 @@
       live.textContent=progressText.textContent+' loaded. '+credentialText.textContent+'. '+statusText.textContent+'.';
       await wait(TIMING.gap);if(token!==generation)return;
     }
-    await credentialSequence;if(token!==generation)return;
-    showReady();
     live.textContent='JeffPursley.exe 100 percent. Release status ready.';
     await wait(700);if(token!==generation)return;
     callout.classList.remove('gm-visible');link.classList.remove('gm-visible');
